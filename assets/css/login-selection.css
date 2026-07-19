@@ -1,0 +1,170 @@
+/* ==========================
+   PriceWise Login Selection
+========================== */
+
+
+.login-page{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#F5F3F6;
+
+}
+
+
+
+.login-container{
+
+    width:100%;
+
+    max-width:900px;
+
+    text-align:center;
+
+}
+
+
+
+.login-logo{
+
+    width:100px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.login-container h1{
+
+    font-size:42px;
+
+    font-weight:700;
+
+}
+
+
+
+.login-container span{
+
+    color:#ED563B;
+
+}
+
+
+
+.login-container p{
+
+    color:#777;
+
+    margin-bottom:40px;
+
+}
+
+
+
+.role-container{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:30px;
+
+}
+
+
+
+.role-card{
+
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+
+}
+
+
+
+.role-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+
+
+.role-icon{
+
+    font-size:50px;
+
+    color:#ED563B;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.role-card h3{
+
+    font-size:25px;
+
+}
+
+
+
+.role-card p{
+
+    font-size:15px;
+
+}
+
+
+
+.role-btn{
+
+    display:inline-block;
+    margin-top:20px;
+    background:#ED563B;
+    color:white;
+    padding:14px 35px;
+    border-radius:30px;
+    text-decoration:none;
+
+
+}
+
+
+
+.role-btn:hover{
+
+    color:white;
+    opacity:.85;
+
+}
+
+
+.home-btn{
+
+
+    display:inline-block;
+    margin-top:40px;
+    color:#ED563B;
+    text-decoration:none;
+
+}

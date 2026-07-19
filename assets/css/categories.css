@@ -1,0 +1,40 @@
+.category-grid{
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+
+}
+
+
+.category-card{
+
+    background:white;
+    padding:30px;
+    text-align:center;
+    border-radius:20px;
+    transition:.3s;
+
+}
+
+
+.category-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+
+.category-card img{
+
+    width:200px;
+    height: 150px
+
+}
+
+
+.category-card h3{
+
+    margin-top:20px;
+
+}

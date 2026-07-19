@@ -1,0 +1,69 @@
+@media(max-width:768px){
+
+
+.hero-content h1{
+
+font-size:38px;
+
+}
+
+
+.search-box input{
+
+width:250px;
+
+}
+
+
+.category-grid,
+.deal-grid{
+
+grid-template-columns:1fr;
+
+}
+
+
+.nav-links{
+
+display:none;
+
+}
+
+
+}
+
+
+@media(max-width:768px){
+
+
+.store-comparison{
+
+    flex-direction:column;
+    gap:20px;
+
+}
+
+
+.store-vs{
+
+    font-size:30px;
+
+}
+
+
+
+.steps-container{
+
+    grid-template-columns:1fr;
+
+}
+
+
+.store-card{
+
+    width:90%;
+
+}
+
+
+}

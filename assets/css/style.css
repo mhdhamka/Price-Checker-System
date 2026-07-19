@@ -1,0 +1,83 @@
+/* ==========================
+   PriceWise Global Style
+========================== */
+
+
+@import url(
+'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'
+);
+
+
+:root{
+
+    --primary-color:#ED563B;
+    --dark-color:#1f1f1f;
+    --light-bg:#F5F3F6;
+    --white:#ffffff;
+
+}
+
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+
+body{
+
+    font-family:'Poppins',sans-serif;
+    background:var(--light-bg);
+    color:#333;
+
+}
+
+
+section{
+
+    padding:80px 0;
+
+}
+
+
+.container{
+
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+
+}
+
+
+h2{
+
+    font-size:36px;
+    font-weight:700;
+    text-align:center;
+    margin-bottom:40px;
+
+}
+
+
+button,
+.main-btn{
+
+    background:var(--primary-color);
+    color:white;
+    border:none;
+    padding:14px 30px;
+    border-radius:30px;
+    cursor:pointer;
+
+}
+
+
+button:hover,
+.main-btn:hover{
+
+    opacity:.85;
+
+}

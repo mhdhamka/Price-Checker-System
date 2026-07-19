@@ -1,0 +1,215 @@
+/* ==========================
+   PriceWise Login Page
+========================== */
+
+
+.login-wrapper{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#F5F3F6;
+
+}
+
+
+
+.login-card{
+
+
+    width:100%;
+
+    max-width:430px;
+
+    background:white;
+
+    padding:45px;
+
+    border-radius:25px;
+
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.1);
+
+
+}
+
+
+
+.login-logo{
+
+    width:90px;
+
+    display:block;
+
+    margin:0 auto 20px;
+
+}
+
+
+
+.login-card h2{
+
+
+    text-align:center;
+
+    font-size:32px;
+
+    font-weight:700;
+
+}
+
+
+
+.login-card h2 span{
+
+    color:#ED563B;
+
+}
+
+
+
+.login-subtitle{
+
+
+    text-align:center;
+
+    color:#777;
+
+    margin-bottom:35px;
+
+
+}
+
+
+
+.login-group{
+
+    margin-bottom:20px;
+
+}
+
+
+
+.login-group label{
+
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+    display:block;
+
+
+}
+
+
+
+.login-group input{
+
+
+    width:100%;
+
+    padding:15px;
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+    outline:none;
+
+}
+
+
+
+.login-group input:focus{
+
+
+    border-color:#ED563B;
+
+
+}
+
+
+
+.login-btn{
+
+
+    width:100%;
+
+    padding:15px;
+
+
+    background:#ED563B;
+
+
+    color:white;
+
+
+    border:none;
+
+
+    border-radius:30px;
+
+
+    font-size:16px;
+
+    font-weight:600;
+
+
+}
+
+
+
+.login-btn:hover{
+
+
+    opacity:.85;
+
+
+}
+
+
+
+.back-home{
+
+
+    display:block;
+    text-align:center;
+    margin-top:25px;
+    color:#ED563B;
+    text-decoration:none;
+
+}
+
+
+
+.register-link{
+
+    text-align:center;
+    margin-top:25px;
+    color:#666;
+
+}
+
+
+.register-link a{
+
+    color:#ED563B;
+    font-weight:600;
+
+}
+
+
+.password-strength{
+
+    font-size:13px;
+    color:#777;
+
+}
