@@ -1,0 +1,209 @@
+.custom-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            border: 2px solid #ff0000;
+            background-color: #ffffff;
+            color: #ff0000;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .custom-btn:hover {
+            background-color: #ff0000;
+            color: #ffffff;
+        }
+
+        .container-fluid {
+            background-color: #F5F3F6;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-container input[type="text"] {
+            margin-right: 10px;
+        }
+
+.search-card{
+
+background:#fff;
+padding:35px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+}
+
+
+
+.search-box{
+
+display:flex;
+gap:10px;
+
+}
+
+
+
+.search-box input{
+
+height:50px;
+border-radius:30px;
+padding-left:25px;
+border:1px solid #ddd;
+flex:1;
+
+}
+
+
+
+.search-box button{
+
+background:#ED563B;
+border:none;
+padding:0 30px;
+border-radius:30px;
+color:white;
+font-weight:600;
+
+}
+
+
+
+.product-card{
+
+
+background:white;
+border-radius:15px;
+overflow:hidden;
+height:100%;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+transition:0.3s;
+
+
+}
+
+
+
+.product-card:hover{
+
+transform:translateY(-8px);
+
+}
+
+
+
+.product-image{
+
+height:90px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#f8f8f8;
+
+}
+
+
+
+.product-image img{
+
+max-width:90px;
+max-height:90px;
+object-fit:contain;
+
+}
+
+
+.product-content{
+
+padding:20px;
+
+}
+
+
+.product-content h4{
+
+font-size:20px;
+font-weight:700;
+
+}
+
+
+.category{
+
+background:#ED563B;
+color:white;
+padding:5px 15px;
+border-radius:20px;
+font-size:13px;
+
+}
+
+
+.product-content h3{
+
+color:#ED563B;
+margin-top:15px;
+font-weight:700;
+
+}
+
+
+.product-content p{
+
+font-size:14px;
+color:#666;
+
+}
+
+
+.description{
+
+height:45px;
+overflow:hidden;
+
+}
+
+
+.compare-link{
+
+display:inline-block;
+margin-top:15px;
+background:#ED563B;
+color:white;
+padding:10px 20px;
+border-radius:25px;
+text-decoration:none;
+
+}
+
+
+
+.compare-link:hover{
+
+color:white;
+
+}
+
+
+
+.result-title{
+
+margin-bottom:20px;
+
+}
+
+
+
+.no-result{
+
+text-align:center;
+padding:50px;
+
+}

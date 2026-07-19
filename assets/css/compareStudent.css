@@ -1,0 +1,120 @@
+.custom-btn {
+
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 10px;
+    border: 2px solid #ff0000;
+    background-color: #ffffff;
+    color: #ff0000;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.custom-btn:hover {
+    background-color: #ff0000;
+    color: #ffffff;
+}
+
+.container-fluid {
+    background-color: #F5F3F6;
+    padding: 20px; /* Adjust the padding */
+    max-width: 80%; /* Adjust the maximum width */
+    margin: 0 auto; /* Center the container */
+}
+
+/* Compare Page */
+.comparison-container {
+
+background:#f5f3f6;
+padding:40px;
+text-align:center;
+
+}
+
+
+
+.comparison-container h2 {
+
+font-size:32px;
+font-weight:700;
+
+}
+
+
+
+.compare-item-card {
+
+background:white;
+border-radius:20px;
+padding:25px;
+height:100%;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+transition:.3s;
+
+}
+
+
+
+.compare-item-card:hover {
+
+transform:translateY(-8px);
+
+}
+
+
+
+.compare-image {
+
+
+width:180px;
+height:180px;
+object-fit:contain;
+margin-bottom:20px;
+
+
+}
+
+
+
+.compare-item-card h4 {
+
+font-size:20px;
+font-weight:600;
+
+}
+
+
+
+.price {
+
+
+font-size:25px;
+font-weight:bold;
+color:#ED563B;
+margin:15px;
+
+
+}
+
+
+
+.compare-info {
+
+
+text-align:left;
+font-size:14px;
+color:#555;
+
+
+}
+
+
+
+.compare-info strong {
+
+color:#222;
+
+}
