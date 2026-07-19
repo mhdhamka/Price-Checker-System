@@ -1,0 +1,320 @@
+*
+{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+
+body
+{
+
+    min-height:100vh;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ED563B,
+        #ff9966
+    );
+
+}
+
+
+
+.login-page
+{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:30px;
+
+}
+
+
+
+.login-container
+{
+
+    width:900px;
+
+    text-align:center;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,0.2);
+
+}
+
+
+
+
+.login-logo
+{
+
+    width:120px;
+
+    height:120px;
+
+    object-fit:contain;
+
+    margin-bottom:20px;
+
+}
+
+
+
+
+h1
+{
+
+    font-size:35px;
+
+    font-weight:700;
+
+    color:#333;
+
+}
+
+
+h1 span
+{
+
+    color:#ED563B;
+
+}
+
+
+
+
+.subtitle
+{
+
+    color:#777;
+
+    margin-top:10px;
+
+    margin-bottom:40px;
+
+}
+
+
+
+
+.login-options
+{
+
+    display:flex;
+
+    gap:30px;
+
+    justify-content:center;
+
+}
+
+
+
+
+
+.login-card
+{
+
+    width:350px;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    background:#fff;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.1);
+
+    transition:0.3s;
+
+}
+
+
+
+.login-card:hover
+{
+
+    transform:translateY(-10px);
+
+}
+
+
+
+
+.icon-box
+{
+
+    font-size:50px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+
+.login-card h2
+{
+
+    font-size:25px;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.login-card p
+{
+
+    color:#666;
+
+    font-size:14px;
+
+    min-height:70px;
+
+}
+
+
+
+
+.login-btn
+{
+
+    display:inline-block;
+
+    padding:12px 35px;
+
+    border-radius:30px;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:0.3s;
+
+}
+
+
+
+
+
+.student-btn
+{
+
+    background:#ED563B;
+
+}
+
+
+
+.admin-btn
+{
+
+    background:#333;
+
+}
+
+
+
+.login-btn:hover
+{
+
+    color:white;
+
+    opacity:0.85;
+
+}
+
+
+
+
+.home-btn
+{
+
+    display:inline-block;
+
+    margin-top:35px;
+
+    color:#555;
+
+    text-decoration:none;
+
+    font-weight:500;
+
+}
+
+
+
+.home-btn:hover
+{
+
+    color:#ED563B;
+
+}
+
+
+
+
+
+
+
+@media(max-width:768px)
+{
+
+
+.login-options
+{
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+
+.login-card
+{
+
+    width:100%;
+
+}
+
+
+
+.login-container
+{
+
+    padding:25px;
+
+}
+
+
+h1
+{
+
+    font-size:28px;
+
+}
+
+
+}

@@ -1,0 +1,261 @@
+*
+{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+
+
+body
+{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ED563B,
+        #ff9966
+    );
+
+    padding:20px;
+
+}
+
+
+
+
+.register-box
+{
+
+    width:450px;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,0.2);
+
+}
+
+
+
+
+.register-logo
+{
+
+    display:block;
+
+    margin:auto;
+
+    width:100px;
+
+    height:100px;
+
+}
+
+
+
+
+.register-box h2
+{
+
+    text-align:center;
+
+    margin-top:20px;
+
+    color:#333;
+
+    font-size:30px;
+
+}
+
+
+
+.subtitle
+{
+
+    text-align:center;
+
+    color:#777;
+
+    margin-bottom:30px;
+
+}
+
+
+
+
+
+.input-group
+{
+
+    margin-bottom:18px;
+
+}
+
+
+
+.input-group label
+{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:500;
+
+    color:#444;
+
+}
+
+
+
+
+.input-group input
+{
+
+    width:100%;
+
+    padding:13px 18px;
+
+    border-radius:30px;
+
+    border:1px solid #ddd;
+
+    outline:none;
+
+}
+
+
+
+.input-group input:focus
+{
+
+    border-color:#ED563B;
+
+}
+
+
+
+
+
+button
+{
+
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:30px;
+    background:#ED563B;
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+
+}
+
+
+
+button:hover
+{
+
+    background:#d9472f;
+
+}
+
+
+
+
+.register-links
+{
+
+    text-align:center;
+    margin-top:25px;
+    font-size:14px;
+
+}
+
+
+
+
+.register-links a
+{
+
+    color:#ED563B;
+    text-decoration:none;
+    font-weight:600;
+
+}
+
+
+
+.register-links a:hover
+{
+
+    text-decoration:underline;
+
+}
+
+
+
+
+
+.message
+{
+
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:20px;
+    text-align:center;
+
+}
+
+
+
+
+.error
+{
+
+    background:#ffe4e0;
+    color:#d9472f;
+
+}
+
+
+
+.success
+{
+
+    background:#e2f7e7;
+    color:#218838;
+
+}
+
+
+
+
+@media(max-width:500px)
+{
+
+.register-box
+{
+
+    width:100%;
+    padding:30px;
+
+}
+
+
+}

@@ -1,0 +1,252 @@
+*
+{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+
+body
+{
+    background:#F5F3F6;
+}
+
+
+.admin-container
+{
+    display:flex;
+    min-height:100vh;
+}
+
+
+
+/* SIDEBAR */
+
+.admin-sidebar
+{
+    width:260px;
+    background:#222831;
+    color:white;
+    padding:25px 15px;
+}
+
+
+.sidebar-logo
+{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+
+.sidebar-logo img
+{
+    width:70px;
+}
+
+
+.sidebar-logo h4
+{
+    margin-top:10px;
+}
+
+
+
+.sidebar-menu
+{
+    list-style:none;
+}
+
+
+.sidebar-menu li
+{
+    margin-bottom:10px;
+}
+
+
+
+.sidebar-menu a
+{
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    padding:14px 18px;
+
+    color:white;
+    text-decoration:none;
+
+    border-radius:12px;
+
+    transition:.3s;
+}
+
+
+
+.sidebar-menu a:hover,
+.sidebar-menu .active a
+{
+    background:#ED563B;
+}
+
+
+
+
+/* MAIN */
+
+.admin-main
+{
+    flex:1;
+}
+
+
+
+/* HEADER */
+
+
+.admin-header
+{
+    height:80px;
+    background:white;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 30px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+
+
+.admin-profile
+{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+
+.admin-profile img
+{
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+    object-fit:cover;
+}
+
+
+
+
+.dashboard-content
+{
+    padding:35px;
+}
+
+
+
+.dashboard-cards
+{
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:25px;
+
+    margin-top:30px;
+}
+
+
+
+.dashboard-card
+{
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+}
+
+
+
+.dashboard-card:hover
+{
+    transform:translateY(-8px);
+}
+
+
+
+.dashboard-card i
+{
+    font-size:35px;
+    color:#ED563B;
+}
+
+
+
+.dashboard-card h3
+{
+    margin-top:15px;
+    font-size:35px;
+}
+
+
+
+.dashboard-card p
+{
+    color:#777;
+}
+
+
+
+
+.admin-footer
+{
+    text-align:center;
+    padding:20px;
+    color:#777;
+}
+
+
+
+
+@media(max-width:900px)
+{
+
+.dashboard-cards
+{
+    grid-template-columns:
+    repeat(2,1fr);
+}
+
+
+}
+
+
+
+@media(max-width:600px)
+{
+
+.admin-sidebar
+{
+    display:none;
+}
+
+
+.dashboard-cards
+{
+    grid-template-columns:1fr;
+}
+
+
+}
