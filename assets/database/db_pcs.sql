@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2026 at 01:14 PM
+-- Generation Time: Jul 20, 2026 at 08:53 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -63,7 +63,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`adminID`, `adminFullname`, `adminUsername`, `adminEmail`, `adminPassword`, `adminIMG`, `logStatus`) VALUES
-(1, 'MOHAMMAD HAMKA IZZUDDIN BIN MOHAMAD YAHYA', 'mdhamka', 'm.hamka017@gmail.com', 'abc123', 'assets/images/hamka.jpg', '0');
+(1, 'MOHD HAMKA', 'mdhamka', 'm.hamka017@gmail.com', 'abc123', '../../assets/images/profile/hamka.jpg', '1');
 
 -- --------------------------------------------------------
 
@@ -136,6 +136,30 @@ INSERT INTO `item` (`ItemID`, `ItemName`, `ItemPrice`, `ItemCategory`, `ItemDesc
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ratings`
+--
+
+CREATE TABLE `ratings` (
+  `ratingID` int(11) NOT NULL,
+  `ItemID` int(11) NOT NULL,
+  `studentID` int(11) NOT NULL,
+  `rating` decimal(2,1) NOT NULL,
+  `comment` varchar(500) DEFAULT NULL,
+  `dateCreated` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ratings`
+--
+
+INSERT INTO `ratings` (`ratingID`, `ItemID`, `studentID`, `rating`, `comment`, `dateCreated`) VALUES
+(1, 1, 1, '5.0', 'Affordable and good quality', '2026-07-19 14:55:50'),
+(2, 2, 2, '4.5', 'Worth buying', '2026-07-19 14:55:50'),
+(3, 3, 3, '4.0', 'Good product', '2026-07-19 14:55:50');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `store`
 --
 
@@ -175,11 +199,12 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`studentID`, `fullName`, `username`, `email`, `password`, `studentIMG`, `logStatus`) VALUES
-(1, 'Faizatul Fitri Bin Boestamam', 'fai', 'fai@gmail.com', 'abc123', '../../assets/images/profile/fai.jpg', '0'),
+(1, 'Faizatul Fitri Bin Boestamam', 'fai', 'fai@gmail.com', 'dummy123', '../../assets/images/profile/fai.jpg', '0'),
 (2, 'Mohammad Amir Alam Bin Rahim Omar', 'amiromar', 'amir@gmail.com', 'abc123', '../../assets/images/profile/amir.jpg', '0'),
 (3, 'Harith Zakwan Bin Zakaria', 'harith', 'harith@gmail.com', 'abc123', '../../assets/images/profile/harith.jpg', '0'),
 (4, 'Mohamad Waqiuddin Bin Yahya', 'qiu', 'qiu@gmail.com', 'abc123', '../../assets/images/profile/qiu.jpeg', '0'),
-(5, 'Iman Tarmizi Rosalina', 'iman', 'iman@gmail.com', 'abc123', '../../assets/images/profile/iman.jpg', '0');
+(5, 'Iman Tarmizi Rosalina', 'iman', 'iman@gmail.com', 'abc123', '../../assets/images/profile/iman.jpg', '0'),
+(6, 'John Cena', 'cena', 'john@gmail.com', 'wwe123', '../../assets/images/profile/default.png', '0');
 
 --
 -- Indexes for dumped tables
@@ -208,6 +233,14 @@ ALTER TABLE `category`
 --
 ALTER TABLE `item`
   ADD PRIMARY KEY (`ItemID`);
+
+--
+-- Indexes for table `ratings`
+--
+ALTER TABLE `ratings`
+  ADD PRIMARY KEY (`ratingID`),
+  ADD KEY `fk_rating_item` (`ItemID`),
+  ADD KEY `fk_rating_student` (`studentID`);
 
 --
 -- Indexes for table `store`
@@ -244,6 +277,12 @@ ALTER TABLE `category`
   MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `ratings`
+--
+ALTER TABLE `ratings`
+  MODIFY `ratingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `store`
 --
 ALTER TABLE `store`
@@ -253,7 +292,18 @@ ALTER TABLE `store`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1012;
+  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1013;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `ratings`
+--
+ALTER TABLE `ratings`
+  ADD CONSTRAINT `fk_rating_item` FOREIGN KEY (`ItemID`) REFERENCES `item` (`ItemID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_rating_student` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
