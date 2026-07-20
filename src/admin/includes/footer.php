@@ -1,10 +1,25 @@
 <footer class="admin-footer">
 
-    <p>
+    <div class="footer-content">
 
-        © 2024 Price Checker System |
-        Universiti Malaysia Sarawak (UNIMAS)
+        <h4>
+            Price Checker System
+        </h4>
 
-    </p>
+        <p>
+            Smart price comparison and management platform.
+        </p>
+
+        <span>
+            © 2024 Price Checker System
+        </span>
+
+        <br>
+
+        <span>
+            Universiti Malaysia Sarawak (UNIMAS)
+        </span>
+
+    </div>
 
 </footer>
