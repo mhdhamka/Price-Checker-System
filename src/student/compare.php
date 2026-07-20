@@ -137,6 +137,7 @@ if (isset($_POST['compare']) && count($_POST['compare']) > 0) {
                         <p>
                             Review product details and choose the best option based on price and store.
                         </p>
+                        <br>
 
                         <div class="row justify-content-center">
 

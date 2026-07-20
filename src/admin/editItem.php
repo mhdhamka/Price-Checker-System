@@ -9,6 +9,20 @@ if(!isset($_SESSION['adminID']))
     exit();
 }
 
+$id=$_GET['id'];
+$item=mysqli_fetch_assoc(
+
+mysqli_query(
+
+$conn,
+
+"SELECT * FROM item
+WHERE ItemID='$id'"
+
+)
+
+);
+
 ?>
 
 <!DOCTYPE html>
@@ -44,22 +58,22 @@ if(!isset($_SESSION['adminID']))
         <div class="dashboard-content">
 
             <div class="page-title">
-
-                <h2>Add New Item</h2>
-
-                <p>Add a new product into the system.</p>
-
+                <h2>Edit Item</h2>
+                <p>Update product information.</p>
             </div>
 
             <div class="form-card">
 
-                <form action="../admin/processes/addItemProcess.php" method="POST" enctype="multipart/form-data">
+                <form action="../admin/processes/editItemProcess.php" method="POST" enctype="multipart/form-data">
+
+                    <input type="hidden" name="id" value="<?php echo $item['ItemID']; ?>">
+                    <input type="hidden" name="oldImage" value="<?php echo $item['ItemImage']; ?>">
 
                     <div class="form-group">
 
                         <label>Item Name</label>
 
-                        <input type="text" name="itemName" required>
+                        <input type="text" name="itemName" value="<?php echo $item['ItemName']; ?>" required>
 
                     </div>
 
@@ -67,7 +81,7 @@ if(!isset($_SESSION['adminID']))
 
                         <label>Price (RM)</label>
 
-                        <input type="number" step="0.01" name="price" required>
+                        <input type="number" step="0.01" name="price" value="<?php echo $item['ItemPrice']; ?>" required>
 
                     </div>
 
@@ -81,24 +95,22 @@ if(!isset($_SESSION['adminID']))
 
                                 <?php
 
-                                $cat=mysqli_query($conn,"SELECT * FROM category");
+                                $cat = mysqli_query($conn,"SELECT * FROM category");
 
-                                while($c=mysqli_fetch_assoc($cat))
-
+                                while($c = mysqli_fetch_assoc($cat))
                                 {
-
                                 ?>
 
-                                <option>
+                                <option
+                                    value="<?php echo $c['categoryName']; ?>"
+                                    <?php if($c['categoryName']==$item['ItemCategory']) echo "selected"; ?>>
 
                                     <?php echo $c['categoryName']; ?>
 
                                 </option>
 
                                 <?php
-
                                 }
-
                                 ?>
 
                             </select>
@@ -113,24 +125,22 @@ if(!isset($_SESSION['adminID']))
 
                                 <?php
 
-                                $store=mysqli_query($conn,"SELECT * FROM store");
+                                $store = mysqli_query($conn,"SELECT * FROM store");
 
-                                while($s=mysqli_fetch_assoc($store))
-
+                                while($s = mysqli_fetch_assoc($store))
                                 {
-
                                 ?>
 
-                                <option>
+                                <option
+                                    value="<?php echo $s['StoreName']; ?>"
+                                    <?php if($s['StoreName']==$item['StoreName']) echo "selected"; ?>>
 
                                     <?php echo $s['StoreName']; ?>
 
                                 </option>
 
                                 <?php
-
                                 }
-
                                 ?>
 
                             </select>
@@ -143,30 +153,34 @@ if(!isset($_SESSION['adminID']))
 
                         <label>Description</label>
 
-                        <textarea name="description" rows="5"></textarea>
+                        <textarea name="description"><?php echo $item['ItemDescription']; ?></textarea>
 
                     </div>
 
                     <div class="form-group">
 
-                        <label>Item Image</label>
+                        <label>Current Image</label><br>
 
-                        <input type="file" name="image" accept="image/*" required>
+                        <img src="<?php echo $item['ItemImage']; ?>" width="150">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>New Image (Optional)</label>
+
+                        <input type="file" name="image" accept="image/*">
 
                     </div>
 
                     <div class="form-buttons">
 
                         <button class="save-btn" type="submit">
-
-                            Save Item
-
+                            Update Item
                         </button>
 
                         <a href="../admin/items.php" class="cancel-btn">
-
                             Cancel
-
                         </a>
 
                     </div>

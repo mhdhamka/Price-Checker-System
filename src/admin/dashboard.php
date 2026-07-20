@@ -12,7 +12,6 @@ if(!isset($_SESSION['adminID']))
 }
 
 // Count Students
-
 $studentCount =
 mysqli_fetch_assoc(
 mysqli_query(
@@ -24,7 +23,6 @@ $conn,
 
 
 // Count Items
-
 $itemCount =
 mysqli_fetch_assoc(
 mysqli_query(
@@ -34,9 +32,7 @@ $conn,
 )['total'];
 
 
-
 // Count Stores
-
 $storeCount =
 mysqli_fetch_assoc(
 mysqli_query(
@@ -46,9 +42,7 @@ $conn,
 )['total'];
 
 
-
 // Count Categories
-
 $categoryCount =
 mysqli_fetch_assoc(
 mysqli_query(
@@ -58,9 +52,7 @@ $conn,
 )['total'];
 
 
-
 // Count Ratings
-
 $ratingCount =
 mysqli_fetch_assoc(
 mysqli_query(
@@ -69,13 +61,50 @@ $conn,
 )
 )['total'];
 
+
+/* Category Chart */
+$categoryName = [];
+$categoryTotal = [];
+
+$sql = mysqli_query(
+$conn,
+"SELECT ItemCategory,
+COUNT(*) AS total
+FROM item
+GROUP BY ItemCategory"
+);
+
+while($row = mysqli_fetch_assoc($sql))
+{
+    $categoryName[] = $row['ItemCategory'];
+    $categoryTotal[] = $row['total'];
+}
+
+
+/* Store Chart */
+$storeName = [];
+$storeTotal = [];
+
+$sql = mysqli_query(
+$conn,
+"SELECT StoreName,
+COUNT(*) AS total
+FROM item
+GROUP BY StoreName"
+);
+
+while($row = mysqli_fetch_assoc($sql))
+{
+    $storeName[] = $row['StoreName'];
+    $storeTotal[] = $row['total'];
+}
+
 ?>
 
 
 <!DOCTYPE html>
 
 <html lang="en">
-
 
 <head>
 
@@ -87,9 +116,7 @@ $conn,
     </title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
     <link rel="stylesheet" href="../../assets/css/adminDashboard.css">
     <link rel="icon" href="../../assets/images/logo.png" type="image/x-icon">
 
@@ -235,7 +262,6 @@ $conn,
 
             <!-- Recent Activities -->
             <div class="section-card">
-
                 <div class="section-header">
 
                     <h3>
@@ -342,9 +368,17 @@ $conn,
             <div class="analytics-section">
                 <div class="chart-card">
 
+                    <span class="chart-badge">
+                        Analytics
+                    </span>
+
                     <h3>
                         Item Category Distribution
                     </h3>
+
+                    <p>
+                        Percentage of products available in each category.
+                    </p>
 
                     <canvas id="categoryChart"></canvas>
 
@@ -355,6 +389,10 @@ $conn,
                     <h3>
                         Store Product Comparison
                     </h3>
+
+                    <p>
+                        Number of products available in each store.
+                    </p>
 
                     <canvas id="storeChart"></canvas>
 

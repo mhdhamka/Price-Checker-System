@@ -4,12 +4,6 @@ session_start();
 
 include("../config/db_cPCS.php");
 
-
-// =======================
-// SYSTEM STATISTICS
-// =======================
-
-
 $students = mysqli_fetch_assoc(
     mysqli_query(
         $conn,
@@ -73,14 +67,9 @@ $ratings = mysqli_fetch_assoc(
     </title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-
     <link rel="stylesheet" href="../../assets/css/adminDashboard.css">
-
-
-    <link rel="stylesheet" href="../../assets/css/font-awesome.css">
+    <link rel="icon" href="../../assets/images/logo.png" type="image/x-icon">
 
 </head>
 
