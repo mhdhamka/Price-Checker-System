@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="../../assets/css/font-awesome.css">
     <link rel="stylesheet" href="../../assets/css/styleindex.css">
     <link rel="stylesheet" href="../../assets/css/indexPublic.css">
+    <link rel="stylesheet" href="../../assets/css/sliders.css">
     <link rel="stylesheet" href="../../assets/css/footer.css">
     <link rel="icon" href="../../assets/images/logo.png" type="image/x-icon">
     
@@ -319,27 +320,33 @@
 
             </div>
 
-            <div class="row">
+            <div class="slider-wrapper">
 
-            <?php
+                <button class="slider-btn prev">
+                    <i class="fa fa-chevron-left"></i>
+                </button>
 
-            // Get store information
-            $storeQuery = "SELECT * FROM store ORDER BY storeID ASC";
+                <div class="card-slider" id="storeSlider">
 
-            $storeResult = mysqli_query($conn, $storeQuery);
+                <?php
+
+                // Get store information
+                $storeQuery = "SELECT * FROM store ORDER BY storeID ASC";
+
+                $storeResult = mysqli_query($conn, $storeQuery);
 
 
-            if($storeResult && mysqli_num_rows($storeResult) > 0)
-            {
-
-
-                while($store = mysqli_fetch_assoc($storeResult))
-
+                if($storeResult && mysqli_num_rows($storeResult) > 0)
                 {
 
-            ?>
 
-                <div class="col-lg-6 col-md-6 mb-4">
+                    while($store = mysqli_fetch_assoc($storeResult))
+
+                    {
+
+                ?>
+
+                <div class="slider-card">
 
                     <div class="store-card">
 
@@ -371,8 +378,7 @@
 
                 echo "
 
-                <div class='col-12 text-center'>
-
+                <div class='text-center w-100'>
                     <h5>
                         No store available.
                     </h5>
@@ -388,6 +394,13 @@
 
 
             </div>
+
+                <button class="slider-btn next">
+                    <i class="fa fa-chevron-right"></i>
+                </button>
+
+            </div>
+
         </div>
     </section>
 
@@ -514,85 +527,87 @@
 
         </div>
 
-        <div class="row">
+        <div class="slider-wrapper">
 
+            <button class="slider-btn prev">
+                <i class="fa fa-chevron-left"></i>
+            </button>
 
+            <div class="card-slider" id="categorySlider">
 
-            <?php
+                <?php
 
-            // Get categories
-            $categoryQuery = "SELECT * FROM category ORDER BY categoryID ASC";
+                // Get categories
+                $categoryQuery = "SELECT * FROM category ORDER BY categoryID ASC";
 
-            $categoryResult = mysqli_query($conn, $categoryQuery);
+                $categoryResult = mysqli_query($conn, $categoryQuery);
 
-            if($categoryResult && mysqli_num_rows($categoryResult) > 0)
+                if($categoryResult && mysqli_num_rows($categoryResult) > 0)
 
-            {
+                {
 
-            while($category = mysqli_fetch_assoc($categoryResult))
+                while($category = mysqli_fetch_assoc($categoryResult))
 
-            {
+                {
 
-            ?>
+                ?>
 
+                <div class="slider-card">
 
-            <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="category-card">
 
-                <div class="category-card">
+                        <img src="<?php echo $category['categoryIMG']; ?>">
 
-                    <img src="<?php echo $category['categoryIMG']; ?>">
+                        <div class="category-content">
+                            <h4>
 
-                    <div class="category-content">
-                        <h4>
+                                <?php echo $category['categoryName']; ?>
 
-                            <?php echo $category['categoryName']; ?>
+                            </h4>
 
-                        </h4>
+                            <p>
+                                Explore available 
+                                <?php echo $category['categoryName']; ?>
+                                items.
+                            </p>
 
-                        <p>
-                            Explore available 
-                            <?php echo $category['categoryName']; ?>
-                            items.
-                        </p>
+                        </div>
 
                     </div>
 
                 </div>
 
-                </div>
-
-                    <?php
-
-                    }
-
-
-                    }
-
+            <?php
+            }
+                }
                     else
+                {
 
-                    {
+                echo "
 
-
-                    echo "
-
-                    <div class='col-12 text-center'>
+                <div class='col-12 text-center'>
 
                     <h5>
                         No categories available.
                     </h5>
 
-                    </div>
-
-                    ";
-
-
-                    }
-
-
-                    ?>
-
                 </div>
-            </div>
+
+                ";
+
+
+                }
+
+            ?>
+
+        </div>
+
+            <button class="slider-btn next">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+
+        </div>
+
         </div>
     </section>
     
@@ -683,6 +698,8 @@
     <script src="../../assets/js/slideshow.js"></script>
     <!-- Global Init -->
     <script src="../../assets/js/custom.js"></script>
+
+    <script src="../../assets/js/sliders.js"></script>
 
   </body>
 </html>

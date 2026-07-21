@@ -167,7 +167,7 @@ $totalPages = ceil($total/$limit);
 
                 <h2>
 
-                    Manage Students
+                    Students Management
 
                 </h2>
 
@@ -410,43 +410,46 @@ $totalPages = ceil($total/$limit);
 
                         <td class="action-buttons">
 
-                            <a href="#" class="action-btn view-btn"
+                            <button type="button" class="action-btn view-btn"
                                 data-id="<?php echo $student['studentID']; ?>"
                                 title="View Student">
 
                                 <i class="fa-solid fa-eye"></i>
 
-                            </a>
+                            </button>
 
-
-                            <a href="resetPassword.php?id=<?php echo $student['studentID'];?>"
-                            class="action-btn reset-btn"
-                            title="Reset Password">
+                            <button type="button" class="action-btn reset-btn"
+                                data-id="<?php echo $student['studentID']; ?>"
+                                data-name="<?php echo htmlspecialchars($student['fullName']); ?>"
+                                title="Reset Password">
 
                                 <i class="fa-solid fa-key"></i>
 
-                            </a>
+                            </button>
 
+                            <?php if($student['logStatus']==1){ ?>
 
-                            <?php if($student['logStatus']==0) { ?>
+                                <button type="button"
+                                    class="action-btn disable-btn"
+                                    data-id="<?php echo $student['studentID']; ?>"
+                                    data-name="<?php echo htmlspecialchars($student['fullName']); ?>"
+                                    title="Disable Student">
 
-                                <a href="processes/enableStudent.php?id=<?php echo $student['studentID'];?>"
-                                class="action-btn enable-btn"
-                                title="Enable Student">
+                                    <i class="fa-solid fa-user-slash"></i>
+
+                                </button>
+
+                            <?php }else{ ?>
+
+                                <button type="button"
+                                    class="action-btn enable-btn"
+                                    data-id="<?php echo $student['studentID']; ?>"
+                                    data-name="<?php echo htmlspecialchars($student['fullName']); ?>"
+                                    title="Enable Student">
 
                                     <i class="fa-solid fa-user-check"></i>
 
-                                </a>
-
-                            <?php } else { ?>
-
-                                <a href="processes/disableStudent.php?id=<?php echo $student['studentID'];?>"
-                                class="action-btn disable-btn"
-                                title="Disable Student">
-
-                                    <i class="fa-solid fa-user-xmark"></i>
-
-                                </a>
+                                </button>
 
                             <?php } ?>
 
@@ -495,15 +498,110 @@ $totalPages = ceil($total/$limit);
 
         </div>
 
+        <!-- View Student Modal -->
         <div id="studentModal" class="student-modal">
 
             <div class="student-modal-content">
 
-                <span class="close-modal">&times;</span>
+                <button type="button" class="close-modal">&times;</button>
 
                 <div id="studentDetails">
-                    Loading...
+
                 </div>
+
+            </div>
+
+        </div>
+
+        <!-- ==========================================
+            CONFIRM ACTION MODAL
+        ========================================== -->
+
+        <div id="confirmModal" class="student-modal">
+
+            <div class="student-modal-content confirm-modal">
+
+                <!-- Close Button -->
+                <button type="button" class="close-modal">
+                    &times;
+                </button>
+
+                <!-- Icon -->
+                <div id="confirmIcon" class="confirm-icon">
+
+                    <i class="fa-solid fa-key"></i>
+
+                </div>
+
+                <!-- Title -->
+                <h2 id="confirmTitle">
+
+                    Confirmation
+
+                </h2>
+
+                <!-- Message -->
+                <p id="confirmMessage">
+
+                    Are you sure you want to continue?
+
+                </p>
+
+                <!-- Student Name -->
+                <div class="confirm-name">
+
+                    <span id="confirmStudent">
+
+                        Student Name
+
+                    </span>
+
+                </div>
+
+                <!-- Information -->
+                <div class="confirm-note">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    <span id="confirmNote">
+
+                        Action description goes here.
+
+                    </span>
+
+                </div>
+
+                <!-- Form -->
+                <form id="confirmForm" method="POST">
+
+                    <input
+                        type="hidden"
+                        id="confirmStudentID"
+                        name="studentID">
+
+                    <div class="confirm-actions">
+
+                        <button
+                            type="button"
+                            class="cancel-btn">
+
+                            <i class="fa-solid fa-xmark"></i>
+                            Cancel
+
+                        </button>
+
+                        <button
+                            type="submit"
+                            id="confirmBtn"
+                            class="confirm-btn">
+
+                            Confirm
+
+                        </button>
+
+                    </div>
+
+                </form>
 
             </div>
 

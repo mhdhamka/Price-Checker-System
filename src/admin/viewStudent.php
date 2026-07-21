@@ -3,139 +3,127 @@
 session_start();
 include("../config/db_cPCS.php");
 
-if(!isset($_GET['studentID']))
+if(!isset($_SESSION['adminID']))
+{
+    exit("Access denied.");
+}
+
+$studentID = isset($_GET['studentID'])
+    ? (int)$_GET['studentID']
+    : 0;
+
+$query = mysqli_query($conn,"
+SELECT *
+FROM student
+WHERE studentID='$studentID'
+");
+
+if(mysqli_num_rows($query) == 0)
 {
     exit("Student not found.");
 }
-
-$studentID = (int)$_GET['studentID'];
-
-$query = mysqli_query(
-
-$conn,
-
-"SELECT *
-FROM student
-WHERE studentID='$studentID'"
-
-);
 
 $student = mysqli_fetch_assoc($query);
 
-if(!$student)
-{
-    exit("Student not found.");
-}
-
-/* Ratings */
+/* ==========================================
+   STUDENT STATISTICS
+========================================== */
 
 $rating = mysqli_fetch_assoc(
-
-mysqli_query(
-
-$conn,
-
-"SELECT COUNT(*) total
-FROM ratings
-WHERE studentID='$studentID'"
-
-)
-
+    mysqli_query($conn,"
+    SELECT COUNT(*) total
+    FROM ratings
+    WHERE studentID='$studentID'
+    ")
 )['total'];
+
+/* Replace these queries with your actual tables later */
 
 $post = 0;
 $comment = 0;
 
 ?>
 
-<div class="student-profile-modal">
+<div class="student-profile">
 
-    <div style="text-align:center;">
+    <div class="profile-header">
 
-        <img src="<?php echo $student['studentIMG']; ?>"
+        <img src="<?php echo htmlspecialchars($student['studentIMG']); ?>"
              class="profile-image">
 
         <h2>
-
-            <?php echo $student['fullName']; ?>
-
+            <?php echo htmlspecialchars($student['fullName']); ?>
         </h2>
+
+        <p>
+            <?php echo htmlspecialchars($student['email']); ?>
+        </p>
+
+        <?php if($student['logStatus']){ ?>
+
+            <span class="status-badge active">
+                <i class="fa-solid fa-circle-check"></i>
+                Active Student
+            </span>
+
+        <?php } else { ?>
+
+            <span class="status-badge disabled">
+                <i class="fa-solid fa-circle-xmark"></i>
+                Disabled Student
+            </span>
+
+        <?php } ?>
 
     </div>
 
-    <hr>
+    <div class="info-card">
 
-    <table class="table">
+        <h3>
+            Student Information
+        </h3>
 
-        <tr>
+        <div class="info-row">
+            <span>Student ID</span>
+            <strong><?php echo $student['studentID']; ?></strong>
+        </div>
 
-            <th>Username</th>
+        <div class="info-row">
+            <span>Username</span>
+            <strong><?php echo htmlspecialchars($student['username']); ?></strong>
+        </div>
 
-            <td>
-
-                <?php echo $student['username']; ?>
-
-            </td>
-
-        </tr>
-
-        <tr>
-
-            <th>Email</th>
-
-            <td>
-
-                <?php echo $student['email']; ?>
-
-            </td>
-
-        </tr>
-
-        <tr>
-
-            <th>Status</th>
-
-            <td>
-
-                <?php
-
-                echo ($student['logStatus'])
-                    ? "Active"
-                    : "Disabled";
-
-                ?>
-
-            </td>
-
-        </tr>
-
-    </table>
-
-    <hr>
+    </div>
 
     <div class="student-stats">
 
-        <div>
+        <div class="stat-card">
 
-            <h3><?php echo $rating; ?></h3>
+            <i class="fa-solid fa-star"></i>
 
-            <p>Ratings</p>
+            <h2><?php echo $rating; ?></h2>
 
-        </div>
-
-        <div>
-
-            <h3><?php echo $post; ?></h3>
-
-            <p>Posts</p>
+            <span>Ratings</span>
 
         </div>
 
-        <div>
+        <div class="stat-card">
 
-            <h3><?php echo $comment; ?></h3>
+            <i class="fa-solid fa-comments"></i>
 
-            <p>Comments</p>
+            <h2><?php echo $post; ?></h2>
+
+            <span>Posts</span>
+
+        </div>
+
+        <div class="stat-card">
+
+            <i class="fa-solid fa-message"></i>
+
+            <h2><?php echo $comment; ?></h2>
+
+            <span>Comments</span>
 
         </div>
 

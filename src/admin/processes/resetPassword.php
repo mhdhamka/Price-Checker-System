@@ -11,11 +11,18 @@ if(!isset($_SESSION['adminID']))
 
 $studentID=(int)$_POST['studentID'];
 
+/*
+Default password:
+12345678
+*/
+
+$password=password_hash("12345678",PASSWORD_DEFAULT);
+
 mysqli_query($conn,"
 UPDATE student
-SET logStatus='0'
+SET password='$password'
 WHERE studentID='$studentID'
 ");
 
-header("Location: ../../admin/students.php");
+header("Location: ../students.php");
 exit();
