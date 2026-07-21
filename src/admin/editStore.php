@@ -10,14 +10,14 @@ if(!isset($_SESSION['adminID']))
 }
 
 $id=$_GET['id'];
-$category=mysqli_fetch_assoc(
+$store=mysqli_fetch_assoc(
 
 mysqli_query(
 
 $conn,
 
-"SELECT * FROM category
-WHERE categoryID='$id'"
+"SELECT * FROM store
+WHERE storeID='$id'"
 
 )
 
@@ -35,7 +35,7 @@ WHERE categoryID='$id'"
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
-        Manage Categories
+        Manage Stores
     </title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -58,22 +58,30 @@ WHERE categoryID='$id'"
         <div class="dashboard-content">
 
             <div class="page-title">
-                <h2>Edit Category</h2>
-                <p>Update Category information.</p>
+                <h2>Edit Store</h2>
+                <p>Update store information.</p>
             </div>
 
             <div class="form-card">
 
-                <form action="../admin/processes/editCategoryProcess.php" method="POST" enctype="multipart/form-data">
+                <form action="../admin/processes/editStoreProcess.php" method="POST" enctype="multipart/form-data">
 
-                    <input type="hidden" name="id" value="<?php echo $category['categoryID']; ?>">
-                    <input type="hidden" name="oldImage" value="<?php echo $category['categoryIMG']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $store['storeID']; ?>">
+                    <input type="hidden" name="oldImage" value="<?php echo $store['storeIMG']; ?>">
 
                     <div class="form-group">
 
-                        <label>Category Name</label>
+                        <label>Store Name</label>
 
-                        <input type="text" name="categoryName" value="<?php echo $category['categoryName']; ?>" required>
+                        <input type="text" name="StoreName" value="<?php echo $store['StoreName']; ?>" required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Description</label>
+
+                        <textarea name="desc1"><?php echo $store['desc1']; ?></textarea>
 
                     </div>
 
@@ -81,7 +89,7 @@ WHERE categoryID='$id'"
 
                         <label>Current Image</label><br>
 
-                        <img src="<?php echo $category['categoryIMG']; ?>" width="150">
+                        <img src="<?php echo $store['storeIMG']; ?>" width="150">
 
                     </div>
 
@@ -99,7 +107,7 @@ WHERE categoryID='$id'"
                             Update Item
                         </button>
 
-                        <a href="../admin/categories.php" class="cancel-btn">
+                        <a href="../admin/stores.php" class="cancel-btn">
                             Cancel
                         </a>
 

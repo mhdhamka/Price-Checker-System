@@ -1,0 +1,526 @@
+<?php
+
+session_start();
+include("../config/db_cPCS.php");
+
+if(!isset($_SESSION['adminID']))
+{
+    header("Location: ../public/loginAdmin.php");
+    exit();
+}
+
+/* ==========================================
+   STUDENT STATISTICS
+========================================== */
+
+$totalStudents = mysqli_fetch_assoc(
+mysqli_query($conn,"
+SELECT COUNT(*) total
+FROM student
+"))['total'];
+
+$activeStudents = mysqli_fetch_assoc(
+mysqli_query($conn,"
+SELECT COUNT(*) total
+FROM student
+WHERE logStatus='1'
+"))['total'];
+
+$disabledStudents = mysqli_fetch_assoc(
+mysqli_query($conn,"
+SELECT COUNT(*) total
+FROM student
+WHERE logStatus='0'
+"))['total'];
+
+$registeredThisMonth = mysqli_fetch_assoc(
+mysqli_query($conn,"
+SELECT COUNT(*) total
+FROM student
+WHERE MONTH(created_at)=MONTH(CURRENT_DATE())
+AND YEAR(created_at)=YEAR(CURRENT_DATE())
+"))['total'];
+
+
+/* ==========================================
+   SEARCH / FILTER / SORT / PAGINATION
+========================================== */
+
+$search = $_GET['search'] ?? "";
+$status = $_GET['logStatus'] ?? "";
+$sort = $_GET['sort'] ?? "";
+
+$sql = "SELECT * FROM student WHERE 1";
+
+/* SEARCH */
+if($search != "")
+{
+    $search = mysqli_real_escape_string($conn,$search);
+
+    $sql .= " AND (
+        fullName LIKE '%$search%'
+        OR username LIKE '%$search%'
+        OR email LIKE '%$search%'
+    )";
+}
+
+/* CATEGORY FILTER */
+if($status!="")
+{
+    $status=mysqli_real_escape_string($conn,$status);
+
+    $sql.=" AND logStatus='$status'";
+}
+
+/* SORTING */
+switch($sort)
+{
+
+case "old":
+
+$sql.=" ORDER BY studentID ASC";
+
+break;
+
+case "az":
+
+$sql.=" ORDER BY fullName ASC";
+
+break;
+
+case "za":
+
+$sql.=" ORDER BY fullName DESC";
+
+break;
+
+default:
+
+$sql.=" ORDER BY studentID ASC";
+
+}
+
+/* TOTAL RECORDS */
+$countSQL = str_replace(
+    "SELECT *",
+    "SELECT COUNT(*) total",
+    $sql
+);
+
+$total = mysqli_fetch_assoc(
+    mysqli_query($conn,$countSQL)
+)['total'];
+
+/* PAGINATION */
+$limit = 10;
+
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+if($page < 1)
+{
+    $page = 1;
+}
+
+$offset = ($page-1)*$limit;
+$sql .= " LIMIT $limit OFFSET $offset";
+$studentQuery = mysqli_query($conn,$sql);
+$totalPages = ceil($total/$limit);
+
+
+?>
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Manage Students
+    </title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/adminDashboard.css">
+    <link rel="icon" href="../../assets/images/logo.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+    <?php include("../admin/includes/sidebar.php"); ?>
+
+    <div class="admin-main">
+
+        <?php include("../admin/includes/header.php"); ?>
+
+        <div class="dashboard-content">
+
+            <!-- Page Title -->
+
+            <div class="page-title">
+
+                <h2>
+
+                    Manage Students
+
+                </h2>
+
+                <p>
+
+                    View, search, edit, and delete student records.
+
+                </p>
+
+            </div>
+
+            <div class="dashboard-cards">
+
+                <div class="dashboard-card">
+                    <i class="fa-solid fa-user"></i>
+                    <h4>
+                        <?php echo $totalStudents; ?>
+                    </h4>
+
+                    <p>
+                        Total Students
+                    </p>
+                </div>
+
+                <div class="dashboard-card">
+                    <i class="fa-solid fa-user-check"></i>
+                    <h4>
+                        <?php echo $activeStudents; ?>
+                    </h4>
+
+                    <p>
+                        Active Students
+                    </p>
+                </div>
+
+                <div class="dashboard-card">
+                    <i class="fa-solid fa-user-slash"></i>
+                    <h4>
+                        <?php echo $disabledStudents; ?>
+                    </h4>
+
+                    <p>
+                        Disabled Students
+                    </p>
+                </div>
+
+                <div class="dashboard-card">
+                    <i class="fa-solid fa-calendar-plus"></i>
+                    <h4>
+                        <?php echo $registeredThisMonth; ?>
+                    </h4>
+
+                    <p>
+                        Registered This Month
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Report -->
+            <div class="report-card">
+                <h3>
+                    Student Reports
+                </h3>
+
+                <p>
+                    Generate and export student statistics.
+                </p>
+
+                <div class="report-buttons">
+                    <a href="../admin/exportPDF.php?type=student">
+                        <i class="fa fa-file-pdf"></i>
+                        Export Student PDF
+                    </a>
+
+                    <a href="../admin/exportExcel.php?type=student">
+                        <i class="fa fa-file-excel"></i>
+                        Export Student Excel
+                    </a>
+                </div>
+            </div>
+
+            <!-- Top Bar -->
+
+            <div class="manage-top">
+
+                <form method="GET" class="search-box">
+
+                    <input type="text" name="search" placeholder="Search student..." value="<?php echo htmlspecialchars($search); ?>">
+
+                    <select name="logStatus">
+
+                        <option value="">All Status</option>
+
+                        <?php
+
+                        $statusQuery = mysqli_query($conn,"SELECT DISTINCT logStatus FROM student");
+
+                        while($statusRow = mysqli_fetch_assoc($statusQuery))
+                        {
+
+                        ?>
+
+                        <option 
+                            value="<?php echo $statusRow['logStatus']; ?>"
+                            <?php 
+                            if($status == $statusRow['logStatus'])
+                                echo "selected";
+                            ?>
+                        >
+
+                            <?php echo $statusRow['logStatus']; ?>
+
+                        </option>
+
+                        <?php
+
+                        }
+
+                        ?>
+
+                    </select>
+
+
+                    <select name="sort">
+
+                        <option value="">Newest</option>
+
+                        <option value="old" 
+                        <?php if($sort=="old") echo "selected"; ?>>
+                            Oldest
+                        </option>
+
+                        <option value="az" 
+                        <?php if($sort=="az") echo "selected"; ?>>
+                            A-Z
+                        </option>
+
+                        <option value="za" 
+                        <?php if($sort=="za") echo "selected"; ?>>
+                            Z-A
+                        </option>
+
+                    </select>
+
+                    <button type="submit">
+
+                        <i class="fa fa-search"></i>
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- Table -->
+
+            <div class="table-card">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No.</th>
+                            <th>Image</th>
+                            <th>Full Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    <?php
+
+                    if(mysqli_num_rows($studentQuery)==0)
+                    {
+
+                    ?>
+
+                    <tr>
+
+                        <td colspan="7" style="text-align:center;">
+
+                            No student record found.
+
+                        </td>
+
+                    </tr>
+
+                    <?php
+
+                    }
+                    else
+                    {
+
+                    $no = $offset + 1;
+
+                    while($student=mysqli_fetch_assoc($studentQuery))
+                    {
+
+                    ?>
+
+                    <tr>
+
+                        <td>
+
+                            <?php echo $no++; ?>
+
+                        </td>
+
+                        <td>
+
+                            <img src="<?php echo $student['studentIMG']; ?>" class="table-image">
+
+                        </td>
+
+                        <td>
+
+                            <?php echo $student['fullName']; ?>
+
+                        </td>
+
+                        <td>
+
+                            <?php echo $student['username']; ?>
+
+                        </td>
+
+                        <td>
+
+                            <?php echo $student['email']; ?>
+
+                        </td>
+
+                        <td class="action-buttons">
+
+                            <a href="#" class="action-btn view-btn"
+                                data-id="<?php echo $student['studentID']; ?>"
+                                title="View Student">
+
+                                <i class="fa-solid fa-eye"></i>
+
+                            </a>
+
+
+                            <a href="resetPassword.php?id=<?php echo $student['studentID'];?>"
+                            class="action-btn reset-btn"
+                            title="Reset Password">
+
+                                <i class="fa-solid fa-key"></i>
+
+                            </a>
+
+
+                            <?php if($student['logStatus']==0) { ?>
+
+                                <a href="processes/enableStudent.php?id=<?php echo $student['studentID'];?>"
+                                class="action-btn enable-btn"
+                                title="Enable Student">
+
+                                    <i class="fa-solid fa-user-check"></i>
+
+                                </a>
+
+                            <?php } else { ?>
+
+                                <a href="processes/disableStudent.php?id=<?php echo $student['studentID'];?>"
+                                class="action-btn disable-btn"
+                                title="Disable Student">
+
+                                    <i class="fa-solid fa-user-xmark"></i>
+
+                                </a>
+
+                            <?php } ?>
+
+                        </td>
+
+                    </tr>
+
+                    <?php
+
+                    }
+                    
+                    }
+
+                    ?>
+
+                    </tbody>
+
+                </table>
+
+                <div class="pagination">
+
+                    <?php
+
+                    for($i=1;$i<=$totalPages;$i++)
+
+                    {
+
+                    ?>
+
+                        <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>&logStatus=<?php echo urlencode($status); ?>&sort=<?php echo urlencode($sort); ?>"
+                        class="<?php if($page==$i) echo 'active'; ?>">
+
+                            <?php echo $i; ?>
+
+                        </a>
+
+                    <?php
+
+                    }
+
+                    ?>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="studentModal" class="student-modal">
+
+            <div class="student-modal-content">
+
+                <span class="close-modal">&times;</span>
+
+                <div id="studentDetails">
+                    Loading...
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <?php include("../admin/includes/footer.php"); ?>
+
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../assets/js/students.js"></script>
+
+</body>
+
+
+</html>

@@ -1,284 +1,299 @@
-<!---TMF 4935: Final Year Project--->
-<!---Mohammad Hamka Izzuddin Bin Mohamad Yahya (73571)--->
-
 <?php
-	session_start();
-	include "dbConnect_PCS.php";
-	
-	if (isset($_POST['submit'])) {
-        global $conn;
-        $aboutusID = mysqli_real_escape_string($conn, $_POST['aboutusID']);
-        $name = mysqli_real_escape_string($conn, $_POST['name']);
-        $course = mysqli_real_escape_string($conn, $_POST['course']);
-        $details = mysqli_real_escape_string($conn, $_POST['details']);
-    
-        if (empty($_FILES['image']['name'])) {
-            $sql = "UPDATE aboutus
-                    SET aboutusName = '$name', aboutusCourse = '$course', aboutusDetails = '$details'
-                    WHERE aboutusID = '$aboutusID'";
-    
-            if (mysqli_query($conn, $sql)) {
-                header('location: aboutus.php?editID=1');
-            } else {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-            }
-        } else {
-            $img = mysqli_real_escape_string($conn, $_FILES['image']['name']);
-            $path = "assets/images/" . basename($img);
-    
-            $sql = "UPDATE aboutus
-                    SET aboutusName = '$name', aboutusCourse = '$course', aboutusDetails = '$details', aboutusIMG = '$path'
-                    WHERE aboutusID = '$aboutusID'";
-    
-            if (mysqli_query($conn, $sql) && move_uploaded_file($_FILES['image']['tmp_name'], $path)) {
-                header('location: aboutus.php?editID=1');
-            } else {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-            }
-        }
-    }
-    
+
+session_start();
+include("../config/db_cPCS.php");
+
+if(!isset($_SESSION['adminID']))
+{
+    header("Location: ../public/loginAdmin.php");
+    exit();
+}
+
+/* ==========================================
+   SEARCH / PAGINATION
+========================================== */
+
+$search = $_GET['search'] ?? "";
+
+$sql = "SELECT * FROM category WHERE 1";
+
+/* SEARCH */
+
+if($search != "")
+{
+    $search = mysqli_real_escape_string($conn,$search);
+
+    $sql .= " AND (
+        categoryName LIKE '%$search%'
+    )";
+}
+
+/* TOTAL RECORDS */
+$countSQL = str_replace(
+    "SELECT *",
+    "SELECT COUNT(*) total",
+    $sql
+);
+
+$total = mysqli_fetch_assoc(
+    mysqli_query($conn,$countSQL)
+)['total'];
+
+/* PAGINATION */
+$limit = 10;
+
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+if($page < 1)
+{
+    $page = 1;
+}
+
+$offset = ($page-1)*$limit;
+$sql .= " LIMIT $limit OFFSET $offset";
+$categoryQuery = mysqli_query($conn,$sql);
+$totalPages = ceil($total/$limit);
+
 ?>
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Price Checker System Admin Dashboard</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
 
-    <link rel="icon" href="assets/images/logo.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <title>
+        Manage Categories
+    </title>
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
-    
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/adminDashboard.css">
+    <link rel="icon" href="../../assets/images/logo.png" type="image/x-icon">
 
-    <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container-fluid position-relative d-flex p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
+
+<div class="admin-container">
+
+    <?php include("../admin/includes/sidebar.php"); ?>
+
+    <div class="admin-main">
+
+        <?php include("../admin/includes/header.php"); ?>
+
+        <div class="dashboard-content">
+
+            <!-- Page Title -->
+
+            <div class="page-title">
+
+                <h2>
+
+                    Manage Categories
+
+                </h2>
+
+                <p>
+
+                    View, search, add, edit, and delete categories.
+
+                </p>
+
             </div>
-        </div>
-        <!-- Spinner End -->
-		<?php
-			global $conn;
-			$sql = "SELECT * FROM admin WHERE logStatus = 1;";
-			$result = mysqli_query($conn, $sql);
-			
-			if ($result -> num_rows > 0)
-			{
-				while ($row = $result -> fetch_assoc())
-				{
-					$username = $row["adminUsername"];
-					$img = $row['adminIMG'];
-				}
-			}
-		?>
 
+            <!-- Top Bar -->
 
-        <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
-            <nav class="navbar bg-secondary navbar-dark">
-                <a href="indexAdmin.php" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Admin</h3>
+            <div class="manage-top">
+
+                <form method="GET" class="search-box">
+
+                    <input type="text" name="search" placeholder="Search category..." value="<?php echo $search; ?>">
+
+                    <button>
+
+                        <i class="fa fa-search"></i>
+
+                    </button>
+
+                </form>
+
+                <a href="../admin/addCategory.php" class="add-btn">
+
+                    <i class="fa fa-plus"></i>
+
+                    Add Category
+
                 </a>
-                <div class="d-flex align-items-center ms-4 mb-4">
-                    <div class="position-relative">
-                        <img class="rounded-circle" src="<?php echo $img ?>" alt="" style="width: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
-                    </div>
-                    <div class="ms-3">
-                        <h6 class="mb-0">
-							<span class="d-none d-lg-inline-flex">
-								<?php echo $username ?>
-							</span></h6>
-                        <span>Admin</span>
-                    </div>
-                </div>
-                <div class="navbar-nav w-100">
-                    <a href="adminProfile.php" class="nav-item nav-link"><i class="fa fa-user-cog me-2"></i>My Profile</a>
-                    <a href="indexAdmin.php" class="nav-item nav-link"><i class="fa fa-shop me-2"></i>Manage Item</a>
-                    <a href="filterAdmin.php" class="nav-item nav-link"><i class="fa fa-filter me-2"></i>Filter & Compare</a>
-                    <a href="searchAdmin.php" class="nav-item nav-link"><i class="fa fa-search me-2"></i>Search Item</a>
-                    <a href="store.php?editID=1" class="nav-item nav-link"><i class="fa fa-store me-2"></i>Store</a>
-                    <a href="category.php?editID=1" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>Category</a>
-                    <a href="aboutus.php?editID=1" class="nav-item nav-link"><i class="fa fa-user me-2"></i>About Us</a>
-                    <a href="logoutAdmin.php" class="nav-item nav-link"><i class="fa fa-sign-out me-2"></i>Log Out</a>
-                </div>
-            </nav>
-        </div>
-        <!-- Sidebar End -->
 
+            </div>
 
-        <!-- Content Start -->
-        <div class="content">
-            <!-- Navbar Start -->
-            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
-                <a href="indexAdmin.php" class="navbar-brand d-flex d-lg-none me-4">
-                    <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
-                </a>
-                <a href="#" class="sidebar-toggler flex-shrink-0">
-                    <i class="fa fa-bars"></i>
-                </a>
-                <div class="navbar-nav align-items-center ms-auto">
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="<?php echo $img ?>" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">
-								<?php echo $username ?>
-							</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a href="adminProfile.php" class="dropdown-item">My Profile</a>
-                            <a href="logoutAdmin.php" class="dropdown-item">Log Out</a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            <!-- Navbar End -->
+            <!-- Table -->
 
-            <!-- Form Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-						<h6 class="mb-0">Update Category Details</h6>
-                    </div>
+            <div class="table-card">
 
-                    <div class="table-responsive">
-							<table class="table text-start align-middle table-bordered table-hover mb-0">
-								<thead>
-									<tr class="text-white">
-										<th scope="col">Category ID</th>
-										<th scope="col">Category Name</th>
-										<th scope="col">Category Image</th>
-										<th scope="col">Action</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-										global $conn;
-										$sql = "SELECT * FROM category";
-										
-										$result = mysqli_query($conn, $sql);
-										if ($result -> num_rows > 0)
-										{
-											while ($row = $result -> fetch_assoc())
-											{
-												echo "<tr style = 'text-align: left;'>
-														<td><center>".$row['categoryID']."</td>
-														<td><center>".$row['categoryName']."</td>
-														<td><center><img src = ".$row['categoryIMG']." style = 'width: 80%'></td>
-														<td>
-															<button class='btn btn-primary'style = 'background-color: white'><a href=\"category.php?editID=$row[categoryID]\">Update</a></button>
-														</td>
-													 </tr>";
-											}
-										}
-									?>
-								</tbody>
-							</table>
-						</div>
-					<div class="bg-secondary rounded h-100 p-4">
-						<form action = "category.php" method = "POST" enctype="multipart/form-data">
-						<?php
-							global $conn;
-							$editID = $_GET['editID'];
-							$sql = "SELECT * FROM category WHERE categoryID = '$editID'";
-							$result = mysqli_query($conn, $sql);
+                <table>
 
-							if ($result -> num_rows > 0)
-							{
-								while ($row = $result -> fetch_assoc())
-								{
-									$categoryID = $_GET['editID'];
-                                    $name = $row['categoryName'];
-								}
-							}
-						?>	 
-                        <div class="row mb-3">
-								<label for="inputFname" class="col-sm-2 col-form-label">Category ID</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="inputFname" name = "categoryID" value = "<?php echo $categoryID ?>" readonly>
-								</div>
-							</div>
-							<div class="row mb-3">
-								<label for="inputFname" class="col-sm-2 col-form-label">Category Name</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="inputFname" name = "name" value = "<?php echo $name ?>">
-							    </div>
-							</div>
-                            <div class="row mb-3">
-								<label for="inputFname" class="col-sm-2 col-form-label">Category Image</label>
-								<div class="col-sm-10">
-									<input type="file" class="form-control" id="inputFname" name = "image" value = "<?php echo $img ?>">
-							    </div>
-							</div>
+                    <thead>
+
+                        <tr>
+
+                            <th>No.</th>
+                            <th>Image</th>
+                            <th>Name</th>
                             
-							<button type="submit" class="btn btn-primary" style = "background-color: white"><a href = "category.php?editID=<?php echo $editID ?>" style = "font-color: white;">Cancel</a></button>
-							<button type="submit" class="btn btn-primary" name = "submit">Update</button>
-					  </form>
-                    </div>
-                </div>
-            </div>
-            <!-- Form End -->
+                            <th>Action</th>
 
+                        </tr>
 
-            <!-- Footer Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary rounded-top p-4">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">2024 Price Checker System</a>, All Right Reserved. 
-                        </div>
-                    </div>
+                    </thead>
+
+                    <tbody>
+
+                    <?php
+
+                    if(mysqli_num_rows($categoryQuery)==0)
+                    {
+
+                    ?>
+
+                    <tr>
+
+                        <td colspan="7" style="text-align:center;">
+
+                            No category found.
+
+                        </td>
+
+                    </tr>
+
+                    <?php
+
+                    }
+                    else
+                    {
+
+                    $no = $offset + 1;
+
+                    while($category=mysqli_fetch_assoc($categoryQuery))
+                    {
+
+                    ?>
+
+                    <tr>
+                        <td>
+                            <?php echo $no++; ?>
+                        </td>
+
+                        <td>
+
+                            <img src="<?php echo $category['categoryIMG']; ?>" class="table-image">
+
+                        </td>
+
+                        <td>
+
+                            <?php echo $category['categoryName']; ?>
+
+                        </td>
+
+                        <td>
+
+                            <a href="../admin/editCategory.php?id=<?php echo $category['categoryID'];?>" class="edit-btn">
+
+                                <i class="fa fa-pen"></i>
+
+                            </a>
+
+                            <a href="#" class="delete-btn" data-id="<?php echo $category['categoryID']; ?>">
+
+                                <i class="fa fa-trash"></i>
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    <?php
+
+                    }
+
+                    }
+
+                    ?>
+
+                    </tbody>
+
+                </table>
+
+                <div class="pagination">
+
+                    <?php
+
+                    for($i=1;$i<=$totalPages;$i++)
+
+                    {
+
+                    ?>
+
+                        <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>"
+                        class="<?php if($page==$i) echo 'active'; ?>">
+
+                            <?php echo $i; ?>
+
+                        </a>
+
+                    <?php
+
+                    }
+
+                    ?>
+
                 </div>
+
             </div>
-            <!-- Footer End -->
+
         </div>
-        <!-- Content End -->
 
+        <!-- DELETE MODAL -->
+        <div id="deleteModal" class="delete-modal">
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+            <div class="delete-modal-content">
+
+                <div class="delete-modal-header">
+                    <h3>Delete Category</h3>
+                    <button class="delete-close" id="closeDelete">&times;</button>
+                </div>
+
+                <div class="delete-modal-body">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <p>Are you sure you want to delete this category?<br>This action cannot be undone.</p>
+                </div>
+
+                <div class="delete-modal-footer">
+                    <button id="cancelDelete">Cancel</button>
+                    <a id="confirmDelete">Delete</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <?php include("../admin/includes/footer.php"); ?>
+
     </div>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/chart/chart.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+</div>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-	<script src="https://kit.fontawesome.com/626fa0fc8f.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../assets/js/categories.js"></script>
+
 </body>
+
+
 </html>

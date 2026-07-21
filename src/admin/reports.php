@@ -106,75 +106,75 @@ $ratings = mysqli_fetch_assoc(
 
                         <div class="dashboard-card">
 
-                        <i class="fa fa-users"></i>
+                            <i class="fa fa-users"></i>
 
-                        <h3>
-                            <?php echo $students; ?>
-                        </h3>
+                            <h3>
+                                <?php echo $students; ?>
+                            </h3>
 
-                        <p>
-                            Total Students
-                        </p>
+                            <p>
+                                Total Students
+                            </p>
+
+                        </div>
+
+                        <div class="dashboard-card">
+
+                            <i class="fa fa-box"></i>
+
+                            <h3>
+                                <?php echo $items; ?>
+                            </h3>
+
+                            <p>
+                                Total Items
+                            </p>
+
+                        </div>
+
+                        <div class="dashboard-card">
+
+                            <i class="fa fa-store"></i>
+
+                            <h3>
+                                <?php echo $stores; ?>
+                            </h3>
+
+                            <p>
+                                Total Stores
+                            </p>
+
+                        </div>
+
+                        <div class="dashboard-card">
+
+                            <i class="fa fa-layer-group"></i>
+
+                            <h3>
+                                <?php echo $categories; ?>
+                            </h3>
+
+                            <p>
+                                Categories
+                            </p>
+
+                        </div>
+
+                        <div class="dashboard-card">
+
+                            <i class="fa fa-star"></i>
+
+                            <h3>
+                                <?php echo $ratings; ?>
+                            </h3>
+
+                            <p>
+                                Ratings
+                            </p>
+
+                        </div>
 
                     </div>
-
-                    <div class="dashboard-card">
-
-                        <i class="fa fa-box"></i>
-
-                        <h3>
-                            <?php echo $items; ?>
-                        </h3>
-
-                        <p>
-                            Total Items
-                        </p>
-
-                    </div>
-
-                    <div class="dashboard-card">
-
-                        <i class="fa fa-store"></i>
-
-                        <h3>
-                            <?php echo $stores; ?>
-                        </h3>
-
-                        <p>
-                            Total Stores
-                        </p>
-
-                    </div>
-
-                    <div class="dashboard-card">
-
-                        <i class="fa fa-layer-group"></i>
-
-                        <h3>
-                            <?php echo $categories; ?>
-                        </h3>
-
-                        <p>
-                            Categories
-                        </p>
-
-                    </div>
-
-                    <div class="dashboard-card">
-
-                        <i class="fa fa-star"></i>
-
-                        <h3>
-                            <?php echo $ratings; ?>
-                        </h3>
-
-                        <p>
-                            Ratings
-                        </p>
-
-                    </div>
-
-                </div>
 
 
                 <!-- EXPORT SECTION -->
