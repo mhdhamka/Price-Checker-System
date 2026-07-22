@@ -64,24 +64,15 @@ min-width:160px;
 }
 
 
-
 .search-toolbar button{
 
-
 height:52px;
-
 padding:0 30px;
-
 border:none;
-
 border-radius:12px;
-
 background:#ED563B;
-
 color:white;
-
 font-weight:600;
-
 white-space:nowrap;
 
 }
@@ -127,68 +118,98 @@ RATING MODAL
 
 .student-modal{
 
-
-display:none;
-position:fixed;
-z-index:9999;
-left:0;
-top:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.55);
+    display:none;
+    position:fixed;
+    z-index:9999;
+    inset:0;
+    background:rgba(0,0,0,.55);
 
 }
 
-
+/* MAIN MODAL */
 
 .student-modal-content{
 
-background:white;
-width:450px;
-max-width:90%;
-border-radius:20px;
-padding:30px;
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-box-shadow:0 20px 50px rgba(0,0,0,.2);
+    background:white;
+    width:500px;
+    max-width:92%;
+    max-height:85vh;
+    border-radius:22px;
+    padding:30px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    box-shadow:
+    0 25px 60px rgba(0,0,0,.25);
+    overflow:hidden;
+    overflow-y:auto;
 
 }
 
 
+
+/* CLOSE BUTTON */
 
 .close-modal{
 
-
-position:absolute;
-right:20px;
-top:15px;
-border:none;
-background:none;
-font-size:30px;
+    position:absolute;
+    right:20px;
+    top:15px;
+    width:35px;
+    height:35px;
+    border:none;
+    border-radius:50%;
+    background:#f5f5f5;
+    font-size:25px;
+    line-height:30px;
+    cursor:pointer;
+    color:#555;
 
 }
 
+
+.close-modal:hover{
+
+    background:#ED563B;
+    color:white;
+
+}
+
+
+
+/* TITLE */
 
 
 .rating-box h2{
 
-text-align:center;
-color:#ED563B;
+    text-align:center;
+
+    color:#ED563B;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
 
 }
 
 
 
+/* STAR AREA */
+
 .star-rating{
 
+    display:flex;
 
-display:flex;
-justify-content:center;
-gap:12px;
-font-size:35px;
-margin:20px 0;
+    justify-content:center;
+
+    gap:12px;
+
+    font-size:38px;
+
+    margin:20px 0;
 
 }
 
@@ -196,8 +217,21 @@ margin:20px 0;
 
 .star-rating i{
 
-color:#ddd;
-cursor:pointer;
+    color:#ddd;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+
+.star-rating i:hover{
+
+    transform:scale(1.15);
+
+    color:#FFC107;
 
 }
 
@@ -205,32 +239,55 @@ cursor:pointer;
 
 .star-rating i.active{
 
-color:#FFC107;
+    color:#FFC107;
 
 }
 
+
+
+/* COMMENT BOX */
 
 
 .rating-box textarea{
 
 
-width:100%;
-height:120px;
-border-radius:12px;
-padding:15px;
-border:1px solid #ddd;
-resize:none;
+    width:100%;
+
+    height:110px;
+
+    border-radius:15px;
+
+    padding:15px;
+
+    border:1px solid #ddd;
+
+    resize:none;
+
+    font-size:14px;
+
+}
+
+
+.rating-box textarea:focus{
+
+    outline:none;
+
+    border-color:#ED563B;
 
 }
 
 
 
+/* BUTTONS */
+
+
 .rating-actions{
 
+    display:flex;
 
-display:flex;
-gap:15px;
-margin-top:20px;
+    gap:15px;
+
+    margin-top:20px;
 
 }
 
@@ -239,12 +296,19 @@ margin-top:20px;
 .cancel-btn,
 .submit-rating{
 
+    flex:1;
 
-flex:1;
-height:45px;
-border:none;
-border-radius:10px;
-font-weight:600;
+    height:45px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
 
 }
 
@@ -252,7 +316,17 @@ font-weight:600;
 
 .cancel-btn{
 
-background:#eee;
+    background:#f1f1f1;
+
+    color:#555;
+
+}
+
+
+
+.cancel-btn:hover{
+
+    background:#ddd;
 
 }
 
@@ -260,30 +334,179 @@ background:#eee;
 
 .submit-rating{
 
-background:#ED563B;
-color:white;
+    background:#ED563B;
+
+    color:white;
 
 }
 
+
+
+.submit-rating:hover{
+
+    background:#d94b32;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+/* ==========================
+REVIEWS SECTION
+========================== */
+
+
+.reviews-container{
+
+    margin-top:25px;
+
+    border-top:1px solid #eee;
+
+    padding-top:15px;
+
+}
+
+
+
+.reviews-container h4{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+
+
+/* SCROLL AREA */
+
+#reviews{
+
+    max-height:230px;
+
+    overflow-y:auto;
+
+    padding-right:8px;
+
+}
+
+
+
+/* CUSTOM SCROLLBAR */
+
+#reviews::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+
+#reviews::-webkit-scrollbar-thumb{
+
+    border-radius:10px;
+
+    background:#ccc;
+
+}
+
+
+
+/* REVIEW CARD */
 
 
 .review-card{
 
 
-background:#fafafa;
-border-radius:12px;
-padding:15px;
-margin-top:15px;
+    background:#fafafa;
+
+    border-radius:15px;
+
+    padding:15px;
+
+    margin-bottom:12px;
+
+    border:1px solid #eee;
+
 
 }
 
 
+
+/* USER INFO */
+
+.review-user{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:8px;
+
+}
+
+
+
+.review-user img{
+
+    width:40px;
+
+    height:40px;
+
+    object-fit:cover;
+
+}
+
+
+
+.review-user strong{
+
+    font-size:14px;
+
+}
+
+
+
+/* STARS */
 
 .review-stars{
 
-color:#FFC107;
+    color:#FFC107;
+
+    font-size:18px;
+
+    margin-bottom:8px;
 
 }
+
+
+
+/* COMMENT */
+
+.review-card p{
+
+    font-size:14px;
+
+    color:#555;
+
+    margin-bottom:5px;
+
+}
+
+
+
+/* DATE */
+
+.review-card small{
+
+    color:#999;
+
+}
+
 
 /* ==========================
 PRODUCT CARD

@@ -31,6 +31,41 @@ if(isset($_SESSION['username']) && $_SESSION['username'] !== ''){
       }
     </script>'; 
 }
+
+/* ----- STATISTICS ----- */
+// Count Items
+$totalItems =
+mysqli_fetch_assoc(
+mysqli_query(
+$conn,
+"SELECT COUNT(*) AS total FROM item"
+)
+)['total'];
+
+
+// Count Stores
+$totalStore =
+mysqli_fetch_assoc(
+mysqli_query(
+$conn,
+"SELECT COUNT(*) AS total FROM store"
+)
+)['total'];
+
+// Count Categories
+$totalCategory =
+mysqli_fetch_assoc(
+mysqli_query(
+$conn,
+"SELECT COUNT(*) AS total FROM category"
+)
+)['total'];
+
+$averageRating = mysqli_fetch_assoc(
+mysqli_query($conn,"
+SELECT ROUND(AVG(rating),2) avgRate
+FROM ratings
+"))['avgRate'];
 ?>
 
 <!DOCTYPE html>
@@ -308,66 +343,159 @@ if(isset($_SESSION['username']) && $_SESSION['username'] !== ''){
     </section>
     
 
-    <hr>
-    <!-- ***** Search Starts ***** -->
-    <section class="section" id="search">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 offset-lg-1">
-                <div class="section-heading">
-                    <h2>Explore <em>Categories</em></h2>
-                    <img src="../../assets/images/line-dec.png" alt="">
-                    <p>Explore items from Beverages, Biscuits, and Noodles categories. Find products that match your preferences and budget.</p>
+
+    <!-- ***** Search Preview Starts ***** -->
+    <section class="section search-preview-section" id="search">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <h2>
+                    Discover <em>Products</em>
+                </h2>
+
+                <img src="../../assets/images/line-dec.png">
+
+                <p>
+                    Search products, compare prices across stores, and discover trusted community ratings.
+                </p>
+
+            </div>
+
+
+            <!-- Search Preview Box -->
+            <div class="search-preview-box">
+
+                <div class="preview-search">
+
+                    <i class="fa fa-search"></i>
+
+                    <span>
+                        Search products, brands, or stores...
+                    </span>
+
                 </div>
+
+                <div class="search-feature-list">
+
+                    <div class="feature-item">
+
+                        <i class="fa fa-filter"></i>
+
+                        <span>
+                            Filter Products
+                        </span>
+
+                    </div>
+
+                    <div class="feature-item">
+
+                        <i class="fa fa-random"></i>
+
+                        <span>
+                            Compare Prices
+                        </span>
+
+                    </div>
+
+                    <div class="feature-item">
+
+                        <i class="fa fa-star"></i>
+
+                        <span>
+                            View Ratings
+                        </span>
+
+                    </div>
+
+                </div>
+
             </div>
-        </div>
-        <div class="category-slider">
 
-            <button class="slide-btn prev-btn" onclick="slideCategory(-1)">
-                &#10094;
-            </button>
 
-            <div class="category-container">
+            <!-- Statistics -->
+            <div class="searchpreview-stats">
 
-                <?php
-                $sql = "SELECT * FROM category";
+                <div class="searchpreview-card">
 
-                $result = mysqli_query($conn, $sql);
+                    <i class="fa fa-cubes"></i>
 
-                if ($result->num_rows > 0) {
+                    <h3>
+                        <?php echo $totalItems; ?>
+                    </h3>
 
-                    while ($row = $result->fetch_assoc()) {
+                    <p>
+                        Products
+                    </p>
 
-                        echo "
-                        <div class='category-card'>
+                </div>
 
-                            <img src='".$row['categoryIMG']."'>
 
-                            <div class='category-content'>
-                                <h4>".$row['categoryName']."</h4>
-                                <p>Explore available ".$row['categoryName']." items.</p>
-                            </div>
+                <div class="searchpreview-card">
 
-                        </div>";
+                    <i class="fa fa-building"></i>
 
-                    }
-                }
-                ?>
+                    <h3>
+                        <?php echo $totalStore; ?>
+                    </h3>
+
+                    <p>
+                        Stores
+                    </p>
+
+                </div>
+
+
+                <div class="searchpreview-card">
+
+                    <i class="fa fa-tags"></i>
+
+                    <h3>
+                        <?php echo $totalCategory; ?>
+                    </h3>
+
+                    <p>
+                        Categories
+                    </p>
+
+                </div>
+
+                <div class="searchpreview-card">
+
+                    <i class="fa fa-star"></i>
+
+                    <h3>
+                        <?php echo number_format($averageRating,1); ?>
+                        ★
+                    </h3>
+
+                    <p>
+                        Community Ratings
+                    </p>
+
+                </div>
 
             </div>
 
-            <button class="slide-btn next-btn" onclick="slideCategory(1)">
-                &#10095;
-            </button>
-        <br>
+
+            <div class="main-button">
+
+                <center>
+
+                    <a href="../student/search.php">
+
+                        Explore Products
+
+                    </a>
+
+                </center>
+
+            </div>
+
         </div>
-        <br>
-        <div class="main-button scroll-to-section">
-            <center><a href="../student/search.php">Search Item</a></center>
-        </div>
-        <br>
-    </div>
-   </section>
+
+    </section>
    
 
 

@@ -762,64 +762,6 @@ $totalPages=ceil($total/$limit);
         </div>
 
 
-        <div class="pagination">
-
-            <?php
-
-            if($page>1)
-            {
-
-            ?>
-
-            <a href="?page=<?php echo $page-1; ?>">
-
-            <i class="fa fa-angle-left"></i>
-
-            </a>
-
-            <?php
-
-            }
-
-            for($i=1;$i<=$totalPages;$i++)
-            {
-
-            ?>
-
-            <a
-
-            href="?page=<?php echo $i; ?>"
-
-            class="<?php if($page==$i) echo "active"; ?>">
-
-            <?php echo $i; ?>
-
-            </a>
-
-            <?php
-
-            }
-
-            if($page<$totalPages)
-            {
-
-            ?>
-
-            <a href="?page=<?php echo $page+1; ?>">
-
-            <i class="fa fa-angle-right"></i>
-
-            </a>
-
-            <?php
-
-            }
-
-            ?>
-
-        </div>
-
-
         <!-- ==========================================
         VIEW RATING MODAL
         ========================================== -->

@@ -73,12 +73,14 @@ $store    = $_GET['store'] ?? "";
 
 $sort     = $_GET['sort'] ?? "";
 
+$star     = $_GET['star'] ?? "";
+
 
 /* ==========================================================
 PAGINATION
 ========================================================== */
 
-$limit = 9;
+$limit = 6;
 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
@@ -232,10 +234,10 @@ $offset = ($page - 1) * $limit;
 
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="../student/dashboard.php">Home</a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php">Filter & Compare </a></li>
-                            <li class="scroll-to-section"><a href="../student/searchStudent.php" class="active">Search </a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php">About us</a></li>
+                            <li class="scroll-to-section"><a href="../student/dashboard.php#top">Home</a></li>
+                            <li class="scroll-to-section"><a href="../student/dashboard.php#compare">Filter & Compare </a></li>
+                            <li class="scroll-to-section"><a href="../student/search.php" class="active">Search </a></li>
+                            <li class="scroll-to-section"><a href="../student/dashboard.php#why-us">Why Us</a></li>
 
                             <form method="post">
                                 <div class="icons">
@@ -399,34 +401,42 @@ $offset = ($page - 1) * $limit;
 
                                     <option value="">All Categories</option>
 
-                                    <?php
+                                        <?php
 
-                                    $categoryQuery=mysqli_query($conn,"
-                                    SELECT DISTINCT ItemCategory
-                                    FROM item
-                                    ORDER BY ItemCategory
-                                    ");
+                                        $categoryQuery=mysqli_query($conn,"
+                                        SELECT DISTINCT ItemCategory
+                                        FROM item
+                                        ORDER BY ItemCategory
+                                        ");
 
-                                    while($category=mysqli_fetch_assoc($categoryQuery))
-                                    {
+                                        while($cat=mysqli_fetch_assoc($categoryQuery))
+                                        {
 
-                                    ?>
+                                        ?>
 
-                                    <option value="<?php echo $category['ItemCategory'];?>"
+                                    <option value="<?php echo $cat['ItemCategory']; ?>"
 
                                         <?php
-                                        if($category == $category['ItemCategory'])
+
+                                        if($category == $cat['ItemCategory'])
                                         {
                                             echo "selected";
                                         }
+
                                         ?>
+
                                         >
 
-                                        <?php echo $category['ItemCategory'];?>
+                                        <?php echo $cat['ItemCategory']; ?>
 
                                     </option>
 
-                                    <?php } ?>
+
+                                        <?php
+
+                                        }
+
+                                        ?>
 
                                 </select>
 
@@ -436,34 +446,43 @@ $offset = ($page - 1) * $limit;
 
                                     <option value="">All Stores</option>
 
-                                    <?php
+                                        <?php
 
-                                    $storeQuery=mysqli_query($conn,"
-                                    SELECT DISTINCT StoreName
-                                    FROM item
-                                    ORDER BY StoreName
-                                    ");
+                                        $storeQuery=mysqli_query($conn,"
+                                        SELECT DISTINCT StoreName
+                                        FROM item
+                                        ORDER BY StoreName
+                                        ");
 
-                                    while($store=mysqli_fetch_assoc($storeQuery))
-                                    {
 
-                                    ?>
+                                        while($st=mysqli_fetch_assoc($storeQuery))
+                                        {
 
-                                    <option value="<?php echo $store['StoreName'];?>"
+                                        ?>
+
+                                    <option value="<?php echo $st['StoreName']; ?>"
 
                                         <?php
-                                        if($store == $store['StoreName'])
+
+                                        if($store == $st['StoreName'])
                                         {
                                             echo "selected";
                                         }
+
                                         ?>
+
                                         >
 
-                                        <?php echo $store['StoreName'];?>
+                                        <?php echo $st['StoreName']; ?>
 
                                     </option>
 
-                                    <?php } ?>
+
+                                        <?php
+
+                                        }
+
+                                        ?>
 
                                 </select>
 
@@ -639,7 +658,9 @@ $offset = ($page - 1) * $limit;
 
                                     $sql .= "
 
-                                    ORDER BY item.ItemID DESC
+                                    ORDER BY averageRating DESC,
+                                    totalRating DESC,
+                                    item.ItemName ASC
 
                                     ";
 
@@ -756,15 +777,17 @@ $offset = ($page - 1) * $limit;
 
                                         <div class="product-actions">
 
-                                            <a href="filter.php" class="compare-link">
+                                            <a href="../student/filter.php" class="compare-link">
 
                                                 Compare
 
                                             </a>
 
-                                            <button
-                                            class="rate-btn"
-                                            data-id="<?php echo $row['ItemID'];?>">
+                                            <button 
+                                                type="button"
+                                                class="rate-btn"
+                                                data-id="<?php echo $row['ItemID']; ?>"
+                                                data-name="<?php echo htmlspecialchars($row['ItemName']); ?>">
 
                                                 <i class="fa fa-star"></i>
 
@@ -827,6 +850,135 @@ $offset = ($page - 1) * $limit;
     </section>
 
 
+    <?php
+
+        $queryString = http_build_query([
+            "search"   => $search,
+            "store"    => $store,
+            "category" => $category,
+            "star"     => $star,
+            "sort"     => $sort
+        ]);
+
+    ?>
+
+    <div class="pagination">
+
+        <!-- Previous -->
+
+        <?php if($page > 1){ ?>
+
+            <a href="?page=<?php echo $page-1; ?>&<?php echo $queryString; ?>">
+
+                <i class="fa fa-angle-left"></i>
+
+            </a>
+
+        <?php } ?>
+
+
+        <?php
+
+        $start = max(1,$page-2);
+
+        $end = min($totalPages,$page+2);
+
+        if($start > 1)
+        {
+
+        ?>
+
+            <a href="?page=1&<?php echo $queryString; ?>">
+
+                1
+
+            </a>
+
+            <?php if($start > 2){ ?>
+
+                <span class="dots">...</span>
+
+            <?php } ?>
+
+        <?php
+
+        }
+
+        ?>
+
+
+        <?php
+
+        for($i=$start;$i<=$end;$i++)
+        {
+
+        ?>
+
+            <a
+
+            href="?page=<?php echo $i; ?>&<?php echo $queryString; ?>"
+
+            class="<?php echo ($page==$i) ? 'active' : ''; ?>">
+
+                <?php echo $i; ?>
+
+            </a>
+
+        <?php
+
+        }
+
+        ?>
+
+
+        <?php
+
+        if($end < $totalPages)
+        {
+
+            if($end < $totalPages-1)
+            {
+
+        ?>
+
+                <span class="dots">...</span>
+
+        <?php
+
+            }
+
+        ?>
+
+            <a href="?page=<?php echo $totalPages; ?>&<?php echo $queryString; ?>">
+
+                <?php echo $totalPages; ?>
+
+            </a>
+
+        <?php
+
+        }
+
+        ?>
+
+
+        <!-- Next -->
+
+        <?php if($page < $totalPages){ ?>
+
+            <a href="?page=<?php echo $page+1; ?>&<?php echo $queryString; ?>">
+
+                <i class="fa fa-angle-right"></i>
+
+            </a>
+
+        <?php } ?>
+
+    </div>
+
+    <br>
+
+
     <!-- Rating Modal -->
     <div id="ratingModal" class="student-modal">
 
@@ -839,11 +991,9 @@ $offset = ($page - 1) * $limit;
 
             <div class="rating-box">
 
-
-                <h2>
+                <h2 id="ratingTitle">
                     Rate this Product
                 </h2>
-
 
                 <input type="hidden" id="itemID">
 
@@ -851,41 +1001,45 @@ $offset = ($page - 1) * $limit;
                 <div class="star-rating">
 
                     <i class="fa fa-star" data-rate="1"></i>
+
                     <i class="fa fa-star" data-rate="2"></i>
+
                     <i class="fa fa-star" data-rate="3"></i>
+
                     <i class="fa fa-star" data-rate="4"></i>
+
                     <i class="fa fa-star" data-rate="5"></i>
 
                 </div>
 
 
-
-                <textarea 
-                id="comment"
-                placeholder="Share your experience..."></textarea>
-
+                <textarea id="comment"></textarea>
 
 
                 <div class="rating-actions">
-
 
                     <button class="cancel-btn">
                         Cancel
                     </button>
 
-
                     <button class="submit-rating">
                         Submit Rating
                     </button>
 
-
                 </div>
 
 
+                <div class="reviews-container">
+
+                    <h4>
+                        Customer Reviews
+                    </h4>
+
                 <div id="reviews"></div>
 
-
             </div>
+        
+        </div>
 
 
         </div>
@@ -960,6 +1114,8 @@ $offset = ($page - 1) * $limit;
                 </div>
         </div>
     </footer>
+
+    
 
     <!-- jQuery -->
     <script src="../../assets/js/jquery-2.1.0.min.js"></script>

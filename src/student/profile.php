@@ -94,7 +94,7 @@ $img = $row['studentIMG'];
                                     <img src="<?php echo $img; ?>" width="40" height="40" class="rounded-circle">
                                       <div class="dropdown-content">
                                         <a href="../student/profile.php">My Profile</a>
-                                        <a href="logoutStudent.php" name="logout">Log Out</a>
+                                        <a href="../public/logout.php" name="logout">Log Out</a>
                                       </div>
                                     </div>
                                 </form>

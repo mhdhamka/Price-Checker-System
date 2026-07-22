@@ -85,10 +85,10 @@
 
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="../student/dashboard.php">Home</a></li>
+                            <li class="scroll-to-section"><a href="../student/dashboard.php#top">Home</a></li>
                             <li class="scroll-to-section"><a href="../student/filter.php" class="active">Filter & Compare </a></li>
                             <li class="scroll-to-section"><a href="../student/dashboard.php#search">Search </a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#why-us">About us</a></li>
+                            <li class="scroll-to-section"><a href="../student/dashboard.php#why-us">Why US</a></li>
 
                             <form method="post">
                                 <div class="icons">
