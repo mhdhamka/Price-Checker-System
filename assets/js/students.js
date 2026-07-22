@@ -93,7 +93,7 @@ $(document).on("click", ".reset-btn", function () {
 
     $("#confirmForm").attr(
         "action",
-        "processes/resetPassword.php"
+        "../admin/processes/resetPassword.php"
     );
 
     $("#confirmModal").fadeIn();

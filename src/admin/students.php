@@ -469,22 +469,126 @@ $totalPages = ceil($total/$limit);
 
                 </table>
 
+
+        <!-- ==========================================
+            PAGINATION
+        ========================================== -->
                 <div class="pagination">
 
                     <?php
 
-                    for($i=1;$i<=$totalPages;$i++)
+                    // Previous button
+                    if($page > 1)
+                    {
+                    ?>
 
+                    <a href="?page=<?php echo $page-1; ?>&search=<?php echo urlencode($search); ?>&logStatus=<?php echo urlencode($status); ?>&sort=<?php echo urlencode($sort); ?>">
+
+                        <i class="fa fa-angle-left"></i>
+
+                    </a>
+
+                    <?php
+                    }
+
+
+                    // First page
+                    if($page > 3)
+                    {
+                    ?>
+
+                    <a href="?page=1&search=<?php echo urlencode($search); ?>&logStatus=<?php echo urlencode($status); ?>&sort=<?php echo urlencode($sort); ?>">
+
+                        1
+
+                    </a>
+
+
+                    <?php if($page > 4)
+                    { 
+                    ?>
+
+                    <span class="dots">
+                        ...
+                    </span>
+
+                    <?php
+                    }
+
+                    }
+
+
+                    // Current page range
+
+                    $start = max(1, $page - 2);
+
+                    $end = min($totalPages, $page + 2);
+
+
+                    for($i=$start; $i<=$end; $i++)
                     {
 
                     ?>
 
-                        <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>&logStatus=<?php echo urlencode($status); ?>&sort=<?php echo urlencode($sort); ?>"
-                        class="<?php if($page==$i) echo 'active'; ?>">
+                    <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>&logStatus=<?php echo urlencode($status); ?>&sort=<?php echo urlencode($sort); ?>"
+                    class="<?php if($page==$i) echo 'active'; ?>">
 
-                            <?php echo $i; ?>
+                        <?php echo $i; ?>
 
-                        </a>
+                    </a>
+
+
+                    <?php
+
+                    }
+
+
+                    // Last page
+
+                    if($page < $totalPages - 2)
+                    {
+
+                        if($page < $totalPages - 3)
+                        {
+
+                    ?>
+
+                    <span class="dots">
+                        ...
+                    </span>
+
+
+                    <?php
+
+                        }
+
+                    ?>
+
+                    <a href="?page=<?php echo $totalPages; ?>&search=<?php echo urlencode($search); ?>&logStatus=<?php echo urlencode($status); ?>&sort=<?php echo urlencode($sort); ?>">
+
+                        <?php echo $totalPages; ?>
+
+                    </a>
+
+
+                    <?php
+
+                    }
+
+
+                    // Next button
+
+                    if($page < $totalPages)
+                    {
+
+                    ?>
+
+                    <a href="?page=<?php echo $page+1; ?>&search=<?php echo urlencode($search); ?>&logStatus=<?php echo urlencode($status); ?>&sort=<?php echo urlencode($sort); ?>">
+
+                        <i class="fa fa-angle-right"></i>
+
+                    </a>
+
 
                     <?php
 
@@ -492,13 +596,40 @@ $totalPages = ceil($total/$limit);
 
                     ?>
 
-                </div>
+                    </div>
+
+
+                    <div class="pagination-info">
+
+                        Showing
+
+                        <strong>
+                            <?php echo $offset + 1; ?>
+                        </strong>
+
+                        to
+
+                        <strong>
+                            <?php echo min($offset + $limit, $total); ?>
+                        </strong>
+
+                        of
+
+                        <strong>
+                            <?php echo $total; ?>
+                        </strong>
+
+                        students
+
+                    </div>
 
             </div>
 
         </div>
 
-        <!-- View Student Modal -->
+        <!-- ==========================================
+            VIEW STUDENT MODAL
+        ========================================== -->
         <div id="studentModal" class="student-modal">
 
             <div class="student-modal-content">

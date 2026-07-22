@@ -1,12 +1,6 @@
-<?php session_start();?>
-
-<script type="text/javascript">
-  window.onload = function() {
-    alert("Welcome Back, <?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; ?>");
-  }
-</script>
-
 <?php 
+
+session_start();
 include ("../config/db_cPCS.php");
 
 // Assign session variables with checks for existence

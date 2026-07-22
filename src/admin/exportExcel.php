@@ -5,75 +5,211 @@ require '../../vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+
 include("../config/db_cPCS.php");
 
-$type = $_GET['type'] ?? 'item';
+$type=$_GET['type'] ?? 'item';
 
-$spreadsheet = new Spreadsheet();
-$sheet = $spreadsheet->getActiveSheet();
 
-if($type == "item")
+$spreadsheet=new Spreadsheet();
+$sheet=$spreadsheet->getActiveSheet();
+
+
+
+/* =====================
+ITEM
+===================== */
+
+if($type=="item")
 {
-    // Item headings
-    $sheet->setCellValue("A1","Item Name");
-    $sheet->setCellValue("B1","Category");
-    $sheet->setCellValue("C1","Store");
 
-    $result = mysqli_query($conn,"
-        SELECT *
-        FROM item
-    ");
 
-    $row = 2;
+$headers=[
+    "Item Name",
+    "Category",
+    "Store",
+    "Price"
+];
 
-    while($data = mysqli_fetch_assoc($result))
-    {
-        $sheet->setCellValue("A".$row,$data['ItemName']);
-        $sheet->setCellValue("B".$row,$data['ItemCategory']);
-        $sheet->setCellValue("C".$row,$data['StoreName']);
 
-        $row++;
-    }
+$sql="
+    SELECT *
 
-    $filename = "Item_Report.xlsx";
+    FROM item
+
+    ORDER BY ItemName
+";
+
+
+$filename="Item_Report.xlsx";
+
+
 }
-else if($type == "student")
+
+
+/* =====================
+STUDENT
+===================== */
+
+else if($type=="student")
 {
-    // Student headings
-    $sheet->setCellValue("A1","Student ID");
-    $sheet->setCellValue("B1","Full Name");
-    $sheet->setCellValue("C1","Username");
-    $sheet->setCellValue("D1","Email");
-    $sheet->setCellValue("E1","Status");
 
-    $result = mysqli_query($conn,"
-        SELECT *
-        FROM student
-        ORDER BY fullName
-    ");
+$headers=[
 
-    $row = 2;
+    "Student ID",
+    "Full Name",
+    "Username",
+    "Email",
+    "Status",
+    "Total Ratings"
 
-    while($data = mysqli_fetch_assoc($result))
+];
+
+
+$sql="
+
+SELECT
+
+student.*,
+
+COUNT(ratings.ratingID) totalRatings
+
+FROM student
+
+LEFT JOIN ratings
+
+ON student.studentID=ratings.studentID
+GROUP BY student.studentID
+ORDER BY fullName
+
+
+";
+
+
+$filename="Student_Report.xlsx";
+
+
+}
+
+
+
+/* =====================
+RATING
+===================== */
+
+else if($type=="rating")
+{
+
+$headers=[
+
+    "Rating ID",
+    "Item",
+    "Student",
+    "Rating",
+    "Comment",
+    "Date Created"
+
+];
+
+
+$sql="
+
+SELECT
+
+ratings.ratingID,
+item.ItemName,
+student.fullName,
+ratings.rating,
+ratings.comment,
+ratings.dateCreated
+
+FROM ratings
+
+JOIN item
+
+ON ratings.ItemID=item.ItemID
+
+
+JOIN student
+
+ON ratings.studentID=student.studentID
+
+
+ORDER BY dateCreated DESC
+
+
+";
+
+
+$filename="Rating_Report.xlsx";
+
+
+}
+
+
+
+$column = 'A';
+
+foreach($headers as $header)
+{
+    $sheet->setCellValue(
+        $column.'1',
+        $header
+    );
+
+    $column++;
+}
+
+
+
+$result=mysqli_query($conn,$sql);
+
+
+$row = 2;
+
+while($data = mysqli_fetch_assoc($result))
+{
+
+    $column = 'A';
+
+    foreach($data as $value)
     {
-        $sheet->setCellValue("A".$row,$data['studentID']);
-        $sheet->setCellValue("B".$row,$data['fullName']);
-        $sheet->setCellValue("C".$row,$data['username']);
-        $sheet->setCellValue("D".$row,$data['email']);
-        $sheet->setCellValue("E".$row,
-            $data['logStatus'] ? "Active" : "Disabled"
+
+        $sheet->setCellValue(
+            $column.$row,
+            $value
         );
 
-        $row++;
+        $column++;
+
     }
 
-    $filename = "Student_Report.xlsx";
+    $row++;
+
 }
 
-$writer = new Xlsx($spreadsheet);
+foreach(range('A','F') as $column)
+{
+    $sheet->getColumnDimension($column)
+    ->setAutoSize(true);
+}
 
-header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename="'.$filename.'"');
+$writer=new Xlsx($spreadsheet);
+
+
+header(
+'Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+);
+
+
+header(
+'Content-Disposition: attachment; filename="'.$filename.'"'
+);
+
 
 $writer->save("php://output");
+
+
 exit();
+
+?>

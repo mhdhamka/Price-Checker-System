@@ -145,7 +145,6 @@ AND item.StoreName='$store'
 
 
 /* CATEGORY */
-
 if($category!="")
 {
 
@@ -160,23 +159,30 @@ AND item.ItemCategory='$category'
 }
 
 
-
 /* STAR FILTER */
-
 if($star!="")
 {
 
-$sql.="
+    $star = intval($star);
 
-AND rating >= $star
-AND rating < ".($star+1);
+    if($star == 5)
+    {
+        $sql .= "
+        AND ratings.rating = 5.0
+        ";
+    }
+    else
+    {
+        $sql .= "
+        AND ratings.rating >= $star
+        AND ratings.rating < ".($star + 1)."
+        ";
+    }
 
 }
 
 
-
 /* SORT */
-
 switch($sort)
 {
 
@@ -188,19 +194,19 @@ break;
 
 case "highest":
 
-$sql.=" ORDER BY rating DESC";
+$sql.=" ORDER BY ratings.rating DESC";
 
 break;
 
 case "lowest":
 
-$sql.=" ORDER BY rating ASC";
+$sql.=" ORDER BY ratings.rating ASC";
 
 break;
 
 default:
 
-$sql.=" ORDER BY ratingID DESC";
+$sql.=" ORDER BY ratingID ASC";
 
 }
 
@@ -330,6 +336,29 @@ $totalPages=ceil($total/$limit);
 
             </div>
 
+            <!-- Report -->
+            <div class="report-card">
+                <h3>
+                    Rating Reports
+                </h3>
+
+                <p>
+                    Generate and export rating statistics.
+                </p>
+
+                <div class="report-buttons">
+                    <a href="../admin/exportPDF.php?type=rating">
+                        <i class="fa fa-file-pdf"></i>
+                        Export Rating PDF
+                    </a>
+
+                    <a href="../admin/exportExcel.php?type=rating">
+                        <i class="fa fa-file-excel"></i>
+                        Export Rating Excel
+                    </a>
+                </div>
+            </div>
+
             <!-- Top Bar -->
 
             <div class="manage-top">
@@ -407,15 +436,25 @@ $totalPages=ceil($total/$limit);
                             All Ratings
                         </option>
 
-                        <option value="5">★★★★★</option>
+                        <option value="5" <?php if($star=="5") echo "selected"; ?>>
+                            ★★★★★
+                        </option>
 
-                        <option value="4">★★★★☆</option>
+                        <option value="4" <?php if($star=="4") echo "selected"; ?>>
+                            ★★★★☆
+                        </option>
 
-                        <option value="3">★★★☆☆</option>
+                        <option value="3" <?php if($star=="3") echo "selected"; ?>>
+                            ★★★☆☆
+                        </option>
 
-                        <option value="2">★★☆☆☆</option>
+                        <option value="2" <?php if($star=="2") echo "selected"; ?>>
+                            ★★☆☆☆
+                        </option>
 
-                        <option value="1">★☆☆☆☆</option>
+                        <option value="1" <?php if($star=="1") echo "selected"; ?>>
+                            ☆☆☆☆☆
+                        </option>
 
                     </select>
 
@@ -464,8 +503,6 @@ $totalPages=ceil($total/$limit);
                             <th>Item</th>
                             <th>Student</th>
                             <th>Rating</th>
-                            <th>Comment</th>
-                            <th>Date</th>
                             <th>Action</th>
 
                         </tr>
@@ -537,28 +574,16 @@ $totalPages=ceil($total/$limit);
 
                         </td>
 
-                        <td>
-
-                            <?php echo $rating['comment']; ?>
-
-                        </td>
-
-                        <td>
-
-                            <?php echo date("d M Y",
-                            strtotime($rating['dateCreated'])); ?>
-
-                        </td>
-
                         <td class="action-buttons">
 
-                            <button class="action-btn view-btn" data-id="<?php echo $rating['ratingID'];?>">
+                            <button type="button" class="action-btn view-btn" data-id="<?php echo $rating['ratingID']; ?>" title="View Rating">
 
                                 <i class="fa-solid fa-eye"></i>
 
                             </button>
 
-                            <button class="action-btn delete-btn" data-id="<?php echo $rating['ratingID'];?>">
+                            <button type="button" class="action-btn delete-btn" data-id="<?php echo $rating['ratingID']; ?>" data-item="<?php echo htmlspecialchars($rating['ItemName']); ?>" 
+                            data-student="<?php echo htmlspecialchars($rating['fullName']); ?>" title="Delete Rating">
 
                                 <i class="fa-solid fa-trash"></i>
 
@@ -580,19 +605,73 @@ $totalPages=ceil($total/$limit);
 
                 </table>
 
+
+                <!-- ==========================================
+                    PAGINATION
+                ========================================== -->
                 <div class="pagination">
 
                     <?php
 
-                    for($i=1;$i<=$totalPages;$i++)
+                    // Previous button
+                    if($page > 1)
+                    {
+                    ?>
 
+                        <a href="?page=<?php echo $page-1; ?>&search=<?php echo urlencode($search); ?>&store=<?php echo urlencode($store); ?>&category=<?php echo urlencode($category); ?>&star=<?php echo urlencode($star); ?>&sort=<?php echo urlencode($sort); ?>">
+
+                            <i class="fa fa-angle-left"></i>
+
+                        </a>
+
+                    <?php
+                    }
+
+
+                    // First page
+                    if($page > 3)
+                    {
+                    ?>
+
+                        <a href="?page=1&search=<?php echo urlencode($search); ?>&store=<?php echo urlencode($store); ?>&category=<?php echo urlencode($category); ?>&star=<?php echo urlencode($star); ?>&sort=<?php echo urlencode($sort); ?>">
+
+                            1
+
+                        </a>
+
+
+                        <?php
+
+                        if($page > 4)
+                        {
+
+                        ?>
+
+                            <span class="dots">
+                                ...
+                            </span>
+
+                        <?php
+
+                        }
+
+                        ?>
+
+                    <?php
+                    }
+
+
+                    // Current page range
+                    $start = max(1, $page - 2);
+                    $end = min($totalPages, $page + 2);
+
+                    for($i = $start; $i <= $end; $i++)
                     {
 
                     ?>
 
-                        <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>&store=<?php echo urlencode($store); 
-                        ?>&category=<?php echo urlencode($category); ?>&star=<?php echo urlencode($star); ?>&sort=<?php echo urlencode($sort); ?>"
-                        class="<?php if($page==$i) echo 'active'; ?>">
+                        <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>&store=<?php echo urlencode($store); ?>&category=<?php echo urlencode($category); ?>&star=<?php echo urlencode($star); ?>&sort=<?php echo urlencode($sort); ?>"
+                        class="<?php if($i == $page) echo 'active'; ?>">
 
                             <?php echo $i; ?>
 
@@ -602,7 +681,79 @@ $totalPages=ceil($total/$limit);
 
                     }
 
+
+                    // Last page
+                    if($page < $totalPages - 2)
+                    {
+
+                        if($page < $totalPages - 3)
+                        {
+
                     ?>
+                            <span class="dots">
+                                ...
+                            </span>
+
+                    <?php
+
+                        }
+
+                    ?>
+
+                        <a href="?page=<?php echo $totalPages; ?>&search=<?php echo urlencode($search); ?>&store=<?php echo urlencode($store); ?>&category=<?php echo urlencode($category); ?>&star=<?php echo urlencode($star); ?>&sort=<?php echo urlencode($sort); ?>">
+
+                            <?php echo $totalPages; ?>
+
+                        </a>
+
+
+                    <?php
+
+                    }
+
+
+                    // Next button
+                    if($page < $totalPages)
+                    {
+
+                    ?>
+
+                        <a href="?page=<?php echo $page+1; ?>&search=<?php echo urlencode($search); ?>&store=<?php echo urlencode($store); ?>&category=<?php echo urlencode($category); ?>&star=<?php echo urlencode($star); ?>&sort=<?php echo urlencode($sort); ?>">
+
+                            <i class="fa fa-angle-right"></i>
+
+                        </a>
+
+
+                    <?php
+
+                    }
+
+                    ?>
+
+                </div>
+
+                <div class="pagination-info">
+
+                    Showing
+
+                    <strong>
+                        <?php echo $offset + 1; ?>
+                    </strong>
+
+                    to
+
+                    <strong>
+                        <?php echo min($offset + $limit, $total); ?>
+                    </strong>
+
+                    of
+
+                    <strong>
+                        <?php echo $total; ?>
+                    </strong>
+
+                    ratings
 
                 </div>
 
@@ -610,14 +761,82 @@ $totalPages=ceil($total/$limit);
 
         </div>
 
-        <!-- View Student Modal -->
-        <div id="studentModal" class="student-modal">
+
+        <div class="pagination">
+
+            <?php
+
+            if($page>1)
+            {
+
+            ?>
+
+            <a href="?page=<?php echo $page-1; ?>">
+
+            <i class="fa fa-angle-left"></i>
+
+            </a>
+
+            <?php
+
+            }
+
+            for($i=1;$i<=$totalPages;$i++)
+            {
+
+            ?>
+
+            <a
+
+            href="?page=<?php echo $i; ?>"
+
+            class="<?php if($page==$i) echo "active"; ?>">
+
+            <?php echo $i; ?>
+
+            </a>
+
+            <?php
+
+            }
+
+            if($page<$totalPages)
+            {
+
+            ?>
+
+            <a href="?page=<?php echo $page+1; ?>">
+
+            <i class="fa fa-angle-right"></i>
+
+            </a>
+
+            <?php
+
+            }
+
+            ?>
+
+        </div>
+
+
+        <!-- ==========================================
+        VIEW RATING MODAL
+        ========================================== -->
+
+        <div id="ratingModal" class="student-modal">
 
             <div class="student-modal-content">
 
-                <button type="button" class="close-modal">&times;</button>
+                <button
+                    type="button"
+                    class="close-modal">
 
-                <div id="studentDetails">
+                    &times;
+
+                </button>
+
+                <div id="ratingDetails">
 
                 </div>
 
@@ -688,8 +907,8 @@ $totalPages=ceil($total/$limit);
 
                     <input
                         type="hidden"
-                        id="confirmStudentID"
-                        name="studentID">
+                        id="confirmRatingID"
+                        name="ratingID">
 
                     <div class="confirm-actions">
 
@@ -728,7 +947,7 @@ $totalPages=ceil($total/$limit);
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../../assets/js/students.js"></script>
+<script src="../../assets/js/ratings.js"></script>
 
 </body>
 

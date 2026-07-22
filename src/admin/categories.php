@@ -235,24 +235,150 @@ $totalPages = ceil($total/$limit);
 
                     <?php
 
-                    for($i=1;$i<=$totalPages;$i++)
+                    // Previous button
+                    if($page > 1)
+                    {
+                    ?>
 
+                    <a href="?page=<?php echo $page-1; ?>&search=<?php echo urlencode($search); ?>">
+
+                        <i class="fa fa-angle-left"></i>
+
+                    </a>
+
+                    <?php
+                    }
+
+
+                    // First page
+                    if($page > 3)
+                    {
+                    ?>
+
+                    <a href="?page=1&search=<?php echo urlencode($search); ?>">
+
+                        1
+
+                    </a>
+
+
+                    <?php if($page > 4)
+                    {
+                    ?>
+
+                    <span class="dots">
+                        ...
+                    </span>
+
+                    <?php
+                    }
+
+                    }
+
+
+                    // Current page range
+
+                    $start = max(1, $page - 2);
+
+                    $end = min($totalPages, $page + 2);
+
+
+                    for($i=$start; $i<=$end; $i++)
                     {
 
                     ?>
 
-                        <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>"
-                        class="<?php if($page==$i) echo 'active'; ?>">
+                    <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>"
+                    class="<?php if($page == $i) echo 'active'; ?>">
 
-                            <?php echo $i; ?>
+                        <?php echo $i; ?>
 
-                        </a>
+                    </a>
+
+
+                    <?php
+
+                    }
+
+
+                    // Last page
+
+                    if($page < $totalPages - 2)
+                    {
+
+                        if($page < $totalPages - 3)
+                        {
+
+                    ?>
+
+                    <span class="dots">
+                        ...
+                    </span>
+
+
+                    <?php
+
+                        }
+
+                    ?>
+
+
+                    <a href="?page=<?php echo $totalPages; ?>&search=<?php echo urlencode($search); ?>">
+
+                        <?php echo $totalPages; ?>
+
+                    </a>
+
+
+                    <?php
+
+                    }
+
+
+                    // Next button
+
+                    if($page < $totalPages)
+                    {
+
+                    ?>
+
+                    <a href="?page=<?php echo $page+1; ?>&search=<?php echo urlencode($search); ?>">
+
+                        <i class="fa fa-angle-right"></i>
+
+                    </a>
+
 
                     <?php
 
                     }
 
                     ?>
+
+                </div>
+
+
+                <div class="pagination-info">
+
+                    Showing
+
+                    <strong>
+                        <?php echo $offset + 1; ?>
+                    </strong>
+
+                    to
+
+                    <strong>
+                        <?php echo min($offset + $limit, $total); ?>
+                    </strong>
+
+                    of
+
+                    <strong>
+                        <?php echo $total; ?>
+                    </strong>
+
+                    categories
 
                 </div>
 

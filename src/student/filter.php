@@ -120,7 +120,7 @@
                 <div class="col-lg-10 offset-lg-1">
                     <div class="section-heading">
                         <a href="../student/dashboard.php" class="custom-btn">
-                            Return to Home
+                            Back to Dashboard
                         </a>
 
                         <br><br>

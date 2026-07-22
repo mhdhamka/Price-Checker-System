@@ -1,6 +1,94 @@
 
-<?php session_start(); ?>
-<?php include ("../config/db_cPCS.php"); ?>
+<?php 
+
+session_start(); 
+include ("../config/db_cPCS.php"); 
+
+/* ==========================================================
+SEARCH PAGE STATISTICS
+========================================================== */
+
+/* Total Products */
+
+$totalItems = mysqli_fetch_assoc(
+mysqli_query($conn,"
+SELECT COUNT(*) total
+FROM item
+"))['total'];
+
+
+/* Highest Rated Product */
+
+$highestRated = mysqli_fetch_assoc(
+mysqli_query($conn,"
+SELECT
+item.ItemName,
+ROUND(AVG(ratings.rating),1) averageRating
+
+FROM item
+
+LEFT JOIN ratings
+ON item.ItemID = ratings.ItemID
+
+GROUP BY item.ItemID
+
+ORDER BY averageRating DESC
+
+LIMIT 1
+"));
+
+
+/* Lowest Rated Product */
+
+$lowestRated = mysqli_fetch_assoc(
+mysqli_query($conn,"
+SELECT
+item.ItemName,
+ROUND(AVG(ratings.rating),1) averageRating
+
+FROM item
+
+LEFT JOIN ratings
+ON item.ItemID = ratings.ItemID
+
+GROUP BY item.ItemID
+
+HAVING COUNT(ratings.ratingID) > 0
+
+ORDER BY averageRating ASC
+
+LIMIT 1
+"));
+
+
+/* ==========================================
+SEARCH VARIABLES
+========================================== */
+
+$search   = $_GET['search'] ?? "";
+
+$category = $_GET['category'] ?? "";
+
+$store    = $_GET['store'] ?? "";
+
+$sort     = $_GET['sort'] ?? "";
+
+
+/* ==========================================================
+PAGINATION
+========================================================== */
+
+$limit = 9;
+
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+if($page < 1){
+    $page = 1;
+}
+
+$offset = ($page - 1) * $limit;
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -72,6 +160,64 @@
             $img = $row['studentIMG'];
         }
     }
+
+    /* ==========================================================
+    SEARCH PAGE STATISTICS
+    ========================================================== */
+
+    /* Total Products */
+
+    $totalItems = mysqli_fetch_assoc(
+    mysqli_query($conn,"
+    SELECT COUNT(*) total
+    FROM item
+    "))['total'];
+
+
+    /* Highest Rated Product */
+
+    $highestRated = mysqli_fetch_assoc(
+    mysqli_query($conn,"
+    SELECT
+    item.ItemName,
+    ROUND(AVG(ratings.rating),1) averageRating
+
+    FROM item
+
+    LEFT JOIN ratings
+    ON item.ItemID = ratings.ItemID
+
+    GROUP BY item.ItemID
+
+    HAVING COUNT(ratings.ratingID) > 0
+
+    ORDER BY averageRating DESC
+
+    LIMIT 1
+    "));
+
+
+    /* Lowest Rated Product */
+
+    $lowestRated = mysqli_fetch_assoc(
+    mysqli_query($conn,"
+    SELECT
+    item.ItemName,
+    ROUND(AVG(ratings.rating),1) averageRating
+
+    FROM item
+
+    LEFT JOIN ratings
+    ON item.ItemID = ratings.ItemID
+
+    GROUP BY item.ItemID
+
+    HAVING COUNT(ratings.ratingID) > 0
+
+    ORDER BY averageRating ASC
+
+    LIMIT 1
+    "));
     ?>
 
     <!-- ***** Header Area Start ***** -->
@@ -123,49 +269,238 @@
                     <div class="section-heading">
 
                         <a href="../student/dashboard.php" class="custom-btn">
-                            Return to Home
+                            Back to Dashboard
                         </a>
 
                         <br><br>
 
+                        <span class="section-subtitle">
+
+                            Smart Product Search
+
+                        </span>
+
                         <h2>
-                            Search <em>Items</em>
+
+                            Discover the Best <em>Products</em>
+
                         </h2>
 
                         <img src="../../assets/images/line-dec.png">
 
                         <p>
-                            Find products, check prices, and discover affordable choices.
+                             Search products, compare prices across stores, view community ratings, and make smarter shopping decisions.
                         </p>
 
                     </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-4 col-md-4">
+
+                            <div class="dashboard-card">
+
+                                <i class="fa fa-cubes"></i>
+
+                                <h3>
+
+                                    <?php echo $totalItems; ?>
+
+                                </h3>
+
+                                <span>
+
+                                    Total Products
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-lg-4 col-md-4">
+
+                            <div class="dashboard-card">
+
+                                <i class="fa fa-star"></i>
+
+                                <h3>
+
+                                    <?php echo number_format($highestRated['averageRating'],1); ?>
+
+                                    ★
+
+                                </h3>
+
+                                <span>
+
+                                    <?php echo $highestRated['ItemName']; ?>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-lg-4 col-md-4">
+
+                            <div class="dashboard-card">
+
+                                <i class="fa fa-arrow-down"></i>
+
+                                <h3>
+
+                                    <?php echo number_format($lowestRated['averageRating'],1); ?>
+
+                                    ★
+
+                                </h3>
+
+                                <span>
+
+                                    <?php echo $lowestRated['ItemName']; ?>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <br>
 
                     <!-- Search Card -->
                     <div class="search-card">
 
                         <!-- Search Form -->
-                        <form method="post" onsubmit="return validateSearch()">
+                        <form method="GET">
 
-                            <div class="search-box">
+                            <div class="search-toolbar">
 
-                                <input 
-                                type="text"
-                                id="searchtextbox"
-                                name="search"
-                                placeholder="Search item name, category or store..."
-                                value="<?php echo isset($_POST['search']) ? $_POST['search'] : ''; ?>">
-
-
-                                <button type="submit">
+                                <div class="search-input">
 
                                     <i class="fa fa-search"></i>
+
+                                    <input
+                                        type="text"
+                                        name="search"
+                                        placeholder="Search product..."
+                                        value="<?php echo $_GET['search'] ?? ""; ?>">
+
+                                </div>
+
+
+                                <select name="category">
+
+                                    <option value="">All Categories</option>
+
+                                    <?php
+
+                                    $categoryQuery=mysqli_query($conn,"
+                                    SELECT DISTINCT ItemCategory
+                                    FROM item
+                                    ORDER BY ItemCategory
+                                    ");
+
+                                    while($category=mysqli_fetch_assoc($categoryQuery))
+                                    {
+
+                                    ?>
+
+                                    <option value="<?php echo $category['ItemCategory'];?>"
+
+                                        <?php
+                                        if($category == $category['ItemCategory'])
+                                        {
+                                            echo "selected";
+                                        }
+                                        ?>
+                                        >
+
+                                        <?php echo $category['ItemCategory'];?>
+
+                                    </option>
+
+                                    <?php } ?>
+
+                                </select>
+
+
+
+                                <select name="store">
+
+                                    <option value="">All Stores</option>
+
+                                    <?php
+
+                                    $storeQuery=mysqli_query($conn,"
+                                    SELECT DISTINCT StoreName
+                                    FROM item
+                                    ORDER BY StoreName
+                                    ");
+
+                                    while($store=mysqli_fetch_assoc($storeQuery))
+                                    {
+
+                                    ?>
+
+                                    <option value="<?php echo $store['StoreName'];?>"
+
+                                        <?php
+                                        if($store == $store['StoreName'])
+                                        {
+                                            echo "selected";
+                                        }
+                                        ?>
+                                        >
+
+                                        <?php echo $store['StoreName'];?>
+
+                                    </option>
+
+                                    <?php } ?>
+
+                                </select>
+
+
+
+                                <select name="sort">
+
+                                    <option value="">Newest</option>
+
+                                    <option value="priceLow" <?php if($sort=="priceLow") echo "selected"; ?>>
+                                        Lowest Price
+                                    </option>
+
+                                    <option value="priceHigh" <?php if($sort=="priceHigh") echo "selected"; ?>>
+                                        Highest Price
+                                    </option>
+
+                                    <option value="rating" <?php if($sort=="rating") echo "selected"; ?>>
+                                        Highest Rating
+                                    </option>
+
+                                    <option value="name" <?php if($sort=="name") echo "selected"; ?>>
+                                        A-Z
+                                    </option>
+
+                                </select>
+
+
+                                <button>
+
                                     Search
 
                                 </button>
 
                             </div>
 
-                        </form>
+                            </form>
 
 
                         <br>
@@ -173,26 +508,166 @@
 
                         <?php
 
-                        $sql = "SELECT * FROM item";
+                        $sql = "
+
+                            SELECT
+
+                            item.*,
+
+                            IFNULL(AVG(ratings.rating),0) AS averageRating,
+
+                            COUNT(ratings.ratingID) AS totalRating
+
+                            FROM item
+
+                            LEFT JOIN ratings
+                            ON item.ItemID = ratings.ItemID
+
+                            WHERE 1
+
+                            ";
 
 
-                        if(isset($_POST['search']) && !empty($_POST['search']))
-                        {
+                            /* SEARCH */
 
-                            $search = mysqli_real_escape_string($conn,$_POST['search']);
+                            if($search != "")
+                            {
+
+                                $search = mysqli_real_escape_string($conn,$search);
+
+                                $sql .= "
+
+                                AND
+                                (
+                                    item.ItemName LIKE '%$search%'
+                                    OR item.ItemCategory LIKE '%$search%'
+                                    OR item.StoreName LIKE '%$search%'
+                                )
+
+                                ";
+
+                            }
 
 
-                            $sql .= " WHERE 
-                            ItemName LIKE '%$search%'
-                            OR ItemCategory LIKE '%$search%'
-                            OR StoreName LIKE '%$search%'";
+                            /* CATEGORY */
 
-                        }
+                            if($category != "")
+                            {
+
+                                $category = mysqli_real_escape_string($conn,$category);
+
+                                $sql .= "
+
+                                AND item.ItemCategory = '$category'
+
+                                ";
+
+                            }
 
 
-                        $result = mysqli_query($conn,$sql);
+                            /* STORE */
+
+                            if($store != "")
+                            {
+
+                                $store = mysqli_real_escape_string($conn,$store);
+
+                                $sql .= "
+
+                                AND item.StoreName = '$store'
+
+                                ";
+
+                            }
 
 
+                            /* GROUP */
+
+                            $sql .= "
+
+                            GROUP BY item.ItemID
+
+                            ";
+
+
+                            /* SORT */
+
+                            switch($sort)
+                            {
+
+                                case "priceLow":
+
+                                    $sql .= "
+
+                                    ORDER BY item.ItemPrice ASC
+
+                                    ";
+
+                                    break;
+
+                                case "priceHigh":
+
+                                    $sql .= "
+
+                                    ORDER BY item.ItemPrice DESC
+
+                                    ";
+
+                                    break;
+
+                                case "rating":
+
+                                    $sql .= "
+
+                                    ORDER BY averageRating DESC
+
+                                    ";
+
+                                    break;
+
+                                case "name":
+
+                                    $sql .= "
+
+                                    ORDER BY item.ItemName ASC
+
+                                    ";
+
+                                    break;
+
+                                default:
+
+                                    $sql .= "
+
+                                    ORDER BY item.ItemID DESC
+
+                                    ";
+
+                            }
+
+
+                            /* COUNT */
+
+                            $countSql = $sql;
+
+                            $countResult = mysqli_query($conn,$countSql);
+
+                            $totalRows = mysqli_num_rows($countResult);
+
+                            $totalPages = ceil($totalRows / $limit);
+
+
+                            /* PAGINATION */
+
+                            $sql .= "
+
+                            LIMIT $offset,$limit
+
+                            ";
+
+
+                            /* FINAL QUERY */
+                            $result = mysqli_query($conn,$sql);
 
                         if($result && mysqli_num_rows($result) > 0)
                         {
@@ -222,42 +697,85 @@
                                 <div class="product-card">
 
                                     <div class="product-image">
-                                        <img src="<?php echo $row['ItemImage']; ?>">
+
+                                        <img src="<?php echo $row['ItemImage'];?>">
+
                                     </div>
 
                                     <div class="product-content">
 
                                         <h4>
-                                            <?php echo $row['ItemName']; ?>
+
+                                            <?php echo $row['ItemName'];?>
+
                                         </h4>
 
                                         <span class="category">
-                                            <?php echo $row['ItemCategory']; ?>
+
+                                            <?php echo $row['ItemCategory'];?>
+
                                         </span>
+
+
+                                        <div class="rating-summary">
+
+                                            <span class="stars">
+
+                                                ★★★★★
+
+                                            </span>
+
+                                            <strong>
+
+                                                <?php echo number_format($row['averageRating'],1);?>
+
+                                            </strong>
+
+                                        </div>
+
 
                                         <h3>
 
-                                            RM <?php echo $row['ItemPrice']; ?>
+                                            RM <?php echo number_format($row['ItemPrice'],2);?>
 
                                         </h3>
 
                                         <p>
+
                                             <i class="fa fa-shopping-cart"></i>
 
-                                            <?php echo $row['StoreName']; ?>
+                                            <?php echo $row['StoreName'];?>
+
                                         </p>
 
                                         <p class="description">
 
-                                            <?php echo $row['ItemDescription']; ?>
+                                            <?php echo $row['ItemDescription'];?>
 
                                         </p>
 
-                                        <a href="../student/filter.php" class="compare-link">
-                                            Compare Price
-                                        </a>
+                                        <div class="product-actions">
+
+                                            <a href="filter.php" class="compare-link">
+
+                                                Compare
+
+                                            </a>
+
+                                            <button
+                                            class="rate-btn"
+                                            data-id="<?php echo $row['ItemID'];?>">
+
+                                                <i class="fa fa-star"></i>
+
+                                                Rate
+
+                                            </button>
+
+                                        </div>
 
                                     </div>
+
                                 </div>
                             </div>
 
@@ -307,6 +825,72 @@
             </div>
         </div>
     </section>
+
+
+    <!-- Rating Modal -->
+    <div id="ratingModal" class="student-modal">
+
+        <div class="student-modal-content">
+
+            <button class="close-modal">
+                &times;
+            </button>
+
+
+            <div class="rating-box">
+
+
+                <h2>
+                    Rate this Product
+                </h2>
+
+
+                <input type="hidden" id="itemID">
+
+
+                <div class="star-rating">
+
+                    <i class="fa fa-star" data-rate="1"></i>
+                    <i class="fa fa-star" data-rate="2"></i>
+                    <i class="fa fa-star" data-rate="3"></i>
+                    <i class="fa fa-star" data-rate="4"></i>
+                    <i class="fa fa-star" data-rate="5"></i>
+
+                </div>
+
+
+
+                <textarea 
+                id="comment"
+                placeholder="Share your experience..."></textarea>
+
+
+
+                <div class="rating-actions">
+
+
+                    <button class="cancel-btn">
+                        Cancel
+                    </button>
+
+
+                    <button class="submit-rating">
+                        Submit Rating
+                    </button>
+
+
+                </div>
+
+
+                <div id="reviews"></div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
 
     <!-- ***** Footer Start ***** -->
     <footer>
