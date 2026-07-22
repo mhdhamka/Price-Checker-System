@@ -32,7 +32,7 @@ if(isset($_SESSION['username']) && $_SESSION['username'] !== ''){
     </script>'; 
 }
 
-/* ----- STATISTICS ----- */
+/* Dashboard Statistics */
 // Count Items
 $totalItems =
 mysqli_fetch_assoc(
@@ -66,6 +66,79 @@ mysqli_query($conn,"
 SELECT ROUND(AVG(rating),2) avgRate
 FROM ratings
 "))['avgRate'];
+
+
+/* TOP RATED PRODUCTS */
+
+$topRated = mysqli_query($conn, "
+
+SELECT
+
+item.ItemID,
+item.ItemName,
+item.ItemImage,
+item.ItemPrice,
+item.ItemCategory,
+item.StoreName,
+
+ROUND(AVG(r.rating),1) AS averageRating,
+
+COUNT(r.ratingID) AS totalReviews
+
+FROM item item
+
+LEFT JOIN ratings r
+ON item.ItemID = r.ItemID
+
+GROUP BY item.ItemID
+
+HAVING totalReviews > 0
+
+ORDER BY averageRating DESC,
+totalReviews DESC
+
+LIMIT 6
+
+");
+
+
+/* Student Community */
+$communityPosts = mysqli_query($conn,"
+
+SELECT
+
+t.topicID,
+t.topicTitle,
+t.views,
+t.isPinned,
+t.created_at,
+c.categoryName,
+s.fullName,
+
+COUNT(r.replyID) totalReplies
+FROM forumtopic t
+LEFT JOIN forumcategory c
+
+ON t.categoryID=c.categoryID
+LEFT JOIN student s
+
+ON t.studentID=s.studentID
+LEFT JOIN forumreply r
+
+ON t.topicID=r.topicID
+WHERE t.status='Active'
+
+GROUP BY t.topicID
+ORDER BY
+
+t.isPinned DESC,
+t.created_at DESC
+
+LIMIT 5
+
+");
+
+
 ?>
 
 <!DOCTYPE html>
@@ -120,44 +193,7 @@ FROM ratings
 			}
 		?>
     
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="indexStudent.php" class="logo"><img src="../../assets/images/logo.png"  width="90" height="90"></a>
-                        
-
-                        <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
-                            <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                            <li class="scroll-to-section"><a href="#compare">Filter & Compare </a></li>
-                            <li class="scroll-to-section"><a href="#search">Search </a></li>
-                            <li class="scroll-to-section"><a href="#why-us">Why Us</a></li>
-
-                            <form method="post">
-                                <div class="icons">
-                                    <div class="dropdown">
-                                    <img src="<?php echo $img; ?>" width="40" height="40" class="rounded-circle">
-                                      <div class="dropdown-content">
-                                        <a href="../student/profile.php">My Profile</a>
-                                        <a href="../public/logout.php" name="logout">Log Out</a>
-                                      </div>
-                                    </div>
-                                </form>
-                                </div>
-                        </ul>        
-                        <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a>
-                        
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
+    <?php include("../student/includes/header.php"); ?>
     
 
     <!-- ***** Main Banner Area Start ***** -->
@@ -185,9 +221,19 @@ FROM ratings
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
-                    <div class="section-heading dark-bg">
+                    <div class="section-heading">
 
-                        <h2><em>Filter & Compare Items</em></h2>
+                        <span class="section-subtitle">
+
+                            Compare Prices
+
+                        </span>
+
+                        <h2>
+
+                            Find the <em>Best Deal</em>
+
+                        </h2>
 
                         <img src="../../assets/images/line-dec.png">
 
@@ -363,7 +409,6 @@ FROM ratings
 
             </div>
 
-
             <!-- Search Preview Box -->
             <div class="search-preview-box">
 
@@ -496,10 +541,365 @@ FROM ratings
         </div>
 
     </section>
-   
 
 
-   <!-- ***** Why Us Starts ***** -->
+    <!-- ***** Quick Access Starts ***** -->
+    <section class="section quick-access-section" id="tools">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <h2>
+                    Quick <em>Access</em>
+                </h2>
+
+                <img src="../../assets/images/line-dec.png">
+
+                <p>
+                    Easily access shopping tools and manage your shopping experience.
+                </p>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="quick-card">
+
+                        <i class="fa fa-search"></i>
+
+                        <h4>
+                            Search Products
+                        </h4>
+
+                        <p>
+                            Find products, stores, and prices quickly.
+                        </p>
+
+
+                        <a href="../student/search.php">
+                            Explore
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="quick-card">
+
+                        <i class="fa fa-exchange"></i>
+
+                        <h4>
+                            Compare Prices
+                        </h4>
+
+                        <p>
+                            Compare prices from different stores.
+                        </p>
+
+
+                        <a href="../student/filter.php">
+                            Compare
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="quick-card">
+
+                        <i class="fa fa-heart"></i>
+
+                        <h4>
+                            My Wishlist
+                        </h4>
+
+                        <p>
+                            Save products you want to check later.
+                        </p>
+
+
+                        <a href="../student/wishlist.php">
+                            View Wishlist
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ***** Trending Products ***** -->
+    <section class="section favourites-section" id="trend">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <h2>
+                    Trending <em>Products</em>
+                </h2>
+
+                <img src="../../assets/images/line-dec.png">
+
+                <p>
+                    Products highly recommended by students based on ratings and reviews.
+                </p>
+
+            </div>
+
+
+            <div class="row">
+
+                <?php while($item=mysqli_fetch_assoc($topRated)){ ?>
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <div class="favourite-product">
+
+                            <div class="favourite-img">
+
+                                <img src="<?php echo $item['ItemImage']; ?>">
+
+                                <span class="badge-top">
+
+                                    Top Rated
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="favourite-info">
+
+                                <h4>
+
+                                <?php echo $item['ItemName']; ?>
+
+                                </h4>
+
+
+                                <div class="meta">
+
+                                    <span>
+
+                                        <i class="fa fa-tags"></i>
+
+                                        <?php echo $item['ItemCategory']; ?>
+
+                                    </span>
+
+                                    <span>
+
+                                        <i class="fa fa-shopping-cart"></i>
+
+                                        <?php echo $item['StoreName']; ?>
+
+                                    </span>
+
+                                </div>
+
+                                <h3>
+
+                                    RM <?php echo number_format($item['ItemPrice'],2); ?>
+
+                                </h3>
+
+
+                                <div class="rating-row">
+
+                                    <div class="stars">
+
+                                        ★★★★★
+
+                                    </div>
+
+                                <div>
+
+                                <strong>
+
+                                    <?php echo $item['averageRating']; ?>
+
+                                </strong>
+
+                                <span>
+
+                                    (<?php echo $item['totalReviews']; ?> reviews)
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <?php } ?>
+
+        </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ***** Student Community ***** -->
+   <section class="section community-section" id="community">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <h2>
+
+                    Student <em>Community</em>
+
+                </h2>
+
+                <img src="../../assets/images/line-dec.png">
+
+                <p>
+
+                Ask questions, share shopping tips and help fellow students.
+
+                </p>
+
+            </div>
+
+
+            <div class="community-wrapper">
+
+                <?php while($post=mysqli_fetch_assoc($communityPosts)){ ?>
+
+                    <div class="community-card">
+
+                        <div class="community-left">
+
+                            <div class="community-icon">
+
+                                <i class="fa fa-comments"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="community-body">
+
+                            <div class="community-top">
+
+                                <?php
+
+                                if($post['isPinned']==1){
+
+                                echo "<span class='pin-badge'>Pinned</span>";
+
+                                }
+
+                                ?>
+
+                                <span class="category-badge">
+
+                                <?php echo $post['categoryName']; ?>
+
+                                </span>
+
+                            </div>
+
+                            <h4>
+
+                                <?php echo $post['topicTitle']; ?>
+
+                            </h4>
+
+                            <p>
+
+                                By
+
+                                <strong>
+
+                                    <?php echo $post['fullName']; ?>
+
+                                </strong>
+
+                            </p>
+
+
+                            <div class="community-meta">
+
+                                <span>
+
+                                    <i class="fa fa-eye"></i>
+
+                                    <?php echo $post['views']; ?>
+
+                                </span>
+
+                                <span>
+
+                                    <i class="fa fa-reply"></i>
+
+                                    <?php echo $post['totalReplies']; ?>
+
+                                    Replies
+
+                                </span>
+
+                                <span>
+
+                                    <i class="fa fa-clock-o"></i>
+
+                                    <?php echo date("d M Y",strtotime($post['created_at'])); ?>
+
+                                    </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                        <?php } ?>
+
+
+                    <div class="text-center mt-5">
+
+                        <a href="../student/forum.php"
+
+                        class="community-btn">
+
+                            Visit Community Forum
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+    </section>
+
+
+    <!-- ***** Why Us Starts ***** -->
     <section class="section" id="why-us">
         <div class="container">
             <div class="row">
@@ -568,74 +968,7 @@ FROM ratings
     
     <br>
 
-    <!-- ***** Footer Start ***** -->
-    <footer>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-
-                <h4>
-                    Price Checker System
-                </h4>
-
-                <p>
-                    Helping students compare prices and make smarter shopping decisions.
-                </p>
-
-                </div>
-
-                <div class="col-lg-4">
-
-                    <h4>
-                        Quick Links
-                    </h4>
-
-                    <p>
-                        <a href="#top">
-                            Home
-                        </a>
-                        |
-                        <a href="#compare">
-                            Filter & Compare
-                        </a>
-                        |
-                        <a href="#search">
-                            Search
-                        </a>
-                        |
-                        <a href="#why-us">
-                            Why Us
-                        </a>
-                    </p>
-
-                </div>
-
-                <div class="col-lg-4">
-                    <h4>
-                        Developed By
-                    </h4>
-
-                    <p>
-                        Mohd Hamka
-                    <br>
-                        Universiti Malaysia Sarawak (UNIMAS)
-                    </p>
-                </div>
-
-                </div>
-
-                <hr>
-
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <p>
-                        Copyright &copy; 2024 Price Checker System. All Rights Reserved.
-                        </p>
-                    </div>
-                </div>
-        </div>
-    </footer>
+    <?php include("../student/includes/footer.php"); ?>
 
     <!-- jQuery -->
     <script src="../../assets/js/jquery-2.1.0.min.js"></script>

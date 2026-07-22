@@ -53,7 +53,7 @@
         </li>
 
         <li>
-            <a href="../forum.php">
+            <a href="../admin/forum.php">
                 <i class="fa fa-comments"></i>
                 Forum
             </a>

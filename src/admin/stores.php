@@ -93,7 +93,7 @@ $totalPages = ceil($total/$limit);
 
                 <h2>
 
-                    Manage stores
+                    Store Management
 
                 </h2>
 

@@ -94,7 +94,7 @@ $totalPages = ceil($total/$limit);
 
                 <h2>
 
-                    Manage Categories
+                    Categories Management
 
                 </h2>
 

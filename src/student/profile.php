@@ -2,8 +2,6 @@
 session_start();
 include("../config/db_cPCS.php");
 
-$studentID = $_SESSION['studentID'];
-
 // Check if user is logged in
 if (!isset($_SESSION['studentID'])) {
     header("Location: ../public/loginStudent.php"); 
@@ -58,18 +56,12 @@ $img = $row['studentIMG'];
 
     <?php
         global $conn;
-        $sql = "SELECT * FROM student WHERE logStatus = 1;";
-        $result = mysqli_query($conn, $sql);
 
-        if ($result->num_rows > 0)
-        {
-            while ($row = $result->fetch_assoc())
-            {
-                $username = $row["username"];
-                $img = $row['studentIMG'];
-            }
-        }
-        ?>
+        $sql = "SELECT username, studentIMG
+        FROM student
+        WHERE studentID = '$studentID'";
+
+    ?>
     
     <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
@@ -83,10 +75,13 @@ $img = $row['studentIMG'];
 
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#top">Home</a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#compare">Filter & Compare </a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#search">Search </a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#why-us">Why Us</a></li>
+                            <li class="scroll-to-section"><a href="#top">Home</a></li>
+                            <li class="scroll-to-section"><a href="#compare">Compare </a></li>
+                            <li class="scroll-to-section"><a href="#search">Products</a></li>
+                            <li class="scroll-to-section"><a href="#tools">Tools</a></li>
+                            <li class="scroll-to-section"><a href="#trend">Trending</a></li>
+                            <li class="scroll-to-section"><a href="#community">Community</a></li>
+                            <li class="scroll-to-section"><a href="#why-us">About</a></li>
 
                             <form method="post">
                                 <div class="icons">
@@ -119,7 +114,7 @@ $img = $row['studentIMG'];
                     <div class="section-heading">
 
                         <h2>
-                            Edit <em>Profile</em>
+                            Update Profile <em>Profile</em>
                         </h2>
 
                         <img src="../../assets/images/line-dec.png">

@@ -26,14 +26,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="../../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="../../css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap.min.css">
@@ -85,10 +85,13 @@
 
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#top">Home</a></li>
-                            <li class="scroll-to-section"><a href="../student/filter.php" class="active">Filter & Compare </a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#search">Search </a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#why-us">Why US</a></li>
+                            <li class="scroll-to-section"><a href="#top">Home</a></li>
+                            <li class="scroll-to-section"><a href="#compare" class="active">Compare </a></li>
+                            <li class="scroll-to-section"><a href="#search">Products</a></li>
+                            <li class="scroll-to-section"><a href="#tools">Tools</a></li>
+                            <li class="scroll-to-section"><a href="#trend">Trending</a></li>
+                            <li class="scroll-to-section"><a href="#community">Community</a></li>
+                            <li class="scroll-to-section"><a href="#why-us">About</a></li>
 
                             <form method="post">
                                 <div class="icons">
@@ -96,7 +99,7 @@
                                         <img src="<?php echo $img; ?>" width="40" height="40" class="rounded-circle">
                                         <div class="dropdown-content">
                                             <a href="../student/profile.php">My Profile</a>
-                                            <a href="logoutStudent.php" name="logout">Log Out</a>
+                                            <a href="../public/logout.php" name="logout">Log Out</a>
                                         </div>
                                     </div>
                                 </div>
@@ -374,74 +377,7 @@
         <br>
 
 
-    <!-- ***** Footer Start ***** -->
-    <footer>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-
-                <h4>
-                    Price Checker System
-                </h4>
-
-                <p>
-                    Helping students compare prices and make smarter shopping decisions.
-                </p>
-
-                </div>
-
-                <div class="col-lg-4">
-
-                    <h4>
-                        Quick Links
-                    </h4>
-
-                    <p>
-                        <a href="../student/dashboard.php">
-                            Home
-                        </a>
-                        |
-                        <a href="../student/filter.php">
-                            Filter & Compare
-                        </a>
-                        |
-                        <a href="../student/search.php">
-                            Search
-                        </a>
-                        |
-                        <a href="../student/dashboard.php#why-us">
-                            Why Us
-                        </a>
-                    </p>
-
-                </div>
-
-                <div class="col-lg-4">
-                    <h4>
-                        Developed By
-                    </h4>
-
-                    <p>
-                        Mohd Hamka
-                    <br>
-                        Universiti Malaysia Sarawak (UNIMAS)
-                    </p>
-                </div>
-
-                </div>
-
-                <hr>
-
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <p>
-                        Copyright &copy; 2024 Price Checker System. All Rights Reserved.
-                        </p>
-                    </div>
-                </div>
-        </div>
-    </footer>
+    <?php include("../student/includes/footer.php"); ?>
 
     <!-- jQuery -->
     <script src="../../assets/js/jquery-2.1.0.min.js"></script>

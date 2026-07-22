@@ -234,10 +234,13 @@ $offset = ($page - 1) * $limit;
 
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#top">Home</a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#compare">Filter & Compare </a></li>
-                            <li class="scroll-to-section"><a href="../student/search.php" class="active">Search </a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#why-us">Why Us</a></li>
+                            <li class="scroll-to-section"><a href="#top">Home</a></li>
+                            <li class="scroll-to-section"><a href="#compare">Compare </a></li>
+                            <li class="scroll-to-section"><a href="#search" class="active">Products</a></li>
+                            <li class="scroll-to-section"><a href="#tools">Tools</a></li>
+                            <li class="scroll-to-section"><a href="#trend">Trending</a></li>
+                            <li class="scroll-to-section"><a href="#community">Community</a></li>
+                            <li class="scroll-to-section"><a href="#why-us">About</a></li>
 
                             <form method="post">
                                 <div class="icons">
@@ -1046,76 +1049,7 @@ $offset = ($page - 1) * $limit;
 
     </div>
 
-    <!-- ***** Footer Start ***** -->
-    <footer>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-
-                <h4>
-                    Price Checker System
-                </h4>
-
-                <p>
-                    Helping students compare prices and make smarter shopping decisions.
-                </p>
-
-                </div>
-
-                <div class="col-lg-4">
-
-                    <h4>
-                        Quick Links
-                    </h4>
-
-                    <p>
-                        <a href="dashboard.php">
-                            Home
-                        </a>
-                        |
-                        <a href="filter.php">
-                            Filter & Compare
-                        </a>
-                        |
-                        <a href="search.php">
-                            Search
-                        </a>
-                        |
-                        <a href="dashboard.php#why-us">
-                            Why Us
-                        </a>
-                    </p>
-
-                </div>
-
-                <div class="col-lg-4">
-                    <h4>
-                        Developed By
-                    </h4>
-
-                    <p>
-                        Mohd Hamka
-                    <br>
-                        Universiti Malaysia Sarawak (UNIMAS)
-                    </p>
-                </div>
-
-                </div>
-
-                <hr>
-
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <p>
-                        Copyright &copy; 2024 Price Checker System. All Rights Reserved.
-                        </p>
-                    </div>
-                </div>
-        </div>
-    </footer>
-
-    
+    <?php include("../student/includes/footer.php"); ?>
 
     <!-- jQuery -->
     <script src="../../assets/js/jquery-2.1.0.min.js"></script>
