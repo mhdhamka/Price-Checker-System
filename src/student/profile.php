@@ -55,12 +55,28 @@ $img = $row['studentIMG'];
 <body>
 
     <?php
-        global $conn;
+    global $conn;
 
-        $sql = "SELECT username, studentIMG
-        FROM student
-        WHERE studentID = '$studentID'";
+    $sql = "
+    SELECT username, studentIMG
+    FROM student
+    WHERE studentID = '$studentID'
+    ";
 
+    $result = mysqli_query($conn, $sql);
+
+    if($result && mysqli_num_rows($result) > 0)
+    {
+        $user = mysqli_fetch_assoc($result);
+
+        $username = $user['username'];
+        $img = $user['studentIMG'];
+    }
+    else
+    {
+        $username = "Student";
+        $img = "../../assets/images/profile/default.png";
+    }
     ?>
     
     <!-- ***** Header Area Start ***** -->
@@ -75,13 +91,13 @@ $img = $row['studentIMG'];
 
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="#top">Home</a></li>
-                            <li class="scroll-to-section"><a href="#compare">Compare </a></li>
-                            <li class="scroll-to-section"><a href="#search">Products</a></li>
-                            <li class="scroll-to-section"><a href="#tools">Tools</a></li>
-                            <li class="scroll-to-section"><a href="#trend">Trending</a></li>
-                            <li class="scroll-to-section"><a href="#community">Community</a></li>
-                            <li class="scroll-to-section"><a href="#why-us">About</a></li>
+                            <li class="scroll-to-section"><a href="../student/dashboard.php#top">Home</a></li>
+                            <li class="scroll-to-section"><a href="../student/dashboard.php#compare">Compare </a></li>
+                            <li class="scroll-to-section"><a href="../student/dashboard.php#search">Products</a></li>
+                            <li class="scroll-to-section"><a href="../student/dashboard.php#tools">Tools</a></li>
+                            <li class="scroll-to-section"><a href="../student/dashboard.php#trend">Trending</a></li>
+                            <li class="scroll-to-section"><a href="../student/dashboard.php#community">Community</a></li>
+                            <li class="scroll-to-section"><a href="../student/dashboard.php#why-us">About</a></li>
 
                             <form method="post">
                                 <div class="icons">
@@ -106,7 +122,7 @@ $img = $row['studentIMG'];
     </header>
   
 
-    <!-- ***** Filter & Compare Start ***** -->
+    <!-- ***** Update Profile Start ***** -->
     <section class="section" id="compare">
         <div class="container">
             <div class="row">
@@ -114,7 +130,7 @@ $img = $row['studentIMG'];
                     <div class="section-heading">
 
                         <h2>
-                            Update Profile <em>Profile</em>
+                            Update <em>Profile</em>
                         </h2>
 
                         <img src="../../assets/images/line-dec.png">

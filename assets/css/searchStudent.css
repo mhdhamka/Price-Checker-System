@@ -916,6 +916,10 @@ CARD RESPONSIVE
 
 }
 
+
+/* ==========================
+BACK TO DASHBOARD
+========================== */
 .custom-btn{
 
     display:inline-flex;
@@ -949,6 +953,9 @@ CARD RESPONSIVE
 
 
 
+/* ==========================
+PAGINATION
+========================== */
 .pagination{
 
 display:flex;

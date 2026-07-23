@@ -1,21 +1,21 @@
-.custom-btn {
+.custom-btn{
 
-    display: inline-block;
-    margin-bottom: 20px;
-    padding: 10px 10px;
-    border: 2px solid #ff0000;
-    background-color: #ffffff;
-    color: #ff0000;
-    border-radius: 10px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    transition: background-color 0.3s, color 0.3s;
+    background:#ED563B;
+    color:#fff;
+    padding:14px 30px;
+    border-radius:14px;
+    border:none;
+    font-weight:600;
+    transition:.3s;
+
 }
 
-.custom-btn:hover {
-    background-color: #ff0000;
-    color: #ffffff;
+.custom-btn:hover{
+
+    background:#d84730;
+    transform:translateY(-3px);
+    color:#fff;
+
 }
 
 .container-fluid {
@@ -26,95 +26,307 @@
 }
 
 /* Compare Page */
-.comparison-container {
+.comparison-container{
 
-background:#f5f3f6;
-padding:40px;
-text-align:center;
-
-}
-
-
-
-.comparison-container h2 {
-
-font-size:32px;
-font-weight:700;
+    max-width:1400px;
+    margin:80px auto;
+    padding:50px;
+    background:#fff;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
 
 }
 
 
 
-.compare-item-card {
+.comparison-container h2{
 
-background:white;
-border-radius:20px;
-padding:25px;
-height:100%;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-transition:.3s;
+    font-size:42px;
+    font-weight:700;
+    margin-bottom:10px;
+
+}
+
+.comparison-container p{
+
+    color:#777;
+    font-size:16px;
+    margin-bottom:40px;
 
 }
 
 
 
-.compare-item-card:hover {
+.compare-item-card{
 
-transform:translateY(-8px);
-
-}
-
-
-
-.compare-image {
-
-
-width:180px;
-height:180px;
-object-fit:contain;
-margin-bottom:20px;
-
+    background:#fff;
+    border-radius:22px;
+    padding:25px;
+    height:100%;
+    border:1px solid #ececec;
+    transition:.35s;
+    position:relative;
+    overflow:hidden;
 
 }
 
 
 
-.compare-item-card h4 {
+.compare-item-card:hover{
 
-font-size:20px;
-font-weight:600;
-
-}
-
-
-
-.price {
-
-
-font-size:25px;
-font-weight:bold;
-color:#ED563B;
-margin:15px;
-
+    transform:translateY(-10px);
+    box-shadow:0 18px 40px rgba(0,0,0,.12);
 
 }
 
 
 
-.compare-info {
+.compare-image-box{
 
+    height:180px;
+    background:#f8f8f8;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:20px;
 
-text-align:left;
-font-size:14px;
-color:#555;
+}
 
+.compare-image{
+
+    width:150px;
+    height:150px;
+    object-fit:contain;
 
 }
 
 
 
-.compare-info strong {
+.compare-item-card h4{
 
-color:#222;
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:15px;
+    color:#222;
+
+}
+
+
+
+.price{
+
+    font-size:34px;
+    font-weight:700;
+    color:#ED563B;
+    margin:20px 0;
+
+}
+
+.best-price{
+
+    position:absolute;
+    top:20px;
+    right:20px;
+    background:#2ecc71;
+    color:white;
+    padding:8px 16px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:600;
+
+}
+
+.compare-info{
+
+    margin-top:20px;
+    padding-top:20px;
+    border-top:1px solid #eee;
+    text-align:left;
+
+}
+
+.compare-row{
+
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px dashed #eee;
+
+}
+
+.compare-row:last-child{
+
+    border-bottom:none;
+
+}
+
+.compare-title{
+
+    font-weight:600;
+    color:#888;
+
+}
+
+.compare-value{
+
+    font-weight:600;
+    color:#333;
+
+}
+
+
+.compare-rating{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin-bottom:20px;
+    color:#f7b500;
+    font-weight:600;
+
+}
+
+
+/* ==========================
+PRODUCT RATING
+========================== */
+
+.rating-box{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin:18px 0 12px;
+    flex-wrap:wrap;
+
+}
+
+.rating-score{
+
+    background:#FFF4D6;
+    color:#F39C12;
+    padding:7px 14px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:6px;
+
+}
+
+.rating-score i{
+
+    font-size:13px;
+
+}
+
+.rating-review{
+
+    color:#777;
+    font-size:13px;
+    font-weight:500;
+
+}
+
+/*==================================
+COMPARISON STATISTICS
+==================================*/
+
+.compare-stats{
+
+    display:grid;
+    grid-template-columns:1fr;
+    gap:15px;
+    margin:22px 0;
+
+}
+
+
+.stat-card{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:16px 18px;
+    border-radius:18px;
+    background:#FAFAFA;
+    border:1px solid #EEEEEE;
+    transition:.3s;
+
+}
+
+
+.stat-card:hover{
+
+    background:#FFF8F6;
+    border-color:#ED563B;
+    transform:translateY(-3px);
+
+}
+
+
+.stat-icon{
+
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:#ED563B;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+    flex-shrink:0;
+
+}
+
+
+.stat-content{
+
+    flex:1;
+
+}
+
+
+.stat-content small{
+
+    display:block;
+    color:#888;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    margin-bottom:3px;
+
+}
+
+
+.stat-content h5{
+
+    margin:0;
+    font-size:24px;
+    font-weight:700;
+    color:#222;
+
+}
+
+
+.stat-content h6{
+
+    margin:0;
+    font-size:17px;
+    font-weight:600;
+    color:#222;
+
+}
+
+
+.stat-content span{
+
+    color:#888;
+    font-size:13px;
 
 }

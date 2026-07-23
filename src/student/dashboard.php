@@ -3,34 +3,13 @@
 session_start();
 include ("../config/db_cPCS.php");
 
-// Assign session variables with checks for existence
-$studentID = isset($_SESSION['studentID']) ? $_SESSION['studentID'] : '';
-$fullName = isset($_SESSION['fullName']) ? $_SESSION['fullName'] : '';
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
-$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
-$password = isset($_SESSION['password']) ? $_SESSION['password'] : '';
-
-// Ensure session variables are set (if they are not, they will remain as empty strings)
-$_SESSION['studentID'] = $studentID;
-$_SESSION['fullName'] = $fullName;
-$_SESSION['username'] = $username;
-$_SESSION['email'] = $email;
-$_SESSION['password'] = $password;
-
-// Check if the username session variable is set and generate the appropriate alert message
-if(isset($_SESSION['username']) && $_SESSION['username'] !== ''){
-    echo '<script type="text/javascript">
-      window.onload = function() {
-        alert("Welcome Back, <?php echo "$username"; ?>");
-      }
-    </script>';
-} else {
-    echo '<script type="text/javascript">
-      window.onload = function() {
-        alert("You have not logged in successfully");
-      }
-    </script>'; 
+// Check if user is logged in
+if (!isset($_SESSION['studentID'])) {
+    header("Location: ../public/loginStudent.php"); 
+    exit();
 }
+
+$studentID = $_SESSION['studentID'];
 
 /* Dashboard Statistics */
 // Count Items
@@ -179,19 +158,31 @@ LIMIT 5
     
 
     <?php
-			global $conn;
-			$sql = "SELECT * FROM student WHERE logStatus = 1;";
-			$result = mysqli_query($conn, $sql);
-			
-			if ($result -> num_rows > 0)
-			{
-				while ($row = $result -> fetch_assoc())
-				{
-					$username = $row["username"];
-					$img = $row['studentIMG'];
-				}
-			}
-		?>
+
+    global $conn;
+
+    $sql = "
+    SELECT username, studentIMG
+    FROM student
+    WHERE studentID = '$studentID'
+    ";
+
+    $result = mysqli_query($conn, $sql);
+
+    if($result && mysqli_num_rows($result) > 0)
+    {
+        $user = mysqli_fetch_assoc($result);
+
+        $username = $user['username'];
+        $img = $user['studentIMG'];
+    }
+    else
+    {
+        $username = "Student";
+        $img = "../../assets/images/profile/default.png";
+    }
+
+    ?>
     
     <?php include("../student/includes/header.php"); ?>
     

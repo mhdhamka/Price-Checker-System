@@ -4,6 +4,14 @@
 session_start(); 
 include ("../config/db_cPCS.php"); 
 
+// Check if user is logged in
+if (!isset($_SESSION['studentID'])) {
+    header("Location: ../public/loginStudent.php"); 
+    exit();
+}
+
+$studentID = $_SESSION['studentID'];
+
 /* ==========================================================
 SEARCH PAGE STATISTICS
 ========================================================== */
@@ -153,15 +161,28 @@ $offset = ($page - 1) * $limit;
 
     <?php
     global $conn;
-    $sql = "SELECT * FROM student WHERE logStatus = 1;";
+
+    $sql = "
+    SELECT username, studentIMG
+    FROM student
+    WHERE studentID = '$studentID'
+    ";
+
     $result = mysqli_query($conn, $sql);
 
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $username = $row["username"];
-            $img = $row['studentIMG'];
-        }
+    if($result && mysqli_num_rows($result) > 0)
+    {
+        $user = mysqli_fetch_assoc($result);
+
+        $username = $user['username'];
+        $img = $user['studentIMG'];
     }
+    else
+    {
+        $username = "Student";
+        $img = "../../assets/images/profile/default.png";
+    }
+
 
     /* ==========================================================
     SEARCH PAGE STATISTICS
@@ -322,8 +343,6 @@ $offset = ($page - 1) * $limit;
                             </div>
 
                         </div>
-
-
 
                         <div class="col-lg-4 col-md-4">
 
