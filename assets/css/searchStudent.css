@@ -181,7 +181,7 @@ RATING MODAL
 /* TITLE */
 
 
-.rating-box h2{
+.rating-modal-body h2{
 
     text-align:center;
 
@@ -246,32 +246,23 @@ RATING MODAL
 
 
 /* COMMENT BOX */
-
-
-.rating-box textarea{
+.rating-modal-body textarea{
 
 
     width:100%;
-
     height:110px;
-
     border-radius:15px;
-
     padding:15px;
-
     border:1px solid #ddd;
-
     resize:none;
-
     font-size:14px;
 
 }
 
 
-.rating-box textarea:focus{
+.rating-modal-body textarea:focus{
 
     outline:none;
-
     border-color:#ED563B;
 
 }
@@ -279,58 +270,39 @@ RATING MODAL
 
 
 /* BUTTONS */
-
-
 .rating-actions{
 
     display:flex;
-
     gap:15px;
-
     margin-top:20px;
 
 }
-
-
 
 .cancel-btn,
 .submit-rating{
 
     flex:1;
-
     height:45px;
-
     border:none;
-
     border-radius:12px;
-
     font-weight:600;
-
     cursor:pointer;
-
     transition:.3s;
 
 }
 
-
-
 .cancel-btn{
 
     background:#f1f1f1;
-
     color:#555;
 
 }
-
-
 
 .cancel-btn:hover{
 
     background:#ddd;
 
 }
-
-
 
 .submit-rating{
 
@@ -518,7 +490,7 @@ PRODUCT CARD
     background:#ffffff;
     border-radius:22px;
     overflow:hidden;
-
+    position:relative;
     box-shadow:
     0 8px 25px rgba(0,0,0,.08);
 
@@ -535,9 +507,47 @@ PRODUCT CARD
 .product-card:hover{
 
     transform:translateY(-8px);
-
     box-shadow:
     0 18px 45px rgba(0,0,0,.15);
+
+}
+
+.product-top{
+
+    position:absolute;
+    top:15px;
+    right:15px;
+    z-index:5;
+
+}
+
+.product-top .wishlist{
+
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    font-size:20px;
+    color:#b5b5b5;
+    box-shadow:0 8px 18px rgba(0,0,0,.12);
+    transition:.3s;
+
+}
+
+.product-top .wishlist:hover{
+
+    color:#ED563B;
+    transform:scale(1.1);
+
+}
+
+.product-top .wishlist.active{
+
+    color:#ED563B;
 
 }
 
@@ -1047,5 +1057,49 @@ SEARCH STAT CARDS
     color:#777;
     font-size:15px;
     line-height:1.5;
+
+}
+
+
+
+/* ==========================
+PRODUCT RATING
+========================== */
+
+.rating-box{
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:15px 0;
+    flex-wrap:wrap;
+
+}
+
+.rating-score{
+
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:7px 14px;
+    background:#FFF4D6;
+    color:#F39C12;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:700;
+
+}
+
+.rating-score i{
+
+    font-size:13px;
+
+}
+
+.rating-review{
+
+    color:#777;
+    font-size:13px;
+    font-weight:500;
 
 }

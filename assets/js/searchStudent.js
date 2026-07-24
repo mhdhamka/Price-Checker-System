@@ -2,6 +2,55 @@ $(document).ready(function () {
 
     let selectedRating = 0;
 
+    /* ==========================================================
+       WISHLIST AJAX
+    ========================================================== */
+
+    function setupWishlist() {
+
+        $(document).on("click", ".wishlist", function (e) {
+
+            e.preventDefault();
+
+            let icon = $(this);
+
+            $.post(
+                "processes/toggleWishlist.php",
+                {
+                    itemID: icon.data("id")
+                },
+                function (response) {
+
+                    response = response.trim();
+
+                    if (response === "added") {
+
+                        icon
+                            .removeClass("fa-heart-o")
+                            .addClass("fa-heart active");
+
+                    }
+                    else if (response === "removed") {
+
+                        icon
+                            .removeClass("fa-heart active")
+                            .addClass("fa-heart-o");
+
+                    }
+
+                }
+
+            );
+
+        });
+
+    }
+
+    // Initialize wishlist
+    setupWishlist();
+
+
+
     /* ==========================================
        OPEN RATING MODAL
     ========================================== */
@@ -25,40 +74,50 @@ $(document).ready(function () {
         $(".star-rating i").removeClass("active");
 
         // Check if student already rated
-        $.get("processes/getRating.php", { itemID: itemID }, function (response) {
+        $.get(
+            "processes/getRating.php",
+            {
+                itemID: itemID
+            },
+            function (response) {
 
-            if (response !== "") {
+                if (response !== "") {
 
-                let data = JSON.parse(response);
+                    let data = JSON.parse(response);
 
-                selectedRating = parseFloat(data.rating);
+                    selectedRating = parseFloat(data.rating);
 
-                $("#comment").val(data.comment);
+                    $("#comment").val(data.comment);
 
-                $(".star-rating i").each(function () {
+                    $(".star-rating i").each(function () {
 
-                    if ($(this).data("rate") <= selectedRating) {
-                        $(this).addClass("active");
-                    }
+                        if ($(this).data("rate") <= selectedRating) {
 
-                });
+                            $(this).addClass("active");
 
-                $(".submit-rating").text("Update Rating");
+                        }
+
+                    });
+
+                    $(".submit-rating").text("Update Rating");
+
+                }
+                else {
+
+                    $(".submit-rating").text("Submit Rating");
+
+                }
+
+                $("#ratingModal").fadeIn();
+
+                loadReviews(itemID);
 
             }
-            else {
 
-                $(".submit-rating").text("Submit Rating");
-
-            }
-
-            $("#ratingModal").fadeIn();
-
-            loadReviews(itemID);
-
-        });
+        );
 
     });
+
 
 
     /* ==========================================
@@ -70,6 +129,7 @@ $(document).ready(function () {
         $("#ratingModal").fadeOut();
 
     });
+
 
 
     /* ==========================================
@@ -93,6 +153,7 @@ $(document).ready(function () {
         });
 
     });
+
 
 
     /* ==========================================
@@ -147,6 +208,7 @@ $(document).ready(function () {
     });
 
 
+
     /* ==========================================
        LOAD REVIEWS
     ========================================== */
@@ -154,9 +216,7 @@ $(document).ready(function () {
     function loadReviews(itemID) {
 
         $("#reviews").load(
-
             "processes/loadReviews.php?itemID=" + itemID
-
         );
 
     }

@@ -31,120 +31,6 @@ box-shadow:0px 5px 25px rgba(0,0,0,0.08);
 }
 
 
-
-/* ==========================
-SEARCH TOOLBAR
-========================== */
-
-
-.search-toolbar{
-
-display:flex;
-align-items:center;
-gap:12px;
-flex-wrap:nowrap;
-
-}
-
-
-
-.search-input{
-
-position:relative;
-flex:2;
-
-}
-
-
-.search-input i{
-
-position:absolute;
-left:18px;
-top:18px;
-color:#999;
-
-}
-
-
-.search-input input{
-
-padding-left:45px !important;
-
-}
-
-
-
-.search-toolbar input,
-.search-toolbar select{
-
-
-height:52px;
-border:1px solid #e5e5e5;
-border-radius:12px;
-padding:0 18px;
-background:white;
-
-font-size:14px;
-
-}
-
-
-
-.search-toolbar select{
-
-flex:1;
-min-width:160px;
-
-}
-
-
-.search-toolbar button{
-
-height:52px;
-padding:0 30px;
-border:none;
-border-radius:12px;
-background:#ED563B;
-color:white;
-font-weight:600;
-white-space:nowrap;
-
-}
-
-
-
-.search-toolbar button:hover{
-
-background:#d8462f;
-
-}
-
-
-
-/* Mobile */
-
-@media(max-width:992px){
-
-
-.search-toolbar{
-
-flex-wrap:wrap;
-
-}
-
-
-.search-input,
-.search-toolbar select,
-.search-toolbar button{
-
-width:100%;
-
-}
-
-
-}
-
-
 /* ==========================
 PRODUCT 
 ========================== */
@@ -236,112 +122,6 @@ PRODUCT IMAGE
     padding:5px 15px;
     border-radius:20px;
     font-size:13px;
-
-}
-
-/* ==========================
-COMPARE CHECKBOX TOP RIGHT
-========================== */
-
-
-.compare-check{
-
-    position:absolute;
-    top:15px;
-    right:15px;
-    background:#ED563B;
-    padding:7px 14px;
-    border-radius:30px;
-    box-shadow:0 5px 15px rgba(0,0,0,.12);
-    display:flex;
-    align-items:center;
-    gap:6px;
-    cursor:pointer;
-    font-size:13px;
-    font-weight:600;
-    color:#555;
-    transition:.3s;
-
-}
-
-
-.compare-check input{
-
-    width:16px;
-    height:16px;
-    accent-color:#ED563B;
-    cursor:pointer;
-
-}
-
-
-.compare-check:hover{
-
-    background:#ED563B;
-    color:white;
-
-
-}
-
-.compare-check:has(input:checked){
-
-    background:#ED563B;
-    color:white;
-
-}
-
-
-.compare-check label {
-
-    background:#f5f5f5;
-    padding:6px 10px;
-    border-radius:20px;
-    cursor:pointer;
-    font-size:13px;
-    display:flex;
-    align-items:center;
-    gap:5px;
-
-}
-
-.compare-check input {
-
-    width:16px;
-    height:16px;
-    accent-color:#ED563B;
-
-}
-
-
-.compare-check label:hover {
-
-    background:#ED563B;
-    color:white;
-
-}
-
-
-.compare-btn{
-
-background:#ED563B;
-border:none;
-padding:12px 30px;
-
-}
-
-.step-number{
-
-    width:60px;
-    height:60px;
-    margin:0 auto 20px;
-    border-radius:50%;
-    background:#ED563B;
-    color:white;
-    font-size:28px;
-    font-weight:700;
-    display:flex;
-    align-items:center;
-    justify-content:center;
 
 }
 
@@ -583,105 +363,196 @@ PRODUCT RATING
 }
 
 
-/* =====================================================
-RECENTLY COMPARED SECTION
-===================================================== */
+/* ==========================
+   WISHLIST ACTION BUTTONS
+========================== */
 
-.recent-section{
-
-    margin-top:40px;
-
+.wishlist-actions
+{
+    display:flex;
+    gap:12px;
+    margin-top:20px;
 }
 
 
-.recent-card{
+.wishlist-actions a
+{
+    flex:1;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    border-radius:12px;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+    transition:all .3s ease;
+}
 
+
+/* Compare Button */
+
+.compare-btn
+{
+    background:#ED563B;
+    color:white;
+}
+
+
+.compare-btn:hover
+{
+    background:#d9482f;
+    color:white;
+    transform:translateY(-3px);
+    box-shadow:0 8px 15px rgba(237,86,59,.25);
+}
+
+
+/* View Button */
+
+.view-btn
+{
+    background:#343a40;
+    color:white;
+}
+
+
+.view-btn:hover
+{
+    background:#212529;
+    color:white;
+    transform:translateY(-3px);
+    box-shadow:0 8px 15px rgba(52,58,64,.25);
+}
+
+
+/* Icon */
+
+.wishlist-actions i
+{
+    font-size:14px;
+}
+
+
+/* =========================
+   WISHLIST RECENT COMPARE
+========================= */
+
+
+.wishlist-recent
+{
+    background:#f8f9fa;
+    padding:90px 0;
+}
+
+
+
+.recent-grid
+{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+
+
+.recent-compare-card
+{
     background:white;
-    border-radius:20px;
-    padding:25px;
-    height:100%;
-    text-align:left;
-    border:1px solid #eee;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    padding:20px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
     transition:.3s;
-    position:relative;
-
 }
 
 
-.recent-card:hover{
-
-    transform:translateY(-8px);
-    box-shadow:0 18px 40px rgba(0,0,0,.15);
-
+.recent-compare-card:hover
+{
+    transform:translateY(-5px);
 }
 
-
-
-.recent-card i{
-
+.recent-icon
+{
     width:55px;
     height:55px;
     background:#ED563B;
     color:white;
-    border-radius:50%;
+    border-radius:15px;
     display:flex;
-    justify-content:center;
     align-items:center;
-    font-size:24px;
-    margin-bottom:20px;
-
+    justify-content:center;
+    font-size:22px;
 }
 
 
 
-.recent-card h5{
+.recent-info
+{
+    flex:1;
+}
 
-    font-size:18px;
-    font-weight:700;
-    margin-bottom:10px;
 
+.recent-info h5
+{
+    margin-bottom:5px;
 }
 
 
 
-.recent-card p{
-
+.recent-info p
+{
+    font-size:14px;
     color:#777;
-    min-height:50px;
-    line-height:1.6;
-
+    margin-bottom:5px;
 }
 
 
 
-.recent-card small{
-
+.recent-info span
+{
+    font-size:13px;
     color:#999;
-    display:block;
-    margin-top:15px;
-
 }
 
 
 
-.recent-card .btn{
-
-    width:100%;
-    border-radius:12px;
+.recent-btn
+{
     background:#ED563B;
     color:white;
-    border:none;
-    padding:10px;
+    padding:10px 15px;
+    border-radius:10px;
+    font-size:13px;
+    text-decoration:none;
 
 }
 
 
+.recent-btn:hover
+{
+    background:#d9482f;
+    color:white;
+}
 
-.recent-card .btn:hover{
 
-    background:#d8462f;
 
+.empty-history
+{
+    text-align:center;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+}
+
+
+.empty-history i
+{
+    font-size:45px;
+    color:#ED563B;
 }
 
 

@@ -13,6 +13,23 @@ if (!isset($_SESSION['studentID'])) {
 $studentID = $_SESSION['studentID'];
 
 /* ==========================================================
+WISHLIST
+========================================================== */
+
+$wishlistItems = [];
+
+$wishlist = mysqli_query($conn,"
+SELECT ItemID
+FROM wishlist
+WHERE studentID='$studentID'
+");
+
+while($wish = mysqli_fetch_assoc($wishlist))
+{
+    $wishlistItems[] = $wish['ItemID'];
+}
+
+/* ==========================================================
 SEARCH PAGE STATISTICS
 ========================================================== */
 
@@ -367,8 +384,6 @@ $offset = ($page - 1) * $limit;
                             </div>
 
                         </div>
-
-
 
                         <div class="col-lg-4 col-md-4">
 
@@ -739,6 +754,14 @@ $offset = ($page - 1) * $limit;
 
                                 <div class="product-card">
 
+                                    <div class="product-top">
+
+                                        <i class="wishlist fa <?php echo in_array($row['ItemID'],$wishlistItems) ? 'fa-heart active' : 'fa-heart-o'; ?>"
+                                            data-id="<?php echo $row['ItemID']; ?>">
+                                        </i>
+
+                                    </div>
+
                                     <div class="product-image">
 
                                         <img src="<?php echo $row['ItemImage'];?>">
@@ -760,19 +783,47 @@ $offset = ($page - 1) * $limit;
                                         </span>
 
 
-                                        <div class="rating-summary">
+                                        <!-- Rating -->
+                                        <div class="rating-box">
 
-                                            <span class="stars">
+                                            <div class="rating-score">
 
-                                                ★★★★★
+                                                <i class="fa fa-star"></i>
 
-                                            </span>
+                                                <?php
 
-                                            <strong>
+                                                echo ($row['averageRating'] > 0)
+                                                    ? number_format($row['averageRating'],1)
+                                                    : "0.0";
 
-                                                <?php echo number_format($row['averageRating'],1);?>
+                                                ?>
 
-                                            </strong>
+                                            </div>
+
+                                            <div class="rating-review">
+
+                                                <?php
+
+                                                if($row['totalRating'] > 0)
+                                                {
+
+                                                    echo $row['totalRating'];
+
+                                                    echo ($row['totalRating']==1)
+                                                        ? " Review"
+                                                        : " Reviews";
+
+                                                }
+                                                else
+                                                {
+
+                                                    echo "No Reviews";
+
+                                                }
+
+                                                ?>
+
+                                            </div>
 
                                         </div>
 
@@ -1011,7 +1062,7 @@ $offset = ($page - 1) * $limit;
             </button>
 
 
-            <div class="rating-box">
+            <div class="rating-modal-body">
 
                 <h2 id="ratingTitle">
                     Rate this Product

@@ -53,28 +53,25 @@ $topRated = mysqli_query($conn, "
 
 SELECT
 
-item.ItemID,
-item.ItemName,
-item.ItemImage,
-item.ItemPrice,
-item.ItemCategory,
-item.StoreName,
+item.*,
 
-ROUND(AVG(r.rating),1) AS averageRating,
+ROUND(AVG(ratings.rating),1) AS averageRating,
 
-COUNT(r.ratingID) AS totalReviews
+COUNT(ratings.ratingID) AS reviewCount
 
-FROM item item
+FROM item
 
-LEFT JOIN ratings r
-ON item.ItemID = r.ItemID
+LEFT JOIN ratings
+ON item.ItemID = ratings.ItemID
 
 GROUP BY item.ItemID
 
-HAVING totalReviews > 0
+HAVING reviewCount > 0
 
-ORDER BY averageRating DESC,
-totalReviews DESC
+ORDER BY
+averageRating DESC,
+reviewCount DESC,
+item.ItemName ASC
 
 LIMIT 6
 
@@ -198,7 +195,7 @@ LIMIT 5
                 <h2>Smart Shopping with</h2>
                 <h2><em>PRICE CHECKER SYSTEM</em></h2>
                 <p>Compare prices, discover affordable choices, and manage your budget easily.</p>
-                <br><br><br>
+                
                 <h6>
                 </h6>
                 </div>
@@ -207,7 +204,7 @@ LIMIT 5
     </div>
   
 
-    <!-- ***** Filter & Compare Start ***** -->
+    <!-- ***** Compare Start ***** -->
     <section class="section" id="compare">
         <div class="container">
             <div class="row">
@@ -291,87 +288,143 @@ LIMIT 5
                 </div>
             </div>
 
-            <!-- Preview Table -->
-            <div class="row">
+            <!-- Price Comparison Review -->
+
+            <div class="row mt-5">
 
                 <div class="col-lg-10 offset-lg-1">
 
+                    <div class="compare-preview-header">
 
-                <h3 class="text-center mb-4">
-                    Item Preview
-                </h3>
+                        <div>
 
-                <div class="table-responsive">
+                            <h3>
 
-                <table class="preview-table">
+                                <i class="fa fa-exchange"></i>
 
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Category</th>
-                            <th>Store</th>
-                            <th>Price</th>
-                        </tr>
-                    </thead>
+                                Price Comparison Preview
 
-                    <tbody>
-                        <?php
+                            </h3>
 
-                        $sql = "SELECT * FROM item LIMIT 5";
+                            <p>
+                                Compare prices from multiple stores before making your purchase.
+                            </p>
 
-                        $result = mysqli_query($conn,$sql);
+                        </div>
 
+                        <a href="../student/filter.php" class="compare-all-btn">
 
-                        while($row=$result->fetch_assoc()){
+                            Compare More
 
+                        </a>
 
-                            echo "
+                    </div>
 
-                            <tr>
+                    <?php
 
-                                <td class='item-name'>
-                                    <img src='".$row['ItemImage']."'>
-                                    <span>".$row['ItemName']."</span>
-                                </td>
+                    $preview=mysqli_query($conn,"
 
-                                <td>".$row['ItemCategory']."</td>
+                    SELECT
 
+                    ItemName,
 
-                                <td>".$row['StoreName']."</td>
+                    ItemImage,
 
-                                <td>
-                                    RM ".$row['ItemPrice']."
-                                </td>
+                    ItemCategory,
 
-                            </tr>
+                    MIN(ItemPrice) lowestPrice,
 
-                            ";
+                    MAX(ItemPrice) highestPrice,
 
-                        }
+                    COUNT(DISTINCT StoreName) totalStores
 
+                    FROM item
 
-                        ?>
+                    GROUP BY ItemName
 
+                    ORDER BY RAND()
 
-                    </tbody>
+                    LIMIT 5
 
+                    ");
 
-                </table>
+                    while($row=mysqli_fetch_assoc($preview))
+
+                    {
+
+                    ?>
+
+                    <div class="compare-preview-card">
+
+                        <div class="compare-preview-left">
+
+                            <img
+                            src="<?php echo $row['ItemImage']; ?>">
+
+                        </div>
+
+                        <div class="compare-preview-middle">
+
+                            <h4>
+
+                                <?php echo $row['ItemName']; ?>
+
+                            </h4>
+
+                            <small>
+
+                                <?php echo $row['ItemCategory']; ?>
+
+                            </small>
+
+                            <div class="price-range">
+
+                                RM <?php echo number_format($row['lowestPrice'],2); ?>
+
+                                -
+
+                                RM <?php echo number_format($row['highestPrice'],2); ?>
+
+                            </div>
+
+                        </div>
+
+                        <div class="compare-preview-right">
+
+                            <div class="store-count">
+
+                                <i class="fa fa-store"></i>
+
+                                <?php echo $row['totalStores']; ?>
+
+                                Stores
+
+                            </div>
+
+                            <a
+
+                            href="../student/filter.php?search=<?php echo urlencode($row['ItemName']); ?>"
+
+                            class="compare-now-btn">
+
+                                Compare
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <?php
+
+                    }
+
+                    ?>
 
                 </div>
 
-                <br>
+            </div>
 
-
-                <div class="main-button">
-
-                    <center>
-                    <a href="../student/filter.php">
-                        Filter & Compare
-                    </a>
-                    </center>
-
-                </div>
 
                 </div>
             </div>
@@ -514,21 +567,6 @@ LIMIT 5
 
             </div>
 
-
-            <div class="main-button">
-
-                <center>
-
-                    <a href="../student/search.php">
-
-                        Explore Products
-
-                    </a>
-
-                </center>
-
-            </div>
-
         </div>
 
     </section>
@@ -642,13 +680,17 @@ LIMIT 5
             <div class="section-heading">
 
                 <h2>
+
                     Trending <em>Products</em>
+
                 </h2>
 
                 <img src="../../assets/images/line-dec.png">
 
                 <p>
+
                     Products highly recommended by students based on ratings and reviews.
+
                 </p>
 
             </div>
@@ -656,84 +698,107 @@ LIMIT 5
 
             <div class="row">
 
-                <?php while($item=mysqli_fetch_assoc($topRated)){ ?>
+                <?php while($item = mysqli_fetch_assoc($topRated)){ ?>
 
-                    <div class="col-lg-4 col-md-6 mb-4">
+                <div class="col-lg-4 col-md-6 mb-4">
 
-                        <div class="favourite-product">
+                    <div class="favourite-product">
 
-                            <div class="favourite-img">
+                        <div class="favourite-img">
 
-                                <img src="<?php echo $item['ItemImage']; ?>">
+                            <img src="<?php echo $item['ItemImage']; ?>">
 
-                                <span class="badge-top">
+                            <span class="badge-top">
 
-                                    Top Rated
+                                <i class="fa fa-fire"></i>
 
-                                </span>
+                                Top Rated
 
-                            </div>
+                            </span>
+
+                        </div>
 
 
-                            <div class="favourite-info">
+                        <div class="favourite-info">
 
-                                <h4>
+                            <h4>
 
                                 <?php echo $item['ItemName']; ?>
 
-                                </h4>
+                            </h4>
 
 
-                                <div class="meta">
-
-                                    <span>
-
-                                        <i class="fa fa-tags"></i>
-
-                                        <?php echo $item['ItemCategory']; ?>
-
-                                    </span>
-
-                                    <span>
-
-                                        <i class="fa fa-shopping-cart"></i>
-
-                                        <?php echo $item['StoreName']; ?>
-
-                                    </span>
-
-                                </div>
-
-                                <h3>
-
-                                    RM <?php echo number_format($item['ItemPrice'],2); ?>
-
-                                </h3>
-
-
-                                <div class="rating-row">
-
-                                    <div class="stars">
-
-                                        ★★★★★
-
-                                    </div>
-
-                                <div>
-
-                                <strong>
-
-                                    <?php echo $item['averageRating']; ?>
-
-                                </strong>
+                            <div class="meta">
 
                                 <span>
 
-                                    (<?php echo $item['totalReviews']; ?> reviews)
+                                    <i class="fa fa-tags"></i>
+
+                                    <?php echo $item['ItemCategory']; ?>
+
+                                </span>
+
+                                <span>
+
+                                    <i class="fa fa-shopping-cart"></i>
+
+                                    <?php echo $item['StoreName']; ?>
 
                                 </span>
 
                             </div>
+
+
+                            <!-- Rating -->
+                            <div class="rating-box">
+
+                                <div class="rating-score">
+
+                                    <i class="fa fa-star"></i>
+
+                                    <?php
+
+                                    echo ($item['averageRating'] > 0)
+                                        ? number_format($item['averageRating'],1)
+                                        : "0.0";
+
+                                    ?>
+
+                                </div>
+
+                                <div class="rating-review">
+
+                                    <?php
+
+                                    if($item['reviewCount'] > 0)
+                                    {
+
+                                        echo $item['reviewCount'];
+
+                                        echo ($item['reviewCount'] == 1)
+                                            ? " Review"
+                                            : " Reviews";
+
+                                    }
+                                    else
+                                    {
+
+                                        echo "No Reviews";
+
+                                    }
+
+                                    ?>
+
+                                </div>
+
+                            </div>
+
+
+                            <h3>
+
+                                RM <?php echo number_format($item['ItemPrice'],2); ?>
+
+                            </h3>
 
                         </div>
 
@@ -741,11 +806,9 @@ LIMIT 5
 
                 </div>
 
+                <?php } ?>
+
             </div>
-
-            <?php } ?>
-
-        </div>
 
         </div>
 
@@ -873,7 +936,7 @@ LIMIT 5
 
                     <div class="text-center mt-5">
 
-                        <a href="../student/forum.php"
+                        <a href="../public/forum.php"
 
                         class="community-btn">
 
@@ -957,7 +1020,7 @@ LIMIT 5
         </div>
     </section>
     
-    <br>
+    <br><br>
 
     <?php include("../student/includes/footer.php"); ?>
 

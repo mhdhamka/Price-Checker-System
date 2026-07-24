@@ -327,13 +327,12 @@ LIMIT 6
                         <a class='menu-trigger'>
                             <span>Menu</span>
                         </a>
-                        <!-- ***** Menu End ***** -->
                     </nav>
                 </div>
             </div>
         </div>
     </header>
-    <!-- ***** Header Area End ***** -->
+   
 
     <!-- ***** Search Starts ***** -->
     <section class="section bg-light" id="search">
