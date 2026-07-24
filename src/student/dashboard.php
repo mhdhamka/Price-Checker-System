@@ -936,7 +936,7 @@ LIMIT 5
 
                     <div class="text-center mt-5">
 
-                        <a href="../public/forum.php"
+                        <a href="../student/forum.php"
 
                         class="community-btn">
 
