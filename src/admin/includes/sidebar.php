@@ -27,7 +27,7 @@
         <li>
             <a href="../admin/items.php">
                 <i class="fa fa-cart-shopping"></i>
-                Items
+                Products
             </a>
         </li>
 

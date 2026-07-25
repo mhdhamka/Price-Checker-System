@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require '../../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -7,6 +9,10 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 
 include("../config/db_cPCS.php");
+
+include("../admin/processes/reportLogger.php");
+
+$adminID=$_SESSION['adminID'] ?? 1;
 
 $type=$_GET['type'] ?? 'item';
 
@@ -25,7 +31,7 @@ if($type=="item")
 
 
 $headers=[
-    "Item Name",
+    "Product Name",
     "Category",
     "Store",
     "Price"
@@ -33,11 +39,18 @@ $headers=[
 
 
 $sql="
-    SELECT *
 
-    FROM item
+SELECT
 
-    ORDER BY ItemName
+ItemName,
+ItemCategory,
+StoreName,
+ItemPrice
+
+FROM item
+
+ORDER BY ItemName
+
 ";
 
 
@@ -70,18 +83,23 @@ $sql="
 
 SELECT
 
-student.*,
+student.studentID,
+student.fullName,
+student.username,
+student.email,
+student.logStatus,
 
-COUNT(ratings.ratingID) totalRatings
+COUNT(ratings.ratingID) AS totalRatings
 
 FROM student
 
 LEFT JOIN ratings
 
 ON student.studentID=ratings.studentID
-GROUP BY student.studentID
-ORDER BY fullName
 
+GROUP BY student.studentID
+
+ORDER BY fullName
 
 ";
 
@@ -103,7 +121,7 @@ else if($type=="rating")
 $headers=[
 
     "Rating ID",
-    "Item",
+    "Product",
     "Student",
     "Rating",
     "Comment",
@@ -167,10 +185,11 @@ $result=mysqli_query($conn,$sql);
 
 $row = 2;
 
-while($data = mysqli_fetch_assoc($result))
+while($data=mysqli_fetch_row($result))
 {
 
-    $column = 'A';
+    $column='A';
+
 
     foreach($data as $value)
     {
@@ -183,6 +202,7 @@ while($data = mysqli_fetch_assoc($result))
         $column++;
 
     }
+
 
     $row++;
 
@@ -208,6 +228,13 @@ header(
 
 
 $writer->save("php://output");
+
+logReport(
+    $conn,
+    $adminID,
+    $type,
+    "Excel"
+);
 
 
 exit();

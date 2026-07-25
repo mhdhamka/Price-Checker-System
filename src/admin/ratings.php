@@ -319,7 +319,7 @@ $totalPages=ceil($total/$limit);
                     </h4>
 
                     <p>
-                        Top Rated Item 
+                        Top Rated Product
                     </p>
                 </div>
 
@@ -330,7 +330,7 @@ $totalPages=ceil($total/$limit);
                     </h4>
 
                     <p>
-                        Lowest Rated
+                        Lowest Rated Product
                     </p>
                 </div>
 
@@ -500,7 +500,7 @@ $totalPages=ceil($total/$limit);
 
                             <th>No.</th>
                             <th>Image</th>
-                            <th>Item</th>
+                            <th>Product</th>
                             <th>Student</th>
                             <th>Rating</th>
                             <th>Action</th>

@@ -251,7 +251,6 @@ $totalPages = ceil($total/$limit);
             </div>
 
             <!-- Top Bar -->
-
             <div class="manage-top">
 
                 <form method="GET" class="search-box">
@@ -324,7 +323,6 @@ $totalPages = ceil($total/$limit);
             </div>
 
             <!-- Table -->
-
             <div class="table-card">
 
                 <table>
@@ -470,9 +468,9 @@ $totalPages = ceil($total/$limit);
                 </table>
 
 
-        <!-- ==========================================
-            PAGINATION
-        ========================================== -->
+                <!-- ==========================================
+                    PAGINATION
+                ========================================== -->
                 <div class="pagination">
 
                     <?php
@@ -596,32 +594,32 @@ $totalPages = ceil($total/$limit);
 
                     ?>
 
-                    </div>
+                </div>
 
 
-                    <div class="pagination-info">
+                <div class="pagination-info">
 
-                        Showing
+                    Showing
 
-                        <strong>
-                            <?php echo $offset + 1; ?>
-                        </strong>
+                    <strong>
+                        <?php echo $offset + 1; ?>
+                    </strong>
 
-                        to
+                    to
 
-                        <strong>
-                            <?php echo min($offset + $limit, $total); ?>
-                        </strong>
+                    <strong>
+                        <?php echo min($offset + $limit, $total); ?>
+                    </strong>
 
-                        of
+                    of
 
-                        <strong>
-                            <?php echo $total; ?>
-                        </strong>
+                    <strong>
+                        <?php echo $total; ?>
+                    </strong>
 
-                        students
+                    students
 
-                    </div>
+                </div>
 
             </div>
 

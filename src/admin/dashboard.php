@@ -368,10 +368,6 @@ while($row = mysqli_fetch_assoc($sql))
             <div class="analytics-section">
                 <div class="chart-card">
 
-                    <span class="chart-badge">
-                        Analytics
-                    </span>
-
                     <h3>
                         Item Category Distribution
                     </h3>

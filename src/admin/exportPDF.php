@@ -1,12 +1,36 @@
 <?php
 
+session_start();
+
 require '../../vendor/autoload.php';
 
 use Dompdf\Dompdf;
 
 include("../config/db_cPCS.php");
 
-$type = $_GET['type'] ?? 'item';
+include("../admin/processes/reportLogger.php");
+
+
+$adminID=$_SESSION['adminID'] ?? 1;
+
+$type=$_GET['type'] ?? 'item';
+
+
+$store=mysqli_real_escape_string(
+$conn,
+$_GET['store'] ?? ''
+);
+
+
+$category=mysqli_real_escape_string(
+$conn,
+$_GET['category'] ?? ''
+);
+
+
+$from=$_GET['from'] ?? '';
+
+$to=$_GET['to'] ?? '';
 
 
 $html = "
@@ -44,6 +68,36 @@ h1{
 ";
 
 
+function addFilters($sql,$store,$category,$from,$to)
+{
+
+    if($store!="")
+    {
+        $sql .= " AND StoreName='$store'";
+    }
+
+
+    if($category!="")
+    {
+        $sql .= " AND ItemCategory='$category'";
+    }
+
+
+    if($from!="" && $to!="")
+    {
+        $sql .= "
+        AND dateCreated 
+        BETWEEN '$from'
+        AND '$to'
+        ";
+    }
+
+
+    return $sql;
+
+}
+
+
 /* ============================
 ITEM REPORT
 ============================ */
@@ -59,18 +113,20 @@ $html .= "
 
 <tr>
 
-<th>Item Name</th>
-<th>Category</th>
-<th>Store</th>
-<th>Price</th>
+    <th>Product Name</th>
+    <th>Category</th>
+    <th>Store</th>
+    <th>Price</th>
 
 </tr>
 
 ";
 
 
-$query=mysqli_query($conn,"
+$sql="
+
 SELECT 
+
 ItemName,
 ItemCategory,
 StoreName,
@@ -78,9 +134,23 @@ ItemPrice
 
 FROM item
 
-ORDER BY ItemName
+WHERE 1
 
-");
+";
+
+$sql=addFilters(
+$sql,
+$store,
+$category,
+$from,
+$to
+);
+
+
+$sql.=" ORDER BY ItemName";
+
+
+$query=mysqli_query($conn,$sql);
 
 
 while($row=mysqli_fetch_assoc($query))
@@ -90,13 +160,13 @@ $html .= "
 
 <tr>
 
-<td>{$row['ItemName']}</td>
+    <td>{$row['ItemName']}</td>
 
-<td>{$row['ItemCategory']}</td>
+    <td>{$row['ItemCategory']}</td>
 
-<td>{$row['StoreName']}</td>
+    <td>{$row['StoreName']}</td>
 
-<td>RM {$row['ItemPrice']}</td>
+    <td>RM {$row['ItemPrice']}</td>
 
 </tr>
 
@@ -127,25 +197,30 @@ $html .= "
 
 <tr>
 
-<th>ID</th>
-<th>Name</th>
-<th>Username</th>
-<th>Email</th>
-<th>Status</th>
-<th>Total Ratings</th>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Username</th>
+    <th>Email</th>
+    <th>Status</th>
+    <th>Total Ratings</th>
 
 </tr>
 
 ";
 
 
-$query=mysqli_query($conn,"
+$sql="
 
-SELECT 
+SELECT
 
-student.*,
+student.studentID,
+student.fullName,
+student.username,
+student.email,
+student.logStatus,
+student.created_at,
 
-COUNT(ratings.ratingID) totalRatings
+COUNT(ratings.ratingID) AS totalRatings
 
 
 FROM student
@@ -156,13 +231,38 @@ LEFT JOIN ratings
 ON student.studentID = ratings.studentID
 
 
-GROUP BY student.studentID
+WHERE 1
 
+";
+
+
+
+if($from!="" && $to!="")
+{
+
+$sql.="
+
+AND student.created_at
+
+BETWEEN '$from'
+AND '$to'
+
+";
+
+}
+
+
+
+$sql.="
+
+GROUP BY student.studentID
 
 ORDER BY fullName
 
+";
 
-");
+
+$query=mysqli_query($conn,$sql);
 
 
 while($row=mysqli_fetch_assoc($query))
@@ -177,17 +277,17 @@ $html.="
 
 <tr>
 
-<td>{$row['studentID']}</td>
+    <td>{$row['studentID']}</td>
 
-<td>{$row['fullName']}</td>
+    <td>{$row['fullName']}</td>
 
-<td>{$row['username']}</td>
+    <td>{$row['username']}</td>
 
-<td>{$row['email']}</td>
+    <td>{$row['email']}</td>
 
-<td>{$status}</td>
+    <td>{$status}</td>
 
-<td>{$row['totalRatings']}</td>
+    <td>{$row['totalRatings']}</td>
 
 </tr>
 
@@ -222,12 +322,12 @@ $html.="
 
 <tr>
 
-<th>ID</th>
-<th>Item</th>
-<th>Student</th>
-<th>Rating</th>
-<th>Comment</th>
-<th>Date</th>
+    <th>ID</th>
+    <th>Product</th>
+    <th>Student</th>
+    <th>Rating</th>
+    <th>Comment</th>
+    <th>Date</th>
 
 
 </tr>
@@ -236,7 +336,7 @@ $html.="
 ";
 
 
-$query=mysqli_query($conn,"
+$sql="
 
 SELECT
 
@@ -245,23 +345,55 @@ item.ItemName,
 student.fullName,
 ratings.rating,
 ratings.comment,
-ratings.dateCreated
+ratings.dateCreated,
+item.StoreName,
+item.ItemCategory
 
 
 FROM ratings
 
 
 JOIN item
+
 ON ratings.ItemID=item.ItemID
 
 
 JOIN student
 
 ON ratings.studentID=student.studentID
-ORDER BY ratings.dateCreated DESC
 
 
-");
+WHERE 1
+
+";
+
+
+if($store!="")
+{
+$sql.=" AND item.StoreName='$store'";
+}
+
+
+if($category!="")
+{
+$sql.=" AND item.ItemCategory='$category'";
+}
+
+
+if($from!="" && $to!="")
+{
+$sql.=" 
+AND ratings.dateCreated 
+BETWEEN '$from'
+AND '$to'
+";
+}
+
+
+$sql.=" ORDER BY ratings.dateCreated DESC";
+
+
+$query=mysqli_query($conn,$sql);
 
 
 while($row=mysqli_fetch_assoc($query))
@@ -311,11 +443,27 @@ $pdf->setPaper('A4','landscape');
 $pdf->render();
 
 
-$pdf->stream($filename,[
+$pdf->render();
 
-"Attachment"=>true
 
-]);
+$pdf->stream(
+    $filename,
+    [
+        "Attachment"=>true
+    ]
+);
+
+
+
+logReport(
+    $conn,
+    $adminID,
+    $type,
+    "PDF"
+);
+
+
+exit();
 
 
 ?>

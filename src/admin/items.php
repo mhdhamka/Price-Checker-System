@@ -163,7 +163,7 @@ $totalPages = ceil($total/$limit);
             <div class="page-title">
 
                 <h2>
-                    Item Management
+                    Product Management
                 </h2>
 
                 <p>
@@ -181,7 +181,7 @@ $totalPages = ceil($total/$limit);
                     </h4>
 
                     <p>
-                        Total Items
+                        Total Products
                     </p>
                 </div>
 
@@ -325,7 +325,7 @@ $totalPages = ceil($total/$limit);
 
                     <i class="fa fa-plus"></i>
 
-                    Add Item
+                    Add Product
 
                 </a>
 
@@ -366,7 +366,7 @@ $totalPages = ceil($total/$limit);
 
                         <td colspan="7" style="text-align:center;">
 
-                            No item found.
+                            No product found.
 
                         </td>
 
@@ -598,7 +598,7 @@ $totalPages = ceil($total/$limit);
                             <?php echo $total; ?>
                         </strong>
 
-                        items
+                        products
 
                     </div>
 
@@ -612,13 +612,13 @@ $totalPages = ceil($total/$limit);
             <div class="delete-modal-content">
 
                 <div class="delete-modal-header">
-                    <h3>Delete Item</h3>
+                    <h3>Delete Product</h3>
                     <button class="delete-close" id="closeDelete">&times;</button>
                 </div>
 
                 <div class="delete-modal-body">
                     <i class="fa-solid fa-triangle-exclamation"></i>
-                    <p>Are you sure you want to delete this item?<br>This action cannot be undone.</p>
+                    <p>Are you sure you want to delete this product?<br>This action cannot be undone.</p>
                 </div>
 
                 <div class="delete-modal-footer">
