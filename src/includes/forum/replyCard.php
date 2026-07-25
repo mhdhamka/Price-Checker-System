@@ -1,181 +1,181 @@
 <div class="reply-list">
 
-<h4>
+    <h4>
 
-<i class="fa fa-comments"></i>
+    <i class="fa fa-comments"></i>
 
-Replies
+    Replies
 
-(
+    (
 
-<?php echo mysqli_num_rows($replyQuery); ?>
+    <?php echo mysqli_num_rows($replyQuery); ?>
 
-)
+    )
 
-</h4>
+    </h4>
 
 
-<?php
+    <?php
 
-if(mysqli_num_rows($replyQuery)==0){
+    if(mysqli_num_rows($replyQuery)==0){
 
-?>
+    ?>
 
-<div class="no-reply">
+    <div class="no-reply">
 
-<i class="fa fa-comment-o fa-3x"></i>
+        <i class="fa fa-comment-o fa-3x"></i>
 
-<p>
+        <p>
 
-No replies yet.
+            No replies yet.
 
-<br>
+            <br>
 
-Be the first to start the discussion!
+            Be the first to start the discussion!
 
-</p>
-
-</div>
-
-<?php
-
-}else{
-
-while($reply=mysqli_fetch_assoc($replyQuery)){
-
-?>
-
-<div class="reply-card">
-
-    <!-- USER -->
-
-    <div class="reply-user">
-
-        <img
-
-        src="<?php echo $reply['studentIMG']; ?>"
-
-        class="rounded-circle"
-
-        width="55"
-
-        height="55"
-
-        >
+        </p>
 
     </div>
 
+    <?php
 
-    <!-- BODY -->
+    }else{
 
-    <div class="reply-body">
+    while($reply=mysqli_fetch_assoc($replyQuery)){
 
-        <div class="reply-top">
+    ?>
 
-            <strong>
+    <div class="reply-card">
+
+        <!-- USER -->
+
+        <div class="reply-user">
+
+            <img
+
+            src="<?php echo $reply['studentIMG']; ?>"
+
+            class="rounded-circle"
+
+            width="55"
+
+            height="55"
+
+            >
+
+        </div>
+
+
+        <!-- BODY -->
+
+        <div class="reply-body">
+
+            <div class="reply-top">
+
+                <strong>
+
+                    <?php
+
+                    echo htmlspecialchars($reply['fullName']);
+
+                    ?>
+
+                </strong>
+
+                <small>
+
+                    <?php
+
+                    echo date(
+
+                        "d M Y h:i A",
+
+                        strtotime($reply['created_at'])
+
+                    );
+
+                    ?>
+
+                </small>
+
+            </div>
+
+
+            <div class="reply-content">
 
                 <?php
 
-                echo htmlspecialchars($reply['fullName']);
+                echo nl2br(
 
-                ?>
-
-            </strong>
-
-            <small>
-
-                <?php
-
-                echo date(
-
-                    "d M Y h:i A",
-
-                    strtotime($reply['created_at'])
+                    htmlspecialchars($reply['replyContent'])
 
                 );
 
                 ?>
 
-            </small>
-
-        </div>
+            </div>
 
 
-        <div class="reply-content">
+            <!-- ACTIONS -->
 
-            <?php
+            <div class="reply-actions">
 
-            echo nl2br(
+                <?php
 
-                htmlspecialchars($reply['replyContent'])
+                if($reply['studentID']==$studentID){
 
-            );
+                ?>
 
-            ?>
+                    <a
 
-        </div>
+                    href="#"
 
+                    class="edit-reply"
 
-        <!-- ACTIONS -->
+                    data-id="<?php echo $reply['replyID']; ?>"
 
-        <div class="reply-actions">
+                    >
 
-            <?php
+                        <i class="fa fa-pencil"></i>
 
-            if($reply['studentID']==$studentID){
+                        Edit
 
-            ?>
+                    </a>
 
-                <a
+                    <a
 
-                href="#"
+                    href="#"
 
-                class="edit-reply"
+                    class="delete-reply"
 
-                data-id="<?php echo $reply['replyID']; ?>"
+                    data-id="<?php echo $reply['replyID']; ?>"
 
-                >
+                    >
 
-                    <i class="fa fa-pencil"></i>
+                        <i class="fa fa-trash"></i>
 
-                    Edit
+                        Delete
 
-                </a>
+                    </a>
 
-                <a
+                <?php
 
-                href="#"
+                }
 
-                class="delete-reply"
+                ?>
 
-                data-id="<?php echo $reply['replyID']; ?>"
-
-                >
-
-                    <i class="fa fa-trash"></i>
-
-                    Delete
-
-                </a>
-
-            <?php
-
-            }
-
-            ?>
+            </div>
 
         </div>
 
     </div>
 
-</div>
+    <?php
 
-<?php
+    }
 
-}
+    }
 
-}
-
-?>
+    ?>
 
 </div>

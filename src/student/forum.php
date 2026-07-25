@@ -69,6 +69,8 @@ if($sort=="reply")
 }
 
 
+
+
 /*==========================
 TOPICS
 ==========================*/
@@ -90,6 +92,16 @@ MAX(r.created_at) lastReplyDate,
 COALESCE(fl.totalLikes,0) totalLikes,
 
 COALESCE(fb.totalBookmarks,0) totalBookmarks,
+
+CASE
+WHEN ul.studentID IS NULL THEN 0
+ELSE 1
+END AS userLiked,
+
+CASE
+WHEN ub.studentID IS NULL THEN 0
+ELSE 1
+END AS userBookmarked,
 
 (
 
@@ -132,10 +144,18 @@ LEFT JOIN
 (
 SELECT topicID,
 COUNT(*) totalBookmarks
-FROM forumbookmark
+FROM forumbookmarks
 GROUP BY topicID
 ) fb
 ON fb.topicID=t.topicID
+
+LEFT JOIN forumlikes ul
+ON ul.topicID=t.topicID
+AND ul.studentID='$studentID'
+
+LEFT JOIN forumbookmarks ub
+ON ub.topicID=t.topicID
+AND ub.studentID='$studentID'
 
 $where
 
@@ -146,7 +166,6 @@ $order
 ";
 
 $communityPosts=mysqli_query($conn,$sql);
-
 
 /*==========================
 FORUM STATS
@@ -305,9 +324,36 @@ $img=$user['studentIMG'];
 
         <div class="container">
 
-            <?php 
+            <?php
                 $isAdmin = false;
                 $pageType = "student";
+
+                /* ==========================
+                RIGHT SIDEBAR DATA
+                ========================== */
+
+                $trendingTopics = mysqli_query($conn,"
+                    SELECT
+                        topicID,
+                        topicTitle,
+                        views
+                    FROM forumtopic
+                    WHERE status='Active'
+                    ORDER BY views DESC
+                    LIMIT 5
+                ");
+
+                /* ==========================
+                CREATE / EDIT CATEGORY LIST
+                ========================== */
+
+                $categoryQuery = mysqli_query($conn,"
+                    SELECT
+                        categoryID,
+                        categoryName
+                    FROM forumcategory
+                    ORDER BY categoryName ASC
+                ");
             ?>
 
             <?php include("../includes/forum/forumHeader.php"); ?>
@@ -320,33 +366,23 @@ $img=$user['studentIMG'];
 
                 <?php include("../includes/forum/forumTopicList.php"); ?>
 
-               
-                <?php
-                /* Trending Topics */
-
-                $trendingTopics = mysqli_query($conn,"
-
-                    SELECT
-
-                    topicID,
-                    topicTitle,
-                    views
-
-                    FROM forumtopic
-
-                    WHERE status='Active'
-
-                    ORDER BY views DESC
-
-                    LIMIT 5
-
-                ");
-
-                ?>
-
                 <?php include("../includes/forum/forumRightSidebar.php"); ?>
 
             </div>
+
+            <!-- ==========================
+                MODALS
+            ========================== -->
+
+            <?php include("../includes/forum/forumCreateModal.php"); ?>
+
+            <?php include("../includes/forum/forumEditModal.php"); ?>
+
+            <?php include("../includes/forum/forumDeleteModal.php"); ?>
+
+            <!-- ==========================
+                FOOTER
+            ========================== -->
 
             <?php include("../includes/forum/forumFooter.php"); ?>
 
@@ -375,7 +411,10 @@ $img=$user['studentIMG'];
     <script src="../../assets/js/slideshow.js"></script>
     <!-- Global Init -->
     <script src="../../assets/js/custom.js"></script>
-    <script src="../../assets/js/forum.js"></script>
+    <script src="../../assets/js/forum/like.js"></script>
+    <script src="../../assets/js/forum/bookmark.js"></script>
+    <script src="../../assets/js/forum/modal.js"></script>
+    <script src="../../assets/js/forum/topic.js"></script>
 
     <script>
         function slideCategory(direction){

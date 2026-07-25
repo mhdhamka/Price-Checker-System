@@ -16,11 +16,11 @@
 
     <?php if(!$isAdmin){ ?>
 
-        <a href="../student/createTopic.php" class="community-btn">
+        <a href="#" id="openCreateTopic" class="community-btn">
 
             <i class="fa fa-plus"></i>
 
-            Create Topic
+            Create Discussion
 
         </a>
 

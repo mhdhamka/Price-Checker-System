@@ -11,18 +11,21 @@ if(!isset($_SESSION['studentID']))
 $studentID=$_SESSION['studentID'];
 $topicID=(int)$_POST['topicID'];
 
+$added=false;
+
 $check=mysqli_query($conn,"
-SELECT *
+SELECT bookmarkID
 FROM forumbookmarks
 WHERE topicID='$topicID'
 AND studentID='$studentID'
 ");
 
-if(mysqli_num_rows($check)>0)
+if(mysqli_num_rows($check))
 {
 
     mysqli_query($conn,"
-    DELETE FROM forumbookmarks
+    DELETE
+    FROM forumbookmarks
     WHERE topicID='$topicID'
     AND studentID='$studentID'
     ");
@@ -36,12 +39,19 @@ else
     VALUES('$topicID','$studentID')
     ");
 
+    $added=true;
+
 }
 
-$count=mysqli_fetch_assoc(mysqli_query($conn,"
+$total=mysqli_fetch_assoc(mysqli_query($conn,"
 SELECT COUNT(*) total
 FROM forumbookmarks
 WHERE topicID='$topicID'
 "));
 
-echo $count['total'];
+echo json_encode([
+
+    "status"=>$added ? "added" : "removed",
+    "total"=>$total['total']
+
+]);

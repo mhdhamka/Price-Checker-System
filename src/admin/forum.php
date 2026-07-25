@@ -1,26 +1,81 @@
-<?php 
+<?php
 
 session_start();
-include ("../config/db_cPCS.php");
+include("../config/db_cPCS.php");
 
-// Check if user is logged in
-if (!isset($_SESSION['studentID'])) {
-    header("Location: ../public/loginStudent.php"); 
+if(!isset($_SESSION['adminID']))
+{
+    header("Location: ../public/loginAdmin.php");
     exit();
 }
 
-$studentID = $_SESSION['studentID'];
+$adminID = $_SESSION['adminID'];
 
-/* Student Community */
-$communityPosts = mysqli_query($conn,"
+$isAdmin = true;
+$pageType = "admin";
+
+
+/*==========================
+FILTERS
+==========================*/
+
+$search   = $_GET['search']   ?? "";
+$category = $_GET['category'] ?? "";
+$sort     = $_GET['sort']     ?? "newest";
+
+
+/*==========================
+SEARCH QUERY
+==========================*/
+
+$where=" WHERE t.status='Active' ";
+
+if($search!="")
+{
+    $search=mysqli_real_escape_string($conn,$search);
+
+    $where.=" AND (
+        t.topicTitle LIKE '%$search%'
+        OR t.topicContent LIKE '%$search%'
+    )";
+}
+
+if($category!="")
+{
+    $category=(int)$category;
+
+    $where.=" AND t.categoryID=$category";
+}
+
+
+/*==========================
+SORT
+==========================*/
+
+$order=" ORDER BY t.isPinned DESC,t.created_at DESC ";
+
+if($sort=="views")
+{
+    $order=" ORDER BY t.views DESC ";
+}
+
+if($sort=="reply")
+{
+    $order=" ORDER BY totalReplies DESC ";
+}
+
+
+
+
+/*==========================
+TOPICS
+==========================*/
+
+$sql="
 
 SELECT
 
-t.topicID,
-t.topicTitle,
-t.views,
-t.isPinned,
-t.created_at,
+t.*,
 
 c.categoryName,
 
@@ -30,15 +85,26 @@ COUNT(DISTINCT r.replyID) totalReplies,
 
 MAX(r.created_at) lastReplyDate,
 
+COALESCE(fl.totalLikes,0) totalLikes,
+
+COALESCE(fb.totalBookmarks,0) totalBookmarks,
+
 (
+
 SELECT s2.fullName
+
 FROM forumreply fr
+
 JOIN student s2
 ON fr.studentID=s2.studentID
+
 WHERE fr.topicID=t.topicID
+
 ORDER BY fr.created_at DESC
+
 LIMIT 1
-) AS lastReplyBy
+
+) lastReplyBy
 
 FROM forumtopic t
 
@@ -49,20 +115,82 @@ LEFT JOIN student s
 ON t.studentID=s.studentID
 
 LEFT JOIN forumreply r
-ON t.topicID=r.topicID
+ON r.topicID=t.topicID
 
-WHERE t.status='Active'
+LEFT JOIN
+(
+SELECT topicID,
+COUNT(*) totalLikes
+FROM forumlikes
+GROUP BY topicID
+) fl
+ON fl.topicID=t.topicID
+
+LEFT JOIN
+(
+SELECT topicID,
+COUNT(*) totalBookmarks
+FROM forumbookmark
+GROUP BY topicID
+) fb
+ON fb.topicID=t.topicID
+
+$where
 
 GROUP BY t.topicID
 
-ORDER BY
+$order
 
-t.isPinned DESC,
-t.created_at DESC
+";
 
-LIMIT 5
+$communityPosts=mysqli_query($conn,$sql);
 
-");
+
+/*==========================
+FORUM STATS
+==========================*/
+
+$totalTopics=mysqli_fetch_assoc(
+mysqli_query($conn,"
+SELECT COUNT(*) total
+FROM forumtopic
+"))['total'];
+
+$totalReplies=mysqli_fetch_assoc(
+mysqli_query($conn,"
+SELECT COUNT(*) total
+FROM forumreply
+"))['total'];
+
+$totalMembers=mysqli_fetch_assoc(
+mysqli_query($conn,"
+SELECT COUNT(*) total
+FROM student
+"))['total'];
+
+
+/*==========================
+PROFILE
+==========================*/
+
+$user=mysqli_fetch_assoc(
+
+mysqli_query($conn,"
+
+SELECT
+adminUsername,
+adminIMG
+
+FROM admin
+
+WHERE adminID='$adminID'
+
+")
+
+);
+
+$adminUsername=$user['adminUsername'];
+$img=$user['adminIMG'];
 
 ?>
 
@@ -76,7 +204,7 @@ LIMIT 5
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 
-    <title>Price Checker System Student</title>
+    <title>Price Checker System Admin</title>
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap.min.css">
@@ -89,7 +217,6 @@ LIMIT 5
 </head>
     
 <body>
-    
     <!-- ***** Preloader Start ***** -->
     <div id="js-preloader" class="js-preloader">
       <div class="preloader-inner">
@@ -101,16 +228,15 @@ LIMIT 5
         </div>
       </div>
     </div>
-    
 
     <?php
 
     global $conn;
 
     $sql = "
-    SELECT username, studentIMG
-    FROM student
-    WHERE studentID = '$studentID'
+    SELECT adminUsername, adminIMG
+    FROM admin
+    WHERE adminID='$adminID'
     ";
 
     $result = mysqli_query($conn, $sql);
@@ -119,12 +245,12 @@ LIMIT 5
     {
         $user = mysqli_fetch_assoc($result);
 
-        $username = $user['username'];
-        $img = $user['studentIMG'];
+        $adminUsername = $user['adminUsername'];
+        $img = $user['adminIMG'];
     }
     else
     {
-        $username = "Student";
+        $adminUsername = "Admin";
         $img = "../../assets/images/profile/default.png";
     }
 
@@ -137,7 +263,7 @@ LIMIT 5
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="../student/dashboard.php" class="logo"><img src="../../assets/images/logo.png" width="90" height="90"></a>
+                        <a href="../admin/dashboard.php" class="logo"><img src="../../assets/images/logo.png" width="90" height="90"></a>
                         <!-- ***** Logo End ***** -->
 
                         <!-- ***** Menu Start ***** -->
@@ -155,7 +281,7 @@ LIMIT 5
                                     <div class="dropdown">
                                         <img src="<?php echo $img; ?>" width="40" height="40" class="rounded-circle">
                                         <div class="dropdown-content">
-                                            <a href="../student/profile.php">My Profile</a>
+                                            <a href="../admin/profile.php">My Profile</a>
                                             <a href="../public/logout.php" name="logout">Log Out</a>
                                         </div>
                                     </div>
@@ -177,9 +303,36 @@ LIMIT 5
 
         <div class="container">
 
-            <?php 
+            <?php
                 $isAdmin = true;
                 $pageType = "admin";
+
+                /* ==========================
+                RIGHT SIDEBAR DATA
+                ========================== */
+
+                $trendingTopics = mysqli_query($conn,"
+                    SELECT
+                        topicID,
+                        topicTitle,
+                        views
+                    FROM forumtopic
+                    WHERE status='Active'
+                    ORDER BY views DESC
+                    LIMIT 5
+                ");
+
+                /* ==========================
+                CREATE / EDIT CATEGORY LIST
+                ========================== */
+
+                $categoryQuery = mysqli_query($conn,"
+                    SELECT
+                        categoryID,
+                        categoryName
+                    FROM forumcategory
+                    ORDER BY categoryName ASC
+                ");
             ?>
 
             <?php include("../includes/forum/forumHeader.php"); ?>
@@ -195,6 +348,20 @@ LIMIT 5
                 <?php include("../includes/forum/forumRightSidebar.php"); ?>
 
             </div>
+
+            <!-- ==========================
+                MODALS
+            ========================== -->
+
+            <?php include("../includes/forum/forumCreateModal.php"); ?>
+
+            <?php include("../includes/forum/forumEditModal.php"); ?>
+
+            <?php include("../includes/forum/forumDeleteModal.php"); ?>
+
+            <!-- ==========================
+                FOOTER
+            ========================== -->
 
             <?php include("../includes/forum/forumFooter.php"); ?>
 
@@ -223,7 +390,10 @@ LIMIT 5
     <script src="../../assets/js/slideshow.js"></script>
     <!-- Global Init -->
     <script src="../../assets/js/custom.js"></script>
-    <script src="../../assets/js/forum.js"></script>
+    <script src="../../assets/js/forum/like.js"></script>
+    <script src="../../assets/js/forum/bookmark.js"></script>
+    <script src="../../assets/js/forum/modal.js"></script>
+    <script src="../../assets/js/forum/topic.js"></script>
 
     <script>
         function slideCategory(direction){
