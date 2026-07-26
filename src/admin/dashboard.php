@@ -52,14 +52,12 @@ $conn,
 )['total'];
 
 
-// Count Ratings
-$ratingCount =
-mysqli_fetch_assoc(
-mysqli_query(
-$conn,
-"SELECT COUNT(*) AS total FROM ratings"
-)
-)['total'];
+// Average Ratings
+$averageRating = mysqli_fetch_assoc(
+mysqli_query($conn,"
+SELECT ROUND(AVG(rating),2) avgRate
+FROM ratings
+"))['avgRate'];
 
 
 /* Category Chart */
@@ -168,8 +166,8 @@ while($row = mysqli_fetch_assoc($sql))
 
                 <div class="dashboard-card">
                     <i class="fa fa-star"></i>
-                    <h3><?php echo $ratingCount; ?></h3>
-                    <p>Total Ratings</p>
+                    <h3><?php echo $averageRating; ?></h3>
+                    <p>Average Ratings</p>
                 </div>
 
             </div>
@@ -201,7 +199,7 @@ while($row = mysqli_fetch_assoc($sql))
 
                     <a href="students.php" class="quick-card">
                         <i class="fa fa-users"></i>
-                        <span>Students</span>
+                        <span>Manage Students</span>
                     </a>
 
                 </div>
@@ -373,7 +371,7 @@ while($row = mysqli_fetch_assoc($sql))
                     </h3>
 
                     <p>
-                        Percentage of products available in each category.
+                        Quick overview of product categories.
                     </p>
 
                     <canvas id="categoryChart"></canvas>
@@ -387,7 +385,7 @@ while($row = mysqli_fetch_assoc($sql))
                     </h3>
 
                     <p>
-                        Number of products available in each store.
+                        Quick comparison between stores.
                     </p>
 
                     <canvas id="storeChart"></canvas>
@@ -398,30 +396,126 @@ while($row = mysqli_fetch_assoc($sql))
 
             <!-- Report -->
             <div class="report-card">
+
                 <h3>
-                    System Reports
+                    Analytics & Reports
                 </h3>
 
                 <p>
-                    Generate and export system statistics.
+                    View detailed analytics, system statistics and export reports.
                 </p>
 
+
                 <div class="report-buttons">
+
+
                     <a href="../admin/reports.php">
+
                         <i class="fa fa-chart-line"></i>
-                        View Report
+
+                        Open Report Centre
+
                     </a>
 
-                    <a href="../admin/exportPDF.php">
-                        <i class="fa fa-file-pdf"></i>
-                        Export PDF
-                    </a>
 
-                    <a href="../admin/exportExcel.php">
-                        <i class="fa fa-file-excel"></i>
-                        Export Excel
-                    </a>
                 </div>
+
+
+            </div>
+
+
+            <!-- Backup & Restore Preview -->
+            <div class="section-card">
+
+                <div class="section-header">
+
+                    <h3>
+                        Backup & Restore
+                    </h3>
+
+                    <p>
+                        Monitor database backup status and manage system recovery.
+                    </p>
+
+                </div>
+
+                <div class="quick-grid">
+
+                    <div class="dashboard-card">
+
+                        <i class="fa-solid fa-database"></i>
+
+                        <h4>
+                            Database Ready
+                        </h4>
+
+                        <p>
+                            Current system status
+                        </p>
+
+                    </div>
+
+                    <div class="dashboard-card">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        <h4>
+                            Latest Backup
+                        </h4>
+
+                        <p>
+                            View backup history and schedule
+                        </p>
+
+                    </div>
+
+                    <div class="dashboard-card">
+
+                        <i class="fa-solid fa-file-arrow-down"></i>
+
+                        <h4>
+                            Backup Files
+                        </h4>
+
+                        <p>
+                            Download and restore backups
+                        </p>
+
+                    </div>
+
+                    <div class="dashboard-card">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        <h4>
+                            Data Protection
+                        </h4>
+
+                        <p>
+                            Secure database recovery
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <br>
+
+
+                <div class="report-buttons">
+
+                    <a href="../admin/backup.php">
+
+                        <i class="fa-solid fa-database"></i>
+
+                        Manage Backup & Restore
+
+                    </a>
+
+                </div>
+
             </div>
 
         </div>

@@ -517,6 +517,57 @@ OFFSET $offset
 
                     </div>
 
+                    <!-- ANALYTICS SUMMARY -->
+                    <div class="summary-card">
+
+                        <h3>
+
+                            Analytics Summary
+
+                        </h3>
+
+                        <p>
+
+                            The Price Checker System currently manages
+
+                            <strong>
+
+                                <?php echo $items; ?>
+
+                            </strong>
+
+                            products across
+
+                            <strong>
+
+                                <?php echo $categories; ?>
+
+                            </strong>
+
+                            categories from
+
+                            <strong>
+
+                                <?php echo $stores; ?>
+
+                            </strong>
+
+                            partner stores.
+
+                            Students have submitted
+
+                            <strong>
+
+                                <?php echo $ratings; ?>
+
+                            </strong>
+
+                            ratings to assist other shoppers in making informed purchasing decisions.
+
+                        </p>
+
+                    </div>
+
                     <!-- Analytics -->
                     <div class="section-header">
 
@@ -989,59 +1040,6 @@ OFFSET $offset
                         </form>
 
                     </div>
-
-
-                    <!-- ANALYTICS SUMMARY -->
-                    <div class="summary-card">
-
-                        <h3>
-
-                            Analytics Summary
-
-                        </h3>
-
-                        <p>
-
-                            The Price Checker System currently manages
-
-                            <strong>
-
-                                <?php echo $items; ?>
-
-                            </strong>
-
-                            products across
-
-                            <strong>
-
-                                <?php echo $categories; ?>
-
-                            </strong>
-
-                            categories from
-
-                            <strong>
-
-                                <?php echo $stores; ?>
-
-                            </strong>
-
-                            partner stores.
-
-                            Students have submitted
-
-                            <strong>
-
-                                <?php echo $ratings; ?>
-
-                            </strong>
-
-                            ratings to assist other shoppers in making informed purchasing decisions.
-
-                        </p>
-
-                    </div>
-
 
                     <br>
 

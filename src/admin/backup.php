@@ -513,13 +513,9 @@ if(!$activityQuery)
 
                             </small>
 
-
                         </div>
 
-
                     </div>
-
-
 
                     <?php
 
@@ -532,9 +528,7 @@ if(!$activityQuery)
 
                     ?>
 
-
                         </div>
-
 
                     </div>
 
