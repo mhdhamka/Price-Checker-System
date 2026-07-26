@@ -87,6 +87,69 @@ function validateSearch(){
 
 }
 
+/* ==========================================================
+SEARCH SUGGESTION
+========================================================== */
+
+$("#searchtextbox").keyup(function(){
+
+    let search=$(this).val();
+
+    if(search.length<2)
+    {
+
+        $("#compareSuggestion").hide();
+
+        return;
+
+    }
+
+    $.ajax({
+
+        url:"filterSuggestion.php",
+
+        type:"GET",
+
+        data:{
+
+            search:search
+
+        },
+
+        success:function(data){
+
+            $("#compareSuggestion")
+
+            .html(data)
+
+            .fadeIn();
+
+        }
+
+    });
+
+});
+
+    $(document).on("click",".compare-suggestion-item",function(){
+
+        let item=$(this).data("name");
+
+        $("#searchtextbox").val(item);
+
+        $("#compareSuggestion").fadeOut();
+
+    });
+
+    $(document).click(function(e){
+
+        if(!$(e.target).closest(".search-box").length){
+
+            $("#compareSuggestion").fadeOut();
+
+        }
+
+    });
+
 
 
 

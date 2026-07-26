@@ -36,3 +36,113 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+
+
+/* ==========================================
+   CATEGORY SEARCH SUGGESTION
+========================================== */
+
+
+$(document).ready(function(){
+
+
+    $("#categorySearchBox").keyup(function(){
+
+
+        let search=$(this).val();
+
+
+
+        if(search.length < 2)
+        {
+
+            $("#categorySuggestion").hide();
+
+            return;
+
+        }
+
+
+
+        $.ajax({
+
+            url:"categorySuggestion.php",
+
+            type:"GET",
+
+            data:{
+                search:search
+            },
+
+
+            success:function(data)
+            {
+
+                $("#categorySuggestion")
+                .html(data)
+                .fadeIn();
+
+            },
+
+
+            error:function(xhr)
+            {
+
+                console.log(xhr.responseText);
+
+            }
+
+
+        });
+
+
+
+    });
+
+
+
+
+    // Select suggestion
+
+    $(document).on(
+    "click",
+    ".category-suggestion-item",
+    function(){
+
+
+        let name=$(this).data("name");
+
+
+        $("#categorySearchBox")
+        .val(name);
+
+
+
+        $("#categorySuggestion")
+        .fadeOut();
+
+
+    });
+
+
+
+
+    // Click outside
+
+    $(document).click(function(e){
+
+
+        if(!$(e.target).closest(".category-search-input").length)
+        {
+
+            $("#categorySuggestion").fadeOut();
+
+        }
+
+
+    });
+
+
+
+});

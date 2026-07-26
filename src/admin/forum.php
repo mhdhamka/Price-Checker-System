@@ -130,7 +130,7 @@ LEFT JOIN
 (
 SELECT topicID,
 COUNT(*) totalBookmarks
-FROM forumbookmark
+FROM forumbookmarks
 GROUP BY topicID
 ) fb
 ON fb.topicID=t.topicID

@@ -122,3 +122,90 @@ $(document).on("click",".delete-btn",function(){
     $("#confirmModal").fadeIn();
 
 });
+
+
+
+/* ==========================================
+   RATING SEARCH SUGGESTION
+========================================== */
+
+
+$(document).ready(function(){
+
+    $("#ratingSearchBox").keyup(function(){
+
+        let search=$(this).val();
+
+            if(search.length < 2)
+            {
+
+                $("#ratingSuggestion").hide();
+
+                return;
+
+            }
+
+            $.ajax({
+
+                url:"ratingSuggestion.php",
+
+                type:"GET",
+
+                data:{
+                    search:search
+                },
+
+
+                success:function(data){
+
+                    $("#ratingSuggestion")
+
+                    .html(data)
+
+                    .fadeIn();
+
+                },
+
+                error:function(xhr){
+
+                    console.log(xhr.responseText);
+
+                }
+
+
+            });
+
+
+
+        });
+
+        // Select suggestion
+        $(document).on(
+            "click",
+            ".rating-suggestion-item",
+                function(){
+
+                let name=$(this).data("name");
+
+                    $("#ratingSearchBox")
+                    .val(name);
+
+                    $("#ratingSuggestion")
+                    .fadeOut();
+
+        });
+
+
+        // Close dropdown
+        $(document).click(function(e){
+
+            if(!$(e.target).closest(".rating-search-input").length)
+            {
+
+                $("#ratingSuggestion").fadeOut();
+
+            }
+
+        });
+
+});

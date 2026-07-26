@@ -446,6 +446,9 @@ LIMIT 6
                                     <input type="text" id="searchtextbox" name="search"
                                     placeholder="Search product...">
 
+                                    <!-- Search Suggestions -->
+                                    <div id="compareSuggestion"></div>
+
                                 </div>
 
                                 <select name="category">
@@ -1076,7 +1079,7 @@ LIMIT 6
                                 class="btn btn-primary compare-btn"
                                 name="compare_submit">
 
-                                    Compare Selected Items
+                                    Compare Items
 
                                 </button>
 

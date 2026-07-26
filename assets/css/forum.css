@@ -1282,34 +1282,94 @@ REPLY CARD
 
 .reply-list{
 
-    margin-top:40px;
+    margin-top:50px;
     display:flex;
     flex-direction:column;
     gap:20px;
 
 }
 
+.reply-list h4{
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:30px;
+    color:#222;
+
+}
+
+.reply-list h4 i{
+
+    color:#ED563B;
+
+}
+
+
 .reply-card{
 
     display:flex;
     gap:20px;
     background:#fff;
-    padding:25px;
+    padding:25px 28px;
     border-radius:18px;
-    box-shadow:0 8px 25px rgba(0,0,0,.06);
-    transition:.3s;
+    border:1px solid #ececec;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+    transition:.25s;
 
 }
 
 .reply-card:hover{
 
-    transform:translateY(-3px);
+    transform:translateY(-4px);
+    box-shadow:0 18px 40px rgba(0,0,0,.08);
+
+}
+
+/*==================================
+HEADER
+==================================*/
+
+.reply-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
 
 }
 
 .reply-user{
 
     flex-shrink:0;
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+}
+
+.reply-avatar{
+
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #ED563B;
+
+}
+
+.reply-user strong{
+
+    font-size:17px;
+    color:#222;
+
+}
+
+.reply-user small{
+
+    color:#888;
 
 }
 
@@ -1351,11 +1411,135 @@ REPLY CARD
 
 }
 
+
+/*==================================
+CONTENT
+==================================*/
+
 .reply-content{
 
+    margin-left:73px;
     line-height:1.9;
     color:#555;
-    margin-bottom:18px;
+    font-size:15px;
+    white-space:pre-line;
+
+}
+
+/*==================================
+FOOTER
+==================================*/
+
+.reply-footer{
+
+    margin-top:22px;
+    margin-left:73px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+/*==================================
+OWNER ACTIONS
+==================================*/
+
+.reply-owner-actions{
+
+    display:flex;
+    gap:12px;
+
+}
+
+.reply-owner-actions a{
+
+    padding:8px 18px;
+    border-radius:30px;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    transition:.25s;
+
+}
+
+.edit-reply-btn{
+
+    background:#EEF5FF;
+    color:#2563EB;
+
+}
+
+.edit-reply-btn:hover{
+
+    background:#2563EB;
+    color:#fff;
+
+}
+
+.delete-reply-btn{
+
+    background:#FFF1F2;
+    color:#DC2626;
+
+}
+
+.delete-reply-btn:hover{
+
+    background:#DC2626;
+    color:#fff;
+
+}
+
+
+/*==================================
+EMPTY
+==================================*/
+
+.no-reply{
+
+    text-align:center;
+    background:#fff;
+    padding:70px;
+    border-radius:18px;
+    border:2px dashed #ddd;
+
+}
+
+.no-reply i{
+
+    color:#ED563B;
+    margin-bottom:20px;
+
+}
+
+.no-reply h5{
+
+    font-size:22px;
+    margin-bottom:10px;
+
+}
+
+
+/*==================================
+BUTTON
+==================================*/
+
+.reply-submit{
+
+    border:none;
+    background:#ED563B;
+    color:#fff;
+    padding:12px 30px;
+    border-radius:40px;
+    font-weight:600;
+    transition:.3s;
+
+}
+
+.reply-submit:hover{
+
+    background:#d84d33;
+    transform:translateY(-2px);
 
 }
 
@@ -2570,5 +2754,31 @@ OWNER ACTIONS
         margin-top:12px;
 
     }
+
+}
+
+
+.back-dashboard-btn{
+
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:#ED563B;
+    color:white;
+    padding:10px 18px;
+    border-radius:25px;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+    margin-bottom: 25px;
+
+}
+
+
+.back-dashboard-btn:hover{
+
+    background:#c9432c;
+    color:white;
+    transform:translateX(-3px);
 
 }

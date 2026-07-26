@@ -365,8 +365,16 @@ $totalPages=ceil($total/$limit);
 
                 <form method="GET" class="search-box">
 
-                    <input type="text" name="search" placeholder="Search item or student..." value="<?php echo htmlspecialchars($search); ?>">
+                    <div class="rating-search-input">
 
+                        <input type="text" id="ratingSearchBox" name="search"
+                        autocomplete="off" placeholder="Search item or student..."
+                        value="<?php echo htmlspecialchars($search); ?>">
+
+                        <div id="ratingSuggestion"></div>
+
+
+                    </div>
 
                     <select name="store">
 

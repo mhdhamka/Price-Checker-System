@@ -34,8 +34,8 @@
                             Search
                         </a>
                         |
-                        <a href="#why-us">
-                            Why Us
+                        <a href="../student/forum.php">
+                            Forum
                         </a>
                     </p>
 

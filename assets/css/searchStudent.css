@@ -16,8 +16,8 @@ flex-wrap:nowrap;
 
 .search-input{
 
-position:relative;
-flex:2;
+    position:relative;
+    flex:2;
 
 }
 
@@ -662,97 +662,60 @@ CATEGORY BADGE
 
 
     display:inline-flex;
-
     width:max-content;
-
-
     background:#FFF1EE;
-
     color:#ED563B;
-
-
     font-size:13px;
-
     font-weight:600;
-
-
     padding:7px 16px;
-
-
     border-radius:50px;
-
-
     margin-bottom:12px;
 
 
 }
 
 
-
-
 /* ==========================
 RATING SUMMARY
 ========================== */
-
 
 .rating-summary{
 
 
     display:flex;
-
     align-items:center;
-
     gap:8px;
-
     margin:12px 0;
-
-
     font-size:14px;
 
 
 }
 
 
-
 .stars{
 
 
     color:#FFC107;
-
     letter-spacing:2px;
-
     font-size:17px;
-
 
 }
 
-
-
 .rating-summary strong{
-
 
     color:#333;
 
 }
 
-
-
-
 .rating-summary small{
 
-
     color:#888;
-
 }
-
-
-
 
 
 /* ==========================
 PRICE
 ========================== */
-
 
 .product-content h3{
 
@@ -1101,5 +1064,137 @@ PRODUCT RATING
     color:#777;
     font-size:13px;
     font-weight:500;
+
+}
+
+/* ==========================
+SEARCH SUGGESTION
+========================== */
+#searchSuggestion{
+
+    position:absolute;
+    top:105%;
+    left:0;
+    width:100%;
+    background:#fff;
+    border-radius:15px;
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+    display:none;
+    overflow:hidden;
+    z-index:999;
+
+}
+
+
+.suggestion-item{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:14px 18px;
+    cursor:pointer;
+    transition:.25s;
+
+}
+
+.suggestion-item:hover{
+
+    background:#F5F7FA;
+
+}
+
+.suggestion-item img{
+
+    width:55px;
+    height:55px;
+    object-fit:cover;
+    border-radius:10px;
+
+}
+
+.suggestion-info h4{
+
+    margin:0;
+    font-size:15px;
+
+}
+
+.suggestion-info span{
+
+    color:#888;
+    font-size:13px;
+
+}
+
+
+.rating-box{
+
+    margin-top:8px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+}
+
+.suggestion-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+
+}
+
+.suggestion-header h4{
+
+    margin:0;
+    font-size:15px;
+    font-weight:600;
+    color:#222;
+
+}
+
+.rating-score{
+
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:5px 12px;
+    background:#FFF4D6;
+    color:#F39C12;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:700;
+
+}
+
+.rating-score i{
+
+    font-size:12px;
+
+}
+
+.rating-review{
+
+    color:#777;
+    font-size:12px;
+    font-weight:500;
+
+}
+
+.suggestion-price{
+
+    color:#ED563B;
+    font-size:15px;
+    font-weight:700;
+    white-space:nowrap;
+
+}
+
+.suggestion-category{
+
+    margin-top:4px;
+    color:#777;
+    font-size:13px;
 
 }

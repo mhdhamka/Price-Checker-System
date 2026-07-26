@@ -143,7 +143,7 @@ ORDER BY r.created_at ASC
 
     <hr>
 
-        <?php include("../includes/forum/replyCard.php"); ?>
+        <?php include("../includes/forum/replyList.php"); ?>
 
 </div>
 

@@ -111,7 +111,17 @@ $totalPages = ceil($total/$limit);
 
                 <form method="GET" class="search-box">
 
-                    <input type="text" name="search" placeholder="Search store..." value="<?php echo $search; ?>">
+                    <div class="store-search-input">
+
+                        <input type="text" id="storeSearchBox" name="search"
+                        autocomplete="off" placeholder="Search store..."
+                        value="<?php echo htmlspecialchars($search); ?>">
+
+
+                        <div id="storeSuggestion"></div>
+
+
+                    </div>
 
                     <button>
 
@@ -415,6 +425,7 @@ $totalPages = ceil($total/$limit);
 
 </div>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../../assets/js/stores.js"></script>
 

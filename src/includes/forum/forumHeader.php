@@ -1,4 +1,27 @@
+<?php
+
+if($pageType=="admin")
+{
+    $dashboardLink="../admin/dashboard.php";
+    $dashboardText="Admin Dashboard";
+}
+else
+{
+    $dashboardLink="../student/dashboard.php";
+    $dashboardText="Student Dashboard";
+}
+
+?>
+
 <br>
+
+<a href="<?php echo $dashboardLink; ?>" class="back-dashboard-btn">
+
+    <i class="fa fa-arrow-left"></i>
+
+    <?php echo $dashboardText; ?>
+
+</a>
 
 <div class="community-heading">
 

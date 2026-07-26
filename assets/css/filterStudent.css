@@ -958,3 +958,134 @@ RESPONSIVE
 
 
 }
+
+
+
+
+/* ==========================
+COMPARE SEARCH SUGGESTION
+========================== */
+
+#compareSuggestion{
+
+    position:absolute;
+    top:105%;
+    left:0;
+    width:245px;
+    background:#fff;
+    border-radius:15px;
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+    display:none;
+    overflow:hidden;
+    z-index:999;
+
+}
+
+
+.compare-suggestion-item{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:14px 18px;
+    cursor:pointer;
+    transition:.25s;
+
+}
+
+
+.compare-suggestion-item:hover{
+
+    background:#F5F7FA;
+
+}
+
+
+.compare-suggestion-item img{
+
+    width:55px;
+    height:55px;
+    object-fit:cover;
+    border-radius:10px;
+
+}
+
+
+.compare-suggestion-info h4{
+
+    margin:0;
+    font-size:15px;
+
+}
+
+
+.compare-suggestion-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+
+}
+
+
+.compare-suggestion-header h4{
+
+    margin:0;
+    font-size:15px;
+    font-weight:600;
+    color:#222;
+
+}
+
+
+.compare-rating-box{
+
+    margin-top:8px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+}
+
+
+.compare-rating-score{
+
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:5px 12px;
+    background:#FFF4D6;
+    color:#F39C12;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:700;
+
+}
+
+
+.compare-rating-review{
+
+    color:#777;
+    font-size:12px;
+
+}
+
+
+.compare-suggestion-price{
+
+    color:#ED563B;
+    font-size:15px;
+    font-weight:700;
+    white-space:nowrap;
+
+}
+
+
+.compare-suggestion-category{
+
+    margin-top:4px;
+    color:#777;
+    font-size:13px;
+
+}

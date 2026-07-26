@@ -427,9 +427,15 @@ $offset = ($page - 1) * $limit;
 
                                     <input
                                         type="text"
+                                        id="searchtextbox"
                                         name="search"
+                                        autocomplete="off"
                                         placeholder="Search product..."
                                         value="<?php echo $_GET['search'] ?? ""; ?>">
+
+
+                                    <!-- Search Suggestions -->
+                                    <div id="searchSuggestion"></div>
 
                                 </div>
 
@@ -556,7 +562,7 @@ $offset = ($page - 1) * $limit;
 
                             </div>
 
-                            </form>
+                        </form>
 
 
                         <br>

@@ -206,3 +206,87 @@ $("#confirmModal").click(function (e) {
     }
 
 });
+
+
+/* ==========================================
+   STUDENT SEARCH SUGGESTION
+========================================== */
+
+$("#studentSearchBox").keyup(function(){
+
+    let search=$(this).val();
+
+
+    if(search.length < 2)
+    {
+
+        $("#studentSuggestion").hide();
+
+        return;
+
+    }
+
+
+
+    $.ajax({
+
+        url:"studentSuggestion.php",
+
+        type:"GET",
+
+        data:{
+            search:search
+        },
+
+
+        success:function(data){
+
+            $("#studentSuggestion")
+            .html(data)
+            .fadeIn();
+
+        }
+
+
+    });
+
+
+});
+
+
+
+$(document).on(
+"click",
+".student-suggestion-item",
+function(){
+
+
+    let name=$(this).data("name");
+
+
+    $("#studentSearchBox")
+    .val(name);
+
+
+
+    $("#studentSuggestion")
+    .fadeOut();
+
+
+
+});
+
+
+
+$(document).click(function(e){
+
+
+    if(!$(e.target).closest(".student-search-input").length)
+    {
+
+        $("#studentSuggestion").fadeOut();
+
+    }
+
+
+});

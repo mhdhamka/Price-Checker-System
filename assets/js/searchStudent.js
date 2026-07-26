@@ -222,3 +222,68 @@ $(document).ready(function () {
     }
 
 });
+
+
+
+    /* ==========================================
+       SEARCH SUGGESTION
+    ========================================== */
+
+    $("#searchtextbox").keyup(function(){
+
+    let search=$(this).val();
+
+    if(search.length<2)
+    {
+
+        $("#searchSuggestion").hide();
+
+        return;
+
+    }
+
+    $.ajax({
+
+        url:"searchSuggestion.php",
+
+        type:"GET",
+
+        data:{
+
+            search:search
+
+        },
+
+        success:function(data){
+
+            $("#searchSuggestion")
+
+            .html(data)
+
+            .fadeIn();
+
+        }
+
+    });
+
+});
+
+    $(document).on("click",".suggestion-item",function(){
+
+        let item=$(this).data("name");
+
+        $("#searchtextbox").val(item);
+
+        $("#searchSuggestion").fadeOut();
+
+    });
+
+    $(document).click(function(e){
+
+        if(!$(e.target).closest(".search-box").length){
+
+            $("#searchSuggestion").fadeOut();
+
+        }
+
+    });

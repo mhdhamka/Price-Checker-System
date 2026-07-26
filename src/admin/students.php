@@ -255,7 +255,15 @@ $totalPages = ceil($total/$limit);
 
                 <form method="GET" class="search-box">
 
-                    <input type="text" name="search" placeholder="Search student..." value="<?php echo htmlspecialchars($search); ?>">
+                    <div class="student-search-input">
+
+                        <input type="text" id="studentSearchBox" name="search" autocomplete="off" placeholder="Search student..."
+                            value="<?php echo htmlspecialchars($search); ?>">
+
+                        <!-- Student Suggestions -->
+                        <div id="studentSuggestion"></div>
+
+                    </div>
 
                     <select name="logStatus">
 
