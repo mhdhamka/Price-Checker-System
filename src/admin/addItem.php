@@ -51,131 +51,215 @@ if(!isset($_SESSION['adminID']))
 
             </div>
 
-            <div class="form-card">
 
-                <form action="../admin/processes/addItemProcess.php" method="POST" enctype="multipart/form-data">
+            <form action="../admin/processes/addItemProcess.php" method="POST" enctype="multipart/form-data">
 
-                    <div class="form-group">
+                <div class="item-form-layout">
 
-                        <label>Item Name</label>
+                    <!-- LEFT CARD -->
 
-                        <input type="text" name="itemName" required>
+                    <div class="profile-card">
 
-                    </div>
+                        <!-- image preview -->
+                        <h3>
 
-                    <div class="form-group">
+                            Product Image
 
-                        <label>Price (RM)</label>
+                        </h3>
 
-                        <input type="number" step="0.01" name="price" required>
-
-                    </div>
-
-                    <div class="form-row">
+                        <img
+                            src="../../assets/images/no-image.png"
+                            class="profile-image item-preview">
 
                         <div class="form-group">
 
-                            <label>Category</label>
+                            <label>
 
-                            <select name="category">
+                                <i class="fa fa-image"></i>
 
-                                <?php
+                                Upload Item Image
 
-                                $cat=mysqli_query($conn,"SELECT * FROM category");
+                            </label>
 
-                                while($c=mysqli_fetch_assoc($cat))
-
-                                {
-
-                                ?>
-
-                                <option>
-
-                                    <?php echo $c['categoryName']; ?>
-
-                                </option>
-
-                                <?php
-
-                                }
-
-                                ?>
-
-                            </select>
-
-                        </div>
-
-                        <div class="form-group">
-
-                            <label>Store</label>
-
-                            <select name="store">
-
-                                <?php
-
-                                $store=mysqli_query($conn,"SELECT * FROM store");
-
-                                while($s=mysqli_fetch_assoc($store))
-
-                                {
-
-                                ?>
-
-                                <option>
-
-                                    <?php echo $s['StoreName']; ?>
-
-                                </option>
-
-                                <?php
-
-                                }
-
-                                ?>
-
-                            </select>
+                            <input
+                                type="file"
+                                name="image"
+                                id="itemImage"
+                                accept="image/*"
+                                required>
 
                         </div>
 
                     </div>
 
-                    <div class="form-group">
+                    <!-- RIGHT CARD -->
 
-                        <label>Description</label>
+                        <!-- all inputs -->
+                         <div class="profile-card">
 
-                        <textarea name="description" rows="5"></textarea>
+                            <h3>
 
-                    </div>
+                                Product Information
 
-                    <div class="form-group">
+                            </h3>
 
-                        <label>Item Image</label>
+                            <br>
 
-                        <input type="file" name="image" accept="image/*" required>
+                            <div class="form-group">
 
-                    </div>
+                                <label>
 
-                    <div class="form-buttons">
+                                <i class="fa fa-box"></i>
 
-                        <button class="save-btn" type="submit">
+                                    Item Name
 
-                            Save Item
+                                </label>
 
-                        </button>
+                                <input
+                                type="text"
+                                name="itemName">
 
-                        <a href="../admin/items.php" class="cancel-btn">
+                            </div>
 
-                            Cancel
+                            <div class="form-group">
 
-                        </a>
+                                <label>
 
-                    </div>
+                                <i class="fa fa-money-bill-wave"></i>
 
-                </form>
+                                    Price (RM)
 
-            </div>
+                                </label>
+
+                                <input
+                                type="number"
+                                step="0.01"
+                                name="price">
+
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        <i class="fa fa-layer-group"></i>
+
+                                        Category
+
+                                    </label>
+
+                                    <select name="category">
+
+                                        <?php
+
+                                        $cat=mysqli_query($conn,"SELECT * FROM category");
+
+                                        while($c=mysqli_fetch_assoc($cat))
+
+                                        {
+
+                                        ?>
+
+                                        <option>
+
+                                            <?php echo $c['categoryName']; ?>
+
+                                        </option>
+
+                                        <?php
+
+                                        }
+
+                                        ?>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label>
+
+                                        <i class="fa fa-store"></i>
+
+                                        Store
+
+                                    </label>
+
+                                    <select name="store">
+
+                                        <?php
+
+                                        $store=mysqli_query($conn,"SELECT * FROM store");
+
+                                        while($s=mysqli_fetch_assoc($store))
+
+                                        {
+
+                                        ?>
+
+                                        <option>
+
+                                            <?php echo $s['StoreName']; ?>
+
+                                        </option>
+
+                                        <?php
+
+                                        }
+
+                                        ?>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    <i class="fa fa-align-left"></i>
+
+                                    Description
+
+                                </label>
+
+                                <textarea rows="6" name="description"></textarea>
+
+                            </div>
+
+                            <div class="form-buttons">
+
+                                <button class="save-btn">
+
+                                <i class="fa fa-floppy-disk"></i>
+
+                                Save Item
+
+                                </button>
+
+                                <a href="../admin/items.php" class="cancel-btn">
+
+                                <i class="fa fa-arrow-left"></i>
+
+                                    Cancel
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                </div>
+
+            </form>
 
         </div>
+
 
         <?php include("../admin/includes/footer.php"); ?>
 

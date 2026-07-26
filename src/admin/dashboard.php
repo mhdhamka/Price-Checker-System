@@ -426,8 +426,6 @@ while($row = mysqli_fetch_assoc($sql))
 
         </div>
 
-        <?php include("../admin/includes/footer.php"); ?>
-
     </div>
 
 </div>
@@ -447,8 +445,7 @@ while($row = mysqli_fetch_assoc($sql))
     <?php echo json_encode($storeTotal); ?>;
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="../../assets/js/adminDashboard.js"></script>
+<?php include("../admin/includes/footer.php"); ?>
 
 </body>
 

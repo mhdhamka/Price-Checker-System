@@ -56,75 +56,190 @@ $admin = mysqli_fetch_assoc($result);
 
         <div class="dashboard-content">
 
+            <!-- PAGE TITLE -->
             <div class="page-title">
+
                 <h2>Admin Profile</h2>
-                <p>Manage your account information, profile picture, and login credentials.</p>
-            </div>
 
-            <div class="form-card">
-
-                <form action="../admin/processes/updateProfile.php" method="POST" enctype="multipart/form-data">
-
-                    <input type="hidden" name="adminID" value="<?php echo $admin['adminID']; ?>">
-                    <input type="hidden" name="oldImage" value="<?php echo $admin['adminIMG']; ?>">
-
-                    <img src="<?php echo $admin['adminIMG']; ?>" width="150">
-
-                    <div class="form-group">
-
-                        <label>Full Name</label>
-
-                        <input type="text" name="adminFullname" value="<?php echo $admin['adminFullname']; ?>">
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>Username</label>
-
-                        <input type="text" name="adminUsername" value="<?php echo $admin['adminUsername']; ?>">
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>Email</label>
-
-                        <input type="email" name="adminEmail" value="<?php echo $admin['adminEmail']; ?>">
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>New Password</label>
-
-                        <input type="password" name="adminPassword" placeholder="Leave blank to keep current password">
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>Image Upload (Optional)</label>
-
-                        <input type="file" name="image" accept="image/*">
-
-                    </div>
-
-                    <div class="form-buttons">
-
-                        <button class="save-btn" type="submit">
-                            Save Changes
-                        </button>
-
-                        <a href="../admin/dashboard.php" class="cancel-btn">
-                            Cancel
-                        </a>
-
-                    </div>
-
-                </form>
+                <p>
+                    Manage your account information, profile picture and login credentials.
+                </p>
 
             </div>
+
+            <br>
+
+            <form action="../admin/processes/updateProfile.php"
+                method="POST"
+                enctype="multipart/form-data">
+
+                <input type="hidden"
+                    name="adminID"
+                    value="<?php echo $admin['adminID']; ?>">
+
+                <input type="hidden"
+                    name="oldImage"
+                    value="<?php echo $admin['adminIMG']; ?>">
+
+
+                <div class="profile-layout">
+
+                    <!-- ==========================
+                        PROFILE CARD
+                    ========================== -->
+
+                    <div class="profile-card">
+
+                        <img
+                            src="<?php echo $admin['adminIMG']; ?>"
+                            class="profile-image">
+
+                        <h3>
+
+                            <?php echo $admin['adminFullname']; ?>
+
+                        </h3>
+
+                        <span>
+
+                            Administrator
+
+                        </span>
+
+                        <div class="form-group">
+
+                            <label>
+
+                                Change Profile Picture
+
+                            </label>
+
+                            <input
+                                type="file"
+                                name="image"
+                                accept="image/*">
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ==========================
+                        ACCOUNT INFORMATION
+                    ========================== -->
+
+                    <div class="profile-card">
+
+                        <h3>
+
+                            Account Information
+
+                        </h3>
+
+                        <br>
+
+                        <div class="form-group">
+
+                            <label>
+
+                                <i class="fa fa-user"></i>
+
+                                Full Name
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="adminFullname"
+                                value="<?php echo $admin['adminFullname']; ?>">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+
+                                <i class="fa fa-user-tag"></i>
+
+                                Username
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="adminUsername"
+                                value="<?php echo $admin['adminUsername']; ?>">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+
+                                <i class="fa fa-envelope"></i>
+
+                                Email Address
+
+                            </label>
+
+                            <input
+                                type="email"
+                                name="adminEmail"
+                                value="<?php echo $admin['adminEmail']; ?>">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+
+                                <i class="fa fa-lock"></i>
+
+                                New Password
+
+                            </label>
+
+                            <input
+                                type="password"
+                                name="adminPassword"
+                                placeholder="Leave blank to keep current password">
+
+                        </div>
+
+
+                        <div class="form-buttons">
+
+                            <button
+                                type="submit"
+                                class="save-btn">
+
+                                <i class="fa fa-floppy-disk"></i>
+
+                                Save Changes
+
+                            </button>
+
+                            <a
+                                href="../admin/dashboard.php"
+                                class="cancel-btn">
+
+                                <i class="fa fa-arrow-left"></i>
+
+                                Back to Dashboard
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </form>
 
         </div>
 

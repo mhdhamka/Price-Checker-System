@@ -21,24 +21,50 @@ $admin = mysqli_fetch_assoc($result);
 <div class="admin-header">
 
     <div class="header-title">
-        <h3>
-            Dashboard
-        </h3>
+
+            <h3>
+                Dashboard
+            </h3>
+
     </div>
 
-    <div class="admin-profile">
 
-        <img src="<?php echo $admin['adminIMG']; ?>">
+    <div class="header-actions">
 
-        <div>
-            <h6>
-                <?php echo $admin['adminFullname']; ?>
-            </h6>
 
-            <span>
-                Administrator
-            </span>
+        <button id="themeToggle" class="theme-btn">
+
+            <i class="fa-solid fa-moon"></i>
+
+        </button>
+
+
+
+        <div class="admin-profile">
+
+
+            <img src="<?php echo $admin['adminIMG']; ?>">
+
+
+            <div>
+
+                <h6>
+                    <?php echo $admin['adminFullname']; ?>
+                </h6>
+
+
+                <span>
+                    Administrator
+                </span>
+
+
+            </div>
+
 
         </div>
+
+
     </div>
+
+
 </div>

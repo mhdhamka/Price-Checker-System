@@ -23,3 +23,10 @@
     </div>
 
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../../assets/js/adminDashboard.js"></script>
+<script src="../../assets/js/sidebar.js"></script>
+<script src="../../assets/js/theme.js"></script>
+<script src="../../assets/js/imagePreview.js"></script>
+
