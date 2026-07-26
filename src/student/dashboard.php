@@ -132,6 +132,7 @@ LIMIT 5
     <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="../../assets/css/styleindex.css">
     <link rel="stylesheet" href="../../assets/css/styleStudent.css">
     <link rel="stylesheet" href="../../assets/css/footer.css">
@@ -997,7 +998,7 @@ LIMIT 5
                         <h4>Smart Comparison</h4>
 
                         <p>
-                        Compare item prices and select the best option based on your budget.
+                            Compare item prices and select the best option based on your budget.
                         </p>
 
 
@@ -1041,6 +1042,7 @@ LIMIT 5
     <script src="../../assets/js/slideshow.js"></script>
     <!-- Global Init -->
     <script src="../../assets/js/custom.js"></script>
+    <script src="../../assets/js/studentTheme.js"></script>
 
     <script>
         function slideCategory(direction){

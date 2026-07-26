@@ -205,10 +205,7 @@ function activeDropdown($pages)
         </li>
 
 
-
-
         <!-- REPORTS -->
-
         <li class="<?php echo activePage('reports.php'); ?>">
 
             <a href="../admin/reports.php">
@@ -221,12 +218,7 @@ function activeDropdown($pages)
 
         </li>
 
-
-
-
-
         <!-- SYSTEM -->
-
         <li class="sidebar-dropdown <?php echo activeDropdown([
 
             'backup.php',
@@ -270,10 +262,7 @@ function activeDropdown($pages)
                 </li>
 
 
-
-
                 <!-- System Health -->
-
                 <li class="<?php echo activePage('systemHealth.php'); ?>">
 
                     <a href="../admin/systemHealth.php">
@@ -287,10 +276,7 @@ function activeDropdown($pages)
                 </li>
 
 
-
-
                 <!-- Audit Logs -->
-
                 <li class="<?php echo activePage('auditLogs.php'); ?>">
 
                     <a href="../admin/auditLogs.php">

@@ -229,6 +229,7 @@ LIMIT 6
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <!-- Libraries Stylesheet -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -292,47 +293,9 @@ LIMIT 6
     }
     ?>
 
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="../student/dashboard.php" class="logo"><img src="../../assets/images/logo.png" width="90" height="90"></a>
-                        <!-- ***** Logo End ***** -->
-
-                        <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
-                            <li class="scroll-to-section"><a href="#top">Home</a></li>
-                            <li class="scroll-to-section"><a href="#compare" class="active">Compare </a></li>
-                            <li class="scroll-to-section"><a href="#search">Products</a></li>
-                            <li class="scroll-to-section"><a href="#tools">Tools</a></li>
-                            <li class="scroll-to-section"><a href="#trend">Trending</a></li>
-                            <li class="scroll-to-section"><a href="#community">Community</a></li>
-                            <li class="scroll-to-section"><a href="#why-us">About</a></li>
-
-                            <form method="get">
-                                <div class="icons">
-                                    <div class="dropdown">
-                                        <img src="<?php echo $img; ?>" width="40" height="40" class="rounded-circle">
-                                        <div class="dropdown-content">
-                                            <a href="../student/profile.php">My Profile</a>
-                                            <a href="../public/logout.php" name="logout">Log Out</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </ul>
-                        <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
    
+    <?php include("../student/includes/header.php"); ?>
+
 
     <!-- ***** Search Starts ***** -->
     <section class="section bg-light" id="search">
@@ -1509,6 +1472,7 @@ LIMIT 6
     <!-- Global Init -->
     <script src="../../assets/js/custom.js"></script>
     <script src="../../assets/js/filterStudent.js"></script>
+    <script src="../../assets/js/studentTheme.js"></script>
 
 </body>
 </html>
