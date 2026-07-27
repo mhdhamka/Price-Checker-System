@@ -465,28 +465,12 @@ Future
 
 # 💡 Areas for Improvement
 
-- Prepared Statements
-- Input Validation
 - Authentication Middleware
 - Reusable PHP Components
 - API Architecture
 - Automated Testing
 - CI/CD Pipeline
 - Docker Deployment
-
----
-
-# 🙏 Acknowledgements
-
-Special thanks to:
-
-- Universiti Malaysia Sarawak (UNIMAS)
-- Open Source Community
-- Chart.js
-- DomPDF
-- PhpSpreadsheet
-- Bootstrap
-- Font Awesome
 
 ---
 
