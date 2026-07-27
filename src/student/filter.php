@@ -297,13 +297,15 @@ LIMIT 6
     <?php include("../student/includes/header.php"); ?>
 
 
-    <!-- ***** Search Starts ***** -->
-    <section class="section bg-light" id="search">
+    <!-- ***** Compare Starts ***** -->
+    <section class="section bg-light" id="compare">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
                     <div class="section-heading">
+
                         <a href="../student/dashboard.php" class="custom-btn">
+                            <i class="fa fa-arrow-left"></i>
                             Back to Dashboard
                         </a>
 
@@ -817,13 +819,6 @@ LIMIT 6
                                         <!-- Card Header -->
                                         <div class="card-top">
 
-                                            <label class="compare-check">
-
-                                                <input type="checkbox" name="compare[]"
-                                                value="<?php echo $row['ItemID']; ?>">
-
-                                            </label>
-
                                             <i 
                                                 class="wishlist fa <?php echo in_array($row['ItemID'], $wishlistItems) ? 'fa-heart active' : 'fa-heart-o'; ?>"
                                                 data-id="<?php echo $row['ItemID']; ?>">
@@ -835,6 +830,59 @@ LIMIT 6
                                         <!-- Product Image -->
                                         <div class="item-image-box">
 
+                                            <!-- Badge -->
+
+                                            <?php
+
+                                            if($row['ItemPrice']==$lowestPrice)
+                                            {
+
+                                            ?>
+
+                                                <div class="badge best-price">
+                                                    <i class="fa fa-tag"></i>
+                                                    Lowest Price
+
+                                                </div>
+
+                                            <?php
+
+                                            }
+
+                                            elseif($row['averageRating'] >= 4.5)
+
+                                            {
+
+                                            ?>
+
+                                                <div class="badge top-rated">
+                                                    <i class="fa fa-star"></i>
+                                                    Top Rated
+
+                                                </div>
+
+                                            <?php
+
+                                            }
+
+                                            elseif($row['totalReviews'] >= 10)
+
+                                            {
+
+                                            ?>
+
+                                                <div class="badge popular">
+                                                    <i class="fa fa-fire"></i>
+                                                    Popular
+
+                                                </div>
+
+                                            <?php
+
+                                            }
+
+                                            ?>
+
                                             <img
                                                 src="<?php echo $row['ItemImage']; ?>"
                                                 class="item-image"
@@ -843,12 +891,21 @@ LIMIT 6
                                         </div>
 
                                         <!-- Product Name -->
-
                                         <h4>
 
                                             <?php echo $row['ItemName']; ?>
 
                                         </h4>
+
+                                        <!-- Category -->
+
+                                        <small class="category">
+
+                                            <i class="fa fa-tags"></i>
+
+                                            <?php echo $row['ItemCategory']; ?>
+
+                                        </small>
 
 
                                         <!-- Rating -->
@@ -906,19 +963,7 @@ LIMIT 6
                                         </div>
 
 
-                                        <!-- Category -->
-
-                                        <small class="category">
-
-                                            <i class="fa fa-tags"></i>
-
-                                            <?php echo $row['ItemCategory']; ?>
-
-                                        </small>
-
-
                                         <!-- Store -->
-
                                         <p>
 
                                             <i class="fa fa-shopping-cart"></i>
@@ -929,87 +974,21 @@ LIMIT 6
 
 
                                         <!-- Price -->
-
                                         <span class="price">
 
                                             RM <?php echo number_format($row['ItemPrice'],2); ?>
 
                                         </span>
 
+                                        <label class="compare-check">
 
-                                        <!-- Badge -->
+                                            <input type="checkbox" name="compare[]"
+                                            value="<?php echo $row['ItemID']; ?>">
 
-                                        <?php
+                                        </label>
 
-                                        if($row['ItemPrice']==$lowestPrice)
-                                        {
 
-                                        ?>
-
-                                            <div class="badge best-price">
-
-                                                Lowest Price
-
-                                            </div>
-
-                                        <?php
-
-                                        }
-
-                                        elseif($row['averageRating'] >= 4.5)
-
-                                        {
-
-                                        ?>
-
-                                            <div class="badge top-rated">
-
-                                                Top Rated
-
-                                            </div>
-
-                                        <?php
-
-                                        }
-
-                                        elseif($row['totalReviews'] >= 10)
-
-                                        {
-
-                                        ?>
-
-                                            <div class="badge popular">
-
-                                                Popular
-
-                                            </div>
-
-                                        <?php
-
-                                        }
-
-                                        ?>
-
-                                         <?php
-
-                                            if($row['averageRating']>=4.5)
-                                            {
-                                                echo "<div class='badge best'>Top Rated</div>";
-                                            }
-                                            elseif($row['totalReviews']>=15)
-                                            {
-                                                echo "<div class='badge popular'>Popular</div>";
-                                            }
-                                            elseif($row['ItemPrice']<=5)
-                                            {
-                                                echo "<div class='badge deal'>Budget Pick</div>";
-                                            }
-                                            else
-                                            {
-                                                echo "<div class='badge'>Recommended</div>";
-                                            }
-
-                                        ?>
+                                        
 
                                     </div>
 
@@ -1183,7 +1162,7 @@ LIMIT 6
     
  
     <!-- ***** Recently Compared ***** -->
-    <section class="section recent">
+    <section class="section recent" id="compare">
         <div class="container">
 
             <div class="section-heading">
@@ -1269,7 +1248,7 @@ LIMIT 6
     </section>
 
     <!-- ***** Compare Suggestion ***** -->
-    <section class="compare suggestion">
+    <section class="compare suggestion" id="compare">
 
         <div class="container">
 
@@ -1364,7 +1343,7 @@ LIMIT 6
     
 
     <!-- ***** How Compare Work ***** -->
-    <section class="section how-it-work">
+    <section class="section how-it-work" id="compare">
         <div class="container">
 
             <div class="section-heading">
@@ -1473,6 +1452,7 @@ LIMIT 6
     <script src="../../assets/js/custom.js"></script>
     <script src="../../assets/js/filterStudent.js"></script>
     <script src="../../assets/js/studentTheme.js"></script>
+    <script src="../../assets/js/header.js"></script>
 
 </body>
 </html>

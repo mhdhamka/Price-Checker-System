@@ -105,3 +105,37 @@
 
 
 })(window.jQuery);
+
+
+const currentPage = document.querySelector(".main-nav").dataset.page;
+
+if (currentPage === "dashboard.php") {
+
+    $(document).on("scroll", function () {
+
+        const scrollPos = $(document).scrollTop();
+
+        $('.nav a[href^="#"]').each(function () {
+
+            const currLink = $(this);
+            const refElement = $(currLink.attr("href"));
+
+            if (!refElement.length) {
+                return;
+            }
+
+            if (
+                refElement.offset().top <= scrollPos + 100 &&
+                refElement.offset().top + refElement.outerHeight() > scrollPos + 100
+            ) {
+
+                $('.nav a').removeClass("active");
+                currLink.addClass("active");
+
+            }
+
+        });
+
+    });
+
+}

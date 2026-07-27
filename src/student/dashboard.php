@@ -1043,6 +1043,7 @@ LIMIT 5
     <!-- Global Init -->
     <script src="../../assets/js/custom.js"></script>
     <script src="../../assets/js/studentTheme.js"></script>
+    <script src="../../assets/js/header.js"></script>
 
     <script>
         function slideCategory(direction){

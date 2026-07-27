@@ -41,8 +41,7 @@ $isDashboard = ($currentPage == "dashboard.php");
 
                         <li>
 
-                            <a href="<?php echo $isDashboard ? '#top' : '../student/dashboard.php#top'; ?>"
-                               class="<?php echo $isDashboard ? 'active' : ''; ?>">
+                            <a href="<?php echo $isDashboard ? '#top' : '../student/dashboard.php#top'; ?>" class="nav-link active">
 
                                 Home
 
@@ -53,7 +52,7 @@ $isDashboard = ($currentPage == "dashboard.php");
 
                         <li>
 
-                            <a href="<?php echo $isDashboard ? '#compare' : '../student/dashboard.php#compare'; ?>">
+                            <a href="<?php echo $isDashboard ? '#compare' : '../student/dashboard.php#compare'; ?>" class="nav-link">
 
                                 Compare
 
@@ -64,7 +63,7 @@ $isDashboard = ($currentPage == "dashboard.php");
 
                         <li>
 
-                            <a href="<?php echo $isDashboard ? '#search' : '../student/dashboard.php#search'; ?>">
+                            <a href="<?php echo $isDashboard ? '#search' : '../student/dashboard.php#search'; ?>" class="nav-link">
 
                                 Products
 
@@ -75,7 +74,7 @@ $isDashboard = ($currentPage == "dashboard.php");
 
                         <li>
 
-                            <a href="<?php echo $isDashboard ? '#tools' : '../student/dashboard.php#tools'; ?>">
+                            <a href="<?php echo $isDashboard ? '#tools' : '../student/dashboard.php#tools'; ?>" class="nav-link">
 
                                 Tools
 
@@ -86,7 +85,7 @@ $isDashboard = ($currentPage == "dashboard.php");
 
                         <li>
 
-                            <a href="<?php echo $isDashboard ? '#trend' : '../student/dashboard.php#trend'; ?>">
+                            <a href="<?php echo $isDashboard ? '#trend' : '../student/dashboard.php#trend'; ?>" class="nav-link">
 
                                 Trending
 
@@ -97,7 +96,7 @@ $isDashboard = ($currentPage == "dashboard.php");
 
                         <li>
 
-                            <a href="<?php echo $isDashboard ? '#community' : '../student/dashboard.php#community'; ?>">
+                            <a href="<?php echo $isDashboard ? '#community' : '../student/dashboard.php#community'; ?>" class="nav-link">
 
                                 Community
 
@@ -108,7 +107,7 @@ $isDashboard = ($currentPage == "dashboard.php");
 
                         <li>
 
-                            <a href="<?php echo $isDashboard ? '#why-us' : '../student/dashboard.php#why-us'; ?>">
+                            <a href="<?php echo $isDashboard ? '#why-us' : '../student/dashboard.php#why-us'; ?>" class="nav-link">
 
                                 About
 
@@ -122,9 +121,7 @@ $isDashboard = ($currentPage == "dashboard.php");
 
 
                     <!-- USER ACTION -->
-
                     <div class="user-actions">
-
 
                         <button id="themeToggle" 
                                 class="theme-btn" 
