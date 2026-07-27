@@ -13,11 +13,16 @@ Compare products • Analyze prices • Manage inventory • Community Forum •
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
-![AJAX](https://img.shields.io/badge/AJAX-Enabled-00A8E8?style=for-the-badge)
 ![jQuery](https://img.shields.io/badge/jQuery-3.x-0769AD?style=for-the-badge&logo=jquery&logoColor=white)
+![AJAX](https://img.shields.io/badge/AJAX-Enabled-00A8E8?style=for-the-badge)
+
 ![Chart.js](https://img.shields.io/badge/Chart.js-Analytics-FF6384?style=for-the-badge)
 ![DomPDF](https://img.shields.io/badge/DomPDF-PDF%20Export-E53935?style=for-the-badge)
 ![PhpSpreadsheet](https://img.shields.io/badge/PhpSpreadsheet-Excel-217346?style=for-the-badge)
+
+![XAMPP](https://img.shields.io/badge/XAMPP-Environment-FB7A24?style=for-the-badge&logo=xampp&logoColor=white)
+![Apache](https://img.shields.io/badge/Apache-Server-D22128?style=for-the-badge&logo=apache&logoColor=white)
+![Git](https://img.shields.io/badge/Git-Version%20Control-F05032?style=for-the-badge&logo=git&logoColor=white)
 
 ![Status](https://img.shields.io/badge/Status-Active%20Development-success?style=for-the-badge)
 ![Version](https://img.shields.io/badge/Version-2.0-blue?style=for-the-badge)
@@ -27,7 +32,7 @@ Compare products • Analyze prices • Manage inventory • Community Forum •
 
 ---
 
-# 📖 Overview
+# Overview
 
 Price Checker System is a modern web application that enables students to compare grocery prices from multiple stores while providing administrators with powerful management, analytics, reporting, and monitoring capabilities.
 
@@ -35,30 +40,28 @@ Unlike a traditional CRUD application, this project focuses on delivering a prod
 
 ---
 
-# 🚀 Project Evolution
+## Project Evolution
 
-This project was first developed as my **Final Year Project (FYP)** at **Universiti Malaysia Sarawak (UNIMAS)**.
+This project was originally developed as my **Final Year Project (FYP)** at **Universiti Malaysia Sarawak (UNIMAS)**.
 
-After completing the academic requirements, I continued working on the system by enhancing its features, improving the design, and restructuring the project into a more complete **portfolio application** that demonstrates my skills and development experience.
+After completing the initial academic project, I continued improving the system by redesigning the interface, expanding its functionality, and transforming it into a more complete **portfolio-level application**.
 
 The current version introduces:
 
-- Completely redesigned UI/UX
-- Modular Admin Dashboard
-- Advanced Reports & Analytics
-- Export Center
-- Backup & Restore System
-- Activity Logs
-- Wishlist
-- Comparison History
-- Search Suggestions
-- Dark Mode
-- Responsive Design
-- Community Forum
-- Role-Based Permission
-- Analytics Dashboard
+- Redesigned UI/UX
+- Student price comparison features
+- Admin dashboard and management tools
+- Reports and analytics
+- Export center
+- Backup and restore
+- Audit logging
+- Wishlist and comparison history
+- Community forum
+- Dark mode support
+- Responsive design
+- Role-based permissions
 
-This repository represents the continuous evolution of the original idea.
+This repository represents the continuous improvement and evolution of the original project idea.
 
 ---
 
@@ -69,319 +72,27 @@ Initial Version Branch
 https://github.com/mhdhamka/Price-Checker-System/tree/initial-version
 
 ---
-
-# ✨ Features
-
-# 👨‍🎓 Student Module
-
-Modern interface with **Light Mode** and **Dark Mode**.
-
----
-
-## 🔍 Filter & Compare
-
-- Product Statistics Cards
-- Live Search
-- Category Filter
-- Store Filter
-- Sorting
-- Search Suggestions
-- Wishlist Integration
-- Product Comparison
-- Comparison History
-- Smart Comparison Suggestions
-- Product Preview
-- View Product Details
-- Comparison Statistics
-
----
-
-## 🔎 Search
-
-- Product Statistics
-- Search Suggestions
-- Category Filter
-- Store Filter
-- Sort Products
-- Product Ratings
-- Wishlist
-- Quick Compare Button
-
----
-
-## ❤️ Wishlist
-
-- Wishlist Statistics
-- Recently Compared Products
-- Suggested Products
-- Search Product
-- Compare Product
-- Remove Wishlist Item
-
----
-
-## 💬 Community Forum (Work in Progress)
-
-Inspired by Reddit.
-
-Features include:
-
-- Discussion Threads
-- Categories
-- Upvote System (Planned)
-- Replies
-- Moderation
-- Search
-- Sorting
-- Role-Based Permission
-
----
-
-# 👨‍💼 Admin Module
-
-Supports both Light Mode and Dark Mode.
-
----
-
-# 📊 Dashboard
-
-Comprehensive system overview.
-
-Features:
-
-- Statistics Cards
-- Quick Actions
-- Recent Activities
-- Recently Added Products
-- Latest Ratings
-- Dashboard Widgets
-- Product Category Distribution
-- Store Inventory Distribution
-- Export Shortcut
-- Backup Shortcut
-
----
-
-# 🛠 Management
-
-Manage:
-
-- Students
-- Administrators
-- Products
-- Categories
-- Stores
-
-Each module includes:
-
-- Statistics Cards
-- Search
-- Search Suggestions
-- Filters
-- Sorting
-- Pagination
-- Add
-- Edit
-- Delete
-- Enable / Disable
-- Reset Password
-- Export (PDF & Excel)
-
----
-
-# 🌐 Community
-
-## Product Ratings
-
-- Search
-- Filter
-- Sort
-- Pagination
-- Delete Rating
-- Export PDF
-- Export Excel
-
-## Forum
-
-Same UI shared with Student Module but different permissions.
-
----
-
-# 📈 Reports & Analytics
-
-One of the core features of the project.
-
----
-
-## Dashboard Statistics
-
-- Registered Students
-- Products Listed
-- Partner Stores
-- Product Categories
-- Customer Ratings
-
----
-
-## Analytics Overview
-
-Interactive visualizations powered by Chart.js.
-
-Includes:
-
-- Product Category Distribution
-- Store Inventory Comparison
-- Monthly Student Registrations
-- Rating Distribution
-
----
-
-## Quick Insights
-
-Automatically calculates:
-
-- Highest Rated Product
-- Most Active Store
-- Largest Category
-- Active Students
-- Average Rating
-
----
-
-## Activity Timeline
-
-Tracks recent system activities such as:
-
-- Student Registration
-- Product Added
-- Product Updated
-- Ratings Submitted
-
----
-
-## Export Center
-
-Supports exporting reports as:
-
-- PDF
-- Excel
-- CSV (Power BI Ready)
-- JSON
-
-Specialized reports available for:
-
-- Students
-- Products
-- Ratings
-
----
-
-## Export History
-
-Displays recently generated reports.
-
-Example:
-
-- Student_Report.pdf
-- Product_Report.xlsx
-- Rating_Report.csv
-
----
-
-# ⚙️ System Module
-
-## Backup & Restore
-
-One-click database backup.
-
-Supports:
-
-- SQL Dump
-- Download Backup
-- Restore Database
-- Automatic Restore
-
----
-
-## System Health
-
-Displays:
-
-- Database Status
-- Number of Tables
-- PHP Version
-- Apache Version
-- Server Status
-- Database Connection
-- Last Backup
-- Health Check
-
----
-
-## Audit Logs
-
-Tracks administrator actions.
-
-Includes:
-
-- Search
-- Filter
-- Sort
-- Module
-- Action
-- Timestamp
-
----
-
-## Profile
-
-Manage administrator information.
-
----
-
-# 🌙 Dark Mode
-
-Available for:
-
-- Student Module
-- Admin Dashboard
-
-Supports persistent theme switching.
-
----
-
-# 🔍 Search Suggestions
-
-Implemented using AJAX.
-
-Available in:
-
-- Product Search
-- Student Search
-- Admin Management
-- Product Management
-
-Features:
-
-- Live Suggestions
-- Rating Preview
-- Product Price
-- Store Name
-- Category
-- Quick Navigation
-
----
-
-# 📤 Export Support
-
-| Format | Supported |
-|----------|-----------|
-| PDF | ✅ |
-| Excel | ✅ |
-| CSV | ✅ |
-| JSON | ✅ |
-
----
+# Features
+
+## Student Module
+
+- Product search, filtering, sorting, and comparison
+- Wishlist and comparison history
+- Product ratings and reviews
+- Search suggestions using AJAX
+- Community forum
+- Light/Dark mode support
+
+
+## Admin Module
+
+- Dashboard analytics
+- Product, store, category management
+- Student and administrator management
+- Rating moderation
+- Export reports
+- Backup and restore database
+- Audit logs
 
 # 📱 Responsive Design
 
@@ -431,35 +142,19 @@ config/
 assets/
 vendor/
 database/
+ └── db_pcs.sql
 README.md
 ```
 
 ---
 
+# Future Improvements
 
-# 🔮 Future Improvements
-
-Planned migration to a more scalable architecture.
-
-Current
-
-- PHP
-- MySQL
-- jQuery
-
-Future
-
-- Next.js
-- Express.js
-- PostgreSQL
-- Prisma ORM
-- TypeScript
-- Docker
-- Redis
-- REST API
-- Real-time Notifications
-- AI Recommendation Engine
-- SaaS Multi-Tenant Architecture
+- Migration to modern full-stack architecture
+- REST API development
+- Automated testing
+- Containerized deployment
+- AI-based product recommendations
 
 ---
 
@@ -486,6 +181,6 @@ Feel free to learn from, fork, and improve upon this project.
 
 ⭐ If you found this project interesting, consider giving it a star!
 
-Made with ❤️ by Mohammad Hamka
+Made with ❤️ by mdhamka
 
 </div>
