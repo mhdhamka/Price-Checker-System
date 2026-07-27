@@ -19,9 +19,6 @@ Compare products • Analyze prices • Manage inventory • Community Forum •
 ![Chart.js](https://img.shields.io/badge/Chart.js-Analytics-FF6384?style=for-the-badge)
 ![DomPDF](https://img.shields.io/badge/DomPDF-PDF%20Export-E53935?style=for-the-badge)
 ![PhpSpreadsheet](https://img.shields.io/badge/PhpSpreadsheet-Excel-217346?style=for-the-badge)
-
-![XAMPP](https://img.shields.io/badge/XAMPP-Environment-FB7A24?style=for-the-badge&logo=xampp&logoColor=white)
-![Apache](https://img.shields.io/badge/Apache-Server-D22128?style=for-the-badge&logo=apache&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-Version%20Control-F05032?style=for-the-badge&logo=git&logoColor=white)
 
 ![Status](https://img.shields.io/badge/Status-Active%20Development-success?style=for-the-badge)
