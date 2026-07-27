@@ -102,7 +102,7 @@ Optimized for:
 
 ---
 
-# 🛠 Tech Stack
+# Tech Stack
 
 ## Backend
 
@@ -127,7 +127,7 @@ Optimized for:
 
 ---
 
-# 📂 Project Structure
+# Project Structure
 
 ```
 Price-Checker-System/
@@ -155,7 +155,7 @@ README.md
 
 ---
 
-# 💡 Areas for Improvement
+# Areas for Improvement
 
 - Authentication Middleware
 - Reusable PHP Components
@@ -166,7 +166,7 @@ README.md
 
 ---
 
-# 📜 License
+# License
 
 This project is released under the MIT License.
 
