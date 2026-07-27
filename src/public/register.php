@@ -3,6 +3,7 @@
 session_start();
 
 include("../config/db_cPCS.php");
+include("../config/auditLog.php");
 
 
 if(isset($_POST['register']))
@@ -26,10 +27,45 @@ if(isset($_POST['register']))
     $result = mysqli_query($conn,$check);
 
 
-    if(mysqli_num_rows($result)>0)
+    if(mysqli_query($conn,$sql))
     {
 
-        $error = "Username or Email already exists.";
+
+        /*
+        =====================================
+        GET NEW STUDENT ID
+        =====================================
+        */
+
+        $studentID = mysqli_insert_id($conn);
+
+
+
+        /*
+        =====================================
+        AUDIT LOG - STUDENT REGISTER
+        =====================================
+        */
+
+        createAuditLog(
+
+            $conn,
+
+            $studentID,
+
+            "Authentication",
+
+            "REGISTER",
+
+            "Student Account",
+
+            "New student account registered: ".$username
+
+        );
+
+
+
+        $success="Registration successful. Please login.";
 
     }
 

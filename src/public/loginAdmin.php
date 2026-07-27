@@ -56,7 +56,7 @@ $adminID = $row['adminID'];
 createAuditLog(
 $conn,
 $adminID,
-"Admin",
+"Authentication",
 "LOGIN",
 "Admin Account",
 "Admin logged into the system"

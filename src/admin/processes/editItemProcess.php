@@ -72,13 +72,13 @@ if($result)
 
         $_SESSION['adminID'],
 
-        "Item",
+        "Product",
 
         "UPDATE",
 
         $itemName,
 
-        "Updated item from ".$oldItem['ItemName']." to ".$itemName
+        "Updated product from ".$oldItem['ItemName']." to ".$itemName
 
     );
 

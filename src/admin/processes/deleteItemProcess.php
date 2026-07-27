@@ -104,13 +104,13 @@ if(isset($_GET['id']))
 
                 $_SESSION['adminID'],
 
-                "Item",
+                "Product",
 
                 "DELETE",
 
                 $item['ItemName'],
 
-                "Deleted item ".$item['ItemName']
+                "Deleted product ".$item['ItemName']
 
             );
 

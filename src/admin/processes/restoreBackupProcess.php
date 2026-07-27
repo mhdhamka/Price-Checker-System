@@ -4,6 +4,8 @@ session_start();
 
 include("../../config/db_cPCS.php");
 
+include("../../config/auditLog.php");
+
 
 if(!isset($_SESSION['adminID']))
 {
@@ -41,7 +43,10 @@ CHECK FILE TYPE
 ==================================
 */
 
-$extension = pathinfo($fileName, PATHINFO_EXTENSION);
+$extension = pathinfo(
+    $fileName,
+    PATHINFO_EXTENSION
+);
 
 
 if(strtolower($extension) != "sql")
@@ -51,7 +56,27 @@ if(strtolower($extension) != "sql")
 }
 
 
-$checkBackup = mysqli_query(
+
+/*
+==================================
+SECURE FILE NAME
+==================================
+*/
+
+$fileNameSafe = mysqli_real_escape_string(
+    $conn,
+    $fileName
+);
+
+
+
+/*
+==================================
+CHECK BACKUP EXISTS
+==================================
+*/
+
+$backupQuery = mysqli_query(
 $conn,
 "
 SELECT backupID
@@ -61,39 +86,10 @@ WHERE fileName='$fileNameSafe'
 );
 
 
-if(mysqli_num_rows($checkBackup)==0)
-{
-    header("Location: ../backup.php?restore=failed");
-    exit();
-}
 
-
-
-/*
-==================================
-GET BACKUP ID
-==================================
-*/
-
-
-$fileNameSafe = mysqli_real_escape_string(
-    $conn,
-    $fileName
+$backupData = mysqli_fetch_assoc(
+    $backupQuery
 );
-
-
-$backupQuery = mysqli_query(
-    $conn,
-    "
-    SELECT backupID
-    FROM backups
-    WHERE fileName='$fileNameSafe'
-    "
-);
-
-
-
-$backupData = mysqli_fetch_assoc($backupQuery);
 
 
 
@@ -115,38 +111,24 @@ RESTORE DATABASE
 ==================================
 */
 
-
 $database = "db_pcs";
 
 
 $command = "\"C:/xampp/mysql/bin/mysql.exe\" -u root $database < \"$fileTmp\"";
 
 
-exec($command,$output,$result);
+exec(
+    $command,
+    $output,
+    $result
+);
+
 
 
 if($result !== 0)
 {
-    header("Location: ../backup.php?restore=failed");
-    exit();
-}
-
-
-
-
-/*
-==================================
-CHECK RESTORE RESULT
-==================================
-*/
-
-
-if($output !== 0)
-{
-
     header("Location: ../backup.php?restore=failed&msg=restore_error");
     exit();
-
 }
 
 
@@ -154,12 +136,12 @@ if($output !== 0)
 
 /*
 ==================================
-INSERT RESTORE LOG
+INSERT BACKUP RESTORE HISTORY
 ==================================
 */
 
-
 $adminID = $_SESSION['adminID'];
+
 
 mysqli_query(
 $conn,
@@ -174,12 +156,37 @@ INSERT INTO backup_logs
 VALUES
 
 (
-    ".($backupID ? "'$backupID'" : "NULL").",
+    '$backupID',
     'Restore Backup',
-    '".$_SESSION['adminID']."'
+    '$adminID'
 )
 
 "
+);
+
+
+
+/*
+==================================
+AUDIT LOG
+==================================
+*/
+
+
+createAuditLog(
+
+    $conn,
+
+    $adminID,
+
+    "Backup",
+
+    "RESTORE",
+
+    $fileName,
+
+    "Restored database backup ".$fileName
+
 );
 
 
@@ -191,7 +198,9 @@ SUCCESS REDIRECT
 */
 
 
-header("Location: ../backup.php?restore=success");
+header(
+    "Location: ../backup.php?restore=success"
+);
 
 exit();
 

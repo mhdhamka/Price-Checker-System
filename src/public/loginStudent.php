@@ -3,7 +3,7 @@
 session_start();
 
 include("../config/db_cPCS.php");
-
+include("../config/auditLog.php");
 
 if(isset($_POST['login']))
 {
@@ -57,6 +57,28 @@ $conn,
 WHERE studentID=".$row['studentID']
 );
 
+
+/*
+=====================================
+AUDIT LOG - STUDENT LOGIN
+=====================================
+*/
+
+createAuditLog(
+
+    $conn,
+
+    $row['studentID'],
+
+    "Authentication",
+
+    "LOGIN",
+
+    "Student Account",
+
+    "Student ".$row['username']." logged into the system"
+
+);
 
 
 header("Location: ../student/dashboard.php");

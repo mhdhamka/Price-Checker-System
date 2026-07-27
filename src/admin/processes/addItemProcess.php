@@ -64,13 +64,13 @@ if($result)
 
         $_SESSION['adminID'],
 
-        "Item",
+        "Product",
 
         "ADD",
 
         $itemName,
 
-        "Added new item ".$itemName
+        "Added new product ".$itemName
 
     );
 

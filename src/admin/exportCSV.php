@@ -8,7 +8,13 @@ include("../admin/processes/reportLogger.php");
 
 include("../config/auditLog.php");
 
-$adminID=$_SESSION['adminID'] ?? 1;
+$adminID=$_SESSION['adminID'] ?? null;
+
+
+if(!$adminID)
+{
+    exit("Access denied.");
+}
 
 $type = $_GET['type'] ?? "item";
 
@@ -250,6 +256,26 @@ logReport(
     $type,
     "CSV"
 );
+
+
+
+createAuditLog(
+
+    $conn,
+
+    $adminID,
+
+    "Report",
+
+    "EXPORT",
+
+    ucfirst($type)." Report CSV",
+
+    "Generated ".ucfirst($type)." report in CSV format"
+
+);
+
+
 
 exit();
 

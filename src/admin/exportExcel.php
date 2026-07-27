@@ -12,7 +12,15 @@ include("../config/db_cPCS.php");
 
 include("../admin/processes/reportLogger.php");
 
-$adminID=$_SESSION['adminID'] ?? 1;
+include("../config/auditLog.php");
+
+$adminID=$_SESSION['adminID'] ?? null;
+
+
+if(!$adminID)
+{
+    exit("Access denied.");
+}
 
 $type=$_GET['type'] ?? 'item';
 
@@ -229,12 +237,33 @@ header(
 
 $writer->save("php://output");
 
+
+
 logReport(
     $conn,
     $adminID,
     $type,
     "Excel"
 );
+
+
+
+createAuditLog(
+
+    $conn,
+
+    $adminID,
+
+    "Report",
+
+    "EXPORT",
+
+    ucfirst($type)." Report Excel",
+
+    "Exported ".ucfirst($type)." report as Excel file: ".$filename
+
+);
+
 
 
 exit();

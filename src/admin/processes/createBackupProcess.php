@@ -4,6 +4,8 @@ session_start();
 
 include("../../config/db_cPCS.php");
 
+include("../../config/auditLog.php");
+
 
 if(!isset($_SESSION['adminID']))
 {
@@ -130,6 +132,11 @@ VALUES
 $backupID = mysqli_insert_id($conn);
 
 
+/*
+==================================
+BACKUP LOG TABLE
+==================================
+*/
 
 mysqli_query(
 $conn,
@@ -152,6 +159,28 @@ VALUES
 "
 );
 
+
+/*
+==================================
+AUDIT LOG
+==================================
+*/
+
+createAuditLog(
+
+    $conn,
+
+    $_SESSION['adminID'],
+
+    "Backup",
+
+    "CREATE",
+
+    $fileName,
+
+    "Created database backup ".$fileName
+
+);
 
 
 header("Location: ../backup.php");
