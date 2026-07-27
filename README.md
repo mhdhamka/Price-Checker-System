@@ -288,22 +288,6 @@ Example:
 
 ---
 
-## Report Footer
-
-```
-Price Checker System • Reports & Analytics
-
-Generated automatically
-
-Powered by:
-
-Chart.js
-DomPDF
-PhpSpreadsheet
-```
-
----
-
 # ⚙️ System Module
 
 ## Backup & Restore
