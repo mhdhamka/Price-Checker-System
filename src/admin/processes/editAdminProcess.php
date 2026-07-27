@@ -3,10 +3,43 @@
 session_start();
 
 include("../../config/db_cPCS.php");
+include("../../config/auditLog.php");
+
+
+if(!isset($_SESSION['adminID']))
+{
+    exit("Access denied.");
+}
 
 
 
-$id = $_POST['adminID'];
+$id = (int)$_POST['adminID'];
+
+
+
+/*
+=====================================
+   GET OLD ADMIN INFORMATION
+=====================================
+*/
+
+$oldAdmin=mysqli_fetch_assoc(
+
+    mysqli_query(
+
+        $conn,
+
+        "
+        SELECT adminFullname
+        FROM admin
+        WHERE adminID='$id'
+        "
+
+    )
+
+);
+
+
 
 $name = $_POST['adminFullname'];
 
@@ -22,43 +55,59 @@ $imageDB = $_POST['oldImage'];
 
 
 
+/*
+=====================================
+   UPLOAD NEW IMAGE
+=====================================
+*/
 
 
 if($_FILES['image']['name'] != "")
 {
 
-
-$imageName = basename($_FILES['image']['name']);
-
-
-$imagePath = "../../../assets/images/admin/" . $imageName;
+    $imageName = basename($_FILES['image']['name']);
 
 
-$imageDB = "../../assets/images/admin/" . $imageName;
+    $imagePath = "../../../assets/images/admin/" . $imageName;
+
+
+    $imageDB = "../../assets/images/admin/" . $imageName;
 
 
 
-move_uploaded_file(
-$_FILES['image']['tmp_name'],
-$imagePath
-);
+    move_uploaded_file(
 
+        $_FILES['image']['tmp_name'],
+
+        $imagePath
+
+    );
 
 }
+
+
+
+/*
+=====================================
+   UPDATE ADMIN
+=====================================
+*/
 
 
 if($password != "")
 {
 
 
-$password = password_hash(
-$password,
-PASSWORD_DEFAULT
-);
+    $password = password_hash(
+
+        $password,
+
+        PASSWORD_DEFAULT
+
+    );
 
 
-
-$sql = "
+    $sql = "
 
     UPDATE admin SET
 
@@ -72,9 +121,10 @@ $sql = "
 
     adminIMG='$imageDB'
 
+
     WHERE adminID='$id'
 
-";
+    ";
 
 
 }
@@ -84,7 +134,7 @@ else
 {
 
 
-$sql = "
+    $sql = "
 
     UPDATE admin SET
 
@@ -96,21 +146,55 @@ $sql = "
 
     adminIMG='$imageDB'
 
+
     WHERE adminID='$id'
 
-";
+    ";
 
 
 }
 
 
 
+$result=mysqli_query($conn,$sql);
 
-mysqli_query($conn,$sql);
+
+
+/*
+=====================================
+   AUDIT LOG
+=====================================
+*/
+
+
+if($result)
+
+{
+
+    createAuditLog(
+
+        $conn,
+
+        $_SESSION['adminID'],
+
+        "Admin",
+
+        "UPDATE",
+
+        $name,
+
+        "Updated admin account from ".$oldAdmin['adminFullname']." to ".$name
+
+    );
+
+}
+
+
 
 
 header("Location: ../../admin/admins.php");
 
 exit();
+
 
 ?>

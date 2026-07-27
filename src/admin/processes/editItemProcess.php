@@ -3,8 +3,23 @@
 session_start();
 
 include("../../config/db_cPCS.php");
+include("../../config/auditLog.php");
 
 $id = $_POST['id'];
+
+$oldItem=mysqli_fetch_assoc(
+
+mysqli_query(
+$conn,
+"
+SELECT ItemName
+FROM item
+WHERE ItemID='$id'
+"
+)
+
+);
+
 
 $itemName = $_POST['itemName'];
 $price = $_POST['price'];
@@ -28,7 +43,7 @@ if($_FILES['image']['name'] != "")
     );
 }
 
-mysqli_query(
+$result=mysqli_query(
 
     $conn,
 
@@ -44,6 +59,30 @@ mysqli_query(
     WHERE ItemID='$id'"
 
 );
+
+
+
+if($result)
+
+{
+
+    createAuditLog(
+
+        $conn,
+
+        $_SESSION['adminID'],
+
+        "Item",
+
+        "UPDATE",
+
+        $itemName,
+
+        "Updated item from ".$oldItem['ItemName']." to ".$itemName
+
+    );
+
+}
 
 header("Location: ../../admin/items.php");
 

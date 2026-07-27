@@ -3,6 +3,7 @@
 session_start();
 
 include("../config/db_cPCS.php");
+include("../config/auditLog.php");
 
 if(isset($_POST['login']))
 {
@@ -34,7 +35,7 @@ if(mysqli_num_rows($result)>0)
 $row=mysqli_fetch_assoc($result);
 
 $_SESSION['adminID']=$row['adminID'];
-$_SESSION['adminfullName']=$row['adminfullName'];
+$_SESSION['adminFullname']=$row['adminFullname'];
 $_SESSION['adminUsername']=$row['adminUsername'];
 $_SESSION['adminEmail']=$row['adminEmail'];
 $_SESSION['adminIMG']=$row['adminIMG'];
@@ -43,6 +44,22 @@ mysqli_query(
 $conn,
 "UPDATE admin SET logStatus=1 
 WHERE adminID=".$row['adminID']
+);
+
+// ================================
+// AUDIT LOG - ADMIN LOGIN
+// ================================
+
+$adminID = $row['adminID'];
+
+
+createAuditLog(
+$conn,
+$adminID,
+"Admin",
+"LOGIN",
+"Admin Account",
+"Admin logged into the system"
 );
 
 

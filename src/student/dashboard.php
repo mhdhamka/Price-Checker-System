@@ -980,7 +980,7 @@ LIMIT 5
 
                     <div class="why-card">
 
-                        <i class="fa fa-search"></i>
+                        <i class="fa-solid fa-magnifying-glass-dollar"></i> 
 
                         <h4>Easy Price Search</h4>
 
@@ -993,7 +993,7 @@ LIMIT 5
                 <div class="col-lg-4">
                     <div class="why-card">
 
-                        <i class="fa fa-bar-chart"></i>
+                        <i class="fa fa-balance-scale"></i>
 
                         <h4>Smart Comparison</h4>
 
@@ -1007,7 +1007,7 @@ LIMIT 5
 
                 <div class="col-lg-4">
                     <div class="why-card">
-                        <i class="fa fa-money"></i>
+                        <i class="fa fa-wallet"></i>
 
                         <h4>Budget Friendly</h4>
 

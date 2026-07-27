@@ -3,6 +3,7 @@
 session_start();
 
 include("../../config/db_cPCS.php");
+include("../../config/auditLog.php");
 
 if(!isset($_SESSION['adminID']))
 {
@@ -11,14 +12,60 @@ if(!isset($_SESSION['adminID']))
 
 $adminID = (int)$_POST['adminID'];
 
+$admin=mysqli_fetch_assoc(
+
 mysqli_query(
-    $conn,
-    "
-    UPDATE admin
-    SET logStatus='1'
-    WHERE adminID='$adminID'
-    "
+
+$conn,
+
+"
+SELECT adminFullname
+FROM admin
+WHERE adminID='$adminID'
+"
+
+)
+
 );
+
+$result=mysqli_query(
+
+$conn,
+
+"
+UPDATE admin
+
+SET logStatus='1'
+
+WHERE adminID='$adminID'
+
+"
+
+);
+
+
+
+if($result)
+
+{
+
+createAuditLog(
+
+$conn,
+
+$_SESSION['adminID'],
+
+"Admin",
+
+"UPDATE",
+
+$admin['adminFullname'],
+
+"Enabled admin account ".$admin['adminFullname']
+
+);
+
+}
 
 header("Location: ../../admin/admins.php");
 exit();

@@ -17,7 +17,7 @@
     <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/font-awesome.css">
-    <link rel="stylesheet" href="../../assets/css/styleindex.css">
+    
     <link rel="stylesheet" href="../../assets/css/indexPublic.css">
     <link rel="stylesheet" href="../../assets/css/sliders.css">
     <link rel="stylesheet" href="../../assets/css/footer.css">
@@ -47,9 +47,7 @@
                     <nav class="main-nav">
                         <a href="index.php" class="logo">
 
-                            <img src="../../assets/images/logo.png" 
-                                width="90" 
-                                height="90">
+                            <img src="../../assets/images/logo.png" width="90px" height="90px">
                         </a>
 
                         <!-- ***** Menu Start ***** -->
@@ -92,7 +90,7 @@
 
                                 <a href="loginSelection.php" class="login-btn">
 
-                                    <img src="../../assets/images/icon.png">
+                                    <i class="fa fa-sign-in"></i>
 
                                     <span>
                                         Get Started
@@ -104,12 +102,6 @@
 
                         </ul>
 
-                        <a class="menu-trigger">
-
-                            <span>
-                                Menu
-                            </span>
-                        </a>
                     </nav>
                 </div>
             </div>
@@ -130,7 +122,7 @@
                 <h6>
                     STUDENT BUDGET MANAGEMENT SYSTEM
                 </h6>
-                <h2>Smart shopping with</h2>
+                <h2>SMART SHOPPING WITH</h2>
                 <h2><em>PRICE CHECKER SYSTEM</em></h2>
                 <p>
                     Compare prices, discover affordable products,
@@ -612,74 +604,7 @@
     </section>
     
     
-    <!-- ***** Footer Start ***** -->
-    <footer>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-
-                <h4>
-                    Price Checker System
-                </h4>
-
-                <p>
-                    Helping students compare prices and make smarter shopping decisions.
-                </p>
-
-                </div>
-
-                <div class="col-lg-4">
-
-                    <h4>
-                        Quick Links
-                    </h4>
-
-                    <p>
-                        <a href="#top">
-                            Home
-                        </a>
-                        |
-                        <a href="#features">
-                            Features
-                        </a>
-                        |
-                        <a href="#store">
-                            Stores
-                        </a>
-                        |
-                        <a href="#preview">
-                            Preview
-                        </a>
-                    </p>
-
-                </div>
-
-                <div class="col-lg-4">
-                    <h4>
-                        Developed By
-                    </h4>
-
-                    <p>
-                        Mohd Hamka
-                    <br>
-                        Universiti Malaysia Sarawak (UNIMAS)
-                    </p>
-                </div>
-
-                </div>
-
-                <hr>
-
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <p>
-                        Copyright &copy; 2024 Price Checker System. All Rights Reserved.
-                        </p>
-                    </div>
-                </div>
-        </div>
-    </footer>
+    <?php include("../student/includes/footer.php"); ?>
 
     <!-- jQuery -->
     <script src="../../assets/js/jquery-2.1.0.min.js"></script>
@@ -698,8 +623,8 @@
     <script src="../../assets/js/slideshow.js"></script>
     <!-- Global Init -->
     <script src="../../assets/js/custom.js"></script>
-
     <script src="../../assets/js/sliders.js"></script>
+    <script src="../../assets/js/indexScroll.js"></script>
 
   </body>
 </html>

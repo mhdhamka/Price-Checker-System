@@ -3,6 +3,7 @@
 session_start();
 
 include("../../config/db_cPCS.php");
+include("../../config/auditLog.php");
 
 $adminFullname = $_POST['adminFullname'];
 $adminUsername = $_POST['adminUsername'];
@@ -25,31 +26,57 @@ move_uploaded_file(
 );
 
 
-mysqli_query(
-    $conn,
+$result=mysqli_query(
 
-    "INSERT INTO admin(
+$conn,
 
-        adminFullname,
-        adminUsername,
-        adminEmail,
-        adminPassword,
-        adminIMG,
-        logStatus
+"INSERT INTO admin(
 
-    )
+    adminFullname,
+    adminUsername,
+    adminEmail,
+    adminPassword,
+    adminIMG,
+    logStatus
 
-    VALUES(
+)
 
-        '$adminFullname',
-        '$adminUsername',
-        '$adminEmail',
-        '$adminPassword',
-        '$imageDB',
-        '1'
+VALUES(
 
-    )"
+    '$adminFullname',
+    '$adminUsername',
+    '$adminEmail',
+    '$adminPassword',
+    '$imageDB',
+    '1'
+
+)"
+
 );
+
+
+
+if($result)
+
+{
+
+    createAuditLog(
+
+        $conn,
+
+        $_SESSION['adminID'],
+
+        "Admin",
+
+        "ADD",
+
+        $adminFullname,
+
+        "Added new admin account ".$adminFullname
+
+    );
+
+}
 
 
 header("Location: ../../admin/admins.php");

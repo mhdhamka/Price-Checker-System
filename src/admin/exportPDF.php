@@ -10,8 +10,17 @@ include("../config/db_cPCS.php");
 
 include("../admin/processes/reportLogger.php");
 
+include("../config/auditLog.php");
 
-$adminID=$_SESSION['adminID'] ?? 1;
+
+$adminID=$_SESSION['adminID'] ?? null;
+
+
+if(!$adminID)
+{
+    exit("Access denied.");
+}
+
 
 $type=$_GET['type'] ?? 'item';
 
@@ -461,6 +470,31 @@ logReport(
     $type,
     "PDF"
 );
+
+
+
+createAuditLog(
+
+    $conn,
+
+    $adminID,
+
+    "Report",
+
+    "EXPORT",
+
+    ucfirst($type)." Report PDF",
+
+    "Generated ".ucfirst($type)." PDF report"
+    .
+    ($store!="" ? " | Store: ".$store : "")
+    .
+    ($category!="" ? " | Category: ".$category : "")
+    .
+    ($from!="" && $to!="" ? " | Date: ".$from." to ".$to : "")
+
+);
+
 
 
 exit();

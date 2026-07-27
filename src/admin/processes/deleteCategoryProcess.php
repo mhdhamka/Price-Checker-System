@@ -3,6 +3,8 @@
 session_start();
 
 include("../../config/db_cPCS.php");
+include("../../config/auditLog.php");
+
 
 if(!isset($_SESSION['adminID']))
 {
@@ -10,10 +12,17 @@ if(!isset($_SESSION['adminID']))
     exit();
 }
 
+
+
 if(isset($_GET['id']))
 {
 
+
     $id=(int)$_GET['id'];
+
+
+
+    // Get category information before delete
 
     $category=mysqli_fetch_assoc(
 
@@ -21,35 +30,78 @@ if(isset($_GET['id']))
 
             $conn,
 
-            "SELECT categoryIMG
+            "
+
+            SELECT categoryName, categoryIMG
+
             FROM category
-            WHERE categoryID='$id'"
+
+            WHERE categoryID='$id'
+
+            "
 
         )
 
     );
 
+
+
     if($category)
     {
+
+
 
         if(file_exists($category['categoryIMG']))
         {
             unlink($category['categoryIMG']);
         }
 
-        mysqli_query(
+
+
+        $result=mysqli_query(
 
             $conn,
 
-            "DELETE
-            FROM category
-            WHERE categoryID='$id'"
+            "
+
+            DELETE FROM category
+
+            WHERE categoryID='$id'
+
+            "
 
         );
 
+
+
+        if($result)
+        {
+
+            createAuditLog(
+
+                $conn,
+
+                $_SESSION['adminID'],
+
+                "Category",
+
+                "DELETE",
+
+                $category['categoryName'],
+
+                "Deleted category ".$category['categoryName']
+
+            );
+
+        }
+
+
     }
 
+
 }
+
+
 
 header("Location: ../../admin/categories.php");
 

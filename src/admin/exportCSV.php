@@ -6,6 +6,8 @@ include("../config/db_cPCS.php");
 
 include("../admin/processes/reportLogger.php");
 
+include("../config/auditLog.php");
+
 $adminID=$_SESSION['adminID'] ?? 1;
 
 $type = $_GET['type'] ?? "item";

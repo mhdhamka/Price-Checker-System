@@ -44,6 +44,7 @@ $img = $row['studentIMG'];
     <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="../../assets/css/styleindex.css">
     <link rel="stylesheet" href="../../assets/css/styleStudent.css">
     <link rel="stylesheet" href="../../assets/css/profileStudent.css">
@@ -79,51 +80,11 @@ $img = $row['studentIMG'];
     }
     ?>
     
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="../student/dashboard.php" class="logo"><img src="../../assets/images/logo.png"  width="90" height="90"></a>
-                        
-
-                        <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#top">Home</a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#compare">Compare </a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#search">Products</a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#tools">Tools</a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#trend">Trending</a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#community">Community</a></li>
-                            <li class="scroll-to-section"><a href="../student/dashboard.php#why-us">About</a></li>
-
-                            <form method="post">
-                                <div class="icons">
-                                    <div class="dropdown">
-                                    <img src="<?php echo $img; ?>" width="40" height="40" class="rounded-circle">
-                                      <div class="dropdown-content">
-                                        <a href="../student/profile.php">My Profile</a>
-                                        <a href="../public/logout.php" name="logout">Log Out</a>
-                                      </div>
-                                    </div>
-                                </form>
-                                </div>
-                        </ul>        
-                        <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a>
-                        
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
+    <?php include("../student/includes/header.php"); ?>
   
 
     <!-- ***** Update Profile Start ***** -->
-    <section class="section" id="compare">
+    <section class="section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
@@ -315,6 +276,8 @@ $img = $row['studentIMG'];
     <!-- Global Init -->
     <script src="../../assets/js/custom.js"></script>
     <script src="../../assets/js/profileStudent.js"></script>
+    <script src="../../assets/js/studentTheme.js"></script>
+    <script src="../../assets/js/header.js"></script>
 
   </body>
 </html>

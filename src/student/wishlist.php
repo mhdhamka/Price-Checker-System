@@ -256,6 +256,7 @@ LIMIT 6
     <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="../../assets/css/styleindex.css">
     <link rel="stylesheet" href="../../assets/css/wishlistStudent.css">
     <link rel="stylesheet" href="../../assets/css/footer.css">
@@ -304,51 +305,10 @@ LIMIT 6
     }
     ?>
 
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="../student/dashboard.php" class="logo"><img src="../../assets/images/logo.png" width="90" height="90"></a>
-                        <!-- ***** Logo End ***** -->
+    <?php include("../student/includes/header.php"); ?>
 
-                        <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
-                            <li class="scroll-to-section"><a href="#top">Home</a></li>
-                            <li class="scroll-to-section"><a href="#compare">Compare </a></li>
-                            <li class="scroll-to-section"><a href="#search">Products</a></li>
-                            <li class="scroll-to-section"><a href="#tools">Tools</a></li>
-                            <li class="scroll-to-section"><a href="#trend">Trending</a></li>
-                            <li class="scroll-to-section"><a href="#community">Community</a></li>
-                            <li class="scroll-to-section"><a href="#why-us">About</a></li>
-
-                            <form method="get">
-                                <div class="icons">
-                                    <div class="dropdown">
-                                        <img src="<?php echo $img; ?>" width="40" height="40" class="rounded-circle">
-                                        <div class="dropdown-content">
-                                            <a href="../student/profile.php">My Profile</a>
-                                            <a href="../public/logout.php" name="logout">Log Out</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </ul>
-                        <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a>
-                        <!-- ***** Menu End ***** -->
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- ***** Header Area End ***** -->
-
-    <!-- ***** Search Starts ***** -->
-    <section class="section bg-light" id="search">
+    <!-- ***** Wishlist Starts ***** -->
+    <section class="section bg-light">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
@@ -538,19 +498,45 @@ LIMIT 6
 
                                     <div class="item-card">
 
-                                        <!-- Card Header -->
-                                        <div class="card-top">
+                                        <!-- Product Image -->
+                                        <div class="item-image-box">
+
+                                            <?php
+
+                                                if($row['averageRating'] >= 4.5)
+                                                {
+
+                                                    echo "<div class='badge top-rated'>Top Rated</div>";
+
+                                                }
+                                                elseif($row['totalReviews'] >= 15)
+                                                {
+
+                                                    echo "<div class='badge popular'>Popular Choice</div>";
+
+                                                }
+                                                elseif($row['ItemPrice'] == $lowestPrice)
+                                                {
+
+                                                    echo "<div class='badge best-price'>Lowest Price</div>";
+
+                                                }
+                                                else
+                                                {
+
+                                                    echo "<div class='badge saved'>Saved</div>";
+
+                                                }
+
+                                            ?>
+
+                                            <!-- Wishlist -->
 
                                             <i 
                                                 class="wishlist fa <?php echo in_array($row['ItemID'], $wishlistItems) ? 'fa-heart active' : 'fa-heart-o'; ?>"
                                                 data-id="<?php echo $row['ItemID']; ?>">
                                             </i>
 
-                                        </div>
-
-
-                                        <!-- Product Image -->
-                                        <div class="item-image-box">
 
                                             <img
                                                 src="<?php echo $row['ItemImage']; ?>"
@@ -655,35 +641,6 @@ LIMIT 6
                                             </a>
 
                                         </div>
-
-                                         <?php
-
-                                            if($row['averageRating'] >= 4.5)
-                                            {
-
-                                                echo "<div class='badge top-rated'>Top Rated</div>";
-
-                                            }
-                                            elseif($row['totalReviews'] >= 15)
-                                            {
-
-                                                echo "<div class='badge popular'>Popular Choice</div>";
-
-                                            }
-                                            elseif($row['ItemPrice'] == $lowestPrice)
-                                            {
-
-                                                echo "<div class='badge best-price'>Lowest Price</div>";
-
-                                            }
-                                            else
-                                            {
-
-                                                echo "<div class='badge saved'>Saved</div>";
-
-                                            }
-
-                                        ?>
 
                                     </div>
 
@@ -1099,6 +1056,8 @@ LIMIT 6
     <!-- Global Init -->
     <script src="../../assets/js/custom.js"></script>
     <script src="../../assets/js/filterStudent.js"></script>
+    <script src="../../assets/js/studentTheme.js"></script>
+    <script src="../../assets/js/header.js"></script>
 
 </body>
 </html>

@@ -3,6 +3,7 @@
 session_start();
 
 include("../../config/db_cPCS.php");
+include("../../config/auditLog.php");
 
 $itemName=$_POST['itemName'];
 $price=$_POST['price'];
@@ -23,27 +24,57 @@ move_uploaded_file(
 );
 
 
-mysqli_query(
-    $conn,
+$result = mysqli_query(
 
-    "INSERT INTO item(
-        ItemName,
-        ItemPrice,
-        ItemCategory,
-        ItemDescription,
-        StoreName,
-        ItemImage
-    )
+$conn,
 
-    VALUES(
-        '$itemName',
-        '$price',
-        '$category',
-        '$description',
-        '$store',
-        '$imageDB'
-    )"
+"INSERT INTO item(
+
+ItemName,
+ItemPrice,
+ItemCategory,
+ItemDescription,
+StoreName,
+ItemImage
+
+)
+
+VALUES(
+
+'$itemName',
+'$price',
+'$category',
+'$description',
+'$store',
+'$imageDB'
+
+)"
+
 );
+
+
+
+if($result)
+
+{
+
+    createAuditLog(
+
+        $conn,
+
+        $_SESSION['adminID'],
+
+        "Item",
+
+        "ADD",
+
+        $itemName,
+
+        "Added new item ".$itemName
+
+    );
+
+}
 
 
 header("Location: ../../admin/items.php");

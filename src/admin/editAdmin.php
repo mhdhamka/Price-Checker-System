@@ -73,253 +73,164 @@ $editAdmin = mysqli_fetch_assoc($query);
 
                     <div class="page-title">
 
+                        <h2>
+                            Edit Administrator
+                        </h2>
 
-<h2>
-Edit Administrator
-</h2>
+                        <p>
+                            Update administrator account information.
+                        </p>
 
+                    </div>
 
-<p>
-Update administrator account information.
-</p>
+                    <form action="../admin/processes/editAdminProcess.php"
+                    method="POST" enctype="multipart/form-data">
 
+                        <input type="hidden" name="adminID"
+                        value="<?php echo $editAdmin['adminID']; ?>">
 
-</div>
+                        <input type="hidden" name="oldImage"
+                        value="<?php echo $editAdmin['adminIMG']; ?>">
 
+                            <div class="profile-layout">
 
+                                <div class="profile-card">
 
+                                    <h3>
+                                        Profile Image
+                                    </h3>
 
 
-<form action="../admin/processes/editAdminProcess.php"
-method="POST"
-enctype="multipart/form-data">
 
+                                    <img src="<?php echo $editAdmin['adminIMG']; ?>"
+                                    class="profile-image">
 
-<input
-type="hidden"
-name="adminID"
-value="<?php echo $editAdmin['adminID']; ?>">
+                                    <div class="form-group">
 
+                                        <label>
 
+                                            <i class="fa fa-image"></i>
 
-<input
-type="hidden"
-name="oldImage"
-value="<?php echo $editAdmin['adminIMG']; ?>">
+                                            Change Image
 
+                                        </label>
 
+                                        <input type="file" name="image"
+                                        accept="image/*">
 
+                                    </div>
 
+                                </div>
 
-<div class="profile-layout">
+                                <div class="profile-card">
 
+                                    <h3>
+                                        Administrator Information
+                                    </h3>
 
 
-<div class="profile-card">
+                                    <br>
 
+                                    <div class="form-group">
 
-<h3>
-Profile Image
-</h3>
+                                        <label>
 
+                                            <i class="fa fa-user"></i>
 
+                                            Full Name
 
-<img
-src="<?php echo $editAdmin['adminIMG']; ?>"
-class="profile-image">
+                                        </label>
 
+                                        <input type="text" name="adminFullname"
+                                        value="<?php echo $editAdmin['adminFullname']; ?>">
 
+                                    </div>
 
-<div class="form-group">
+                                    <div class="form-group">
 
+                                        <label>
 
-<label>
+                                            <i class="fa fa-user-tag"></i>
 
-<i class="fa fa-image"></i>
+                                            Username
 
-Change Image
+                                        </label>
 
-</label>
+                                        <input type="text" name="adminUsername"
+                                        value="<?php echo $editAdmin['adminUsername']; ?>">
 
+                                    </div>
 
-<input
-type="file"
-name="image"
-accept="image/*">
+                                    <div class="form-group">
 
+                                        <label>
 
-</div>
+                                            <i class="fa fa-envelope"></i>
 
+                                            Email
 
-</div>
+                                        </label>
 
+                                        <input type="email" name="adminEmail"
+                                        value="<?php echo $editAdmin['adminEmail']; ?>">
 
+                                    </div>
 
+                                    <div class="form-group">
 
+                                        <label>
 
+                                            <i class="fa fa-lock"></i>
 
-<div class="profile-card">
+                                            New Password
 
+                                        </label>
 
-<h3>
-Administrator Information
-</h3>
+                                        <input type="password" name="adminPassword"
+                                        placeholder="Leave blank to keep current password">
 
+                                    </div>
 
-<br>
 
+                                    <div class="form-buttons">
 
+                                        <button class="save-btn">
 
-<div class="form-group">
+                                            <i class="fa fa-save"></i>
 
+                                            Save Changes
 
-<label>
+                                        </button>
 
-<i class="fa fa-user"></i>
+                                        <a href="../admin/admins.php"
+                                        class="cancel-btn">
 
-Full Name
+                                            <i class="fa fa-arrow-left"></i>
 
-</label>
+                                            Cancel
 
+                                        </a>
 
-<input
-type="text"
-name="adminFullname"
-value="<?php echo $editAdmin['adminFullname']; ?>">
+                                    </div>
 
+                                </div>
 
-</div>
 
+                            </div>
 
+                    </form>
 
 
+                </div>
 
-<div class="form-group">
 
+            <?php include("../admin/includes/footer.php"); ?>
 
-<label>
 
-<i class="fa fa-user-tag"></i>
+        </div>
 
-Username
 
-</label>
-
-
-<input
-type="text"
-name="adminUsername"
-value="<?php echo $editAdmin['adminUsername']; ?>">
-
-
-</div>
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-<i class="fa fa-envelope"></i>
-
-Email
-
-</label>
-
-
-<input
-type="email"
-name="adminEmail"
-value="<?php echo $editAdmin['adminEmail']; ?>">
-
-
-</div>
-
-
-
-
-
-<div class="form-group">
-
-
-<label>
-
-<i class="fa fa-lock"></i>
-
-New Password
-
-</label>
-
-
-<input
-type="password"
-name="adminPassword"
-placeholder="Leave blank to keep current password">
-
-
-</div>
-
-
-
-
-<div class="form-buttons">
-
-
-<button
-class="save-btn">
-
-
-<i class="fa fa-save"></i>
-
-Save Changes
-
-
-</button>
-
-
-
-<a
-href="../admin/admins.php"
-class="cancel-btn">
-
-
-<i class="fa fa-arrow-left"></i>
-
-Cancel
-
-
-</a>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-</form>
-
-
-</div>
-
-
-<?php include("../admin/includes/footer.php"); ?>
-
-
-</div>
-
-
-</div>
+    </div>
 
 
 </body>

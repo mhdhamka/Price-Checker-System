@@ -3,17 +3,31 @@
 session_start();
 
 include("../../config/db_cPCS.php");
+include("../../config/auditLog.php");
+
 
 if(!isset($_SESSION['adminID']))
 {
-    header("Location: ../public/loginAdmin.php");
+    header("Location: ../../public/loginAdmin.php");
     exit();
 }
+
+
 
 if(isset($_GET['id']))
 {
 
+
     $id=(int)$_GET['id'];
+
+
+
+    /*
+    =====================================
+       GET STORE INFORMATION
+    =====================================
+    */
+
 
     $store=mysqli_fetch_assoc(
 
@@ -21,38 +35,113 @@ if(isset($_GET['id']))
 
             $conn,
 
-            "SELECT storeIMG
+            "
+            SELECT 
+
+            StoreName,
+            storeIMG
+
             FROM store
-            WHERE storeID='$id'"
+
+            WHERE storeID='$id'
+
+            "
 
         )
 
     );
 
+
+
     if($store)
+
     {
 
-        if(file_exists($store['storeIMG']))
+
+        /*
+        =====================================
+           DELETE IMAGE
+        =====================================
+        */
+
+
+        $imagePath="../../../assets/images/store/".basename($store['storeIMG']);
+
+
+        if(file_exists($imagePath))
         {
-            unlink($store['storeIMG']);
+
+            unlink($imagePath);
+
         }
 
-        mysqli_query(
 
-            $conn,
 
-            "DELETE
-            FROM store
-            WHERE storeID='$id'"
+
+        /*
+        =====================================
+           DELETE STORE
+        =====================================
+        */
+
+
+        $result=mysqli_query(
+
+        $conn,
+
+        "
+        DELETE FROM store
+
+        WHERE storeID='$id'
+
+        "
 
         );
 
+
+
+
+        /*
+        =====================================
+           AUDIT LOG
+        =====================================
+        */
+
+
+        if($result)
+
+        {
+
+            createAuditLog(
+
+                $conn,
+
+                $_SESSION['adminID'],
+
+                "Store",
+
+                "DELETE",
+
+                $store['StoreName'],
+
+                "Deleted store ".$store['StoreName']
+
+            );
+
+        }
+
+
+
     }
 
+
 }
+
+
 
 header("Location: ../../admin/stores.php");
 
 exit();
+
 
 ?>
