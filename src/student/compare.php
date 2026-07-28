@@ -202,6 +202,7 @@ else
             <!-- Icon Font Stylesheet -->
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
             <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
             <!-- Libraries Stylesheet -->
             <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -264,341 +265,239 @@ else
             }
             ?>
 
-                <!-- ***** Header Area Start ***** -->
-                <header class="header-area header-sticky">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <nav class="main-nav">
-                                    <!-- ***** Logo Start ***** -->
-                                    <a href="../student/dashboard.php" class="logo"><img src="../../assets/images/logo.png" width="90" height="90"></a>
-                                    <!-- ***** Logo End ***** -->
 
-                                    <!-- ***** Menu Start ***** -->
-                                    <ul class="nav">
-                                        <li class="scroll-to-section"><a href="#top">Home</a></li>
-                                        <li class="scroll-to-section"><a href="#compare" class="active">Compare </a></li>
-                                        <li class="scroll-to-section"><a href="#search">Products</a></li>
-                                        <li class="scroll-to-section"><a href="#tools">Tools</a></li>
-                                        <li class="scroll-to-section"><a href="#trend">Trending</a></li>
-                                        <li class="scroll-to-section"><a href="#community">Community</a></li>
-                                        <li class="scroll-to-section"><a href="#why-us">About</a></li>
-
-                                        <form method="post">
-                                            <div class="icons">
-                                                <div class="dropdown">
-                                                    <img src="<?php echo $img; ?>" width="40" height="40" class="rounded-circle">
-                                                    <div class="dropdown-content">
-                                                        <a href="profileStudent.php">My Profile</a>
-                                                        <a href="../public/logout.php" name="logout">Log Out</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </ul>
-                                    <a class='menu-trigger'>
-                                        <span>Menu</span>
-                                    </a>
-                                    <!-- ***** Menu End ***** -->
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </header>
-                <!-- ***** Header Area End ***** -->
-            </div>
+            <?php include("../student/includes/header.php"); ?>        
 
             <br><br><br>
 
-                    <div class="comparison-container">
+            <section class="section bg-light" id="compare">
 
-                        <h2>
-                            Compare <em>Selected Items</em>
-                        </h2>
+                <div class="comparison-container">
 
-                        <p>
-                            Compare prices, ratings, popularity, and product information to find the best value.
-                        </p>
+                    <h2>
+                        Compare <em>Selected Items</em>
+                    </h2>
 
-                        <br>
+                    <p>
+                        Compare prices, ratings, popularity, and product information to find the best value.
+                    </p>
 
-                        <div class="row justify-content-center">
+                    <br>
 
-                            <?php
-                            while($row=mysqli_fetch_assoc($productResult))
-                            {
-                            ?>
+                    <div class="row justify-content-center">
 
-                            <div class="col-lg-4 col-md-6 mb-4">
+                        <?php
+                        while($row=mysqli_fetch_assoc($productResult))
+                        {
+                        ?>
 
-                                <div class="compare-item-card">
+                        <div class="col-lg-4 col-md-6 mb-4">
 
-                                    <!-- Badge -->
+                            <div class="compare-item-card">
 
-                                    <?php
+                                <!-- Badge -->
 
-                                    if($row['ItemPrice']==$lowestPrice)
-                                    {
+                                <?php
 
-                                    ?>
+                                if($row['ItemPrice']==$lowestPrice)
+                                {
 
-                                        <div class="compare-badge best-price">
+                                ?>
 
-                                            <i class="fa fa-check-circle"></i>
+                                    <div class="compare-badge best-price">
 
-                                            Best Price
+                                        <i class="fa fa-check-circle"></i>
 
-                                        </div>
-
-                                    <?php
-
-                                    }
-                                    elseif($row['averageRating']>=4.5)
-                                    {
-
-                                    ?>
-
-                                        <div class="compare-badge top-rated">
-
-                                            <i class="fa fa-star"></i>
-
-                                            Top Rated
-
-                                        </div>
-
-                                    <?php
-
-                                    }
-                                    elseif(($row['totalCompared'] ?? 0)>=10)
-                                    {
-
-                                    ?>
-
-                                        <div class="compare-badge popular">
-
-                                            <i class="fa fa-fire"></i>
-
-                                            Popular Choice
-
-                                        </div>
-
-                                    <?php
-
-                                    }
-
-                                    ?>
-
-
-                                    <!-- Image -->
-                                    <div class="compare-image-box">
-
-                                        <img
-                                        src="<?php echo $row['ItemImage']; ?>"
-                                        class="compare-image"
-                                        alt="<?php echo $row['ItemName']; ?>">
+                                        Best Price
 
                                     </div>
 
+                                <?php
 
-                                    <!-- Name -->
-                                    <h4>
+                                }
+                                elseif($row['averageRating']>=4.5)
+                                {
 
-                                        <?php echo $row['ItemName']; ?>
+                                ?>
 
-                                    </h4>
+                                    <div class="compare-badge top-rated">
 
+                                        <i class="fa fa-star"></i>
 
-                                    <!-- Rating -->
-
-                                    <div class="rating-box">
-
-                                        <div class="rating-score">
-
-                                            <i class="fa fa-star"></i>
-
-                                            <?php
-
-                                            echo ($row['averageRating'] > 0)
-                                                ? number_format($row['averageRating'],1)
-                                                : "0.0";
-
-                                            ?>
-
-                                        </div>
-
-                                        <div class="rating-review">
-
-                                            <?php
-
-                                            if($row['totalReviews'] > 0)
-                                            {
-
-                                                echo $row['totalReviews'];
-
-                                            }
-                                            else
-                                            {
-
-                                                echo "No";
-
-                                            }
-
-                                            ?>
-
-                                            Reviews
-
-                                        </div>
+                                        Top Rated
 
                                     </div>
 
+                                <?php
 
-                                    <!-- Price -->
+                                }
+                                elseif(($row['totalCompared'] ?? 0)>=10)
+                                {
 
-                                    <div class="price">
+                                ?>
 
-                                        RM <?php echo number_format($row['ItemPrice'],2); ?>
+                                    <div class="compare-badge popular">
+
+                                        <i class="fa fa-fire"></i>
+
+                                        Popular Choice
 
                                     </div>
 
+                                <?php
 
-                                    <!-- Comparison Statistics -->
-                                    <div class="compare-stats">
+                                }
 
-                                        <div class="stat-card">
+                                ?>
 
-                                            <div class="stat-icon">
 
-                                                <i class="fa fa-random"></i>
+                                <!-- Image -->
+                                <div class="compare-image-box">
 
-                                            </div>
+                                    <img
+                                    src="<?php echo $row['ItemImage']; ?>"
+                                    class="compare-image"
+                                    alt="<?php echo $row['ItemName']; ?>">
 
-                                            <div class="stat-content">
+                                </div>
 
-                                                <small>
 
-                                                    Compared
+                                <!-- Name -->
+                                <h4>
 
-                                                </small>
+                                    <?php echo $row['ItemName']; ?>
 
-                                                <h5>
+                                </h4>
 
-                                                    <?php echo $row['totalCompared'] ?? 0; ?>
 
-                                                </h5>
+                                <!-- Rating -->
 
-                                                <span>
+                                <div class="rating-box">
 
-                                                    Times
+                                    <div class="rating-score">
 
-                                                </span>
+                                        <i class="fa fa-star"></i>
 
-                                            </div>
+                                        <?php
+
+                                        echo ($row['averageRating'] > 0)
+                                            ? number_format($row['averageRating'],1)
+                                            : "0.0";
+
+                                        ?>
+
+                                    </div>
+
+                                    <div class="rating-review">
+
+                                        <?php
+
+                                        if($row['totalReviews'] > 0)
+                                        {
+
+                                            echo $row['totalReviews'];
+
+                                        }
+                                        else
+                                        {
+
+                                            echo "No";
+
+                                        }
+
+                                        ?>
+
+                                        Reviews
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Price -->
+
+                                <div class="price">
+
+                                    RM <?php echo number_format($row['ItemPrice'],2); ?>
+
+                                </div>
+
+
+                                <!-- Comparison Statistics -->
+                                <div class="compare-stats">
+
+                                    <div class="stat-card">
+
+                                        <div class="stat-icon">
+
+                                            <i class="fa fa-random"></i>
 
                                         </div>
 
+                                        <div class="stat-content">
 
-                                        <div class="stat-card">
+                                            <small>
 
-                                            <div class="stat-icon">
+                                                Compared
 
-                                                <i class="fa fa-clock-o"></i>
+                                            </small>
 
-                                            </div>
+                                            <h5>
 
-                                            <div class="stat-content">
+                                                <?php echo $row['totalCompared'] ?? 0; ?>
 
-                                                <small>
+                                            </h5>
 
-                                                    Last Compared
+                                            <span>
 
-                                                </small>
+                                                Times
 
-                                                <h6>
-
-                                                    <?php
-
-                                                    if(!empty($row['lastCompared']))
-                                                    {
-
-                                                        echo date(
-                                                        "d M Y",
-                                                        strtotime($row['lastCompared'])
-                                                        );
-
-                                                    }
-                                                    else
-                                                    {
-
-                                                        echo "Never";
-
-                                                    }
-
-                                                    ?>
-
-                                                </h6>
-
-                                            </div>
+                                            </span>
 
                                         </div>
 
                                     </div>
 
 
-                                    <!-- Product Information -->
+                                    <div class="stat-card">
 
-                                    <div class="compare-info">
+                                        <div class="stat-icon">
 
-                                        <div class="compare-row">
-
-                                            <span class="compare-title">
-
-                                                <i class="fa fa-tags"></i>
-
-                                                Category
-
-                                            </span>
-
-                                            <span class="compare-value">
-
-                                                <?php echo $row['ItemCategory']; ?>
-
-                                            </span>
+                                            <i class="fa fa-clock-o"></i>
 
                                         </div>
 
-                                        <div class="compare-row">
+                                        <div class="stat-content">
 
-                                            <span class="compare-title">
+                                            <small>
 
-                                                <i class="fa fa-shopping-cart"></i>
+                                                Last Compared
 
-                                                Store
-
-                                            </span>
-
-                                            <span class="compare-value">
-
-                                                <?php echo $row['StoreName']; ?>
-
-                                            </span>
-
-                                        </div>
-
-                                        <div class="compare-description">
+                                            </small>
 
                                             <h6>
 
-                                                <i class="fa fa-align-left"></i>
+                                                <?php
 
-                                                Description
+                                                if(!empty($row['lastCompared']))
+                                                {
+
+                                                    echo date(
+                                                    "d M Y",
+                                                    strtotime($row['lastCompared'])
+                                                    );
+
+                                                }
+                                                else
+                                                {
+
+                                                    echo "Never";
+
+                                                }
+
+                                                ?>
 
                                             </h6>
-
-                                            <p>
-
-                                                <?php echo $row['ItemDescription']; ?>
-
-                                            </p>
 
                                         </div>
 
@@ -606,25 +505,90 @@ else
 
                                 </div>
 
-                            </div>
 
-                            <?php
-                            }
-                            ?>
+                                <!-- Product Information -->
+
+                                <div class="compare-info">
+
+                                    <div class="compare-row">
+
+                                        <span class="compare-title">
+
+                                            <i class="fa fa-tags"></i>
+
+                                            Category
+
+                                        </span>
+
+                                        <span class="compare-value">
+
+                                            <?php echo $row['ItemCategory']; ?>
+
+                                        </span>
+
+                                    </div>
+
+                                    <div class="compare-row">
+
+                                        <span class="compare-title">
+
+                                            <i class="fa fa-shopping-cart"></i>
+
+                                            Store
+
+                                        </span>
+
+                                        <span class="compare-value">
+
+                                            <?php echo $row['StoreName']; ?>
+
+                                        </span>
+
+                                    </div>
+
+                                    <div class="compare-description">
+
+                                        <h6>
+
+                                            <i class="fa fa-align-left"></i>
+
+                                            Description
+
+                                        </h6>
+
+                                        <p>
+
+                                            <?php echo $row['ItemDescription']; ?>
+
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
-                        <a href="../student/filter.php" class="custom-btn">
-
-                            <i class="fa fa-arrow-left"></i>
-
-                            Back to Compare
-
-                        </a>
+                        <?php
+                        }
+                        ?>
 
                     </div>
+
+                    <a href="../student/filter.php" class="custom-btn">
+
+                        <i class="fa fa-arrow-left"></i>
+
+                        Back to Compare
+
+                    </a>
+
+                </div>
+
+            <section>
                                         
-                    <center>
+            <center>
                 
 
             <?php include("../student/includes/footer.php"); ?>
@@ -646,6 +610,8 @@ else
 
             <!-- Global Init -->
             <script src="../../assets/js/custom.js"></script>
+            <script src="../../assets/js/studentTheme.js"></script>
+            <script src="../../assets/js/header.js"></script>
             <script>
                 // Ensure form submission with Enter key works
                 document.getElementById("searchtextbox").addEventListener("keypress", function(event) {

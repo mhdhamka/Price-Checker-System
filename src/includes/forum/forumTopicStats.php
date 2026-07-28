@@ -1,23 +1,34 @@
 <div class="topic-stats">
 
-        <span>
+        <!-- Views -->
+        <span class="stat-chip views-chip">
 
-            <i class="fa fa-eye"></i>
+            <i class="fa-solid fa-eye"></i>
 
-            <?php echo $post['views']; ?>
+            <strong>
+                <?php echo $post['views']; ?>
+            </strong>
 
-            Views
+            <small>
+                Views
+            </small>
 
         </span>
 
         <span>
-            <a class="topic-stat-link" href="../<?php echo $pageType; ?>/viewTopic.php?id=<?php echo $post['topicID']; ?>">
+            <!-- Replies -->
+            <a class="topic-stat-link stat-chip replies-chip"
+             href="../<?php echo $pageType; ?>/viewTopic.php?id=<?php echo $post['topicID']; ?>">
 
-                <i class="fa fa-comment"></i>
+                <i class="fa-solid fa-comments"></i>
 
-                <?php echo $post['totalReplies']; ?>
+                <strong>
+                    <?php echo $post['totalReplies']; ?>
+                </strong>
 
-                Replies
+                <small>
+                    Replies
+                </small>
 
             </a>
         </span>
@@ -31,11 +42,12 @@
 
         <?php } ?>
 
-            <span>
+            <!-- Like -->
+            <span class="stat-chip like-chip">
 
                     <a href="#" class="like-btn" data-id="<?php echo $post['topicID']; ?>">
 
-                        <i class="fa <?php echo ($post['userLiked']) ? 'fa-heart' : 'fa-heart-o'; ?>"></i>
+                        <i class="<?php echo $post['userLiked'] ? 'fa-solid fa-heart' : 'fa-regular fa-heart'; ?>"></i>
 
                     </a>
 
@@ -48,12 +60,13 @@
             </span>
 
 
-                <span>
-                    <a href="#" class="bookmark-btn" data-id="<?php echo $post['topicID']; ?>">
+                <!-- Bookmark -->
+            <span class="stat-chip bookmark-chip">
+                <a href="#" class="bookmark-btn" data-id="<?php echo $post['topicID']; ?>">
 
-                        <i class="fa <?php echo $post['userBookmarked'] ? 'fa-bookmark' : 'fa-bookmark-o'; ?>"></i>
+                    <i class="<?php echo $post['userBookmarked'] ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark'; ?>"></i>
 
-                    </a>
+                </a>
 
                 <span class="bookmark-count">
 
@@ -69,19 +82,19 @@
 
                 <a href="#" class="topic-action">
 
-                    <i class="fa fa-thumb-tack"></i>
+                    <i class="fa-solid fa-thumbtack"></i>
 
                 </a>
 
                 <a href="#" class="topic-action">
 
-                    <i class="fa fa-lock"></i>
+                    <i class="fa-solid fa-lock"></i>
 
                 </a>
 
                 <a href="#" class="topic-action delete">
 
-                    <i class="fa fa-trash"></i>
+                    <i class="fa-solid fa-trash-can"></i>
 
                 </a>
 

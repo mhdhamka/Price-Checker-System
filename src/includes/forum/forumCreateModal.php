@@ -1,125 +1,216 @@
 <div class="forum-modal" id="createTopicModal">
 
-    <div class="forum-create-modal">
 
-        <div class="modal-header">
+    <div class="topic-modal-box">
 
-            <div>
 
-                <h3>
+        <!-- HEADER -->
 
-                    <i class="fa fa-comments"></i>
+        <div class="topic-modal-header">
 
-                    Start a New Discussion
 
-                </h3>
+            <div class="topic-title-area">
 
-                <p>
 
-                    Ask questions, share shopping tips, compare prices, or help other students make smarter purchasing decisions.
+                <div class="topic-modal-icon">
 
-                </p>
+                    <i class="fa-solid fa-comments"></i>
+
+                </div>
+
+
+
+                <div>
+
+                    <h3>
+                        Start a New Discussion
+                    </h3>
+
+
+                    <p>
+                        Ask questions, share shopping tips, and help the community.
+                    </p>
+
+
+                </div>
+
 
             </div>
 
-            <span class="close-create-topic">&times;</span>
+
+
+
+            <span class="close-create-topic modal-close-icon">
+
+                <i class="fa fa-times"></i>
+
+            </span>
+
+
 
         </div>
 
+
+
+
+
+
+
         <form action="processes/forum/addTopic.php" method="POST">
 
-            <div class="forum-create-body">
+
+
+            <div class="topic-modal-body">
+
+
 
                 <!-- TITLE -->
 
-                <div class="form-group">
+
+                <div class="topic-form-group">
+
 
                     <label>
+
+                        <i class="fa-solid fa-heading"></i>
 
                         Discussion Title
 
                     </label>
 
+
+
                     <input
+
                     type="text"
+
                     name="topicTitle"
-                    placeholder="e.g. Which supermarket has the cheapest instant noodles?"
+
                     maxlength="150"
+
+                    placeholder="Example: Cheapest Milo around UNIMAS?"
+
                     required>
 
+
                 </div>
+
+
+
+
 
 
 
                 <!-- CATEGORY -->
 
-                <div class="form-group">
+
+                <div class="topic-form-group">
+
 
                     <label>
+
+                        <i class="fa-solid fa-folder-open"></i>
 
                         Discussion Category
 
                     </label>
 
+
+
                     <select name="categoryID" required>
+
 
                         <option value="">
 
-                            Select a category
+                            Select category
 
                         </option>
 
+
                         <?php while($category=mysqli_fetch_assoc($categoryQuery)){ ?>
 
-                            <option value="<?php echo $category['categoryID']; ?>">
 
-                                <?php echo htmlspecialchars($category['categoryName']); ?>
+                        <option value="<?php echo $category['categoryID']; ?>">
 
-                            </option>
+
+                            <?php echo htmlspecialchars($category['categoryName']); ?>
+
+
+                        </option>
+
 
                         <?php } ?>
 
+
                     </select>
 
+
+
                 </div>
+
+
+
+
 
 
 
                 <!-- CONTENT -->
 
-                <div class="form-group">
+
+                <div class="topic-form-group">
+
 
                     <label>
+
+                        <i class="fa-solid fa-align-left"></i>
 
                         Discussion Details
 
                     </label>
 
-                    <textarea name="topicContent" rows="8" 
-                    placeholder="Share your experience, ask a question, compare prices, recommend products, or start a discussion with the community..."
+
+
+                    <textarea
+
+                    name="topicContent"
+
+                    maxlength="2000"
+
+                    rows="8"
+
+                    placeholder="Share your experience, ask questions, compare prices, or recommend products..."
+
                     required></textarea>
 
+
+
                 </div>
+
+
+
+
 
             </div>
 
 
 
-            <div class="modal-footer">
 
-                <button
-                type="button"
-                class="btn-cancel">
+
+
+
+            <!-- FOOTER -->
+
+            <div class="topic-modal-footer">
+
+                <button type="button" class="topic-cancel-btn">
 
                     Cancel
 
                 </button>
 
-                <button
-                type="submit"
-                class="btn-create-topic">
+                <button type="submit" class="topic-submit-btn">
 
-                    <i class="fa fa-paper-plane"></i>
+                    <i class="fa-solid fa-paper-plane"></i>
 
                     Publish Discussion
 

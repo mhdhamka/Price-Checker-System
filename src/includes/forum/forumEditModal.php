@@ -1,97 +1,152 @@
 <div class="forum-modal" id="editTopicModal">
 
-    <div class="forum-create-modal">
+    <div class="topic-modal-box">
 
-        <div class="modal-header">
+        <div class="topic-modal-header">
 
-            <h3>
+            <div class="topic-title-area">
 
-                <i class="fa fa-pencil"></i>
+                <div class="topic-modal-icon edit">
 
-                Edit Discussion
+                    <i class="fa fa-pencil"></i>
 
-            </h3>
+                </div>
 
-            <span class="close-edit-topic">&times;</span>
+            <div>
+
+                <h3>
+
+                    Edit Discussion
+
+                </h3>
+
+
+                <p>
+
+                    Update your discussion details
+
+                </p>
+
+            </div>
+
 
         </div>
 
-        <form action="processes/forum/updateTopic.php" id="editTopicForm">
+        <span class="close-edit-topic modal-close-icon">
 
-            <input type="hidden" name="topicID" id="editTopicID">
+            <i class="fa fa-times"></i>
 
-            <div class="forum-create-body">
-
-                <div class="form-group">
-
-                    <label>Discussion Title</label>
-
-                    <input type="text" name="topicTitle" id="editTopicTitle" required>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Category</label>
-
-                    <select
-                    name="categoryID"
-                    id="editCategoryID">
-
-                        <?php
-                        mysqli_data_seek($categoryQuery,0);
-
-                        while($cat=mysqli_fetch_assoc($categoryQuery)){
-                        ?>
-
-                        <option value="<?php echo $cat['categoryID']; ?>">
-
-                            <?php echo htmlspecialchars($cat['categoryName']); ?>
-
-                        </option>
-
-                        <?php } ?>
-
-                    </select>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Discussion</label>
-
-                    <textarea
-                    id="editTopicContent"
-                    name="topicContent"
-                    rows="8"></textarea>
-
-                </div>
-
-            </div>
-
-            <div class="modal-footer">
-
-                <button
-                type="button"
-                class="btn-cancel">
-
-                    Cancel
-
-                </button>
-
-                <button
-                class="btn-create-topic">
-
-                    <i class="fa fa-save"></i>
-
-                    Save Changes
-
-                </button>
-
-            </div>
-
-        </form>
+        </span>
 
     </div>
+
+
+    <form id="editTopicForm">
+
+        <input type="hidden" name="topicID" id="editTopicID">
+
+        <div class="topic-modal-body">
+
+            <div class="topic-form-group">
+
+
+                <label>
+
+                    <i class="fa fa-heading"></i>
+
+                    Discussion Title
+
+                </label>
+
+
+                <input type="text" name="topicTitle" id="editTopicTitle"
+                maxlength="150" required>
+
+
+            </div>
+
+
+            <div class="topic-form-group">
+
+                <label>
+
+                    <i class="fa fa-folder"></i>
+
+                    Category
+
+                </label>
+
+                <select name="categoryID" id="editCategoryID">
+
+                    <?php
+
+                    mysqli_data_seek($categoryQuery,0);
+
+
+                    while($cat=mysqli_fetch_assoc($categoryQuery)){
+
+                    ?>
+
+                    <option value="<?php echo $cat['categoryID']; ?>">
+
+
+                        <?php echo htmlspecialchars($cat['categoryName']); ?>
+
+
+                    </option>
+
+
+                    <?php } ?>
+
+
+                </select>
+
+
+            </div>
+
+            <div class="topic-form-group">
+
+                <label>
+
+                    <i class="fa fa-align-left"></i>
+
+                    Discussion
+
+                </label>
+
+                <textarea id="editTopicContent" name="topicContent"
+                maxlength="2000" rows="8"></textarea>
+
+            </div>
+
+        </div>
+
+
+        <div class="topic-modal-footer">
+
+
+            <button type="button" class="topic-cancel-btn">
+
+                Cancel
+
+            </button>
+
+            <button class="topic-submit-btn">
+
+                <i class="fa fa-save"></i>
+
+                Save Changes
+
+            </button>
+
+
+        </div>
+
+
+    </form>
+
+
+</div>
+
 
 </div>

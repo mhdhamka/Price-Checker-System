@@ -1185,41 +1185,58 @@ SEARCH STAT CARDS
 }
 
 
-
 /* ==========================
-PRODUCT RATING
+   PRODUCT RATING
 ========================== */
 
 .rating-box{
 
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:12px;
     margin:15px 0;
     flex-wrap:wrap;
 
 }
 
+
+/* Rating Score Badge */
+
 .rating-score{
 
     display:flex;
     align-items:center;
-    gap:6px;
-    padding:7px 14px;
-    background:#FFF4D6;
+    gap:7px;
+
+    padding:8px 16px;
+
+    background:var(--badge-bg);
     color:#F39C12;
-    border-radius:30px;
+
+    border-radius:50px;
+
     font-size:14px;
     font-weight:700;
 
+    border:1px solid rgba(243,156,18,.25);
+
+    box-shadow:
+    0 4px 12px rgba(243,156,18,.12);
+
+    transition:.3s ease;
+
 }
 
-body.dark .rating-score{
 
-    background:#3b2f10;
-    color:#FFC107;
+.rating-score:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 8px 18px rgba(243,156,18,.2);
 
 }
+
 
 .rating-score i{
 
@@ -1227,15 +1244,55 @@ body.dark .rating-score{
 
 }
 
+
+/* Review Text */
+
 .rating-review{
 
-    
+    display:flex;
+    align-items:center;
+    gap:6px;
+
     color:var(--text-muted);
-    font-size:12px;
+
+    font-size:13px;
+
     font-weight:500;
 
 }
 
+
+.rating-review::before{
+
+    content:"•";
+
+    color:var(--border);
+
+    font-size:16px;
+
+}
+
+
+/* ==========================
+   DARK MODE
+========================== */
+
+body.dark .rating-score{
+
+    background:#3b2f10;
+
+    color:#FFC107;
+
+    border-color:rgba(255,193,7,.3);
+
+}
+
+
+body.dark .rating-review::before{
+
+    color:#475569;
+
+}
 /* ==========================
 SEARCH SUGGESTION
 ========================== */

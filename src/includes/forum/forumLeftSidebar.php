@@ -1,83 +1,278 @@
 <div class="forum-left">
 
-    <div class="forum-box">
 
-        <h4>
+<div class="forum-box community-box">
 
-            Categories
 
-        </h4>
+    <!-- HEADER -->
 
-        <a href="#">
+    <div class="community-side-header">
 
-            All Topics
+        <div class="community-side-icon">
 
-        </a>
+            <i class="fa fa-compass"></i>
 
-        <a href="#">
+        </div>
 
-            Price Discussion
 
-        </a>
+        <div>
 
-        <a href="#">
+            <h4>
+                Explore
+            </h4>
 
-            Shopping Tips
+            <p>
+                Find discussions
+            </p>
 
-        </a>
+        </div>
 
-        <a href="#">
-
-            Product Reviews
-
-        </a>
-
-        <a href="#">
-
-            General Discussion
-
-        </a>
-
-        <a href="#">
-
-            Promotions
-
-        </a>
 
     </div>
 
-    <div class="forum-box">
 
-        <h4>
+
+
+
+    <!-- CATEGORIES -->
+
+
+    <div class="category-list">
+
+
+        <a href="#" class="category-item active">
+
+
+            <div class="category-icon">
+
+                <i class="fa fa-comments"></i>
+
+            </div>
+
+
+            <div class="category-info">
+
+                <strong>
+                    All Topics
+                </strong>
+
+                <small>
+                    Latest discussions
+                </small>
+
+            </div>
+
+
+            <span>
+                120
+            </span>
+
+
+        </a>
+
+
+
+
+
+        <a href="#" class="category-item">
+
+
+            <div class="category-icon">
+
+                <i class="fa fa-tags"></i>
+
+            </div>
+
+
+            <div class="category-info">
+
+                <strong>
+                    Price Discussion
+                </strong>
+
+                <small>
+                    Compare prices
+                </small>
+
+            </div>
+
+
+            <span>
+                45
+            </span>
+
+
+        </a>
+
+
+
+
+
+        <a href="#" class="category-item">
+
+
+            <div class="category-icon">
+
+                <i class="fa fa-shopping-cart"></i>
+
+            </div>
+
+
+            <div class="category-info">
+
+                <strong>
+                    Shopping Tips
+                </strong>
+
+                <small>
+                    Save more money
+                </small>
+
+            </div>
+
+
+            <span>
+                32
+            </span>
+
+
+        </a>
+
+
+
+
+
+
+        <a href="#" class="category-item">
+
+
+            <div class="category-icon">
+
+                <i class="fa fa-star"></i>
+
+            </div>
+
+
+            <div class="category-info">
+
+                <strong>
+                    Product Reviews
+                </strong>
+
+                <small>
+                    Share experience
+                </small>
+
+            </div>
+
+
+            <span>
+                28
+            </span>
+
+
+        </a>
+
+
+
+
+
+        <a href="#" class="category-item">
+
+
+            <div class="category-icon">
+
+                <i class="fa fa-gift"></i>
+
+            </div>
+
+
+            <div class="category-info">
+
+                <strong>
+                    Promotions
+                </strong>
+
+                <small>
+                    Latest deals
+                </small>
+
+            </div>
+
+
+            <span>
+                10
+            </span>
+
+
+        </a>
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- TAGS -->
+
+
+    <div class="popular-tags">
+
+
+        <div class="tags-title">
+
+            <i class="fa fa-fire"></i>
 
             Popular Tags
 
-        </h4>
+        </div>
 
-        <span class="forum-tag">
 
-            #rice
 
-        </span>
+        <div class="tag-wrapper">
 
-        <span class="forum-tag">
 
-            #promotion
+            <a href="#">
+                #StudentBudget
+            </a>
 
-        </span>
 
-        <span class="forum-tag">
+            <a href="#">
+                #SavingTips
+            </a>
 
-            #beverages
 
-        </span>
+            <a href="#">
+                #CheapMeals
+            </a>
 
-        <span class="forum-tag">
 
-            #budget
+            <a href="#">
+                #BestDeals
+            </a>
 
-        </span>
+
+            <a href="#">
+                #SmartShopping
+            </a>
+
+
+            <a href="#">
+                #CampusLife
+            </a>
+
+
+        </div>
+
 
     </div>
+
+
+
+</div>
+
 
 </div>

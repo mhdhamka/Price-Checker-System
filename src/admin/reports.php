@@ -151,7 +151,7 @@ UNION ALL
 
     ItemName AS title,
 
-    'New item added' AS activity,
+    'New product added' AS activity,
 
     created_at AS activityDate,
 

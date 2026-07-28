@@ -149,7 +149,7 @@ while($row = mysqli_fetch_assoc($sql))
                 <div class="dashboard-card">
                     <i class="fa fa-cart-shopping"></i>
                     <h3><?php echo $itemCount; ?></h3>
-                    <p>Total Items</p>
+                    <p>Total Products</p>
                 </div>
 
                 <div class="dashboard-card">
@@ -184,7 +184,7 @@ while($row = mysqli_fetch_assoc($sql))
 
                     <a href="addItem.php" class="quick-card">
                         <i class="fa fa-plus-circle"></i>
-                        <span>Add Item</span>
+                        <span>Add Product</span>
                     </a>
 
                     <a href="addStore.php" class="quick-card">
@@ -212,7 +212,7 @@ while($row = mysqli_fetch_assoc($sql))
 
                 <div class="section-header">
 
-                    <h3>Recently Added Items</h3>
+                    <h3>Recently Added Products</h3>
 
                 </div>
 
@@ -312,7 +312,7 @@ while($row = mysqli_fetch_assoc($sql))
 
                     ?>
 
-                    <!-- Latest Items -->
+                    <!-- Latest Products -->
                     <?php
 
                     $itemQuery = mysqli_query(
@@ -344,7 +344,7 @@ while($row = mysqli_fetch_assoc($sql))
                             </h5>
 
                             <p>
-                                New item added.
+                                New product added.
                             </p>
 
                         </div>
@@ -367,7 +367,7 @@ while($row = mysqli_fetch_assoc($sql))
                 <div class="chart-card">
 
                     <h3>
-                        Item Category Distribution
+                        Product Category Distribution
                     </h3>
 
                     <p>

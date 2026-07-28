@@ -22,7 +22,7 @@
                     </h4>
 
                     <p>
-                        <a href="#top">
+                        <a href="../student/dashboard.php#top">
                             Home
                         </a>
                         |

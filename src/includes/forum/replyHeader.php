@@ -20,7 +20,7 @@
 
             <small>
 
-                <i class="fa fa-clock-o"></i>
+                <i class="fa-solid fa-clock"></i>
 
                 <?php echo date("d M Y h:i A",strtotime($reply['created_at'])); ?>
 

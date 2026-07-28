@@ -22,15 +22,20 @@ $(document).ready(function(){
 
                 response=response.trim();
 
-                let count=btn.closest("span").find(".like-count");
+                let count=btn.closest(".stat-chip").find(".like-count");
+
                 let total=parseInt(count.text()) || 0;
+
+                let icon=btn.find("i");
 
                 if(response==="added")
                 {
 
-                    btn.find("i")
-                        .removeClass("fa-heart-o")
-                        .addClass("fa-heart");
+                    icon
+                        .removeClass("fa-regular")
+                        .addClass("fa-solid");
+
+                    btn.addClass("active");
 
                     count.text(total+1);
 
@@ -38,9 +43,11 @@ $(document).ready(function(){
                 else
                 {
 
-                    btn.find("i")
-                        .removeClass("fa-heart")
-                        .addClass("fa-heart-o");
+                    icon
+                        .removeClass("fa-solid")
+                        .addClass("fa-regular");
+
+                    btn.removeClass("active");
 
                     count.text(Math.max(total-1,0));
 

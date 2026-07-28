@@ -1,12 +1,21 @@
 <div class="forum-modal" id="deleteTopicModal">
 
-    <div class="forum-confirm-modal">
 
-        <div class="confirm-icon">
+    <div class="delete-topic-box">
 
-            <i class="fa fa-trash"></i>
+
+
+        <div class="delete-topic-icon">
+
+
+            <i class="fa-solid fa-trash-can"></i>
+
 
         </div>
+
+
+
+
 
         <h3>
 
@@ -14,37 +23,71 @@
 
         </h3>
 
+
+
+
         <p>
 
-            This discussion and every reply inside it will be permanently deleted.
+            This discussion and all replies inside it will be permanently deleted.
 
         </p>
 
-        <input
+
+
+
+
+        <input 
         type="hidden"
         id="deleteTopicID">
 
-        <div class="modal-footer">
+
+
+
+
+        <div class="delete-topic-actions">
+
+
 
             <button
-            class="btn-cancel">
+
+            type="button"
+
+            class="delete-cancel-btn">
+
 
                 Cancel
 
+
             </button>
 
-            <button
-            id="confirmDelete"
-            class="btn-delete-topic">
 
-                <i class="fa fa-trash"></i>
+
+
+
+            <button
+
+            type="button"
+
+            id="confirmDelete"
+
+            class="delete-confirm-btn">
+
+
+                <i class="fa-solid fa-trash"></i>
+
 
                 Delete
 
+
             </button>
+
+
 
         </div>
 
+
+
     </div>
+
 
 </div>

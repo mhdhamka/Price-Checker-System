@@ -6,8 +6,7 @@ $(document).ready(function(){
 
         let btn=$(this);
 
-        if(btn.hasClass("loading"))
-            return;
+        if(btn.hasClass("loading")) return;
 
         btn.addClass("loading");
 
@@ -16,33 +15,37 @@ $(document).ready(function(){
             "processes/forum/bookmarkTopic.php",
 
             {
-
                 topicID:btn.data("id")
-
             },
 
             function(response){
 
                 let data=JSON.parse(response);
 
-                btn.closest("span")
+                let icon=btn.find("i");
+
+                btn.closest(".stat-chip")
                     .find(".bookmark-count")
                     .text(data.total);
 
                 if(data.status==="added")
                 {
 
-                    btn.find("i")
-                        .removeClass("fa-bookmark-o")
-                        .addClass("fa-bookmark");
+                    icon
+                        .removeClass("fa-regular")
+                        .addClass("fa-solid");
+
+                    btn.addClass("active");
 
                 }
                 else
                 {
 
-                    btn.find("i")
-                        .removeClass("fa-bookmark")
-                        .addClass("fa-bookmark-o");
+                    icon
+                        .removeClass("fa-solid")
+                        .addClass("fa-regular");
+
+                    btn.removeClass("active");
 
                 }
 

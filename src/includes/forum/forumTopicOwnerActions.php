@@ -1,19 +1,21 @@
 <div class="topic-owner-actions">
 
-    <a href="#" class="edit-topic-btn" data-id="<?php echo $post['topicID']; ?>">
+    <button type="button" class="topic-action-btn edit-topic-btn"
+    data-id="<?php echo $post['topicID']; ?>">
 
-        <i class="fa fa-pencil"></i>
+        <i class="fa-solid fa-pen-to-square"></i>
 
-        Edit
+        <span>Edit</span>
 
-    </a>
+    </button>
 
-    <a href="#" class="delete-topic-btn" data-id="<?php echo $post['topicID']; ?>">
+    <button type="button" class="topic-action-btn delete-topic-btn"
+    data-id="<?php echo $post['topicID']; ?>">
 
-        <i class="fa fa-trash"></i>
+        <i class="fa-solid fa-trash-can"></i>
 
-        Delete
+        <span>Delete</span>
 
-    </a>
+    </button>
 
 </div>

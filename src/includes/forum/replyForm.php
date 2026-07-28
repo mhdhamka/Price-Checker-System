@@ -1,33 +1,58 @@
 <div class="reply-form-card">
 
-    <h4>
+    <div class="reply-form-header">
 
-        <i class="fa fa-reply"></i>
+        <div class="reply-form-icon">
 
-        Join the Discussion
+            <i class="fa fa-comments"></i>
 
-    </h4>
+        </div>
 
-    <form id="replyForm" method="POST">
+    <div>
 
-        <input type="hidden" name="topicID" value="<?php echo $topicID; ?>">
+        <h4>
+            Join the Discussion
+        </h4>
+
+        <p>
+            Share your opinion with the community
+        </p>
+
+    </div>
+
+</div>
+
+
+<form id="replyForm">
+
+    <input type="hidden" name="topicID"
+    value="<?php echo $topicID; ?>">
+
+        <div class="reply-editor">
+
 
         <textarea
 
-            name="replyContent"
+        id="replyContent"
 
-            id="replyContent"
+        name="replyContent"
 
-            placeholder="Share your thoughts with the community..."
+        maxlength="1000"
 
-            required
+        placeholder="Write your reply here..."
 
-        ></textarea>
+        required></textarea>
 
 
-        <div class="reply-actions">
+        <div class="reply-footer">
 
-            <button type="submit" class="community-btn">
+            <span class="char-count">
+
+                0/1000
+
+            </span>
+
+            <button class="community-btn">
 
                 <i class="fa fa-paper-plane"></i>
 
@@ -35,8 +60,13 @@
 
             </button>
 
+
         </div>
 
-    </form>
+    </div>
+
+</form>
+
+
 
 </div>

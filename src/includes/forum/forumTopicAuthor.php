@@ -1,17 +1,43 @@
 <div class="topic-author">
-    <i class="fa fa-user"></i>
 
-        Started by
+    <div class="author-info">
 
-        <strong>
+        <span class="author-icon">
 
-            <?php echo htmlspecialchars($post['fullName']); ?>
+            <i class="fa fa-user-circle"></i>
 
-        </strong>
+        </span>
 
-        <span class="author-divider"></span>
+        <span>
 
-        <i class="fa fa-clock-o"></i>
+            Started by
 
-        <?php echo date("d M Y",strtotime($post['created_at'])); ?>
+            <strong>
+
+                <?php echo htmlspecialchars($post['fullName']); ?>
+
+            </strong>
+
+        </span>
+
+    </div>
+
+    <span class="author-divider"></span>
+
+    <div class="date-info">
+
+        
+
+            <i class="fa-solid fa-clock"></i>
+
+        
+
+        <span>
+
+            <?php echo date("d M Y",strtotime($post['created_at'])); ?>
+
+        </span>
+
+    </div>
+
 </div>

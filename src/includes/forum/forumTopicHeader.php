@@ -20,6 +20,8 @@
 
         <span class="category-badge">
 
+            <span class="category-dot"></span>
+
             <?php echo htmlspecialchars($topic['categoryName']); ?>
 
         </span>
@@ -62,7 +64,7 @@
 
             <small>
 
-                <i class="fa fa-clock-o"></i>
+                <i class="fa-solid fa-clock"></i>
 
                 <?php echo date("d M Y",strtotime($topic['created_at'])); ?>
 
@@ -78,20 +80,26 @@
          META
     =========================== -->
 
-    <div class="topic-header-meta">
+    <div class="topic-stats">
 
-        <span>
+        <!-- Views -->
+        <span class="stat-chip views-chip">
 
-            <i class="fa fa-eye"></i>
+            <i class="fa-solid fa-eye"></i>
 
-            <?php echo $topic['views']; ?>
+            <strong>
+                <?php echo $topic['views']; ?>
+            </strong>
 
-            Views
+            <small>
+                Views
+            </small>
 
         </span>
 
 
-        <span>
+        <!-- Likes -->
+        <span class="stat-chip like-chip">
 
             <a href="#"
 
@@ -99,7 +107,10 @@
 
             data-id="<?php echo $topic['topicID']; ?>">
 
-                <i class="fa fa-heart-o"></i>
+                <i class="<?php echo $topic['userLiked'] 
+                    ? 'fa-solid fa-heart' 
+                    : 'fa-regular fa-heart'; ?>">
+                </i>
 
             </a>
 
@@ -109,14 +120,22 @@
 
             </span>
 
+            <small>
+                Likes
+            </small>
+
         </span>
 
 
-        <span>
+        <!-- Bookmark -->
+        <span class="stat-chip bookmark-chip">
 
             <a href="#" class="bookmark-btn" data-id="<?php echo $topic['topicID']; ?>">
 
-                <i class="fa fa-bookmark-o"></i>
+                <i class="<?php echo $topic['userBookmarked'] 
+                    ? 'fa-solid fa-bookmark' 
+                    : 'fa-regular fa-bookmark'; ?>">
+                </i>
 
             </a>
 
@@ -125,6 +144,10 @@
                 <?php echo $topic['totalBookmarks']; ?>
 
             </span>
+
+            <small>
+                Saves
+            </small>
 
         </span>
 

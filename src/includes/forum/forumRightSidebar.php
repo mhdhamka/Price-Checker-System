@@ -1,81 +1,207 @@
 <div class="forum-right">
 
-    <!-- Statistics -->
 
-    <div class="forum-box">
+    <!-- ==========================
+    FORUM STATISTICS
+    =========================== -->
 
-        <h4>
 
-            Forum Statistics
+    <div class="forum-box stats-box">
 
-        </h4>
 
-        <div class="forum-stat">
+        <div class="sidebar-title">
 
-            <span>Topics</span>
+            <div>
 
-            <strong>
+                <h4>
+                    Forum Overview
+                </h4>
 
-                <?php echo $totalTopics; ?>
+                <small>
+                    Community activity
+                </small>
 
-            </strong>
+            </div>
 
-        </div>
-
-        <div class="forum-stat">
-
-            <span>Replies</span>
-
-            <strong>
-
-                <?php echo $totalReplies; ?>
-
-            </strong>
 
         </div>
 
-        <div class="forum-stat">
 
-            <span>Members</span>
 
-            <strong>
 
-                <?php echo $totalMembers; ?>
+        <div class="stats-grid">
 
-            </strong>
+
+            <div class="stat-card">
+
+                <div class="stat-icon topic">
+
+                    <i class="fa fa-comments"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Topics
+                    </span>
+
+
+                    <strong>
+                        <?php echo $totalTopics; ?>
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon reply">
+
+                    <i class="fa fa-reply"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Replies
+                    </span>
+
+
+                    <strong>
+                        <?php echo $totalReplies; ?>
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+            <div class="stat-card">
+
+
+                <div class="stat-icon member">
+
+                    <i class="fa fa-users"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Members
+                    </span>
+
+
+                    <strong>
+                        <?php echo $totalMembers; ?>
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
 
         </div>
+
 
     </div>
 
 
 
-    <div class="forum-box">
 
-        <h4>
 
-            Trending Topics
 
-        </h4>
+    <!-- ==========================
+    TRENDING TOPICS
+    =========================== -->
 
-        <?php
 
-        while($trend=mysqli_fetch_assoc($trendingTopics)){
+    <div class="forum-box trending-box">
 
-        ?>
+
+        <div class="sidebar-title">
+
+
+            <div>
+
+                <h4>
+                    Trending Topics
+                </h4>
+
+                <small>
+                    Most discussed
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+
+
+        <div class="trending-list">
+
+
+        <?php while($trend=mysqli_fetch_assoc($trendingTopics)){ ?>
+
 
             <a href="../<?php echo $pageType; ?>/viewTopic.php?id=<?php echo $trend['topicID']; ?>">
 
-                <?php echo htmlspecialchars($trend['topicTitle']); ?>
+
+                <div class="trend-number">
+
+                    <?php echo $trend['views']; ?>
+
+                </div>
+
+
+                <div class="trend-content">
+
+
+                    <p>
+
+                    <?php echo htmlspecialchars($trend['topicTitle']); ?>
+
+                    </p>
+
+
+                    <span>
+
+                        views
+
+                    </span>
+
+
+                </div>
+
 
             </a>
 
-        <?php
 
-        }
+        <?php } ?>
 
-        ?>
+
+        </div>
+
 
     </div>
+
 
 </div>

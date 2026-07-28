@@ -136,7 +136,7 @@ $totalPages = ceil($total/$limit);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
-        Manage Items
+        Manage Products
     </title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -167,7 +167,7 @@ $totalPages = ceil($total/$limit);
                 </h2>
 
                 <p>
-                    View, search, edit and delete items.
+                    View, search, edit and delete products.
                 </p>
 
             </div>
