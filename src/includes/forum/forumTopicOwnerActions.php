@@ -1,21 +1,45 @@
+<?php
+
+if(isset($topic))
+{
+    $ownerTopic = $topic;
+}
+elseif(isset($post))
+{
+    $ownerTopic = $post;
+}
+else
+{
+    exit();
+}
+
+?>
+
+
 <div class="topic-owner-actions">
 
-    <button type="button" class="topic-action-btn edit-topic-btn"
-    data-id="<?php echo $post['topicID']; ?>">
 
-        <i class="fa-solid fa-pen-to-square"></i>
+<button type="button" 
+class="topic-action-btn edit-topic-btn"
+data-id="<?php echo $ownerTopic['topicID']; ?>">
 
-        <span>Edit</span>
+    <i class="fa-solid fa-pen-to-square"></i>
 
-    </button>
+    <span>Edit</span>
 
-    <button type="button" class="topic-action-btn delete-topic-btn"
-    data-id="<?php echo $post['topicID']; ?>">
+</button>
 
-        <i class="fa-solid fa-trash-can"></i>
 
-        <span>Delete</span>
 
-    </button>
+<button type="button"
+class="topic-action-btn delete-topic-btn"
+data-id="<?php echo $ownerTopic['topicID']; ?>">
+
+    <i class="fa-solid fa-trash-can"></i>
+
+    <span>Delete</span>
+
+</button>
+
 
 </div>

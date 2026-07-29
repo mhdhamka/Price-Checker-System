@@ -1,5 +1,6 @@
 <div class="topic-badges">
 
+
     <?php if($post['isPinned']){ ?>
 
         <span class="pin-badge">
@@ -10,7 +11,25 @@
 
         </span>
 
+
     <?php } ?>
+
+
+
+    <?php if($post['isLocked']){ ?>
+
+        <span class="lock-badge">
+
+            <i class="fa-solid fa-lock"></i>
+
+            <span>Locked</span>
+
+        </span>
+
+
+    <?php } ?>
+
+
 
     <span class="category-badge">
 
@@ -19,5 +38,6 @@
         <?php echo htmlspecialchars($post['categoryName']); ?>
 
     </span>
+
 
 </div>

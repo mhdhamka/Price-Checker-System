@@ -1,4 +1,4 @@
-<div class="forum-modal" id="createTopicModal">
+<div class="topic-modal" id="createTopicModal">
 
 
     <div class="topic-modal-box">
@@ -51,24 +51,12 @@
         </div>
 
 
-
-
-
-
-
         <form action="processes/forum/addTopic.php" method="POST">
-
-
 
             <div class="topic-modal-body">
 
-
-
                 <!-- TITLE -->
-
-
                 <div class="topic-form-group">
-
 
                     <label>
 
@@ -78,34 +66,13 @@
 
                     </label>
 
-
-
-                    <input
-
-                    type="text"
-
-                    name="topicTitle"
-
-                    maxlength="150"
-
-                    placeholder="Example: Cheapest Milo around UNIMAS?"
-
-                    required>
-
+                    <input type="text" name="topicTitle" maxlength="150" placeholder="Example: Cheapest Milo around UNIMAS?" required>
 
                 </div>
 
 
-
-
-
-
-
                 <!-- CATEGORY -->
-
-
                 <div class="topic-form-group">
-
 
                     <label>
 
@@ -114,8 +81,6 @@
                         Discussion Category
 
                     </label>
-
-
 
                     <select name="categoryID" required>
 
@@ -149,14 +114,34 @@
                 </div>
 
 
+                <!-- TAGS -->
+                <div class="topic-form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-tags"></i>
+
+                        Topic Tags
+
+                    </label>
 
 
+                    <input  type="text" id="topicTagsInput"
+                    placeholder="Example: Bread, Bakery, Budget">
 
+
+                    <small class="tag-help">
+                        Add up to 3 tags separated by commas
+                    </small>
+
+
+                    <input type="hidden" name="topicTags"
+                    id="topicTags">
+
+                </div>
 
 
                 <!-- CONTENT -->
-
-
                 <div class="topic-form-group">
 
 
@@ -170,36 +155,14 @@
 
 
 
-                    <textarea
-
-                    name="topicContent"
-
-                    maxlength="2000"
-
-                    rows="8"
-
-                    placeholder="Share your experience, ask questions, compare prices, or recommend products..."
-
-                    required></textarea>
-
-
+                    <textarea name="topicContent" maxlength="2000" rows="8" placeholder="Share your experience, ask questions, compare prices, or recommend products..." required></textarea>
 
                 </div>
-
-
-
-
 
             </div>
 
 
-
-
-
-
-
             <!-- FOOTER -->
-
             <div class="topic-modal-footer">
 
                 <button type="button" class="topic-cancel-btn">

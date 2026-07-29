@@ -190,8 +190,18 @@ if(mysqli_num_rows($result)==0)
 $topic=mysqli_fetch_assoc($result);
 
 
+/* ==========================
+LOAD CATEGORY FOR EDIT MODAL
+========================== */
 
+$categoryQuery=mysqli_query($conn,"
+SELECT *
 
+FROM forumcategory
+
+ORDER BY categoryName ASC
+
+");
 
 
 
@@ -283,7 +293,13 @@ ORDER BY r.created_at ASC
 
         </a>
 
-        <?php include("../includes/forum/forumTopicHeader.php"); ?>
+        <?php 
+        
+            $topicData = $topic;
+
+            include("../includes/forum/forumTopicHeader.php"); 
+        
+        ?>
 
 
         <!-- REPLY SECTION -->
@@ -312,6 +328,14 @@ ORDER BY r.created_at ASC
 
 
 <br><br>
+
+<!-- ==========================
+    MODALS
+========================== -->
+
+<?php include("../includes/forum/forumEditModal.php"); ?>
+
+<?php include("../includes/forum/forumDeleteModal.php"); ?>
 
 <?php include("../includes/forum/replyEditModal.php"); ?>
 

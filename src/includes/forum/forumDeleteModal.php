@@ -1,4 +1,4 @@
-<div class="forum-modal" id="deleteTopicModal">
+<div class="topic-modal" id="deleteTopicModal">
 
 
     <div class="delete-topic-box">

@@ -11,7 +11,6 @@ if(!isset($_SESSION['studentID']))
 }
 
 
-
 $studentID=$_SESSION['studentID'];
 
 $isAdmin=false;
@@ -20,48 +19,10 @@ $pageType="student";
 
 
 
-$category=$_GET['category'] ?? "";
-
-$sort=$_GET['sort'] ?? "newest";
+$search=$_GET['search'] ?? "";
 
 
-
-$where=" WHERE t.status='Active' ";
-
-
-
-if($category!="")
-{
-
-$category=(int)$category;
-
-$where.=" AND t.categoryID=$category";
-
-}
-
-
-
-
-$order=" ORDER BY t.isPinned DESC,t.created_at DESC ";
-
-
-
-if($sort=="views")
-{
-
-$order=" ORDER BY t.views DESC ";
-
-}
-
-
-if($sort=="reply")
-{
-
-$order=" ORDER BY totalReplies DESC ";
-
-}
-
-
+$search=mysqli_real_escape_string($conn,$search);
 
 
 
@@ -107,7 +68,6 @@ END userBookmarked
 
 
 
-
 FROM forumtopic t
 
 
@@ -131,7 +91,6 @@ ON r.topicID=t.topicID
 
 
 
-
 LEFT JOIN
 
 (
@@ -149,6 +108,7 @@ GROUP BY topicID
 ) fl
 
 ON fl.topicID=t.topicID
+
 
 
 
@@ -192,16 +152,43 @@ AND ub.studentID='$studentID'
 
 
 
+WHERE t.status='Active'
 
-$where
+AND
+(
+    t.topicTitle LIKE '%$search%'
 
+    OR
+
+    t.topicContent LIKE '%$search%'
+
+    OR
+
+    c.categoryName LIKE '%$search%'
+
+    OR
+
+    s.fullName LIKE '%$search%'
+
+    OR
+
+    EXISTS
+    (
+        SELECT 1
+
+        FROM forumreply fr
+
+        WHERE fr.topicID=t.topicID
+
+        AND fr.replyContent LIKE '%$search%'
+    )
+)
 
 
 GROUP BY t.topicID
 
 
-
-$order
+ORDER BY t.isPinned DESC, t.created_at DESC
 
 
 

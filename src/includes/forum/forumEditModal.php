@@ -1,4 +1,4 @@
-<div class="forum-modal" id="editTopicModal">
+<div class="topic-modal" id="editTopicModal">
 
     <div class="topic-modal-box">
 
@@ -61,6 +61,35 @@
 
                 <input type="text" name="topicTitle" id="editTopicTitle"
                 maxlength="150" required>
+
+
+            </div>
+            
+
+            <div class="topic-form-group">
+
+                <label>
+
+                    <i class="fa-solid fa-tags"></i>
+
+                    Discussion Tags
+
+                </label>
+
+
+                <input 
+                type="text"
+                name="topicTags"
+                id="editTopicTags"
+                maxlength="255"
+                placeholder="Example: Budget, Shopping, Student">
+
+
+                <small class="tag-help">
+
+                    Separate tags using commas. Maximum 3 tags.
+
+                </small>
 
 
             </div>

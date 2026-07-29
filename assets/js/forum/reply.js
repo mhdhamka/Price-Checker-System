@@ -22,18 +22,31 @@ url:"processes/forum/loadReply.php",
 
 type:"POST",
 
+dataType:"json",
+
 data:{
-replyID:replyID
+    replyID:replyID
 },
 
 
-success:function(data){
+success:function(response){
 
 
-try{
+if(response.status !== "success")
+{
+
+    showToast(
+        response.message || "Unable to load reply",
+        "error"
+    );
+
+    return;
+
+}
 
 
-let reply=JSON.parse(data);
+
+let reply=response.data;
 
 
 
@@ -50,28 +63,23 @@ $("#editReplyModal")
 
 
 
-}
+},
 
-catch(error){
+
+error:function(){
 
 showToast(
-"Unable to load reply",
+"Server error loading reply",
 "error"
 );
 
 }
 
 
-
-}
-
-
 });
 
 
-
 });
-
 
 
 
@@ -79,7 +87,7 @@ showToast(
 
 
 /* ==================================================
-CLOSE MODALS
+CLOSE EDIT MODAL
 ================================================== */
 
 
@@ -112,17 +120,14 @@ function(e){
 if(e.target.id==="editReplyModal")
 {
 
-
 $(this)
 .fadeOut(200)
 .css("display","none");
-
 
 }
 
 
 });
-
 
 
 
@@ -149,7 +154,6 @@ let id=$("#editReplyID").val();
 
 $.ajax({
 
-
 url:"processes/forum/updateReply.php",
 
 type:"POST",
@@ -157,20 +161,21 @@ type:"POST",
 data:$(this).serialize(),
 
 
+
 success:function(response){
 
 
+response=response.trim();
 
-if(response.trim()=="success"){
 
+
+if(response==="success")
+{
 
 
 $("#editReplyModal")
-.fadeOut(200,function(){
-
-$(this).css("display","none");
-
-});
+.fadeOut(200)
+.css("display","none");
 
 
 
@@ -188,12 +193,10 @@ showToast(
 );
 
 
-
 }
 
-
-else{
-
+else
+{
 
 showToast(
 "Update failed",
@@ -204,16 +207,24 @@ showToast(
 }
 
 
+},
+
+
+error:function(){
+
+showToast(
+"Server error",
+"error"
+);
 
 }
 
 
-
 });
 
 
-
 });
+
 
 
 
@@ -259,6 +270,8 @@ $("#deleteReplyModal")
 
 
 
+
+
 /* ==================================================
 DELETE REPLY
 ================================================== */
@@ -275,9 +288,7 @@ let id=$("#deleteReplyID").val();
 
 
 
-
 $.ajax({
-
 
 url:"processes/forum/deleteReply.php",
 
@@ -292,9 +303,12 @@ replyID:id
 success:function(response){
 
 
+response=response.trim();
 
-if(response.trim()=="success"){
 
+
+if(response==="success")
+{
 
 
 $(".reply-card[data-id='"+id+"']")
@@ -306,13 +320,9 @@ $(this).remove();
 
 
 
-
 $("#deleteReplyModal")
-.fadeOut(200,function(){
-
-$(this).css("display","none");
-
-});
+.fadeOut(200)
+.css("display","none");
 
 
 
@@ -325,7 +335,8 @@ showToast(
 
 }
 
-else{
+else
+{
 
 
 showToast(
@@ -337,9 +348,17 @@ showToast(
 }
 
 
+},
+
+
+error:function(){
+
+showToast(
+"Server error",
+"error"
+);
 
 }
-
 
 
 });
@@ -402,14 +421,23 @@ e.preventDefault();
 
 
 
-$.ajax({
+let form=$(this);
 
+
+
+let button=form.find("button");
+
+button.prop("disabled",true);
+
+
+
+$.ajax({
 
 url:"processes/forum/addReply.php",
 
 type:"POST",
 
-data:$(this).serialize(),
+data:form.serialize(),
 
 
 
@@ -417,8 +445,32 @@ success:function(data){
 
 
 
-if(data.trim()=="empty"){
+data=data.trim();
 
+
+
+// Topic locked
+
+if(data==="locked")
+{
+
+showToast(
+"This topic is locked",
+"error"
+);
+
+
+button.prop("disabled",false);
+
+return;
+
+}
+
+
+
+
+if(data==="empty")
+{
 
 showToast(
 "Reply cannot be empty",
@@ -426,10 +478,12 @@ showToast(
 );
 
 
+button.prop("disabled",false);
+
 return;
 
-
 }
+
 
 
 
@@ -440,33 +494,26 @@ let reply=JSON.parse(data);
 
 
 
-
 let html=`
-
 
 <div class="reply-card new-reply"
 data-id="${reply.replyID}">
 
 
-
 <div class="reply-avatar">
 
-
-<img src="../../assets/images/student/${reply.studentIMG}">
-
+<img src="${reply.studentIMG 
+? '../../assets/images/student/'+reply.studentIMG 
+: '../../assets/images/profile/default.png'}">
 
 </div>
-
-
 
 
 
 <div class="reply-body">
 
 
-
 <div class="reply-header">
-
 
 <strong>
 
@@ -475,17 +522,12 @@ ${escapeHTML(reply.fullName)}
 </strong>
 
 
-
 <span>
-
 Just now
-
 </span>
 
 
 </div>
-
-
 
 
 
@@ -497,10 +539,7 @@ ${escapeHTML(reply.replyContent)}
 
 
 
-
-
 <div class="reply-tools">
-
 
 
 <button
@@ -514,8 +553,6 @@ Edit
 
 
 
-
-
 <button
 class="delete-reply-btn"
 data-id="${reply.replyID}">
@@ -526,8 +563,6 @@ Delete
 </button>
 
 
-
-
 </div>
 
 
@@ -535,12 +570,9 @@ Delete
 </div>
 
 
-
 </div>
-
 
 `;
-
 
 
 
@@ -549,11 +581,9 @@ $(".reply-list")
 
 
 
-
 $("#replyContent")
 .val("")
 .trigger("input");
-
 
 
 
@@ -564,13 +594,10 @@ showToast(
 
 
 
-
 }
 
-
-
-catch(error){
-
+catch(error)
+{
 
 showToast(
 "Something went wrong",
@@ -582,16 +609,31 @@ showToast(
 
 
 
+},
+
+
+error:function(){
+
+showToast(
+"Server error",
+"error"
+);
+
+
+},
+
+
+complete:function(){
+
+button.prop("disabled",false);
+
 }
 
 
-
 });
 
 
-
 });
-
 
 
 
@@ -610,9 +652,7 @@ $("#editReplyContent,#replyContent")
 .on("input",function(){
 
 
-
 let length=$(this).val().length;
-
 
 
 $(this)
@@ -621,8 +661,10 @@ $(this)
 .text(length+"/1000");
 
 
-
 });
+
+
+
 
 
 
@@ -631,21 +673,18 @@ $(this)
 
 
 /* ==================================================
-ESCAPE CLOSE
+ESC CLOSE
 ================================================== */
 
 
 $(document).keydown(function(e){
 
 
-if(e.key==="Escape"){
-
-
-$(".forum-reply-modal")
-.fadeOut(200)
-.css("display","none");
-
-
+if(e.key==="Escape")
+{
+    $(".reply-modal")
+    .fadeOut(200)
+    .css("display","none");
 }
 
 
@@ -653,8 +692,8 @@ $(".forum-reply-modal")
 
 
 
-
 });
+
 
 
 
@@ -671,14 +710,11 @@ TOAST
 function showToast(message,type){
 
 
-
 let toast=$(
 
 `
 <div class="forum-toast ${type}">
-
 ${message}
-
 </div>
 `
 
@@ -690,15 +726,12 @@ $("body").append(toast);
 
 
 
-
 setTimeout(function(){
 
 
 toast.fadeOut(300,function(){
 
-
 $(this).remove();
-
 
 });
 
@@ -708,6 +741,8 @@ $(this).remove();
 
 
 }
+
+
 
 
 

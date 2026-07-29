@@ -71,7 +71,9 @@ function(e){
 e.preventDefault();
 
 
-let topicID=$(this).data("id");
+let topicID=$(this).attr("data-id");
+
+console.log("EDIT TOPIC ID:", topicID);
 
 
 
@@ -83,71 +85,67 @@ url:"processes/forum/loadTopic.php",
 type:"POST",
 
 data:{
-topicID:topicID
+   topicID:topicID
 },
 
+
+beforeSend:function(){
+
+    console.log("Sending:", topicID);
+
+},
 
 dataType:"json",
 
 
+success:function(response){
 
-success:function(topic){
+    console.log(response);
 
+    if(response.status !== "success")
+    {
 
+        showTopicToast(
+            response.message,
+            "error"
+        );
 
-if(topic.error)
-{
+        return;
 
-showTopicToast(
-topic.error,
-"error"
-);
-
-return;
-
-}
-
+    }
 
 
+    let topic=response.data;
 
 
-$("#editTopicID")
-.val(topic.topicID);
+    $("#editTopicID")
+    .val(topic.topicID);
 
 
-
-$("#editTopicTitle")
-.val(topic.topicTitle);
-
+    $("#editTopicTitle")
+    .val(topic.topicTitle);
 
 
-$("#editTopicContent")
-.val(topic.topicContent);
+    $("#editTopicContent")
+    .val(topic.topicContent);
 
 
-
-$("#editCategoryID")
-.val(topic.categoryID);
-
+    $("#editCategoryID")
+    .val(topic.categoryID);
 
 
+    $("#editTopicTags")
+   .val(topic.topicTags ?? "");
 
 
-
-$("#editTopicModal")
-.css({
-
-display:"flex",
-
-opacity:0
-
-})
-.animate({
-
-opacity:1
-
-},200);
-
+    $("#editTopicModal")
+    .css({
+        display:"flex",
+        opacity:0
+    })
+    .animate({
+        opacity:1
+    },200);
 
 
 },
@@ -259,7 +257,7 @@ function(){
 
 
 
-$(".forum-modal")
+$(".topic-modal")
 .fadeOut(200,function(){
 
 
@@ -287,7 +285,7 @@ $(this)
 
 $(document).on(
 "click",
-".forum-modal",
+".topic-modal",
 function(e){
 
 
@@ -537,24 +535,15 @@ $("#deleteTopicModal")
 $(document).keydown(function(e){
 
 
-if(e.key==="Escape"){
-
-
-$(".forum-modal")
-.fadeOut(200)
-.css("display","none");
-
-
+if(e.key==="Escape")
+{
+    $(".topic-modal")
+    .fadeOut(200)
+    .css("display","none");
 }
 
 
 });
-
-
-
-
-
-
 
 
 
@@ -635,3 +624,196 @@ $(this).remove();
 
 
 }
+
+
+/* ==========================
+   TOPIC TAG LIMIT
+========================== */
+
+
+$(document).on(
+"input",
+"#topicTagsInput",
+function(){
+
+
+    let input=$(this);
+
+
+    let tags=input.val()
+    .split(",")
+    .map(tag=>tag.trim())
+    .filter(tag=>tag.length>0);
+
+
+
+    if(tags.length > 3)
+    {
+
+        tags=tags.slice(0,3);
+
+
+        showTopicToast(
+            "Maximum 3 tags allowed",
+            "error"
+        );
+
+    }
+
+
+
+    $("#topicTags")
+    .val(
+        tags.join(",")
+    );
+
+
+
+});
+
+
+/* ==========================
+   EDIT TOPIC TAG LIMIT
+========================== */
+
+
+$(document).on(
+"input",
+"#editTopicTags",
+function(){
+
+
+    let tags=$(this)
+    .val()
+    .split(",")
+    .map(tag=>tag.trim())
+    .filter(tag=>tag!="");
+
+
+
+    if(tags.length > 3)
+    {
+
+        tags=tags.slice(0,3);
+
+
+        showTopicToast(
+            "Maximum 3 tags allowed",
+            "error"
+        );
+
+    }
+
+
+
+    $(this).val(
+        tags.join(",")
+    );
+
+
+});
+
+
+
+/* ==========================
+   OPEN REPORT MODAL
+========================== */
+
+
+$(document).on(
+"click",
+".report-topic-btn",
+function(){
+
+
+let topicID=$(this).data("id");
+
+
+$("#reportTopicID").val(topicID);
+
+
+$("#reportReplyID").val("");
+
+
+
+$("#reportModal")
+.css({
+display:"flex",
+opacity:0
+})
+.animate({
+opacity:1
+},200);
+
+
+
+});
+
+
+
+/* ==========================
+   CLOSE REPORT MODAL
+========================== */
+
+
+$(document).on(
+"click",
+".close-report-modal",
+function(){
+
+
+$("#reportModal")
+.fadeOut(200);
+
+
+});
+
+
+$("#reportForm").submit(function(e){
+
+e.preventDefault();
+
+
+$.ajax({
+
+url:"processes/forum/reportTopic.php",
+
+type:"POST",
+
+data:$(this).serialize(),
+
+
+success:function(response){
+
+
+$("#reportModal")
+.fadeOut(200);
+
+
+
+showTopicToast(
+"Report submitted successfully",
+"success"
+);
+
+
+
+},
+
+
+error:function(){
+
+
+showTopicToast(
+"Failed to submit report",
+"error"
+);
+
+
+}
+
+
+});
+
+
+});

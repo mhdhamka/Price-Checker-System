@@ -1,4 +1,4 @@
-<div class="forum-reply-modal" id="deleteReplyModal">
+<div class="reply-modal" id="deleteReplyModal">
 
     <div class="delete-reply-box">
 

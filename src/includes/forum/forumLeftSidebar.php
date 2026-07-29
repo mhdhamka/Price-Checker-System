@@ -1,12 +1,158 @@
+<?php
+
+
+/* ==========================
+   CATEGORY DATA
+========================== */
+
+
+$categorySQL = "
+
+SELECT
+
+c.categoryID,
+c.categoryName,
+c.categoryDescription,
+
+COUNT(t.topicID) AS totalTopics
+
+
+FROM forumcategory c
+
+
+LEFT JOIN forumtopic t
+
+ON c.categoryID = t.categoryID
+
+AND t.status='Active'
+
+
+GROUP BY c.categoryID
+
+
+ORDER BY c.categoryID ASC
+
+";
+
+
+$categoryResult=mysqli_query($conn,$categorySQL);
+
+
+
+
+
+/* ==========================
+   TOTAL TOPICS
+========================== */
+
+
+$totalTopicQuery=mysqli_query($conn,"
+
+SELECT COUNT(*) AS total
+
+FROM forumtopic
+
+WHERE status='Active'
+
+");
+
+
+$totalTopic=mysqli_fetch_assoc($totalTopicQuery);
+
+
+
+
+
+/* ==========================
+   POPULAR TAGS
+========================== */
+
+
+$tagSQL="
+
+SELECT
+
+topicTags
+
+FROM forumtopic
+
+WHERE status='Active'
+
+AND topicTags IS NOT NULL
+
+AND topicTags != ''
+
+";
+
+
+$tagResult=mysqli_query($conn,$tagSQL);
+
+
+
+$tagCount=[];
+
+
+
+while($row=mysqli_fetch_assoc($tagResult)){
+
+
+    $tags=explode(",",$row['topicTags']);
+
+
+
+    foreach($tags as $tag){
+
+
+        $tag=trim($tag);
+
+
+
+        if($tag!=""){
+
+
+            if(isset($tagCount[$tag])){
+
+                $tagCount[$tag]++;
+
+            }
+            else{
+
+                $tagCount[$tag]=1;
+
+            }
+
+
+        }
+
+
+    }
+
+
+}
+
+
+
+arsort($tagCount);
+
+
+
+?>
+
+
+
+
+
 <div class="forum-left">
 
 
 <div class="forum-box community-box">
 
 
+
     <!-- HEADER -->
 
     <div class="community-side-header">
+
 
         <div class="community-side-icon">
 
@@ -15,11 +161,13 @@
         </div>
 
 
+
         <div>
 
             <h4>
                 Explore
             </h4>
+
 
             <p>
                 Find discussions
@@ -34,38 +182,62 @@
 
 
 
+
+
     <!-- CATEGORIES -->
 
 
     <div class="category-list">
 
 
-        <a href="#" class="category-item active">
+
+
+
+        <!-- ALL TOPICS -->
+
+
+        <a href="../<?php echo $pageType; ?>/forum.php"
+
+        class="category-item 
+        <?php echo !isset($_GET['category']) ? 'active':''; ?>">
+
 
 
             <div class="category-icon">
 
-                <i class="fa fa-comments"></i>
+                <i class="fa-solid fa-comments"></i>
 
             </div>
 
 
+
             <div class="category-info">
 
+
                 <strong>
+
                     All Topics
+
                 </strong>
 
+
                 <small>
+
                     Latest discussions
+
                 </small>
+
 
             </div>
 
 
+
             <span>
-                120
+
+                <?php echo $totalTopic['total']; ?>
+
             </span>
+
 
 
         </a>
@@ -74,32 +246,100 @@
 
 
 
-        <a href="#" class="category-item">
+
+
+        <?php while($category=mysqli_fetch_assoc($categoryResult)){ ?>
+
+
+
+        <?php
+
+
+        $categoryIcons=[
+
+            1=>"fa-comments",
+
+            2=>"fa-tags",
+
+            3=>"fa-cart-shopping",
+
+            4=>"fa-lightbulb",
+
+            5=>"fa-bullhorn"
+
+        ];
+
+
+        $icon=$categoryIcons[$category['categoryID']] ?? "fa-folder";
+
+
+        ?>
+
+
+
+
+        <a href="../<?php echo $pageType; ?>/forum.php?category=<?php echo $category['categoryID']; ?>"
+
+
+        class="category-item
+
+        <?php 
+
+        echo (isset($_GET['category']) 
+        && $_GET['category']==$category['categoryID']) 
+        ? 'active':''; 
+
+        ?>">
+
+
+
+
 
 
             <div class="category-icon">
 
-                <i class="fa fa-tags"></i>
+
+                <i class="fa-solid <?php echo $icon; ?>"></i>
+
 
             </div>
+
+
+
+
 
 
             <div class="category-info">
 
+
                 <strong>
-                    Price Discussion
+
+                    <?php echo htmlspecialchars($category['categoryName']); ?>
+
                 </strong>
 
+
                 <small>
-                    Compare prices
+
+                    <?php echo htmlspecialchars($category['categoryDescription']); ?>
+
                 </small>
+
 
             </div>
 
 
+
+
+
             <span>
-                45
+
+                <?php echo $category['totalTopics']; ?>
+
             </span>
+
+
+
 
 
         </a>
@@ -108,107 +348,13 @@
 
 
 
-        <a href="#" class="category-item">
+        <?php } ?>
 
 
-            <div class="category-icon">
-
-                <i class="fa fa-shopping-cart"></i>
-
-            </div>
-
-
-            <div class="category-info">
-
-                <strong>
-                    Shopping Tips
-                </strong>
-
-                <small>
-                    Save more money
-                </small>
-
-            </div>
-
-
-            <span>
-                32
-            </span>
-
-
-        </a>
-
-
-
-
-
-
-        <a href="#" class="category-item">
-
-
-            <div class="category-icon">
-
-                <i class="fa fa-star"></i>
-
-            </div>
-
-
-            <div class="category-info">
-
-                <strong>
-                    Product Reviews
-                </strong>
-
-                <small>
-                    Share experience
-                </small>
-
-            </div>
-
-
-            <span>
-                28
-            </span>
-
-
-        </a>
-
-
-
-
-
-        <a href="#" class="category-item">
-
-
-            <div class="category-icon">
-
-                <i class="fa fa-gift"></i>
-
-            </div>
-
-
-            <div class="category-info">
-
-                <strong>
-                    Promotions
-                </strong>
-
-                <small>
-                    Latest deals
-                </small>
-
-            </div>
-
-
-            <span>
-                10
-            </span>
-
-
-        </a>
 
 
     </div>
+
 
 
 
@@ -222,53 +368,62 @@
     <div class="popular-tags">
 
 
+
         <div class="tags-title">
+
 
             <i class="fa fa-fire"></i>
 
+
             Popular Tags
 
+
         </div>
+
+
+
 
 
 
         <div class="tag-wrapper">
 
 
-            <a href="#">
-                #StudentBudget
+        <?php
+
+
+        $displayTags=array_slice($tagCount,0,6,true);
+
+
+
+        foreach($displayTags as $tag=>$count){
+
+
+        ?>
+
+
+
+            <a href="../<?php echo $pageType; ?>/forum.php?tag=<?php echo urlencode($tag); ?>">
+
+
+                #<?php echo htmlspecialchars($tag); ?>
+
+
             </a>
 
 
-            <a href="#">
-                #SavingTips
-            </a>
 
+        <?php } ?>
 
-            <a href="#">
-                #CheapMeals
-            </a>
-
-
-            <a href="#">
-                #BestDeals
-            </a>
-
-
-            <a href="#">
-                #SmartShopping
-            </a>
-
-
-            <a href="#">
-                #CampusLife
-            </a>
 
 
         </div>
 
 
+
+
     </div>
+
+
 
 
 

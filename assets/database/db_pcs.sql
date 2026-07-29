@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2026 at 12:56 PM
+-- Generation Time: Jul 28, 2026 at 02:42 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -34,15 +34,149 @@ CREATE TABLE `admin` (
   `adminEmail` varchar(255) NOT NULL,
   `adminPassword` varchar(255) NOT NULL,
   `adminIMG` varchar(255) NOT NULL,
-  `logStatus` varchar(255) NOT NULL
+  `logStatus` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`adminID`, `adminFullname`, `adminUsername`, `adminEmail`, `adminPassword`, `adminIMG`, `logStatus`) VALUES
-(1, 'MOHD HAMKA', 'mdhamka', 'hamka@gmail.com', 'abc123', '../../assets/images/profile/hamka.jpg', '0');
+INSERT INTO `admin` (`adminID`, `adminFullname`, `adminUsername`, `adminEmail`, `adminPassword`, `adminIMG`, `logStatus`, `created_at`) VALUES
+(1, 'Mohd Hamka', 'mdhamka', 'hamka@gmail.com', 'abc123', '../../assets/images/admin/hamka.jpg', '0', '2024-02-15 13:21:25'),
+(2, 'Liu Yang', 'liuyang', 'liuyang@gmail.com', '$2y$10$4Fg8Hj7Kp2Lm9Qs5Xz1NBuT6Yv3Wm8Rd9Lp5Qx7Za2Kf6Nc8Vb0Pw', '../../assets/images/admin/liu.png', '0', '2024-06-21 06:15:10'),
+(3, 'Simone Biles', 'simone', 'simone@gmail.com', '$2y$10$9Lm3Xv7Qp5Rt8Nk2Hd6ZaUj4Bw1Cs9Fy7Wp3Mv6Xq8Kz2Nr5Gh0Aa', '../../assets/images/admin/simeone.png', '0', '2025-01-12 01:45:33'),
+(4, 'Novak Djokovic', 'novakdjokovic', 'novak@gmail.com', '$2y$10$2Qa7Lm9Xv4Pc8Rt5Nz6HwUd3Jk1Bs9Fy7Wp5Mv6Xq8Kz2Nr5Gh0Bb', '../../assets/images/admin/novak.png', '0', '2025-08-30 08:20:45'),
+(5, 'Yuzuru Hanyu', 'yuzuru', 'yuzuru@gmail.com', '$2y$10$7Lp5Xq9Vm3Rt8Nk2Hd6ZaUj4Bw1Cs9Fy7Wp5Mv6Xq8Kz2Nr5Gh0Cc', '../../assets/images/admin/yuzuru.png', '0', '2026-03-18 03:10:15'),
+(6, 'Katie Ledecky', 'katie', 'katie@gmail.com', '$2y$10$5Rt8Nk2Hd6ZaUj4Bw1Cs9Fy7Wp5Mv6Xq8Kz2Nr5Gh0AaLm3Xv7Q', '../../assets/images/admin/katie.png', '0', '2026-05-22 05:35:50'),
+(7, 'Armand Duplantis', 'armand', 'armand@gmail.com', '$2y$10$3Xv7Qp5Rt8Nk2Hd6ZaUj4Bw1Cs9Fy7Wp5Mv6Xq8Kz2Nr5Gh0AaLm', '../../assets/images/admin/armand.png', '0', '2026-07-10 00:25:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `audit_logs`
+--
+
+CREATE TABLE `audit_logs` (
+  `auditID` int(11) NOT NULL,
+  `adminID` int(11) NOT NULL,
+  `module` varchar(100) DEFAULT NULL,
+  `action` varchar(100) DEFAULT NULL,
+  `target` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `ipAddress` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `audit_logs`
+--
+
+INSERT INTO `audit_logs` (`auditID`, `adminID`, `module`, `action`, `target`, `description`, `ipAddress`, `created_at`) VALUES
+(13, 1, 'Authentication', 'LOGIN', 'Admin Account', 'Administrator successfully logged into the system.', '192.168.1.10', '2026-07-20 00:15:22'),
+(14, 1, 'Product', 'CREATE', 'Coca Cola 1.5L', 'Added a new product with price RM5.80 under Beverage category.', '192.168.1.10', '2026-07-20 01:30:45'),
+(15, 1, 'Product', 'UPDATE', 'Maggi Curry Noodles', 'Updated product information including price and description.', '192.168.1.10', '2026-07-20 02:45:12'),
+(16, 1, 'Category', 'CREATE', 'Coffee', 'Created a new product category Coffee.', '192.168.1.15', '2026-07-21 03:20:33'),
+(17, 1, 'Store', 'CREATE', 'H&L Supermarket', 'Added a new store into the Price Checker System.', '192.168.1.10', '2026-07-21 05:05:40'),
+(18, 1, 'Student', 'DELETE', 'Student Account: Ahmad Rahman', 'Removed inactive student account from the system.', '192.168.1.15', '2026-07-22 01:12:18'),
+(19, 1, 'Rating', 'DELETE', 'Product Rating ID #15', 'Removed inappropriate product rating submitted by student.', '192.168.1.10', '2026-07-22 06:30:55'),
+(20, 1, 'Report', 'EXPORT', 'Item Report PDF', 'Generated and exported item analytics report in PDF format.', '192.168.1.10', '2026-07-23 02:05:26'),
+(21, 1, 'Backup', 'CREATE', 'db_pcs_backup_20260723.sql', 'Created a database backup file successfully.', '192.168.1.15', '2026-07-23 07:40:10'),
+(22, 1, 'Backup', 'RESTORE', 'db_pcs_backup_20260720.sql', 'Restored database using previous backup file.', '192.168.1.10', '2026-07-24 08:25:44'),
+(23, 1, 'Report', 'EXPORT', 'Student Registration Report Excel', 'Exported monthly student registration analytics into Excel format.', '192.168.1.10', '2026-07-25 01:50:30'),
+(24, 1, 'Authentication', 'LOGOUT', 'Admin Account', 'Administrator logged out from the system.', '192.168.1.15', '2026-07-25 09:10:05'),
+(25, 1, 'Admin', 'LOGOUT', 'Admin Account', 'Admin logged out from the system', '::1', '2026-07-27 15:49:23'),
+(26, 1, 'Admin', 'LOGIN', 'Admin Account', 'Admin logged into the system', '::1', '2026-07-27 15:49:56'),
+(27, 1, 'Admin', 'LOGOUT', 'Admin Account', 'Admin logged out from the system', '127.0.0.1', '2026-07-27 15:52:10'),
+(28, 1, 'Admin', 'LOGIN', 'Admin Account', 'Admin logged into the system', '127.0.0.1', '2026-07-27 15:52:18'),
+(29, 1, 'Admin', 'LOGOUT', 'Admin Account', 'Admin logged out from the system', '127.0.0.1', '2026-07-27 15:59:27'),
+(30, 1, 'Admin', 'LOGIN', 'Admin Account', 'Admin logged into the system', '127.0.0.1', '2026-07-27 15:59:36'),
+(31, 1, 'Item', 'ADD', 'aaaaaa', 'Added new item aaaaaa', '127.0.0.1', '2026-07-27 16:08:44'),
+(32, 1, 'Item', 'UPDATE', 'john cena bin chilling', 'Updated item from aaaaaa to john cena bin chilling', '127.0.0.1', '2026-07-27 16:10:24'),
+(33, 1, 'Item', 'UPDATE', 'Ayam Brand Tomato Sardines', 'Updated item from Ayam Brand Sardines in Tomato Sauce to Ayam Brand Tomato Sardines', '127.0.0.1', '2026-07-27 16:11:26'),
+(34, 1, 'Item', 'DELETE', 'aaaaaa', 'Deleted item aaaaaa', '127.0.0.1', '2026-07-27 16:12:25'),
+(35, 1, 'Item', 'DELETE', 'john cena bin chilling', 'Deleted item john cena bin chilling', '127.0.0.1', '2026-07-27 16:12:56'),
+(36, 1, 'Student', 'UPDATE', 'Faizatul Fitri Bin Boestamam', 'Reset password for student Faizatul Fitri Bin Boestamam', '127.0.0.1', '2026-07-27 16:18:08'),
+(37, 1, 'Student', 'UPDATE', 'Faizatul Fitri Bin Boestamam', 'Enabled student account Faizatul Fitri Bin Boestamam', '127.0.0.1', '2026-07-27 16:18:56'),
+(38, 1, 'Student', 'UPDATE', 'Faizatul Fitri Bin Boestamam', 'Disabled student account Faizatul Fitri Bin Boestamam', '127.0.0.1', '2026-07-27 16:19:01'),
+(39, 1, 'Admin', 'UPDATE', 'Mohd Hamkas', 'Updated admin account from Mohd Hamkas to Mohd Hamkas', '127.0.0.1', '2026-07-27 16:28:21'),
+(40, 1, 'Admin', 'UPDATE', 'Mohd Hamka', 'Updated admin account from Mohd Hamkas to Mohd Hamka', '127.0.0.1', '2026-07-27 16:28:38'),
+(41, 1, 'Admin', 'ADD', 'sssssssss', 'Added new admin account sssssssss', '127.0.0.1', '2026-07-27 16:29:05'),
+(42, 1, 'Admin', 'UPDATE', 'sssssssss', 'Reset password for admin sssssssss', '127.0.0.1', '2026-07-27 16:31:14'),
+(43, 1, 'Admin', 'UPDATE', 'sssssssss', 'Disabled admin account sssssssss', '127.0.0.1', '2026-07-27 16:34:07'),
+(44, 1, 'Store', 'UPDATE', 'e-Mart Summer Malls', 'Updated store from e-Mart Summer Mall to e-Mart Summer Malls', '127.0.0.1', '2026-07-27 16:42:36'),
+(45, 1, 'Store', 'UPDATE', 'e-Mart Summer Mall', 'Updated store from e-Mart Summer Malls to e-Mart Summer Mall', '127.0.0.1', '2026-07-27 16:42:49'),
+(46, 1, 'Store', 'ADD', 'dffszzfzf', 'Added new store dffszzfzf', '127.0.0.1', '2026-07-27 16:44:19'),
+(47, 1, 'Store', 'DELETE', 'dffszzfzf', 'Deleted store dffszzfzf', '127.0.0.1', '2026-07-27 16:44:56'),
+(48, 1, 'Report', 'EXPORT', 'Item Report PDF', 'Generated Item PDF report', '127.0.0.1', '2026-07-27 17:04:01'),
+(49, 1, 'Report', 'EXPORT', 'Item Report PDF', 'Generated Item PDF report', '127.0.0.1', '2026-07-27 17:04:10'),
+(50, 1, 'Report', 'EXPORT', 'Item Report PDF', 'Generated Item PDF report', '127.0.0.1', '2026-07-27 17:04:13'),
+(51, 1, 'Report', 'EXPORT', 'Item Report CSV', 'Generated Item report in CSV format', '127.0.0.1', '2026-07-27 17:20:26'),
+(52, 1, 'Report', 'EXPORT', 'Item Report CSV', 'Generated Item report in CSV format', '127.0.0.1', '2026-07-27 17:20:26'),
+(53, 1, 'Backup', 'CREATE', 'database_20260727_192815.sql', 'Created database backup database_20260727_192815.sql', '127.0.0.1', '2026-07-27 17:28:15'),
+(54, 1, 'Admin', 'UPDATE', 'mdhamka', 'Updated profile information from mdhamka to mdhamka', '127.0.0.1', '2026-07-27 17:34:46'),
+(55, 1, 'Admin', 'UPDATE', 'mdhamka', 'Updated admin profile: fullname from Mohd Hamkas to Mohd Hamka', '127.0.0.1', '2026-07-27 17:38:02'),
+(56, 1, 'Admin', 'UPDATE', 'mdhamka', 'Updated admin profile: email from hamka@gmail.com to hamkas@gmail.com', '127.0.0.1', '2026-07-27 17:38:14'),
+(57, 1, 'Admin', 'UPDATE', 'mdhamka', 'Updated admin profile: email from hamkas@gmail.com to hamka@gmail.com', '127.0.0.1', '2026-07-27 17:38:25'),
+(58, 1, 'Admin', 'UPDATE', 'mdhamka', 'Updated admin profile without changes', '127.0.0.1', '2026-07-27 17:38:31'),
+(59, 1, 'Admin', 'UPDATE', 'mdhamka', 'Updated admin profile without changes', '127.0.0.1', '2026-07-27 17:39:14'),
+(60, 1, 'Admin', 'UPDATE', 'starlord', 'Updated admin profile: username from mdhamka to starlord', '127.0.0.1', '2026-07-27 17:39:45'),
+(61, 1, 'Admin', 'UPDATE', 'mdhamka', 'Updated admin profile: username from starlord to mdhamka', '127.0.0.1', '2026-07-27 17:39:52'),
+(62, 1, 'Admin', 'LOGOUT', 'Admin Account', 'Admin logged out from the system', '127.0.0.1', '2026-07-27 17:45:29'),
+(63, 1, 'Student', 'LOGIN', 'Student Account', 'Student fai logged into the system', '127.0.0.1', '2026-07-27 17:56:40'),
+(64, 1, 'Authentication', 'LOGOUT', 'Student Account', 'Student logged out from the system', '127.0.0.1', '2026-07-27 18:07:20'),
+(65, 2, 'Authentication', 'LOGIN', 'Student Account', 'Student amiromar logged into the system', '127.0.0.1', '2026-07-27 18:07:45'),
+(66, 2, 'Authentication', 'LOGOUT', 'Student Account', 'Student logged out from the system', '127.0.0.1', '2026-07-27 18:08:04'),
+(67, 1, 'Authentication', 'LOGIN', 'Admin Account', 'Admin logged into the system', '127.0.0.1', '2026-07-27 19:10:09'),
+(68, 1, 'Authentication', 'LOGOUT', 'Admin Account', 'Admin logged out from the system', '127.0.0.1', '2026-07-27 20:42:53'),
+(69, 1, 'Authentication', 'LOGIN', 'Student Account', 'Student fai logged into the system', '127.0.0.1', '2026-07-27 20:48:57'),
+(70, 1, 'Authentication', 'LOGOUT', 'Student Account', 'Student logged out from the system', '127.0.0.1', '2026-07-27 21:26:28'),
+(71, 1, 'Authentication', 'LOGIN', 'Student Account', 'Student fai logged into the system', '127.0.0.1', '2026-07-28 07:13:27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `backups`
+--
+
+CREATE TABLE `backups` (
+  `backupID` int(11) NOT NULL,
+  `fileName` varchar(255) DEFAULT NULL,
+  `backupDate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `fileSize` varchar(50) DEFAULT NULL,
+  `createdBy` int(11) DEFAULT NULL,
+  `backupStatus` varchar(20) DEFAULT 'Completed'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `backups`
+--
+
+INSERT INTO `backups` (`backupID`, `fileName`, `backupDate`, `fileSize`, `createdBy`, `backupStatus`) VALUES
+(3, 'database_20260726_111654.sql', '2026-07-26 09:16:55', '94.35 KB', 1, 'Completed'),
+(4, 'database_20260727_192815.sql', '2026-07-27 17:28:15', '102.39 KB', 1, 'Completed');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `backup_logs`
+--
+
+CREATE TABLE `backup_logs` (
+  `logID` int(11) NOT NULL,
+  `backupID` int(11) DEFAULT NULL,
+  `action` varchar(50) DEFAULT NULL,
+  `performedBy` int(11) DEFAULT NULL,
+  `actionDate` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `backup_logs`
+--
+
+INSERT INTO `backup_logs` (`logID`, `backupID`, `action`, `performedBy`, `actionDate`) VALUES
+(2, 3, 'Created Backup', 1, '2026-07-26 09:16:55'),
+(3, 4, 'Created Backup', 1, '2026-07-27 17:28:15');
 
 -- --------------------------------------------------------
 
@@ -141,7 +275,31 @@ INSERT INTO `comparisonhistory` (`historyID`, `studentID`, `ItemID`, `comparedGr
 (49, 1, 62, 'CMP6a617333c8960', '2026-07-23 01:49:39'),
 (50, 1, 1, 'CMP6a6173382c938', '2026-07-23 01:49:44'),
 (51, 1, 10, 'CMP6a6173382c938', '2026-07-23 01:49:44'),
-(52, 1, 62, 'CMP6a6173382c938', '2026-07-23 01:49:44');
+(52, 1, 62, 'CMP6a6173382c938', '2026-07-23 01:49:44'),
+(53, 1, 57, 'CMP6a67c48589377', '2026-07-27 20:50:13'),
+(54, 1, 75, 'CMP6a67c48589377', '2026-07-27 20:50:13'),
+(55, 1, 95, 'CMP6a67c48589377', '2026-07-27 20:50:13'),
+(56, 1, 57, 'CMP6a67c619193b4', '2026-07-27 20:56:57'),
+(57, 1, 75, 'CMP6a67c619193b4', '2026-07-27 20:56:57'),
+(58, 1, 95, 'CMP6a67c619193b4', '2026-07-27 20:56:57'),
+(59, 1, 57, 'CMP6a67c66a8587f', '2026-07-27 20:58:18'),
+(60, 1, 75, 'CMP6a67c66a8587f', '2026-07-27 20:58:18'),
+(61, 1, 95, 'CMP6a67c66a8587f', '2026-07-27 20:58:18'),
+(62, 1, 57, 'CMP6a67c74a1458b', '2026-07-27 21:02:02'),
+(63, 1, 75, 'CMP6a67c74a1458b', '2026-07-27 21:02:02'),
+(64, 1, 95, 'CMP6a67c74a1458b', '2026-07-27 21:02:02'),
+(65, 1, 57, 'CMP6a67c7a7308d4', '2026-07-27 21:03:35'),
+(66, 1, 75, 'CMP6a67c7a7308d4', '2026-07-27 21:03:35'),
+(67, 1, 95, 'CMP6a67c7a7308d4', '2026-07-27 21:03:35'),
+(68, 1, 57, 'CMP6a67c8a03f6cc', '2026-07-27 21:07:44'),
+(69, 1, 75, 'CMP6a67c8a03f6cc', '2026-07-27 21:07:44'),
+(70, 1, 95, 'CMP6a67c8a03f6cc', '2026-07-27 21:07:44'),
+(71, 1, 57, 'CMP6a67c977abd86', '2026-07-27 21:11:19'),
+(72, 1, 75, 'CMP6a67c977abd86', '2026-07-27 21:11:19'),
+(73, 1, 95, 'CMP6a67c977abd86', '2026-07-27 21:11:19'),
+(74, 1, 57, 'CMP6a67ca027caaa', '2026-07-27 21:13:38'),
+(75, 1, 75, 'CMP6a67ca027caaa', '2026-07-27 21:13:38'),
+(76, 1, 95, 'CMP6a67ca027caaa', '2026-07-27 21:13:38');
 
 -- --------------------------------------------------------
 
@@ -162,20 +320,10 @@ CREATE TABLE `comparisonstats` (
 INSERT INTO `comparisonstats` (`ItemID`, `totalCompared`, `lastCompared`) VALUES
 (1, 5, '2026-07-23 01:49:44'),
 (10, 5, '2026-07-23 01:49:44'),
-(62, 5, '2026-07-23 01:49:44');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `forumbookmark`
---
-
-CREATE TABLE `forumbookmark` (
-  `bookmarkID` int(11) NOT NULL,
-  `topicID` int(11) NOT NULL,
-  `studentID` int(11) NOT NULL,
-  `bookmarked_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(57, 8, '2026-07-27 21:13:38'),
+(62, 5, '2026-07-23 01:49:44'),
+(75, 8, '2026-07-27 21:13:38'),
+(95, 8, '2026-07-27 21:13:38');
 
 -- --------------------------------------------------------
 
@@ -195,7 +343,8 @@ CREATE TABLE `forumbookmarks` (
 --
 
 INSERT INTO `forumbookmarks` (`bookmarkID`, `topicID`, `studentID`, `bookmarked_at`) VALUES
-(2, 1, 1, '2026-07-24 15:45:03');
+(2, 1, 1, '2026-07-24 15:45:03'),
+(13, 4, 1, '2026-07-25 16:55:35');
 
 -- --------------------------------------------------------
 
@@ -239,7 +388,9 @@ CREATE TABLE `forumlikes` (
 --
 
 INSERT INTO `forumlikes` (`likeID`, `topicID`, `studentID`, `liked_at`) VALUES
-(5, 1, 1, '2026-07-24 15:25:26');
+(6, 1, 1, '2026-07-25 16:32:03'),
+(9, 2, 1, '2026-07-25 16:55:54'),
+(11, 4, 1, '2026-07-28 10:35:26');
 
 -- --------------------------------------------------------
 
@@ -304,9 +455,10 @@ CREATE TABLE `forumtopic` (
 --
 
 INSERT INTO `forumtopic` (`topicID`, `studentID`, `categoryID`, `topicTitle`, `topicContent`, `views`, `isPinned`, `isLocked`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 'Cheapest Milo around UNIMAS?', 'Where can I get the cheapest Milo this week?', 39, 0, 0, 'Active', '2026-07-22 15:58:58', '2026-07-24 15:47:05'),
-(2, 2, 3, 'Budget shopping tips', 'Share your shopping tips for students.', 13, 0, 0, 'Active', '2026-07-22 15:58:58', '2026-07-24 15:11:19'),
-(3, 3, 1, 'Welcome everyone', 'Introduce yourself here.', 38, 0, 0, 'Active', '2026-07-22 15:58:58', '2026-07-24 15:06:18');
+(1, 1, 2, 'Cheapest Milo around UNIMAS?', 'Where can I get the cheapest Milo this week?', 47, 0, 0, 'Active', '2026-07-22 15:58:58', '2026-07-28 08:40:47'),
+(2, 2, 3, 'Budget shopping tips', 'Share your shopping tips for students.', 18, 0, 0, 'Active', '2026-07-22 15:58:58', '2026-07-25 18:33:44'),
+(3, 3, 1, 'Welcome everyone', 'Introduce yourself here.', 39, 0, 0, 'Active', '2026-07-22 15:58:58', '2026-07-25 18:23:26'),
+(4, 1, 1, 'hello', 'ssssss', 20, 0, 0, 'Active', '2026-07-25 11:31:32', '2026-07-28 09:11:26');
 
 -- --------------------------------------------------------
 
@@ -328,7 +480,8 @@ CREATE TABLE `forumviews` (
 INSERT INTO `forumviews` (`viewID`, `topicID`, `studentID`, `viewed_at`) VALUES
 (1, 1, 1, '2026-07-24 08:17:29'),
 (2, 3, 1, '2026-07-24 08:22:42'),
-(3, 2, 1, '2026-07-24 09:05:58');
+(3, 2, 1, '2026-07-24 09:05:58'),
+(4, 4, 1, '2026-07-25 13:07:14');
 
 -- --------------------------------------------------------
 
@@ -498,7 +651,7 @@ INSERT INTO `item` (`ItemID`, `ItemName`, `ItemPrice`, `ItemCategory`, `ItemDesc
 (144, 'Ayamas Chicken Burger Patties', 16.50, 'Frozen Foods', 'Frozen chicken patties suitable for homemade burgers.', 'Choice Daily', '../../assets/images/item/ayamaspatties.png', '2026-07-25 09:09:15'),
 (145, 'Gardenia Original Classic Bread', 3.70, 'Bread & Bakery', 'Soft and fresh white bread suitable for breakfast.', 'KK Super Mart', '../../assets/images/item/gardenia.png', '2026-07-25 09:09:15'),
 (146, 'Gardenia Butterscotch Bread', 4.10, 'Bread & Bakery', 'Sweet bread suitable for breakfast and snacks.', 'Orange Convenience Store', '../../assets/images/item/gardenia-butterscotch.png', '2026-07-25 09:09:15'),
-(147, 'Ayam Brand Sardines in Tomato Sauce', 8.40, 'Canned Foods', 'Premium canned sardines in rich tomato sauce.', 'Servay Hypermarket', '../../assets/images/item/sardines.png', '2026-07-25 09:09:15'),
+(147, 'Ayam Brand Tomato Sardines', 8.40, 'Canned Foods', 'Premium canned sardines in rich tomato sauce.', 'Servay Hypermarket', '../../assets/images/item/sardines.png', '2026-07-25 09:09:15'),
 (148, 'Ayam Brand Tuna Chunks', 7.70, 'Canned Foods', 'Premium canned tuna suitable for meals.', 'Happy Farm Fresh Mart', '../../assets/images/item/tuna.png', '2026-07-25 09:09:15'),
 (149, 'BOH 3-in-1 Tea Mix', 16.20, 'Beverages', 'Instant tea beverage pack for daily use.', 'Farley Supermarket', '../../assets/images/item/boh.png', '2026-07-25 09:09:15'),
 (150, 'Nescafe Classic Coffee', 23.00, 'Beverages', 'Premium instant coffee with rich aroma.', 'Choice Daily', '../../assets/images/item/nclassic.jpg', '2026-07-25 09:09:15');
@@ -1059,7 +1212,22 @@ INSERT INTO `report_logs` (`reportID`, `adminID`, `reportType`, `format`, `gener
 (14, 1, 'item', 'PDF', '2026-07-25 10:15:48'),
 (15, 1, 'item', 'PDF', '2026-07-25 10:44:40'),
 (16, 1, 'item', 'PDF', '2026-07-25 10:44:49'),
-(17, 1, 'item', 'PDF', '2026-07-25 10:44:50');
+(17, 1, 'item', 'PDF', '2026-07-25 10:44:50'),
+(18, 1, 'item', 'CSV', '2026-07-27 15:37:32'),
+(19, 1, 'item', 'CSV', '2026-07-27 15:37:33'),
+(20, 1, 'item', 'PDF', '2026-07-27 17:00:27'),
+(21, 1, 'item', 'PDF', '2026-07-27 17:00:28'),
+(22, 1, 'item', 'PDF', '2026-07-27 17:01:03'),
+(23, 1, 'item', 'PDF', '2026-07-27 17:01:32'),
+(24, 1, 'item', 'PDF', '2026-07-27 17:01:50'),
+(25, 1, 'item', 'PDF', '2026-07-27 17:03:01'),
+(26, 1, 'item', 'PDF', '2026-07-27 17:03:17'),
+(27, 1, 'item', 'PDF', '2026-07-27 17:03:18'),
+(28, 1, 'item', 'PDF', '2026-07-27 17:04:01'),
+(29, 1, 'item', 'PDF', '2026-07-27 17:04:10'),
+(30, 1, 'item', 'PDF', '2026-07-27 17:04:13'),
+(31, 1, 'item', 'CSV', '2026-07-27 17:20:26'),
+(32, 1, 'item', 'CSV', '2026-07-27 17:20:26');
 
 -- --------------------------------------------------------
 
@@ -1120,7 +1288,7 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`studentID`, `fullName`, `username`, `email`, `password`, `studentIMG`, `logStatus`, `created_at`) VALUES
-(1, 'Faizatul Fitri Bin Boestamam', 'fai', 'fai@gmail.com', 'abc123', '../../assets/images/profile/fai.jpg', '0', '2024-03-15 02:30:00'),
+(1, 'Faizatul Fitri Bin Boestamam', 'fai', 'fai@gmail.com', 'abc123', '../../assets/images/profile/fai.jpg', '1', '2024-03-15 02:30:00'),
 (2, 'Mohammad Amir Alam Bin Rahim Omar', 'amiromar', 'amir@gmail.com', 'abc123', '../../assets/images/profile/amir.jpg', '0', '2024-03-15 02:30:00'),
 (3, 'Harith Zakwan Bin Zakaria', 'harith', 'harith@gmail.com', 'abc123', '../../assets/images/profile/harith.jpg', '0', '2024-03-15 02:30:00'),
 (4, 'Mohamad Waqiuddin Bin Yahya', 'qiu', 'qiu@gmail.com', 'abc123', '../../assets/images/profile/qiu.jpeg', '0', '2024-03-15 02:30:00'),
@@ -1181,7 +1349,7 @@ INSERT INTO `student` (`studentID`, `fullName`, `username`, `email`, `password`,
 (59, 'Lionel Messi', 'messi', 'messi@gmail.com', 'abc123', '../../assets/images/profile/messi.png', '0', '2026-07-21 08:44:03'),
 (60, 'Cristiano Ronaldo', 'ronaldo', 'ronaldo@gmail.com', 'abc123', '../../assets/images/profile/ronaldo.png', '0', '2026-07-21 08:44:03'),
 (61, 'Nur Iman Carol Binti Danver', 'nuriman', 'nuriman@gmail.com', 'abc123', '../../assets/images/profile/nuriman.png', '0', '2026-07-21 08:44:03'),
-(62, 'Cole Akmal Bin Zulkifli Palmer', 'akmal', 'akmal@gmail.com', 'abc123', '../../assets/images/profile/akmal.png', '0', '2026-07-21 08:44:03'),
+(62, 'Cole Palmer', 'cole', 'cole@gmail.com', 'abc123', '../../assets/images/profile/cole.png', '0', '2026-07-21 08:44:03'),
 (63, 'Siti Nur Aina Binti Iskandar', 'ainaiskandar', 'ainaiskandar@gmail.com', 'abc123', '../../assets/images/profile/sitiaina.png', '0', '2026-07-21 08:44:03'),
 (64, 'Mohd Hafeez Bin Hamzah', 'hafeez', 'hafeez@gmail.com', 'abc123', '../../assets/images/profile/hafeezhamzah.png', '0', '2026-07-21 08:44:03'),
 (65, 'Nur Shazana Binti Karim', 'shazana', 'shazana@gmail.com', 'abc123', '../../assets/images/profile/shazana.png', '0', '2026-07-21 08:44:03'),
@@ -1210,7 +1378,8 @@ INSERT INTO `wishlist` (`wishlistID`, `studentID`, `ItemID`, `created_at`) VALUE
 (9, 1, 3, '2026-07-23 02:35:43'),
 (10, 1, 4, '2026-07-23 02:35:45'),
 (11, 1, 5, '2026-07-23 02:35:46'),
-(14, 1, 106, '2026-07-23 18:11:54');
+(14, 1, 106, '2026-07-23 18:11:54'),
+(16, 1, 111, '2026-07-27 21:20:11');
 
 --
 -- Indexes for dumped tables
@@ -1221,6 +1390,27 @@ INSERT INTO `wishlist` (`wishlistID`, `studentID`, `ItemID`, `created_at`) VALUE
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`adminID`);
+
+--
+-- Indexes for table `audit_logs`
+--
+ALTER TABLE `audit_logs`
+  ADD PRIMARY KEY (`auditID`),
+  ADD KEY `adminID` (`adminID`);
+
+--
+-- Indexes for table `backups`
+--
+ALTER TABLE `backups`
+  ADD PRIMARY KEY (`backupID`);
+
+--
+-- Indexes for table `backup_logs`
+--
+ALTER TABLE `backup_logs`
+  ADD PRIMARY KEY (`logID`),
+  ADD KEY `backupID` (`backupID`),
+  ADD KEY `performedBy` (`performedBy`);
 
 --
 -- Indexes for table `category`
@@ -1241,14 +1431,6 @@ ALTER TABLE `comparisonhistory`
 --
 ALTER TABLE `comparisonstats`
   ADD PRIMARY KEY (`ItemID`);
-
---
--- Indexes for table `forumbookmark`
---
-ALTER TABLE `forumbookmark`
-  ADD PRIMARY KEY (`bookmarkID`),
-  ADD UNIQUE KEY `topicID` (`topicID`,`studentID`),
-  ADD KEY `studentID` (`studentID`);
 
 --
 -- Indexes for table `forumbookmarks`
@@ -1353,7 +1535,25 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2032;
+
+--
+-- AUTO_INCREMENT for table `audit_logs`
+--
+ALTER TABLE `audit_logs`
+  MODIFY `auditID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+
+--
+-- AUTO_INCREMENT for table `backups`
+--
+ALTER TABLE `backups`
+  MODIFY `backupID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `backup_logs`
+--
+ALTER TABLE `backup_logs`
+  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -1365,19 +1565,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `comparisonhistory`
 --
 ALTER TABLE `comparisonhistory`
-  MODIFY `historyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
-
---
--- AUTO_INCREMENT for table `forumbookmark`
---
-ALTER TABLE `forumbookmark`
-  MODIFY `bookmarkID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `historyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `forumbookmarks`
 --
 ALTER TABLE `forumbookmarks`
-  MODIFY `bookmarkID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `bookmarkID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `forumcategory`
@@ -1389,13 +1583,13 @@ ALTER TABLE `forumcategory`
 -- AUTO_INCREMENT for table `forumlikes`
 --
 ALTER TABLE `forumlikes`
-  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `forumreply`
 --
 ALTER TABLE `forumreply`
-  MODIFY `replyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `replyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `forumreport`
@@ -1407,19 +1601,19 @@ ALTER TABLE `forumreport`
 -- AUTO_INCREMENT for table `forumtopic`
 --
 ALTER TABLE `forumtopic`
-  MODIFY `topicID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `topicID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `forumviews`
 --
 ALTER TABLE `forumviews`
-  MODIFY `viewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `viewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `ItemID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
+  MODIFY `ItemID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
 -- AUTO_INCREMENT for table `ratings`
@@ -1431,13 +1625,13 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `report_logs`
 --
 ALTER TABLE `report_logs`
-  MODIFY `reportID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `reportID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `store`
 --
 ALTER TABLE `store`
-  MODIFY `storeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `storeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `student`
@@ -1449,11 +1643,24 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `wishlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `wishlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `audit_logs`
+--
+ALTER TABLE `audit_logs`
+  ADD CONSTRAINT `audit_logs_ibfk_1` FOREIGN KEY (`adminID`) REFERENCES `admin` (`adminID`);
+
+--
+-- Constraints for table `backup_logs`
+--
+ALTER TABLE `backup_logs`
+  ADD CONSTRAINT `backup_logs_ibfk_1` FOREIGN KEY (`backupID`) REFERENCES `backups` (`backupID`),
+  ADD CONSTRAINT `backup_logs_ibfk_2` FOREIGN KEY (`performedBy`) REFERENCES `admin` (`adminID`);
 
 --
 -- Constraints for table `comparisonhistory`
@@ -1467,13 +1674,6 @@ ALTER TABLE `comparisonhistory`
 --
 ALTER TABLE `comparisonstats`
   ADD CONSTRAINT `comparisonstats_ibfk_1` FOREIGN KEY (`ItemID`) REFERENCES `item` (`ItemID`) ON DELETE CASCADE;
-
---
--- Constraints for table `forumbookmark`
---
-ALTER TABLE `forumbookmark`
-  ADD CONSTRAINT `forumbookmark_ibfk_1` FOREIGN KEY (`topicID`) REFERENCES `forumtopic` (`topicID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `forumbookmark_ibfk_2` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `forumbookmarks`

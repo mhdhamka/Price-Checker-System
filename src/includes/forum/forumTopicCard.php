@@ -6,9 +6,12 @@
 
     <div class="topic-top">
 
-        <?php include("../includes/forum/forumTopicBadges.php"); ?>
+        <?php include(__DIR__ . "/forumTopicBadges.php"); ?>
 
     </div>
+
+    <!-- TAGS -->
+    <?php include(__DIR__ . "/forumTopicTags.php"); ?>
 
 
     <!-- =========================
@@ -30,7 +33,7 @@
          AUTHOR
     ========================== -->
 
-    <?php include("../includes/forum/forumTopicAuthor.php"); ?>
+    <?php include(__DIR__ . "/forumTopicAuthor.php"); ?>
 
 
 
@@ -38,14 +41,20 @@
          STATS
     ========================== -->
 
-    <?php include("../includes/forum/forumTopicStats.php"); ?>
+    <?php include(__DIR__ . "/forumTopicStats.php"); ?>
 
+
+    <!-- =========================
+         REPORT ACTION
+    ========================== -->
+
+     <?php include(__DIR__ . "/forumTopicReportAction.php"); ?>
 
     <!-- =========================
          LAST REPLY
     ========================== -->
 
-    <?php include("../includes/forum/forumTopicLastReply.php"); ?>
+    <?php include(__DIR__ . "/forumTopicLastReply.php"); ?>
 
     
 

@@ -1,9 +1,35 @@
+<br>
+
 <div class="topic-last-reply">
-    <?php if(!empty($post['lastReplyDate'])){ ?>
 
-        <small>
 
-            Last reply by
+<?php if(!empty($post['lastReplyDate'])){ ?>
+
+
+    <div class="last-reply-header">
+
+        <i class="fa-solid fa-comments"></i>
+
+        <span>
+            Latest Reply
+        </span>
+
+    </div>
+
+
+
+    <div class="last-reply-user">
+
+
+        <div class="reply-mini-avatar">
+
+            <i class="fa-solid fa-user"></i>
+
+        </div>
+
+
+        <div>
+
 
             <strong>
 
@@ -11,24 +37,56 @@
 
             </strong>
 
-        </small>
 
-        <br>
+            <small>
+                replied to this topic
+            </small>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <div class="last-reply-date">
+
+
+        <i class="fa-regular fa-clock"></i>
+
+
+        <?php echo date(
+            "d M Y",
+            strtotime($post['lastReplyDate'])
+        ); ?>
+
+
+    </div>
+
+
+
+<?php } else { ?>
+
+
+    <div class="no-last-reply">
+
+
+        <i class="fa-regular fa-comment-dots"></i>
+
 
         <span>
-
-    <?php echo date("d M Y",strtotime($post['lastReplyDate'])); ?>
-
+            No replies yet
         </span>
 
-    <?php } else { ?>
 
-        <small>
+    </div>
 
-            No replies yet
 
-        </small>
 
-    <?php } ?>
+<?php } ?>
+
 
 </div>

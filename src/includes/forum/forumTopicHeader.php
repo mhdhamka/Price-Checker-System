@@ -1,3 +1,5 @@
+
+
 <div class="topic-header-card">
 
     <!-- ==========================
@@ -16,7 +18,25 @@
 
             </span>
 
+
         <?php } ?>
+
+
+
+        <?php if($topic['isLocked']){ ?>
+
+            <span class="lock-badge">
+
+                <i class="fa fa-lock"></i>
+
+                Locked
+
+            </span>
+
+
+        <?php } ?>
+
+
 
         <span class="category-badge">
 
@@ -25,6 +45,7 @@
             <?php echo htmlspecialchars($topic['categoryName']); ?>
 
         </span>
+
 
     </div>
 
@@ -150,6 +171,15 @@
             </small>
 
         </span>
+
+        <!-- Owner Actions LAST -->
+        <?php if($topic['studentID']==$studentID){ ?>
+
+            <?php
+                include(__DIR__ . "/forumTopicOwnerActions.php");
+            ?>
+
+        <?php } ?>
 
     </div>
 

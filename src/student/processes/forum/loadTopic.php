@@ -1,3 +1,5 @@
+
+
 <?php
 
 session_start();
@@ -9,14 +11,21 @@ header('Content-Type: application/json');
 
 
 
+/*
+================================
+CHECK LOGIN
+================================
+*/
+
 if(!isset($_SESSION['studentID']))
 {
 
-echo json_encode([
-    "error"=>"Not logged in"
-]);
+    echo json_encode([
+        "status"=>"error",
+        "message"=>"Not logged in"
+    ]);
 
-exit();
+    exit();
 
 }
 
@@ -25,11 +34,12 @@ exit();
 if(!isset($_POST['topicID']))
 {
 
-echo json_encode([
-    "error"=>"Missing topic ID"
-]);
+    echo json_encode([
+        "status"=>"error",
+        "message"=>"Missing topic ID"
+    ]);
 
-exit();
+    exit();
 
 }
 
@@ -40,54 +50,96 @@ $studentID=(int)$_SESSION['studentID'];
 $topicID=(int)$_POST['topicID'];
 
 
+/*
+================================
+GET OWNER TOPIC
+================================
+*/
 
 
-
-$sql="
+$stmt=mysqli_prepare($conn,"
 
 SELECT
 
-topicID,
-topicTitle,
-topicContent,
-categoryID
+    topicID,
+
+    topicTitle,
+
+    topicContent,
+
+    categoryID,
+
+    topicTags
+
 
 FROM forumtopic
 
-WHERE topicID='$topicID'
 
-AND studentID='$studentID'
+WHERE topicID=?
+
+AND studentID=?
 
 LIMIT 1
 
-";
+
+");
 
 
 
-$result=mysqli_query($conn,$sql);
+mysqli_stmt_bind_param(
+
+    $stmt,
+
+    "ii",
+
+    $topicID,
+
+    $studentID
+
+);
+
+
+
+
+mysqli_stmt_execute($stmt);
+
+
+
+$result=mysqli_stmt_get_result($stmt);
+
 
 
 
 if(mysqli_num_rows($result)==0)
 {
 
+    echo json_encode([
 
-echo json_encode([
+        "status"=>"error",
 
-"error"=>"Topic not found or you do not own this topic"
+        "message"=>"Topic not found or you do not own this topic"
 
-]);
+    ]);
 
-
-exit();
-
+    exit();
 
 }
 
 
 
 
-echo json_encode(mysqli_fetch_assoc($result));
+$topic=mysqli_fetch_assoc($result);
+
+
+
+
+echo json_encode([
+
+    "status"=>"success",
+
+    "data"=>$topic
+
+]);
 
 
 exit();

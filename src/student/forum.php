@@ -283,17 +283,7 @@ $img=$user['studentIMG'];
 </head>
     
 <body>
-    <!-- ***** Preloader Start ***** -->
-    <div id="js-preloader" class="js-preloader">
-      <div class="preloader-inner">
-        <span class="dot"></span>
-        <div class="dots">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-    </div>
+    
 
     <?php
 
@@ -492,11 +482,22 @@ $img=$user['studentIMG'];
                 MODALS
             ========================== -->
 
-            <?php include("../includes/forum/forumCreateModal.php"); ?>
 
-            <?php include("../includes/forum/forumEditModal.php"); ?>
+            <!-- CREATE TOPIC MODAL -->
+            <?php include(__DIR__ . "/../includes/forum/forumCreateModal.php"); ?>
 
-            <?php include("../includes/forum/forumDeleteModal.php"); ?>
+
+            <!-- EDIT TOPIC MODAL -->
+            <?php include(__DIR__ . "/../includes/forum/forumEditModal.php"); ?>
+
+
+            <!-- DELETE TOPIC MODAL -->
+            <?php include(__DIR__ . "/../includes/forum/forumDeleteModal.php"); ?>
+
+
+            <!-- REPORT MODAL -->
+            <?php include(__DIR__ . "/../includes/forum/reportModal.php"); ?>
+
 
             <!-- ==========================
                 FOOTER
@@ -535,6 +536,7 @@ $img=$user['studentIMG'];
     <script src="../../assets/js/forum/bookmark.js"></script>
     <script src="../../assets/js/forum/modal.js"></script>
     <script src="../../assets/js/forum/topic.js"></script>
+    <script src="../../assets/js/forum/searchTopic.js"></script>
 
     <script>
         function slideCategory(direction){

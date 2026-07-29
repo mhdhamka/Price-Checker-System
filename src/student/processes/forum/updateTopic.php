@@ -1,51 +1,169 @@
 <?php
 
 session_start();
+
 include("../../../config/db_cPCS.php");
+
 
 if(!isset($_SESSION['studentID']))
 {
     exit();
 }
 
+
+
 $studentID=(int)$_SESSION['studentID'];
 
-$topicID=(int)$_POST['topicID'];
 
-$title=trim($_POST['topicTitle']);
+$topicID=(int)($_POST['topicID'] ?? 0);
 
-$content=trim($_POST['topicContent']);
 
-$categoryID=(int)$_POST['categoryID'];
+$title=trim($_POST['topicTitle'] ?? '');
 
-$stmt=mysqli_prepare($conn,"
-UPDATE forumtopic
-SET
-topicTitle=?,
-topicContent=?,
-categoryID=?
-WHERE
-topicID=?
-AND studentID=?
-");
 
-mysqli_stmt_bind_param(
-$stmt,
-"ssiii",
-$title,
-$content,
-$categoryID,
-$topicID,
-$studentID
-);
+$content=trim($_POST['topicContent'] ?? '');
 
-if(mysqli_stmt_execute($stmt))
+
+$categoryID=(int)($_POST['categoryID'] ?? 0);
+
+
+$topicTags=trim($_POST['topicTags'] ?? '');
+
+
+
+/* ==========================
+VALIDATION
+========================== */
+
+
+if($title=="")
 {
-    echo "success";
+    exit("Title required");
+}
+
+
+if($content=="")
+{
+    exit("Content required");
+}
+
+
+
+/* ==========================
+PROCESS TAGS
+MAX 3
+========================== */
+
+
+if($topicTags!="")
+{
+
+    $tags=explode(",",$topicTags);
+
+
+    $tags=array_map(function($tag){
+
+        return trim($tag);
+
+    },$tags);
+
+
+
+    $tags=array_filter($tags);
+
+
+
+    if(count($tags)>3)
+    {
+        exit("Maximum 3 tags allowed");
+    }
+
+
+
+    $tags=array_unique($tags);
+
+
+    $topicTags=implode(",",$tags);
+
 }
 else
 {
-    echo "error";
+
+    $topicTags=null;
+
 }
 
+
+
+
+/* ==========================
+UPDATE
+========================== */
+
+
+$stmt=mysqli_prepare($conn,"
+UPDATE forumtopic
+
+SET
+
+topicTitle=?,
+
+topicContent=?,
+
+categoryID=?,
+
+topicTags=?,
+
+updated_at=NOW()
+
+WHERE
+
+topicID=?
+
+AND studentID=?
+
+");
+
+
+
+mysqli_stmt_bind_param(
+
+$stmt,
+
+"ssisii",
+
+$title,
+
+$content,
+
+$categoryID,
+
+$topicTags,
+
+$topicID,
+
+$studentID
+
+);
+
+
+
+if(mysqli_stmt_execute($stmt))
+{
+
+    echo "success";
+
+}
+
+else
+{
+
+    echo "error";
+
+}
+
+
+
 mysqli_stmt_close($stmt);
+
+?>

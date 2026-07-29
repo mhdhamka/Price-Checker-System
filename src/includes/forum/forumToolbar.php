@@ -1,76 +1,81 @@
 <div class="forum-toolbar">
 
-    <form method="GET">
 
-        <div class="forum-search">
+    <div class="forum-search">
 
-            <i class="fa fa-search"></i>
+        <i class="fa fa-search"></i>
 
-            <input
-                type="text"
-                name="search"
-                placeholder="Search topics..."
-                value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ""; ?>"
-            >
+        <input type="text" id="topicSearch"
+        placeholder="Search topics...">
 
-        </div>
+        <div class="search-suggestions"></div>
 
-        <select name="category">
+    </div>
 
-            <option value="">All Categories</option>
 
-            <?php
+    <select id="topicCategory">
 
-            $catQuery=mysqli_query($conn,"
+        <option value="">
+            All Categories
+        </option>
+
+
+        <?php
+
+        $catQuery=mysqli_query($conn,"
             SELECT *
             FROM forumcategory
             ORDER BY categoryName
-            ");
+        ");
 
-            while($cat=mysqli_fetch_assoc($catQuery))
-            {
 
-            ?>
+        while($cat=mysqli_fetch_assoc($catQuery))
+        {
 
-            <option
-            value="<?php echo $cat['categoryID']; ?>"
+        ?>
 
-            <?php
-
-            if(isset($_GET['category']) &&
-                $_GET['category']==$cat['categoryID'])
-                echo "selected";
-
-            ?>
-
-            >
+        <option value="<?php echo $cat['categoryID']; ?>">
 
             <?php echo $cat['categoryName']; ?>
 
-            </option>
+        </option>
 
-            <?php } ?>
 
-        </select>
+        <?php } ?>
 
-        <select name="sort">
 
-            <option value="">Newest</option>
+    </select>
 
-            <option value="views">Most Viewed</option>
 
-            <option value="reply">Most Replies</option>
 
-        </select>
+    <select id="topicSort">
 
-        <button type="submit">
+        <option value="newest">
+            Newest
+        </option>
 
-            <i class="fa fa-filter"></i>
 
-            Filter
+        <option value="views">
+            Most Viewed
+        </option>
 
-        </button>
 
-    </form>
+        <option value="reply">
+            Most Replies
+        </option>
+
+
+    </select>
+
+
+
+    <button id="filterTopicBtn">
+
+        <i class="fa fa-filter"></i>
+
+        Filter
+
+    </button>
+
 
 </div>

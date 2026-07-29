@@ -1,4 +1,4 @@
-<div class="forum-reply-modal" id="editReplyModal">
+<div class="reply-modal" id="editReplyModal">
 
     <div class="reply-edit-box">
 

@@ -44,7 +44,7 @@
 
     <?php while($post=mysqli_fetch_assoc($communityPosts)){ ?>
 
-        <?php include("../includes/forum/forumTopicCard.php"); ?>
+        <?php include("forumTopicCard.php"); ?>
 
     <?php } ?>
 
