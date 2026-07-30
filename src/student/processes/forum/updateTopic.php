@@ -3,6 +3,7 @@
 session_start();
 
 include("../../../config/db_cPCS.php");
+include("../../../config/auditLog.php");
 
 
 if(!isset($_SESSION['studentID']))
@@ -16,6 +17,34 @@ $studentID=(int)$_SESSION['studentID'];
 
 
 $topicID=(int)($_POST['topicID'] ?? 0);
+
+
+/*
+==========================================
+GET TOPIC TITLE FOR AUDIT
+==========================================
+*/
+
+
+$getTopic=mysqli_query($conn,"
+
+SELECT topicTitle
+
+FROM forumtopic
+
+WHERE topicID='$topicID'
+
+AND studentID='$studentID'
+
+LIMIT 1
+
+");
+
+
+$topicData=mysqli_fetch_assoc($getTopic);
+
+
+$oldTitle=$topicData['topicTitle'] ?? "Unknown Topic";
 
 
 $title=trim($_POST['topicTitle'] ?? '');
@@ -150,6 +179,24 @@ $studentID
 
 if(mysqli_stmt_execute($stmt))
 {
+
+
+    createAuditLog(
+
+        $conn,
+
+        $studentID,
+
+        "Forum",
+
+        "UPDATE_TOPIC",
+
+        $title,
+
+        "Updated forum topic from '".$oldTitle."' to '".$title."'"
+
+    );
+
 
     echo "success";
 

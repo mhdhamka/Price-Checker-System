@@ -1,6 +1,5 @@
-
-
 <div class="topic-header-card">
+
 
     <!-- ==========================
          BADGES
@@ -18,9 +17,7 @@
 
             </span>
 
-
         <?php } ?>
-
 
 
         <?php if($topic['isLocked']){ ?>
@@ -33,9 +30,7 @@
 
             </span>
 
-
         <?php } ?>
-
 
 
         <span class="category-badge">
@@ -51,6 +46,7 @@
 
 
 
+
     <!-- ==========================
          TITLE
     =========================== -->
@@ -60,6 +56,7 @@
         <?php echo htmlspecialchars($topic['topicTitle']); ?>
 
     </h1>
+
 
 
 
@@ -97,13 +94,16 @@
 
 
 
+
     <!-- ==========================
          META
     =========================== -->
 
     <div class="topic-stats">
 
+
         <!-- Views -->
+
         <span class="stat-chip views-chip">
 
             <i class="fa-solid fa-eye"></i>
@@ -119,13 +119,14 @@
         </span>
 
 
+
+
         <!-- Likes -->
+
         <span class="stat-chip like-chip">
 
             <a href="#"
-
             class="like-btn"
-
             data-id="<?php echo $topic['topicID']; ?>">
 
                 <i class="<?php echo $topic['userLiked'] 
@@ -135,30 +136,43 @@
 
             </a>
 
+
             <span class="like-count">
 
                 <?php echo $topic['totalLikes']; ?>
 
             </span>
 
+
             <small>
                 Likes
             </small>
 
+
         </span>
 
 
+
+
+
         <!-- Bookmark -->
+
         <span class="stat-chip bookmark-chip">
 
-            <a href="#" class="bookmark-btn" data-id="<?php echo $topic['topicID']; ?>">
+
+            <a href="#"
+            class="bookmark-btn"
+            data-id="<?php echo $topic['topicID']; ?>">
+
 
                 <i class="<?php echo $topic['userBookmarked'] 
                     ? 'fa-solid fa-bookmark' 
                     : 'fa-regular fa-bookmark'; ?>">
                 </i>
 
+
             </a>
+
 
             <span class="bookmark-count">
 
@@ -166,22 +180,65 @@
 
             </span>
 
+
             <small>
                 Saves
             </small>
 
+
         </span>
 
-        <!-- Owner Actions LAST -->
-        <?php if($topic['studentID']==$studentID){ ?>
 
-            <?php
-                include(__DIR__ . "/forumTopicOwnerActions.php");
-            ?>
-
-        <?php } ?>
 
     </div>
+
+
+
+
+
+    <!-- ==========================
+         ACTIONS
+    =========================== -->
+
+    <div class="topic-actions">
+
+        <!-- REPORT -->
+        <?php
+
+        if(
+            isset($studentID) &&
+            $topic['studentID'] != $studentID
+        )
+        {
+
+            include(__DIR__ . "/forumTopicReportAction.php");
+
+        }
+
+        ?>
+
+        <br>
+
+        <!-- OWNER ACTION -->
+        <?php 
+
+        if(
+            isset($studentID) &&
+            $topic['studentID']==$studentID
+        )
+        {
+
+            include(__DIR__ . "/forumTopicOwnerActions.php");
+
+        }
+
+        ?>
+
+
+    </div>
+
+
+
 
 
 
@@ -194,5 +251,6 @@
         <?php echo nl2br(htmlspecialchars($topic['topicContent'])); ?>
 
     </div>
+
 
 </div>

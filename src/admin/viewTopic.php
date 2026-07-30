@@ -3,6 +3,10 @@
 session_start();
 include("../config/db_cPCS.php");
 
+/* ==========================
+AUTHENTICATION
+========================== */
+
 if(!isset($_SESSION['adminID']))
 {
     header("Location: ../public/loginStudent.php");
@@ -10,6 +14,8 @@ if(!isset($_SESSION['adminID']))
 }
 
 $adminID=$_SESSION['adminID'];
+
+$studentID = null;
 
 $isAdmin = true;
 $pageType = "admin";
@@ -77,6 +83,10 @@ if(mysqli_num_rows($result)==0)
 $topic=mysqli_fetch_assoc($result);
 
 
+$topic['userLiked'] = false;
+$topic['userBookmarked'] = false;
+
+
 $replyQuery=mysqli_query($conn,"
 
 SELECT
@@ -115,44 +125,104 @@ ORDER BY r.created_at ASC
     </title>
 
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
-
     <link rel="stylesheet" href="../../assets/css/font-awesome.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/styleindex.css">
     <link rel="stylesheet" href="../../assets/css/forum.css">
-    <link rel="icon" href="../../assets/images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../assets/css/footer.css">
+    <link rel="icon" href="../../assets/images/logo.png">
 
 </head>
 
 <body>
 
-<div class="container">
+<?php
 
-    <br>
+    global $conn;
 
-    <a href="forum.php" class="community-btn">
+    $sql = "
+    SELECT adminUsername, adminIMG
+    FROM admin
+    WHERE adminID = '$adminID'
+    ";
 
-        <i class="fa fa-arrow-left"></i>
+    $result = mysqli_query($conn, $sql);
 
-        Back to Forum
+    if($result && mysqli_num_rows($result) > 0)
+    {
+        $user = mysqli_fetch_assoc($result);
 
-    </a>
+        $adminUsername = $user['adminUsername'];
+        $img = $user['adminIMG'];
+    }
+    else
+    {
+        $adminUsername = "Student";
+        $img = "../../assets/images/profile/default.png";
+    }
 
-    <br><br>
+    ?>
 
-        <?php include("../includes/forum/forumTopicHeader.php"); ?>
+<?php include("../student/includes/header.php"); ?>
 
-    <hr>
+<section class="section" id="community">
 
-        <?php include("../includes/forum/replyForm.php"); ?>
+    <main class="container forum-topic-page">
 
-    <hr>
+        <br><br>
 
-        <?php include("../includes/forum/replyList.php"); ?>
+        <!-- TOPIC HEADER -->
 
-</div>
+        <br><br><br>
+
+        <!-- BACK BUTTON -->
+        <a href="forum.php" class="back-dashboard-btn">
+
+            <i class="fa fa-arrow-left"></i>
+
+            Back to Forum
+
+        </a>
+
+        <?php 
+        
+            $topicData = $topic;
+
+            include("../includes/forum/forumTopicHeader.php"); 
+        
+        ?>
+
+
+        <!-- REPLY SECTION -->
+        <section class="reply-section">
+
+
+            <?php include("../includes/forum/replyForm.php"); ?>
+
+
+        </section>
+
+
+        <!-- REPLY LIST -->
+        <section class="reply-section">
+
+            <?php include("../includes/forum/replyList.php"); ?>
+
+        </section>
+
+
+    </main>
+
+</section>
 
 <script src="../../assets/js/jquery-2.1.0.min.js"></script>
-<script src="../../assets/js/forum.js"></script>
+<script src="../../assets/js/studentTheme.js"></script>
+<script src="../../assets/js/header.js"></script>
+<script src="../../assets/js/forum/like.js"></script>
+<script src="../../assets/js/forum/bookmark.js"></script>
+<script src="../../assets/js/forum/modal.js"></script>
+<script src="../../assets/js/forum/topic.js"></script>
+<script src="../../assets/js/forum/reply.js"></script>
 
 <script>
 

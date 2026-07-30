@@ -341,6 +341,8 @@ ORDER BY r.created_at ASC
 
 <?php include("../includes/forum/replyDeleteModal.php"); ?>
 
+<?php include(__DIR__ . "/../includes/forum/reportModal.php"); ?>
+
 <?php include("../student/includes/footer.php"); ?>
 
 
@@ -352,6 +354,7 @@ ORDER BY r.created_at ASC
 <script src="../../assets/js/forum/modal.js"></script>
 <script src="../../assets/js/forum/topic.js"></script>
 <script src="../../assets/js/forum/reply.js"></script>
+ <script src="../../assets/js/forum/report.js"></script>
 
 
 <script>

@@ -16,8 +16,6 @@ if(trim($q)=="")
 
 $q=mysqli_real_escape_string($conn,$q);
 
-
-
 $sql="
 
 SELECT
@@ -28,7 +26,11 @@ t.topicTitle,
 
 t.views,
 
-c.categoryName
+c.categoryName,
+
+s.fullName,
+
+s.studentIMG
 
 
 FROM forumtopic t
@@ -37,6 +39,13 @@ FROM forumtopic t
 LEFT JOIN forumcategory c
 
 ON t.categoryID=c.categoryID
+
+
+
+LEFT JOIN student s
+
+ON t.studentID=s.studentID
+
 
 
 WHERE t.status='Active'
@@ -48,9 +57,7 @@ AND
 
 t.topicTitle LIKE '%$q%'
 
-OR
-
-t.topicContent LIKE '%$q%'
+OR t.topicContent LIKE '%$q%'
 
 )
 
@@ -135,9 +142,16 @@ data-id="<?php echo $row['topicID']; ?>">
 
 
 
-    <div class="suggestion-icon">
+    <div class="suggestion-avatar">
 
-        <i class="fa-solid fa-comments"></i>
+        <img
+
+        src="<?php echo !empty($row['studentIMG']) 
+            ? $row['studentIMG'] 
+            : '../../assets/images/profile/default.png'; ?>"
+
+        alt="Profile">
+
 
     </div>
 
@@ -156,6 +170,13 @@ data-id="<?php echo $row['topicID']; ?>">
 
         <div class="suggestion-meta">
 
+            <span class="author">
+
+                <i class="fa-solid fa-user"></i>
+
+                <?php echo htmlspecialchars($row['fullName'] ?? "Student"); ?>
+
+            </span>
 
             <span class="category">
 
@@ -165,8 +186,6 @@ data-id="<?php echo $row['topicID']; ?>">
 
             </span>
 
-
-
             <span>
 
                 <i class="fa-solid fa-eye"></i>
@@ -175,9 +194,7 @@ data-id="<?php echo $row['topicID']; ?>">
 
             </span>
 
-
         </div>
-
 
     </div>
 

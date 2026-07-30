@@ -3,6 +3,7 @@
 session_start();
 
 include("../../../config/db_cPCS.php");
+include("../../../config/auditLog.php");
 
 
 if(!isset($_SESSION['studentID']))
@@ -172,6 +173,32 @@ mysqli_stmt_bind_param(
 
 if(mysqli_stmt_execute($stmt))
 {
+
+
+    /*
+    ==========================================
+    AUDIT LOG
+    ==========================================
+    */
+
+
+    createAuditLog(
+
+        $conn,
+
+        $studentID,
+
+        "Forum",
+
+        "CREATE_TOPIC",
+
+        $topicTitle,
+
+        "Created new forum topic: ".$topicTitle
+
+    );
+
+
 
     mysqli_stmt_close($stmt);
 

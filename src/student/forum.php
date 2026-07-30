@@ -536,7 +536,9 @@ $img=$user['studentIMG'];
     <script src="../../assets/js/forum/bookmark.js"></script>
     <script src="../../assets/js/forum/modal.js"></script>
     <script src="../../assets/js/forum/topic.js"></script>
+    <script src="../../assets/js/forum/report.js"></script>
     <script src="../../assets/js/forum/searchTopic.js"></script>
+    <script src="../../assets/js/forum/topicSuggestion.js"></script>
 
     <script>
         function slideCategory(direction){

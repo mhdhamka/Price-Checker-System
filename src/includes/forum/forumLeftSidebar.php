@@ -138,14 +138,198 @@ arsort($tagCount);
 
 ?>
 
-
-
-
-
 <div class="forum-left">
 
 
 <div class="forum-box community-box">
+
+
+    <?php if($isAdmin){ ?>
+
+    <!-- ==========================
+        ADMIN MODERATION MENU
+    ========================== -->
+
+    <div class="admin-forum-menu">
+
+        <div class="admin-menu-title">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <span>
+                Forum Admin
+            </span>
+
+        </div>
+
+        <!-- MODERATION DASHBOARD -->
+        <a href="forumModeration.php"
+        class="admin-menu-item">
+
+
+            <div class="admin-menu-icon moderation-icon">
+
+                <i class="fa-solid fa-gauge-high"></i>
+
+            </div>
+
+            <div class="admin-menu-content">
+
+                <strong>
+                    Moderation Dashboard
+                </strong>
+
+
+                <small>
+                    Overview & statistics
+                </small>
+
+            </div>
+
+
+        </a>
+
+
+        <!-- REPORT MANAGEMENT -->
+
+        <a href="forumReports.php"
+        class="admin-menu-item">
+
+
+            <div class="admin-menu-icon report-icon">
+
+                <i class="fa-solid fa-flag"></i>
+
+            </div>
+
+
+            <div class="admin-menu-content">
+
+
+                <strong>
+                    Report Management
+                </strong>
+
+
+                <small>
+                    Review reported content
+                </small>
+
+
+            </div>
+
+
+        </a>
+
+
+        <!-- HIDDEN CONTENT -->
+
+        <a href="forumHiddenContent.php"
+        class="admin-menu-item">
+
+            <div class="admin-menu-icon hidden-icon">
+
+                <i class="fa-solid fa-eye-slash"></i>
+
+            </div>
+
+
+            <div class="admin-menu-content">
+
+
+                <strong>
+                    Hidden Content
+                </strong>
+
+
+                <small>
+                    Restore hidden topics & replies
+                </small>
+
+
+            </div>
+
+
+        </a>
+
+
+
+
+
+        <!-- ANALYTICS -->
+
+        <a href="forumReportAnalytics.php"
+        class="admin-menu-item">
+
+
+            <div class="admin-menu-icon analytics-icon">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+            </div>
+
+
+            <div class="admin-menu-content">
+
+
+                <strong>
+                    Report Analytics
+                </strong>
+
+
+                <small>
+                    Moderation insights
+                </small>
+
+
+            </div>
+
+
+        </a>
+
+
+
+
+
+        <!-- AUDIT LOGS -->
+
+        <a href="forumAuditLogs.php"
+        class="admin-menu-item">
+
+
+            <div class="admin-menu-icon audit-icon">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+            </div>
+
+
+            <div class="admin-menu-content">
+
+
+                <strong>
+                    Audit Logs
+                </strong>
+
+
+                <small>
+                    Track admin activities
+                </small>
+
+
+            </div>
+
+
+        </a>
+
+
+    </div>
+
+
+
+    <?php } ?>
+
+    <hr>
 
 
 
@@ -185,13 +369,7 @@ arsort($tagCount);
 
 
     <!-- CATEGORIES -->
-
-
     <div class="category-list">
-
-
-
-
 
         <!-- ALL TOPICS -->
 
@@ -201,18 +379,13 @@ arsort($tagCount);
         class="category-item 
         <?php echo !isset($_GET['category']) ? 'active':''; ?>">
 
-
-
             <div class="category-icon">
 
                 <i class="fa-solid fa-comments"></i>
 
             </div>
 
-
-
             <div class="category-info">
-
 
                 <strong>
 
@@ -227,10 +400,7 @@ arsort($tagCount);
 
                 </small>
 
-
             </div>
-
-
 
             <span>
 
@@ -242,14 +412,7 @@ arsort($tagCount);
 
         </a>
 
-
-
-
-
-
-
         <?php while($category=mysqli_fetch_assoc($categoryResult)){ ?>
-
 
 
         <?php
@@ -276,8 +439,6 @@ arsort($tagCount);
         ?>
 
 
-
-
         <a href="../<?php echo $pageType; ?>/forum.php?category=<?php echo $category['categoryID']; ?>"
 
 
@@ -291,11 +452,6 @@ arsort($tagCount);
 
         ?>">
 
-
-
-
-
-
             <div class="category-icon">
 
 
@@ -303,11 +459,6 @@ arsort($tagCount);
 
 
             </div>
-
-
-
-
-
 
             <div class="category-info">
 
@@ -327,10 +478,6 @@ arsort($tagCount);
 
 
             </div>
-
-
-
-
 
             <span>
 
@@ -356,18 +503,8 @@ arsort($tagCount);
     </div>
 
 
-
-
-
-
-
-
     <!-- TAGS -->
-
-
     <div class="popular-tags">
-
-
 
         <div class="tags-title">
 
@@ -380,27 +517,16 @@ arsort($tagCount);
 
         </div>
 
-
-
-
-
-
         <div class="tag-wrapper">
 
 
         <?php
 
+            $displayTags=array_slice($tagCount,0,6,true);
 
-        $displayTags=array_slice($tagCount,0,6,true);
-
-
-
-        foreach($displayTags as $tag=>$count){
-
+            foreach($displayTags as $tag=>$count){
 
         ?>
-
-
 
             <a href="../<?php echo $pageType; ?>/forum.php?tag=<?php echo urlencode($tag); ?>">
 
@@ -410,22 +536,11 @@ arsort($tagCount);
 
             </a>
 
-
-
         <?php } ?>
-
-
 
         </div>
 
-
-
-
     </div>
-
-
-
-
 
 </div>
 

@@ -2,6 +2,7 @@
 
 session_start();
 include("../config/db_cPCS.php");
+include("../config/auditLog.php");
 
 // Check if user is logged in
 if(!isset($_SESSION['studentID']))
@@ -22,10 +23,30 @@ if(isset($_POST['compare']) && count($_POST['compare']) >= 2)
 
     $compareGroup = uniqid("CMP");
 
+    $compareItems = [];
+
     foreach($_POST['compare'] as $itemID)
     {
 
         $itemID=(int)$itemID;
+
+
+        // Get item name for audit log
+        $itemResult = mysqli_query($conn,"
+            SELECT ItemName
+            FROM item
+            WHERE ItemID='$itemID'
+        ");
+
+        $itemData = mysqli_fetch_assoc($itemResult);
+
+        if($itemData)
+        {
+            $itemName = $itemData['ItemName'];
+            $compareItems[] = $itemName;
+        }
+
+
 
         mysqli_query($conn,"
 
@@ -54,6 +75,26 @@ if(isset($_POST['compare']) && count($_POST['compare']) >= 2)
         )
 
         ");
+
+        // AUDIT LOG
+
+        $compareList = implode(", ", $compareItems);
+
+        createAuditLog(
+
+            $conn,
+
+            $studentID,
+
+            "Comparison",
+
+            "COMPARE",
+
+            $compareList,
+
+            "Compared products: ".$compareList
+
+        );
 
 
         /* =====================================

@@ -3,6 +3,7 @@
 session_start();
 
 include("../../../config/db_cPCS.php");
+include("../../../config/auditLog.php");
 
 
 if(!isset($_SESSION['studentID']))
@@ -50,6 +51,34 @@ if($lock && $lock['isLocked']==1)
 
 
 
+/*
+================================
+GET TOPIC TITLE FOR AUDIT
+================================
+*/
+
+
+$topicQuery=mysqli_query($conn,"
+
+SELECT topicTitle
+
+FROM forumtopic
+
+WHERE topicID='$topicID'
+
+LIMIT 1
+
+");
+
+
+$topicData=mysqli_fetch_assoc($topicQuery);
+
+
+$topicTitle=$topicData['topicTitle'] ?? "Unknown Topic";
+
+
+
+
 
 /*
 ================================
@@ -93,7 +122,34 @@ if(mysqli_stmt_execute($stmt))
 
 
 
+    /*
+    ================================
+    AUDIT LOG
+    ================================
+    */
+
+
+    createAuditLog(
+
+        $conn,
+
+        $studentID,
+
+        "Forum",
+
+        "CREATE_REPLY",
+
+        $topicTitle,
+
+        "Added reply in topic: ".$topicTitle
+
+    );
+
+
+
+
     $reply=mysqli_fetch_assoc(mysqli_query($conn,"
+
     SELECT
 
         r.*,
@@ -117,5 +173,6 @@ if(mysqli_stmt_execute($stmt))
     echo json_encode($reply);
 
 }
+
 
 ?>

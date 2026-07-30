@@ -3,10 +3,9 @@
 session_start();
 
 include("../../../config/db_cPCS.php");
-
+include("../../../config/auditLog.php");
 
 header("Content-Type: application/json");
-
 
 
 /*
@@ -29,10 +28,7 @@ if(!isset($_SESSION['studentID']))
 
 }
 
-
-
 $studentID = (int)$_SESSION['studentID'];
-
 
 
 /*
@@ -41,11 +37,9 @@ GET DATA
 ================================
 */
 
-
 $topicID = (int)($_POST['topicID'] ?? 0);
 
 $reason = trim($_POST['reason'] ?? '');
-
 
 
 if($topicID <= 0)
@@ -63,7 +57,6 @@ if($topicID <= 0)
 }
 
 
-
 if($reason == "")
 {
 
@@ -79,15 +72,13 @@ if($reason == "")
 }
 
 
-
-
 /*
 ================================
 CHECK DUPLICATE REPORT
 ================================
 */
 
-$check=mysqli_prepare($conn,"
+$check = mysqli_prepare($conn, "
 
 SELECT reportID
 
@@ -101,25 +92,18 @@ LIMIT 1
 
 ");
 
-
-
 mysqli_stmt_bind_param(
-$check,
-"ii",
-$topicID,
-$studentID
+    $check,
+    "ii",
+    $topicID,
+    $studentID
 );
-
-
 
 mysqli_stmt_execute($check);
 
+$result = mysqli_stmt_get_result($check);
 
-$result=mysqli_stmt_get_result($check);
-
-
-
-if(mysqli_num_rows($result)>0)
+if(mysqli_num_rows($result) > 0)
 {
 
     echo json_encode([
@@ -134,7 +118,37 @@ if(mysqli_num_rows($result)>0)
 }
 
 
+/*
+================================
+GET TOPIC TITLE FOR AUDIT LOG
+================================
+*/
 
+$audit = mysqli_prepare($conn, "
+
+SELECT topicTitle
+
+FROM forumtopic
+
+WHERE topicID=?
+
+LIMIT 1
+
+");
+
+mysqli_stmt_bind_param(
+    $audit,
+    "i",
+    $topicID
+);
+
+mysqli_stmt_execute($audit);
+
+$auditResult = mysqli_stmt_get_result($audit);
+
+$auditData = mysqli_fetch_assoc($auditResult);
+
+$topicTitle = $auditData['topicTitle'] ?? "Unknown Topic";
 
 
 /*
@@ -143,51 +157,67 @@ INSERT REPORT
 ================================
 */
 
-
-$stmt=mysqli_prepare($conn,"
+$stmt = mysqli_prepare($conn, "
 
 INSERT INTO forumreport
 
 (
+
     topicID,
     replyID,
     studentID,
     reason,
     created_at
+
 )
 
 VALUES
 
 (
+
     ?,
     NULL,
     ?,
     ?,
     NOW()
+
 )
 
 ");
 
-
-
 mysqli_stmt_bind_param(
 
-$stmt,
+    $stmt,
 
-"iis",
+    "iis",
 
-$topicID,
+    $topicID,
 
-$studentID,
+    $studentID,
 
-$reason
+    $reason
 
 );
 
 
-
 if(mysqli_stmt_execute($stmt))
 {
+
+    createAuditLog(
+
+        $conn,
+
+        $studentID,
+
+        "Forum",
+
+        "REPORT_TOPIC",
+
+        $topicTitle,
+
+        "Reported forum topic: ".$topicTitle
+
+    );
 
     echo json_encode([
 
@@ -208,8 +238,6 @@ else
     ]);
 
 }
-
-
 
 mysqli_stmt_close($stmt);
 

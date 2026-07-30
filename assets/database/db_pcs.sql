@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2026 at 02:42 PM
+-- Generation Time: Jul 29, 2026 at 05:32 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -131,7 +131,14 @@ INSERT INTO `audit_logs` (`auditID`, `adminID`, `module`, `action`, `target`, `d
 (68, 1, 'Authentication', 'LOGOUT', 'Admin Account', 'Admin logged out from the system', '127.0.0.1', '2026-07-27 20:42:53'),
 (69, 1, 'Authentication', 'LOGIN', 'Student Account', 'Student fai logged into the system', '127.0.0.1', '2026-07-27 20:48:57'),
 (70, 1, 'Authentication', 'LOGOUT', 'Student Account', 'Student logged out from the system', '127.0.0.1', '2026-07-27 21:26:28'),
-(71, 1, 'Authentication', 'LOGIN', 'Student Account', 'Student fai logged into the system', '127.0.0.1', '2026-07-28 07:13:27');
+(71, 1, 'Authentication', 'LOGIN', 'Student Account', 'Student fai logged into the system', '127.0.0.1', '2026-07-28 07:13:27'),
+(72, 1, 'Authentication', 'LOGOUT', 'Student Account', 'Student logged out from the system', '127.0.0.1', '2026-07-28 22:30:20'),
+(73, 1, 'Authentication', 'LOGIN', 'Admin Account', 'Admin logged into the system', '127.0.0.1', '2026-07-28 22:31:07'),
+(74, 1, 'Authentication', 'LOGOUT', 'Admin Account', 'Admin logged out from the system', '127.0.0.1', '2026-07-29 08:22:09'),
+(75, 1, 'Authentication', 'LOGIN', 'Student Account', 'Student fai logged into the system', '127.0.0.1', '2026-07-29 08:22:18'),
+(76, 1, 'Authentication', 'LOGOUT', 'Student Account', 'Student logged out from the system', '127.0.0.1', '2026-07-29 13:39:00'),
+(77, 1, 'Authentication', 'LOGIN', 'Admin Account', 'Admin logged into the system', '127.0.0.1', '2026-07-29 13:39:09'),
+(78, 1, 'Authentication', 'LOGOUT', 'Admin Account', 'Admin logged out from the system', '127.0.0.1', '2026-07-29 15:31:50');
 
 -- --------------------------------------------------------
 
@@ -344,7 +351,96 @@ CREATE TABLE `forumbookmarks` (
 
 INSERT INTO `forumbookmarks` (`bookmarkID`, `topicID`, `studentID`, `bookmarked_at`) VALUES
 (2, 1, 1, '2026-07-24 15:45:03'),
-(13, 4, 1, '2026-07-25 16:55:35');
+(3, 2, 5, '2026-07-25 01:12:22'),
+(4, 3, 8, '2026-07-25 02:30:15'),
+(5, 4, 12, '2026-07-25 05:45:09'),
+(6, 5, 15, '2026-07-25 07:20:44'),
+(7, 6, 21, '2026-07-26 00:12:31'),
+(8, 7, 3, '2026-07-26 01:45:27'),
+(9, 8, 18, '2026-07-26 03:18:52'),
+(10, 9, 25, '2026-07-26 06:33:10'),
+(11, 10, 30, '2026-07-26 08:20:41'),
+(12, 11, 33, '2026-07-26 10:05:22'),
+(13, 12, 40, '2026-07-27 00:45:19'),
+(14, 13, 45, '2026-07-27 02:22:33'),
+(15, 1, 52, '2026-07-27 04:10:45'),
+(16, 2, 60, '2026-07-27 05:55:28'),
+(17, 4, 67, '2026-07-27 07:40:12'),
+(18, 6, 9, '2026-07-27 09:25:55'),
+(19, 7, 14, '2026-07-28 00:30:21'),
+(20, 8, 22, '2026-07-28 01:50:16'),
+(21, 10, 28, '2026-07-28 03:35:42'),
+(22, 11, 35, '2026-07-28 05:20:37'),
+(23, 12, 41, '2026-07-28 07:15:09'),
+(24, 13, 48, '2026-07-28 08:40:28'),
+(25, 3, 55, '2026-07-28 10:25:44'),
+(26, 5, 62, '2026-07-29 00:15:30'),
+(27, 7, 19, '2026-07-29 01:45:18'),
+(28, 9, 27, '2026-07-29 02:55:36'),
+(29, 10, 39, '2026-07-29 04:25:47'),
+(30, 12, 50, '2026-07-29 06:10:29'),
+(31, 1, 58, '2026-07-29 07:35:12'),
+(32, 8, 64, '2026-07-29 09:05:51'),
+(33, 2, 7, '2026-07-29 10:20:15'),
+(34, 3, 11, '2026-07-29 10:45:32'),
+(35, 5, 16, '2026-07-29 11:10:44'),
+(36, 6, 24, '2026-07-29 11:35:18'),
+(37, 9, 31, '2026-07-29 12:05:26'),
+(38, 11, 37, '2026-07-29 12:25:41'),
+(39, 13, 43, '2026-07-29 12:50:13'),
+(40, 4, 51, '2026-07-29 13:15:36'),
+(41, 1, 6, '2026-07-30 00:12:25'),
+(42, 2, 13, '2026-07-30 00:40:19'),
+(43, 3, 20, '2026-07-30 01:05:47'),
+(44, 5, 29, '2026-07-30 01:35:22'),
+(45, 7, 34, '2026-07-30 02:10:55'),
+(46, 8, 46, '2026-07-30 02:45:33'),
+(47, 10, 54, '2026-07-30 03:20:14'),
+(48, 12, 61, '2026-07-30 03:55:40'),
+(49, 13, 66, '2026-07-30 04:30:18'),
+(50, 4, 17, '2026-07-30 05:05:29'),
+(51, 6, 26, '2026-07-30 05:40:52'),
+(52, 8, 32, '2026-07-30 06:15:37'),
+(53, 9, 38, '2026-07-30 06:50:21'),
+(54, 11, 44, '2026-07-30 07:25:46'),
+(55, 1, 57, '2026-07-30 08:00:11'),
+(56, 7, 63, '2026-07-30 08:35:28'),
+(57, 2, 23, '2026-07-30 09:10:45'),
+(58, 3, 36, '2026-07-30 09:45:39'),
+(59, 5, 49, '2026-07-30 10:20:17'),
+(60, 10, 56, '2026-07-30 10:55:31'),
+(61, 12, 65, '2026-07-30 11:30:26'),
+(62, 13, 59, '2026-07-30 12:05:42'),
+(63, 1, 4, '2026-07-31 00:15:22'),
+(64, 2, 10, '2026-07-31 00:42:35'),
+(65, 3, 18, '2026-07-31 01:10:41'),
+(66, 4, 27, '2026-07-31 01:35:18'),
+(67, 5, 35, '2026-07-31 02:05:27'),
+(68, 6, 42, '2026-07-31 02:30:52'),
+(69, 7, 47, '2026-07-31 03:00:14'),
+(70, 8, 53, '2026-07-31 03:25:39'),
+(71, 9, 60, '2026-07-31 04:00:26'),
+(72, 10, 15, '2026-07-31 04:35:44'),
+(73, 11, 22, '2026-07-31 05:10:18'),
+(74, 12, 30, '2026-07-31 05:45:33'),
+(75, 13, 67, '2026-07-31 06:20:57'),
+(76, 3, 52, '2026-07-31 06:55:12'),
+(77, 5, 8, '2026-07-31 07:30:48'),
+(78, 7, 25, '2026-07-31 08:05:21'),
+(79, 9, 33, '2026-07-31 08:40:35'),
+(80, 11, 41, '2026-07-31 09:15:42'),
+(81, 13, 56, '2026-07-31 09:50:26'),
+(82, 2, 64, '2026-07-31 10:25:39'),
+(83, 4, 19, '2026-07-31 11:00:14'),
+(84, 6, 36, '2026-07-31 11:35:28'),
+(85, 8, 45, '2026-07-31 12:10:53'),
+(86, 10, 62, '2026-07-31 12:45:17'),
+(87, 12, 66, '2026-07-31 13:20:31'),
+(88, 1, 28, '2026-08-01 00:10:45'),
+(89, 3, 39, '2026-08-01 00:45:22'),
+(90, 5, 50, '2026-08-01 01:20:36'),
+(91, 8, 58, '2026-08-01 01:55:49'),
+(92, 12, 63, '2026-08-01 02:30:15');
 
 -- --------------------------------------------------------
 
@@ -389,8 +485,134 @@ CREATE TABLE `forumlikes` (
 
 INSERT INTO `forumlikes` (`likeID`, `topicID`, `studentID`, `liked_at`) VALUES
 (6, 1, 1, '2026-07-25 16:32:03'),
-(9, 2, 1, '2026-07-25 16:55:54'),
-(11, 4, 1, '2026-07-28 10:35:26');
+(12, 1, 5, '2026-07-26 01:00:12'),
+(13, 1, 8, '2026-07-26 01:05:21'),
+(14, 1, 14, '2026-07-26 01:11:44'),
+(15, 1, 18, '2026-07-26 01:16:08'),
+(16, 1, 25, '2026-07-26 01:20:35'),
+(17, 1, 31, '2026-07-26 01:25:19'),
+(18, 1, 42, '2026-07-26 01:33:51'),
+(19, 2, 4, '2026-07-26 02:01:33'),
+(20, 2, 9, '2026-07-26 02:05:10'),
+(21, 2, 16, '2026-07-26 02:08:44'),
+(22, 2, 27, '2026-07-26 02:12:18'),
+(23, 2, 38, '2026-07-26 02:18:27'),
+(24, 3, 6, '2026-07-26 02:40:42'),
+(25, 3, 15, '2026-07-26 02:45:31'),
+(26, 3, 24, '2026-07-26 02:48:55'),
+(27, 3, 41, '2026-07-26 02:54:20'),
+(28, 4, 3, '2026-07-26 03:02:41'),
+(29, 4, 12, '2026-07-26 03:08:17'),
+(30, 4, 20, '2026-07-26 03:14:23'),
+(31, 4, 28, '2026-07-26 03:21:18'),
+(32, 4, 36, '2026-07-26 03:26:44'),
+(33, 4, 47, '2026-07-26 03:33:58'),
+(34, 5, 7, '2026-07-26 04:00:12'),
+(35, 5, 13, '2026-07-26 04:04:31'),
+(36, 5, 22, '2026-07-26 04:08:42'),
+(37, 5, 35, '2026-07-26 04:14:28'),
+(38, 5, 51, '2026-07-26 04:20:55'),
+(39, 6, 2, '2026-07-26 04:40:15'),
+(40, 6, 19, '2026-07-26 04:46:21'),
+(41, 6, 29, '2026-07-26 04:53:19'),
+(42, 6, 46, '2026-07-26 04:58:33'),
+(43, 7, 1, '2026-07-26 05:10:14'),
+(44, 7, 17, '2026-07-26 05:14:48'),
+(45, 7, 23, '2026-07-26 05:18:36'),
+(46, 7, 40, '2026-07-26 05:24:27'),
+(47, 7, 58, '2026-07-26 05:31:05'),
+(48, 7, 63, '2026-07-26 05:37:52'),
+(49, 8, 10, '2026-07-26 06:00:31'),
+(50, 8, 21, '2026-07-26 06:06:48'),
+(51, 8, 32, '2026-07-26 06:13:05'),
+(52, 8, 44, '2026-07-26 06:19:40'),
+(53, 8, 57, '2026-07-26 06:25:22'),
+(54, 9, 11, '2026-07-26 07:00:10'),
+(55, 9, 26, '2026-07-26 07:05:54'),
+(56, 9, 39, '2026-07-26 07:11:37'),
+(57, 9, 52, '2026-07-26 07:18:46'),
+(58, 10, 30, '2026-07-26 08:02:08'),
+(59, 10, 37, '2026-07-26 08:08:23'),
+(60, 10, 48, '2026-07-26 08:14:59'),
+(61, 10, 60, '2026-07-26 08:20:41'),
+(62, 11, 33, '2026-07-26 09:01:12'),
+(63, 11, 43, '2026-07-26 09:07:36'),
+(64, 11, 54, '2026-07-26 09:13:19'),
+(65, 11, 67, '2026-07-26 09:20:48'),
+(66, 12, 34, '2026-07-26 10:01:15'),
+(67, 12, 45, '2026-07-26 10:08:42'),
+(68, 12, 56, '2026-07-26 10:14:56'),
+(69, 12, 62, '2026-07-26 10:20:13'),
+(70, 13, 49, '2026-07-26 11:00:41'),
+(71, 13, 53, '2026-07-26 11:07:26'),
+(72, 13, 59, '2026-07-26 11:14:11'),
+(73, 13, 64, '2026-07-26 11:20:37'),
+(74, 1, 33, '2026-07-27 00:01:14'),
+(75, 1, 45, '2026-07-27 00:05:27'),
+(76, 1, 52, '2026-07-27 00:11:43'),
+(77, 1, 61, '2026-07-27 00:17:55'),
+(78, 1, 67, '2026-07-27 00:24:11'),
+(79, 2, 11, '2026-07-27 01:02:13'),
+(80, 2, 23, '2026-07-27 01:06:55'),
+(81, 2, 35, '2026-07-27 01:12:47'),
+(82, 2, 50, '2026-07-27 01:18:30'),
+(83, 2, 64, '2026-07-27 01:23:51'),
+(84, 3, 12, '2026-07-27 02:01:16'),
+(85, 3, 28, '2026-07-27 02:07:28'),
+(86, 3, 36, '2026-07-27 02:12:39'),
+(87, 3, 53, '2026-07-27 02:19:24'),
+(88, 3, 66, '2026-07-27 02:26:10'),
+(89, 4, 5, '2026-07-27 03:03:44'),
+(90, 4, 18, '2026-07-27 03:08:57'),
+(91, 4, 32, '2026-07-27 03:14:11'),
+(92, 4, 43, '2026-07-27 03:20:18'),
+(93, 4, 55, '2026-07-27 03:27:45'),
+(94, 5, 8, '2026-07-27 04:01:32'),
+(95, 5, 24, '2026-07-27 04:08:16'),
+(96, 5, 39, '2026-07-27 04:13:28'),
+(97, 5, 47, '2026-07-27 04:19:05'),
+(98, 5, 63, '2026-07-27 04:25:44'),
+(99, 6, 6, '2026-07-27 05:02:55'),
+(100, 6, 15, '2026-07-27 05:08:47'),
+(101, 6, 34, '2026-07-27 05:15:18'),
+(102, 6, 49, '2026-07-27 05:20:56'),
+(103, 6, 65, '2026-07-27 05:28:12'),
+(104, 7, 9, '2026-07-27 06:01:26'),
+(105, 7, 22, '2026-07-27 06:06:39'),
+(106, 7, 31, '2026-07-27 06:11:55'),
+(107, 7, 46, '2026-07-27 06:18:42'),
+(108, 7, 54, '2026-07-27 06:24:58'),
+(109, 8, 4, '2026-07-27 07:02:17'),
+(110, 8, 16, '2026-07-27 07:07:41'),
+(111, 8, 27, '2026-07-27 07:13:53'),
+(112, 8, 41, '2026-07-27 07:20:36'),
+(113, 8, 58, '2026-07-27 07:26:28'),
+(114, 9, 3, '2026-07-27 08:01:58'),
+(115, 9, 17, '2026-07-27 08:08:42'),
+(116, 9, 30, '2026-07-27 08:14:31'),
+(117, 9, 45, '2026-07-27 08:20:55'),
+(118, 9, 57, '2026-07-27 08:27:19'),
+(119, 10, 2, '2026-07-27 09:02:12'),
+(120, 10, 20, '2026-07-27 09:08:28'),
+(121, 10, 35, '2026-07-27 09:15:46'),
+(122, 10, 51, '2026-07-27 09:21:33'),
+(123, 10, 62, '2026-07-27 09:27:14'),
+(124, 11, 7, '2026-07-27 10:03:16'),
+(125, 11, 25, '2026-07-27 10:09:55'),
+(126, 11, 38, '2026-07-27 10:16:37'),
+(127, 11, 59, '2026-07-27 10:22:11'),
+(128, 11, 60, '2026-07-27 10:28:04'),
+(129, 12, 13, '2026-07-27 11:01:49'),
+(130, 12, 26, '2026-07-27 11:07:28'),
+(131, 12, 42, '2026-07-27 11:13:55'),
+(132, 12, 48, '2026-07-27 11:20:16'),
+(133, 12, 57, '2026-07-27 11:26:41'),
+(134, 13, 14, '2026-07-27 12:02:07'),
+(135, 13, 29, '2026-07-27 12:08:36'),
+(136, 13, 37, '2026-07-27 12:15:48'),
+(137, 13, 50, '2026-07-27 12:21:57'),
+(138, 13, 65, '2026-07-27 12:28:19'),
+(141, 13, 1, '2026-07-29 10:46:51');
 
 -- --------------------------------------------------------
 
@@ -403,17 +625,208 @@ CREATE TABLE `forumreply` (
   `topicID` int(11) NOT NULL,
   `studentID` int(11) NOT NULL,
   `replyContent` text NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `forumreply`
 --
 
-INSERT INTO `forumreply` (`replyID`, `topicID`, `studentID`, `replyContent`, `created_at`) VALUES
-(1, 1, 2, 'H&L has promotion this week.', '2026-07-22 15:59:42'),
-(2, 1, 3, 'E-Mart is cheaper during weekends.', '2026-07-22 15:59:42'),
-(3, 2, 1, 'I always compare prices before buying.', '2026-07-22 15:59:42');
+INSERT INTO `forumreply` (`replyID`, `topicID`, `studentID`, `replyContent`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 'H&L has promotion this week.', '2026-07-22 15:59:42', '2026-07-28 19:21:08'),
+(2, 1, 3, 'E-Mart is cheaper during weekends.', '2026-07-22 15:59:42', '2026-07-28 19:21:08'),
+(3, 2, 1, 'I always compare prices before buying.', '2026-07-22 15:59:42', '2026-07-29 09:02:26'),
+(5, 4, 12, 'I usually buy instant noodles from Emart because they often have bundle promotions.', '2026-07-23 02:12:11', '2026-07-23 02:12:11'),
+(6, 4, 25, '99 Speedmart is quite affordable if you only buy a few packs.', '2026-07-23 02:34:22', '2026-07-23 02:34:22'),
+(7, 4, 48, 'Farley supermarket had a discount on Indomie last weekend.', '2026-07-23 03:18:30', '2026-07-23 03:18:30'),
+(8, 5, 31, 'I prefer Everrise because their vegetables are fresher.', '2026-07-23 05:02:45', '2026-07-23 05:02:45'),
+(9, 5, 14, 'Emart usually restocks vegetables every morning.', '2026-07-23 05:41:18', '2026-07-23 05:41:18'),
+(10, 5, 56, 'You should compare prices because some vegetables are cheaper at H&L.', '2026-07-23 06:05:59', '2026-07-23 06:05:59'),
+(11, 6, 9, 'Frozen chicken is usually cheaper when there is a promotion.', '2026-07-23 09:02:15', '2026-07-23 09:02:15'),
+(12, 6, 42, 'I always keep frozen nuggets in my hostel because they are convenient.', '2026-07-23 09:15:33', '2026-07-23 09:15:33'),
+(13, 6, 60, 'Buying frozen food in bulk can save money.', '2026-07-23 10:04:11', '2026-07-23 10:04:11'),
+(14, 7, 17, 'I recommend Nescafe Classic when it is on promotion.', '2026-07-24 01:10:55', '2026-07-24 01:10:55'),
+(15, 7, 38, 'OldTown White Coffee is my favourite but it is expensive.', '2026-07-24 01:32:40', '2026-07-24 01:32:40'),
+(16, 7, 65, 'I usually wait for supermarket promotions before buying coffee.', '2026-07-24 02:01:18', '2026-07-24 02:01:18'),
+(17, 8, 22, 'Emart had good promotions for canned sardines this week.', '2026-07-24 07:08:23', '2026-07-24 07:08:23'),
+(18, 8, 49, 'Ayam Brand tastes good although it is slightly more expensive.', '2026-07-24 07:36:18', '2026-07-24 07:36:18'),
+(19, 8, 11, 'I usually buy canned tuna because it lasts longer.', '2026-07-24 08:01:47', '2026-07-24 08:01:47'),
+(20, 9, 27, 'Weekend promotions are definitely worth checking.', '2026-07-24 11:15:10', '2026-07-24 11:15:10'),
+(21, 9, 44, 'I compare prices using this system before going shopping.', '2026-07-24 11:55:42', '2026-07-24 11:55:42'),
+(22, 9, 63, 'Sunday evenings usually have clearance discounts.', '2026-07-24 12:24:51', '2026-07-24 12:24:51'),
+(23, 10, 16, 'Gardenia bread with peanut butter is my favourite budget snack.', '2026-07-25 03:05:18', '2026-07-25 03:05:18'),
+(24, 10, 36, 'I usually buy biscuits because they are filling and affordable.', '2026-07-25 03:30:55', '2026-07-25 03:30:55'),
+(25, 10, 58, 'RM10 is enough if you buy during promotions.', '2026-07-25 03:54:33', '2026-07-25 03:54:33'),
+(26, 11, 20, 'I always prepare a shopping list before going to the supermarket.', '2026-07-25 06:28:44', '2026-07-25 06:28:44'),
+(27, 11, 41, 'Avoid shopping when you are hungry because you will buy unnecessary items.', '2026-07-25 07:01:26', '2026-07-25 07:01:26'),
+(28, 11, 67, 'Comparing prices between stores saves me quite a lot every month.', '2026-07-25 07:42:58', '2026-07-25 07:42:58'),
+(29, 12, 5, 'Welcome everyone! Hope we can help each other save money.', '2026-07-25 10:12:14', '2026-07-25 10:12:14'),
+(30, 12, 29, 'Hello! I am a first-year Software Engineering student.', '2026-07-25 10:40:37', '2026-07-25 10:40:37'),
+(31, 12, 51, 'Nice to meet everyone. Looking forward to using this platform.', '2026-07-25 11:08:22', '2026-07-25 11:08:22'),
+(32, 13, 24, 'Everrise usually has fresh bread in the morning.', '2026-07-26 02:20:11', '2026-07-26 02:20:11'),
+(33, 13, 39, 'Gardenia bread is often cheaper at 99 Speedmart.', '2026-07-26 02:55:43', '2026-07-26 02:55:43'),
+(34, 13, 62, 'I compare prices every week before buying bread.', '2026-07-26 03:23:59', '2026-07-26 03:23:59'),
+(35, 1, 8, 'I found Milo cheaper at Everrise yesterday. You should check their weekly promotion.', '2026-07-26 01:05:11', '2026-07-26 01:05:11'),
+(36, 1, 21, 'Emart also had a buy 2 save more promotion last weekend.', '2026-07-26 01:15:42', '2026-07-26 01:15:42'),
+(37, 1, 54, 'The Price Checker system helped me compare before buying.', '2026-07-26 01:28:30', '2026-07-26 01:28:30'),
+(38, 2, 13, 'I always compare prices before shopping because every ringgit counts as a student.', '2026-07-26 02:04:19', '2026-07-26 02:04:19'),
+(39, 2, 37, 'Buying in bulk with friends can reduce the overall cost.', '2026-07-26 02:22:18', '2026-07-26 02:22:18'),
+(40, 2, 46, 'I avoid impulse buying by making a shopping list first.', '2026-07-26 02:35:40', '2026-07-26 02:35:40'),
+(41, 3, 18, 'Welcome everyone! Happy to join this community.', '2026-07-26 03:02:17', '2026-07-26 03:02:17'),
+(42, 3, 59, 'Hope this forum grows because it is useful for students.', '2026-07-26 03:15:44', '2026-07-26 03:15:44'),
+(43, 3, 7, 'Looking forward to sharing shopping deals with everyone.', '2026-07-26 03:28:13', '2026-07-26 03:28:13'),
+(44, 4, 40, 'Farley usually has good promotions near the end of the month.', '2026-07-26 04:11:02', '2026-07-26 04:11:02'),
+(45, 4, 61, 'I bought a carton of Indomie for much cheaper during a warehouse sale.', '2026-07-26 04:34:58', '2026-07-26 04:34:58'),
+(46, 4, 2, 'The comparison feature makes finding the cheapest noodles much easier.', '2026-07-26 04:46:15', '2026-07-26 04:46:15'),
+(47, 5, 35, 'Morning deliveries usually have the freshest vegetables.', '2026-07-26 05:18:33', '2026-07-26 05:18:33'),
+(48, 5, 52, 'H&L has quality vegetables although some are slightly expensive.', '2026-07-26 05:37:45', '2026-07-26 05:37:45'),
+(49, 5, 4, 'I normally shop after class around 6 PM and the vegetables are still fresh.', '2026-07-26 05:58:26', '2026-07-26 05:58:26'),
+(50, 6, 26, 'Frozen food is convenient when assignments start piling up.', '2026-07-26 06:16:42', '2026-07-26 06:16:42'),
+(51, 6, 57, 'Always check the expiry date before buying frozen products.', '2026-07-26 06:42:11', '2026-07-26 06:42:11'),
+(52, 6, 30, 'Some supermarkets have student promotions on frozen food.', '2026-07-26 06:59:03', '2026-07-26 06:59:03'),
+(53, 7, 19, 'I recommend buying coffee during payday promotions.', '2026-07-26 07:21:10', '2026-07-26 07:21:10'),
+(54, 7, 64, 'Instant coffee sachets are usually cheaper than canned coffee.', '2026-07-26 07:45:08', '2026-07-26 07:45:08'),
+(55, 7, 11, 'Compare the price per gram instead of just the package price.', '2026-07-26 07:58:17', '2026-07-26 07:58:17'),
+(56, 8, 45, 'The canned tuna promotion at Everrise was really worth it.', '2026-07-26 08:14:32', '2026-07-26 08:14:32'),
+(57, 8, 3, 'I stock up whenever there is a Buy 2 Free 1 promotion.', '2026-07-26 08:39:25', '2026-07-26 08:39:25'),
+(58, 8, 55, 'Ayam Brand is expensive but the quality is excellent.', '2026-07-26 08:56:10', '2026-07-26 08:56:10'),
+(59, 9, 10, 'Shopping early in the morning is less crowded.', '2026-07-26 09:18:19', '2026-07-26 09:18:19'),
+(60, 9, 43, 'Weekend sales are perfect for buying household essentials.', '2026-07-26 09:37:44', '2026-07-26 09:37:44'),
+(61, 9, 66, 'Always compare prices before checking out.', '2026-07-26 09:55:33', '2026-07-26 09:55:33'),
+(62, 10, 23, 'RM10 can still buy quite a lot if you focus on promotions.', '2026-07-26 10:15:51', '2026-07-26 10:15:51'),
+(63, 10, 47, 'I like buying biscuits because they last for several days.', '2026-07-26 10:32:16', '2026-07-26 10:32:16'),
+(64, 10, 32, 'Chocolate wafers are usually discounted every month.', '2026-07-26 10:50:02', '2026-07-26 10:50:02'),
+(65, 15, 15, 'I normally compare prices using this system before visiting the supermarket.', '2026-07-27 01:10:15', '2026-07-27 01:10:15'),
+(66, 15, 34, 'Everrise had the lowest price when I checked yesterday.', '2026-07-27 01:24:37', '2026-07-27 01:24:37'),
+(67, 16, 27, 'Buying store brands instead of famous brands helps me save money.', '2026-07-27 01:45:18', '2026-07-27 01:45:18'),
+(68, 16, 58, 'I usually wait until there is a weekend promotion before shopping.', '2026-07-27 02:03:54', '2026-07-27 02:03:54'),
+(69, 17, 6, 'I recommend checking the expiry date before buying discounted products.', '2026-07-27 02:18:29', '2026-07-27 02:18:29'),
+(70, 17, 41, 'Bulk purchases are worth it if you share with your roommates.', '2026-07-27 02:41:12', '2026-07-27 02:41:12'),
+(71, 18, 18, 'The bakery section usually has discounts after 8 PM.', '2026-07-27 03:02:46', '2026-07-27 03:02:46'),
+(72, 18, 52, 'Gardenia bread is often cheaper at 99 Speedmart.', '2026-07-27 03:15:27', '2026-07-27 03:15:27'),
+(73, 19, 13, 'I compare prices between Emart and Farley every week.', '2026-07-27 03:38:51', '2026-07-27 03:38:51'),
+(74, 19, 46, 'This forum has helped me discover cheaper supermarkets.', '2026-07-27 03:57:10', '2026-07-27 03:57:10'),
+(75, 20, 25, 'Frozen vegetables are cheaper and last much longer.', '2026-07-27 04:16:43', '2026-07-27 04:16:43'),
+(76, 20, 60, 'I buy frozen food only during monthly promotions.', '2026-07-27 04:34:18', '2026-07-27 04:34:18'),
+(77, 21, 7, 'Buying drinks in cartons instead of single bottles saves money.', '2026-07-27 05:01:35', '2026-07-27 05:01:35'),
+(78, 21, 38, 'I usually compare the price per litre before deciding.', '2026-07-27 05:18:44', '2026-07-27 05:18:44'),
+(79, 22, 11, 'The Price Checker website makes comparing products much easier.', '2026-07-27 05:42:16', '2026-07-27 05:42:16'),
+(80, 22, 50, 'I found several cheaper alternatives thanks to the comparison feature.', '2026-07-27 06:03:27', '2026-07-27 06:03:27'),
+(81, 23, 16, 'Shopping with friends allows us to split bulk purchases.', '2026-07-27 06:25:52', '2026-07-27 06:25:52'),
+(82, 23, 44, 'Always compare unit prices instead of package prices.', '2026-07-27 06:43:38', '2026-07-27 06:43:38'),
+(83, 24, 29, 'I usually prepare a shopping list before leaving my hostel.', '2026-07-27 07:01:19', '2026-07-27 07:01:19'),
+(84, 24, 61, 'Avoid shopping when you are hungry because you tend to overspend.', '2026-07-27 07:22:40', '2026-07-27 07:22:40'),
+(85, 25, 5, 'The weekly supermarket catalogue is useful for finding promotions.', '2026-07-27 07:46:55', '2026-07-27 07:46:55'),
+(86, 25, 67, 'I always check for member discounts before paying.', '2026-07-27 08:03:28', '2026-07-27 08:03:28'),
+(87, 26, 9, 'Buying local products is sometimes much cheaper than imported brands.', '2026-07-27 08:27:41', '2026-07-27 08:27:41'),
+(88, 26, 53, 'Compare prices at different stores because promotions change every week.', '2026-07-27 08:49:14', '2026-07-27 08:49:14'),
+(89, 27, 20, 'I prefer shopping early because popular promotional items sell out quickly.', '2026-07-27 09:11:56', '2026-07-27 09:11:56'),
+(90, 27, 42, 'The search feature helps me find products much faster.', '2026-07-27 09:35:09', '2026-07-27 09:35:09'),
+(91, 28, 33, 'Buying larger packs is cheaper if you have enough storage space.', '2026-07-27 09:58:45', '2026-07-27 09:58:45'),
+(92, 28, 59, 'I usually compare prices before every grocery trip.', '2026-07-27 10:20:31', '2026-07-27 10:20:31'),
+(93, 29, 22, 'Thanks for sharing this information. It really helps students save money.', '2026-07-27 10:43:12', '2026-07-27 10:43:12'),
+(94, 29, 63, 'I hope more users continue sharing supermarket promotions here.', '2026-07-27 11:05:37', '2026-07-27 11:05:37'),
+(95, 30, 12, 'I found better prices at Everrise compared to Emart this week.', '2026-07-28 01:05:18', '2026-07-28 01:05:18'),
+(96, 30, 36, 'The comparison feature saved me quite a bit of money.', '2026-07-28 01:18:47', '2026-07-28 01:18:47'),
+(97, 31, 7, 'I usually compare prices before deciding where to shop.', '2026-07-28 01:36:21', '2026-07-28 01:36:21'),
+(98, 31, 45, 'Shopping early in the morning is less crowded and shelves are fully stocked.', '2026-07-28 01:52:40', '2026-07-28 01:52:40'),
+(99, 32, 18, 'Buying supermarket own-brand products helps reduce my expenses.', '2026-07-28 02:11:33', '2026-07-28 02:11:33'),
+(100, 32, 61, 'I usually wait for monthly promotions before stocking up.', '2026-07-28 02:24:59', '2026-07-28 02:24:59'),
+(101, 33, 24, 'Farley often has good discounts on household essentials.', '2026-07-28 02:43:18', '2026-07-28 02:43:18'),
+(102, 33, 56, 'Checking promotion catalogues before shopping really helps.', '2026-07-28 02:58:12', '2026-07-28 02:58:12'),
+(103, 34, 3, 'I compare unit prices instead of package prices.', '2026-07-28 03:17:55', '2026-07-28 03:17:55'),
+(104, 34, 42, 'Buying larger packs is cheaper if you consume them regularly.', '2026-07-28 03:34:48', '2026-07-28 03:34:48'),
+(105, 35, 15, 'I found the cheapest drinks at 99 Speedmart last weekend.', '2026-07-28 03:53:17', '2026-07-28 03:53:17'),
+(106, 35, 67, 'Always compare prices because promotions change every week.', '2026-07-28 04:08:46', '2026-07-28 04:08:46'),
+(107, 36, 8, 'I normally buy groceries after class because there are fewer people.', '2026-07-28 04:29:54', '2026-07-28 04:29:54'),
+(108, 36, 54, 'The website makes comparing supermarket prices much easier.', '2026-07-28 04:46:20', '2026-07-28 04:46:20'),
+(109, 37, 29, 'Buying in bulk with housemates is a good way to save money.', '2026-07-28 05:05:37', '2026-07-28 05:05:37'),
+(110, 37, 48, 'I usually focus on products that are on promotion first.', '2026-07-28 05:19:56', '2026-07-28 05:19:56'),
+(111, 38, 17, 'Weekend promotions are usually better than weekday offers.', '2026-07-28 05:38:14', '2026-07-28 05:38:14'),
+(112, 38, 63, 'I always compare prices using this platform before shopping.', '2026-07-28 05:54:31', '2026-07-28 05:54:31'),
+(113, 39, 20, 'Buying frozen food is convenient during busy assignment weeks.', '2026-07-28 06:13:47', '2026-07-28 06:13:47'),
+(114, 39, 58, 'Frozen vegetables last longer and reduce food waste.', '2026-07-28 06:28:25', '2026-07-28 06:28:25'),
+(115, 40, 11, 'I always check the expiry date before buying discounted food.', '2026-07-28 06:45:53', '2026-07-28 06:45:53'),
+(116, 40, 35, 'Some stores reduce prices in the evening for fresh products.', '2026-07-28 07:03:41', '2026-07-28 07:03:41'),
+(117, 41, 27, 'I recommend comparing prices across at least three supermarkets.', '2026-07-28 07:21:16', '2026-07-28 07:21:16'),
+(118, 41, 52, 'The search feature helps me find cheaper alternatives quickly.', '2026-07-28 07:37:58', '2026-07-28 07:37:58'),
+(119, 42, 9, 'Planning meals before shopping helps reduce unnecessary spending.', '2026-07-28 07:56:44', '2026-07-28 07:56:44'),
+(120, 42, 43, 'I stick to my shopping list to avoid impulse purchases.', '2026-07-28 08:12:39', '2026-07-28 08:12:39'),
+(121, 43, 5, 'Student discounts are worth checking before making a purchase.', '2026-07-28 08:31:27', '2026-07-28 08:31:27'),
+(122, 43, 39, 'The comparison history feature helps me track price changes.', '2026-07-28 08:48:18', '2026-07-28 08:48:18'),
+(123, 44, 14, 'I hope more students continue sharing supermarket promotions here.', '2026-07-28 09:07:35', '2026-07-28 09:07:35'),
+(124, 44, 62, 'This community has helped me save a lot on my weekly grocery budget.', '2026-07-28 09:24:49', '2026-07-28 09:24:49'),
+(125, 45, 21, 'I usually compare prices between different stores before buying groceries.', '2026-07-29 01:02:14', '2026-07-29 01:02:14'),
+(126, 45, 47, 'Some stores have better deals during their weekly promotions.', '2026-07-29 01:18:32', '2026-07-29 01:18:32'),
+(127, 46, 16, 'I prefer shopping at Emart because many products are affordable.', '2026-07-29 01:35:47', '2026-07-29 01:35:47'),
+(128, 46, 60, 'Checking multiple stores helps me avoid paying higher prices.', '2026-07-29 01:51:28', '2026-07-29 01:51:28'),
+(129, 47, 4, 'I normally create a budget before going grocery shopping.', '2026-07-29 02:08:19', '2026-07-29 02:08:19'),
+(130, 47, 33, 'Making a shopping list prevents unnecessary purchases.', '2026-07-29 02:23:55', '2026-07-29 02:23:55'),
+(131, 48, 19, 'Promotions are useful but we should compare the original prices too.', '2026-07-29 02:41:36', '2026-07-29 02:41:36'),
+(132, 48, 55, 'I always check whether discounts are actually worth it.', '2026-07-29 02:57:12', '2026-07-29 02:57:12'),
+(133, 49, 10, 'The price comparison system makes shopping decisions easier.', '2026-07-29 03:14:48', '2026-07-29 03:14:48'),
+(134, 49, 66, 'I use this forum to discover cheaper alternatives from other students.', '2026-07-29 03:31:24', '2026-07-29 03:31:24'),
+(135, 50, 23, 'Buying snacks in bulk is cheaper for hostel students.', '2026-07-29 03:49:15', '2026-07-29 03:49:15'),
+(136, 50, 51, 'I usually buy snacks during supermarket sales.', '2026-07-29 04:05:38', '2026-07-29 04:05:38'),
+(137, 51, 28, 'Comparing prices helps me manage my monthly allowance better.', '2026-07-29 04:22:51', '2026-07-29 04:22:51'),
+(138, 51, 64, 'Small savings every week can make a big difference.', '2026-07-29 04:39:44', '2026-07-29 04:39:44'),
+(139, 30, 37, 'I recommend checking online promotions before visiting the store.', '2026-07-29 04:58:13', '2026-07-29 04:58:13'),
+(140, 31, 53, 'Different supermarkets have different strengths depending on products.', '2026-07-29 05:15:26', '2026-07-29 05:15:26'),
+(141, 32, 31, 'I usually compare brands because cheaper does not always mean worse.', '2026-07-29 05:32:41', '2026-07-29 05:32:41'),
+(142, 33, 46, 'Weekend sales are usually the best time to buy household items.', '2026-07-29 05:49:58', '2026-07-29 05:49:58'),
+(143, 34, 12, 'Checking price per gram is a useful shopping habit.', '2026-07-29 06:06:35', '2026-07-29 06:06:35'),
+(144, 35, 59, 'I save money by avoiding unnecessary branded products.', '2026-07-29 06:24:17', '2026-07-29 06:24:17'),
+(145, 36, 26, 'I usually shop after checking the latest promotions first.', '2026-07-29 06:41:52', '2026-07-29 06:41:52'),
+(146, 37, 40, 'Sharing grocery expenses with friends can reduce costs.', '2026-07-29 06:58:36', '2026-07-29 06:58:36'),
+(147, 38, 57, 'I think comparing prices should become a normal habit for students.', '2026-07-29 07:15:49', '2026-07-29 07:15:49'),
+(148, 39, 22, 'Frozen food is useful when students have limited cooking time.', '2026-07-29 07:33:14', '2026-07-29 07:33:14'),
+(149, 40, 49, 'Always check storage conditions before buying frozen products.', '2026-07-29 07:50:27', '2026-07-29 07:50:27'),
+(150, 41, 34, 'I discovered cheaper products after comparing several stores.', '2026-07-29 08:08:45', '2026-07-29 08:08:45'),
+(151, 42, 65, 'Budget planning helps prevent overspending during shopping trips.', '2026-07-29 08:25:18', '2026-07-29 08:25:18'),
+(152, 43, 18, 'Student promotions are very helpful for saving money.', '2026-07-29 08:42:39', '2026-07-29 08:42:39'),
+(153, 44, 56, 'I enjoy reading other students recommendations before buying.', '2026-07-29 08:59:51', '2026-07-29 08:59:51'),
+(154, 45, 30, 'Supermarket comparison saves time because everything is easier to check.', '2026-07-29 09:17:24', '2026-07-29 09:17:24'),
+(155, 46, 62, 'I normally compare prices when buying monthly necessities.', '2026-07-29 09:34:40', '2026-07-29 09:34:40'),
+(156, 47, 8, 'Buying only what I need helps me save money.', '2026-07-29 09:51:33', '2026-07-29 09:51:33'),
+(157, 48, 44, 'Promotions are useful but always check the expiry date.', '2026-07-29 10:09:12', '2026-07-29 10:09:12'),
+(158, 49, 15, 'The forum provides useful information about local supermarkets.', '2026-07-29 10:26:57', '2026-07-29 10:26:57'),
+(159, 50, 38, 'I usually prepare a budget before buying snacks and drinks.', '2026-07-29 10:44:21', '2026-07-29 10:44:21'),
+(160, 51, 61, 'Saving small amounts regularly helps students manage expenses.', '2026-07-29 11:01:46', '2026-07-29 11:01:46'),
+(161, 45, 36, 'Different stores offer different prices depending on the product category.', '2026-07-29 11:18:35', '2026-07-29 11:18:35'),
+(162, 46, 17, 'I usually wait for discounts before buying expensive items.', '2026-07-29 11:35:48', '2026-07-29 11:35:48'),
+(163, 47, 50, 'Tracking expenses helps me control my shopping habits.', '2026-07-29 11:52:14', '2026-07-29 11:52:14'),
+(164, 48, 6, 'I agree that comparing prices can reduce unnecessary spending.', '2026-07-29 12:10:33', '2026-07-29 12:10:33'),
+(165, 34, 15, 'I usually compare prices before visiting supermarkets because some items have big price differences.', '2026-07-29 01:12:21', '2026-07-29 01:12:21'),
+(166, 34, 42, 'Checking several stores helps me find better deals every week.', '2026-07-29 01:24:18', '2026-07-29 01:24:18'),
+(167, 35, 28, 'I prefer buying products during promotions because it helps reduce my monthly expenses.', '2026-07-29 01:38:42', '2026-07-29 01:38:42'),
+(168, 35, 63, 'Store brands are sometimes cheaper and still have good quality.', '2026-07-29 01:55:10', '2026-07-29 01:55:10'),
+(169, 36, 19, 'I always check the expiry date before buying discounted items.', '2026-07-29 02:11:33', '2026-07-29 02:11:33'),
+(170, 36, 54, 'Frozen products are convenient for students staying in hostels.', '2026-07-29 02:26:45', '2026-07-29 02:26:45'),
+(171, 37, 8, 'Bread prices are different depending on the supermarket location.', '2026-07-29 02:42:19', '2026-07-29 02:42:19'),
+(172, 37, 37, 'I usually buy bakery items in the evening because there are discounts.', '2026-07-29 02:58:03', '2026-07-29 02:58:03'),
+(173, 38, 26, 'Supermarket membership programs can provide extra savings.', '2026-07-29 03:15:26', '2026-07-29 03:15:26'),
+(174, 38, 62, 'Weekly promotions are useful when planning grocery shopping.', '2026-07-29 03:32:51', '2026-07-29 03:32:51'),
+(175, 39, 14, 'Making a shopping list prevents unnecessary spending.', '2026-07-29 03:48:09', '2026-07-29 03:48:09'),
+(176, 39, 50, 'I save money by comparing prices before purchasing anything.', '2026-07-29 04:05:44', '2026-07-29 04:05:44'),
+(177, 40, 21, 'Weekend promotions usually have better offers compared to normal days.', '2026-07-29 04:22:18', '2026-07-29 04:22:18'),
+(178, 40, 66, 'I wait for discounts before buying expensive groceries.', '2026-07-29 04:39:57', '2026-07-29 04:39:57'),
+(179, 41, 9, 'Shopping after class is more convenient because stores are less crowded.', '2026-07-29 04:55:26', '2026-07-29 04:55:26'),
+(180, 41, 43, 'Buying together with friends can reduce delivery costs.', '2026-07-29 05:12:41', '2026-07-29 05:12:41'),
+(181, 42, 17, 'I recommend comparing prices per unit instead of package prices.', '2026-07-29 05:28:16', '2026-07-29 05:28:16'),
+(182, 42, 58, 'Small savings from every purchase can help students manage money.', '2026-07-29 05:44:53', '2026-07-29 05:44:53'),
+(183, 43, 23, 'This forum is useful for sharing shopping experiences.', '2026-07-29 06:01:22', '2026-07-29 06:01:22'),
+(184, 43, 46, 'Students can learn which stores provide better prices.', '2026-07-29 06:18:36', '2026-07-29 06:18:36'),
+(185, 44, 31, 'I found cheaper products after comparing several supermarkets.', '2026-07-29 06:35:27', '2026-07-29 06:35:27'),
+(186, 44, 53, 'Price checking before shopping saves both time and money.', '2026-07-29 06:52:14', '2026-07-29 06:52:14'),
+(187, 45, 35, 'I usually buy canned food because it lasts longer.', '2026-07-29 07:08:39', '2026-07-29 07:08:39'),
+(188, 45, 59, 'Always check the expiry date when buying canned products.', '2026-07-29 07:25:01', '2026-07-29 07:25:01'),
+(189, 46, 18, 'Morning shopping is better because more fresh products are available.', '2026-07-29 07:41:45', '2026-07-29 07:41:45'),
+(190, 46, 51, 'I prefer supermarkets with many choices and reasonable prices.', '2026-07-29 07:58:20', '2026-07-29 07:58:20'),
+(191, 47, 7, 'Promotions make it easier for students to save money.', '2026-07-29 08:14:11', '2026-07-29 08:14:11'),
+(192, 47, 39, 'I always compare before deciding where to shop.', '2026-07-29 08:30:48', '2026-07-29 08:30:48'),
+(193, 48, 30, 'The price comparison system makes finding deals easier.', '2026-07-29 08:47:26', '2026-07-29 08:47:26'),
+(194, 48, 61, 'Having product information available saves shopping time.', '2026-07-29 09:04:13', '2026-07-29 09:04:13');
 
 -- --------------------------------------------------------
 
@@ -429,6 +842,13 @@ CREATE TABLE `forumreport` (
   `reason` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `forumreport`
+--
+
+INSERT INTO `forumreport` (`reportID`, `topicID`, `replyID`, `studentID`, `reason`, `created_at`) VALUES
+(1, 10, NULL, 1, 'Spam', '2026-07-29 13:15:20');
 
 -- --------------------------------------------------------
 
@@ -447,18 +867,65 @@ CREATE TABLE `forumtopic` (
   `isLocked` tinyint(1) DEFAULT 0,
   `status` enum('Active','Hidden') DEFAULT 'Active',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `topicTags` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `forumtopic`
 --
 
-INSERT INTO `forumtopic` (`topicID`, `studentID`, `categoryID`, `topicTitle`, `topicContent`, `views`, `isPinned`, `isLocked`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 'Cheapest Milo around UNIMAS?', 'Where can I get the cheapest Milo this week?', 47, 0, 0, 'Active', '2026-07-22 15:58:58', '2026-07-28 08:40:47'),
-(2, 2, 3, 'Budget shopping tips', 'Share your shopping tips for students.', 18, 0, 0, 'Active', '2026-07-22 15:58:58', '2026-07-25 18:33:44'),
-(3, 3, 1, 'Welcome everyone', 'Introduce yourself here.', 39, 0, 0, 'Active', '2026-07-22 15:58:58', '2026-07-25 18:23:26'),
-(4, 1, 1, 'hello', 'ssssss', 20, 0, 0, 'Active', '2026-07-25 11:31:32', '2026-07-28 09:11:26');
+INSERT INTO `forumtopic` (`topicID`, `studentID`, `categoryID`, `topicTitle`, `topicContent`, `views`, `isPinned`, `isLocked`, `status`, `created_at`, `updated_at`, `topicTags`) VALUES
+(1, 1, 2, 'Cheapest Milo around UNIMAS?', 'Where can I get the cheapest Milo this week?', 47, 0, 0, 'Active', '2026-07-22 15:58:58', '2026-07-28 22:18:53', 'Milo,StudentBudget,PriceComparison'),
+(2, 2, 3, 'Budget shopping tips', 'Share your shopping tips for students.', 18, 0, 0, 'Active', '2026-07-22 15:58:58', '2026-07-28 22:18:53', 'ShoppingTips,Budgeting,StudentLife'),
+(3, 3, 1, 'Welcome everyone', 'Introduce yourself here.', 39, 0, 0, 'Active', '2026-07-22 15:58:58', '2026-07-28 22:18:53', 'Introduction,CampusLife,Community'),
+(4, 4, 2, 'Best place to buy instant noodles?', 'I usually buy Maggi and Indomie every week. Which supermarket around Kota Samarahan has the cheapest prices recently?', 26, 0, 0, 'Active', '2026-07-23 01:15:20', '2026-07-28 22:18:53', 'InstantNoodles,CheapMeals,FoodDeals'),
+(5, 7, 4, 'Which supermarket has the freshest vegetables?', 'I am looking for fresh vegetables at reasonable prices. Any recommendations near UNIMAS?', 33, 0, 0, 'Active', '2026-07-23 04:42:11', '2026-07-28 22:18:53', 'FreshFood,Supermarket,Groceries'),
+(6, 2, 5, 'Is buying frozen food worth it?', 'I noticed frozen food is sometimes cheaper than fresh ingredients. Do you usually buy frozen products?', 18, 0, 0, 'Active', '2026-07-23 08:30:42', '2026-07-28 22:18:53', 'FrozenFood,BudgetMeals,SavingTips'),
+(7, 9, 2, 'Cheapest coffee for students', 'Coffee prices have increased lately. Which brand offers the best value for money?', 54, 0, 0, 'Active', '2026-07-24 00:18:55', '2026-07-28 22:18:53', 'Coffee,StudentBudget,Drinks'),
+(8, 5, 3, 'Best supermarket promotions this week', 'Has anyone found any good promotions for drinks, snacks, or groceries this week? Please share the best deals you have seen.', 45, 0, 0, 'Active', '2026-07-24 06:45:10', '2026-07-28 22:18:53', 'Promotions,BestDeals,Supermarket'),
+(9, 10, 1, 'Weekend grocery shopping tips', 'Do you usually shop during weekends? Which supermarket has better promotions on Saturdays and Sundays?', 42, 0, 0, 'Active', '2026-07-24 10:21:17', '2026-07-28 22:18:53', 'GroceryTips,ShoppingTips,WeekendShopping'),
+(10, 6, 5, 'Best snacks under RM10', 'I have a budget of RM10 for snacks every week. What are your favourite affordable snacks?', 62, 0, 0, 'Active', '2026-07-25 02:35:42', '2026-07-29 13:12:47', 'Snacks,RM10Challenge,BudgetFood'),
+(11, 3, 4, 'How do you save money on groceries?', 'Share your best budgeting tips when buying groceries as a university student.', 77, 0, 0, 'Active', '2026-07-25 05:56:28', '2026-07-29 12:33:43', 'MoneySaving,Budgeting,GroceryTips'),
+(12, 8, 1, 'Welcome new students!', 'Welcome to the Price Checker community! Introduce yourself and share your favourite supermarket around Kota Samarahan.', 88, 1, 1, 'Active', '2026-07-25 09:20:08', '2026-07-29 08:21:30', 'Welcome,NewStudents,CampusLife'),
+(13, 1, 2, 'Where do you usually buy bread?', 'I often compare bread prices between Emart, Everrise, and 99 Speedmart. Which store offers the best deals?', 38, 0, 0, 'Active', '2026-07-26 01:42:13', '2026-07-28 22:18:53', 'Bread,Bakery,PriceComparison'),
+(15, 11, 2, 'Cheapest bottled water near UNIMAS?', 'Which supermarket usually has the lowest price for bottled drinking water?', 24, 0, 0, 'Active', '2026-07-27 01:15:00', '2026-07-27 01:15:00', 'Water,Budget,PriceComparison'),
+(16, 15, 3, 'Best weekly supermarket promotions', 'Have you found any good promotions for groceries this week? Please share them here.', 37, 0, 0, 'Active', '2026-07-27 03:20:00', '2026-07-27 03:20:00', 'Promotion,Discount,Groceries'),
+(17, 22, 5, 'Affordable breakfast ideas', 'What breakfast items do you usually buy that are filling and affordable for students?', 41, 0, 0, 'Active', '2026-07-27 05:40:00', '2026-07-27 05:40:00', 'Breakfast,BudgetFood,Students'),
+(18, 18, 4, 'Fresh fruits at reasonable prices', 'Which supermarket sells fresh fruits with the best value for money?', 29, 0, 0, 'Active', '2026-07-27 07:05:00', '2026-07-27 07:05:00', 'Fruits,HealthyFood,Groceries'),
+(19, 30, 2, 'Instant coffee recommendations', 'I need an affordable instant coffee brand that still tastes good. Any suggestions?', 55, 0, 0, 'Active', '2026-07-27 09:30:00', '2026-07-27 09:30:00', 'Coffee,StudentBudget,Recommendation'),
+(20, 26, 1, 'Hello from a new member!', 'Hi everyone! I just joined the Price Checker community. Looking forward to learning from all of you.', 18, 0, 0, 'Active', '2026-07-28 00:50:00', '2026-07-28 00:50:00', 'Introduction,Community,Students'),
+(21, 34, 3, 'Where do you buy dairy products?', 'Milk and cheese seem expensive lately. Which supermarket has the best prices?', 48, 0, 0, 'Active', '2026-07-28 02:45:00', '2026-07-28 02:45:00', 'Dairy,Groceries,PriceComparison'),
+(22, 12, 5, 'Budget snacks for study sessions', 'What snacks do you usually buy while studying without spending too much?', 63, 0, 0, 'Active', '2026-07-28 06:20:00', '2026-07-28 06:20:00', 'Snacks,StudyLife,Budget'),
+(23, 45, 2, 'Which supermarket has the best loyalty rewards?', 'Do you use membership cards or reward programs when shopping? Which one gives the best value?', 33, 0, 0, 'Active', '2026-07-28 10:05:00', '2026-07-28 10:05:00', 'Membership,Rewards,Savings'),
+(24, 52, 4, 'Saving money on monthly groceries', 'Share your best tips for reducing grocery expenses while maintaining a balanced diet.', 71, 1, 0, 'Active', '2026-07-29 01:10:00', '2026-07-29 01:10:00', 'Budgeting,GroceryTips,MoneySaving'),
+(25, 13, 2, 'Best place to buy cooking oil?', 'Cooking oil prices seem different everywhere. Which supermarket has the cheapest options lately?', 35, 0, 0, 'Active', '2026-07-29 02:05:00', '2026-07-29 02:05:00', 'CookingOil,Groceries,Savings'),
+(26, 21, 5, 'Healthy snacks under RM10', 'Can anyone recommend healthy snacks that cost less than RM10?', 47, 0, 0, 'Active', '2026-07-29 02:18:00', '2026-07-29 02:18:00', 'HealthyFood,Snacks,Budget'),
+(27, 33, 3, 'Where do you shop every weekend?', 'I usually visit Emart on weekends. Where do you normally shop?', 26, 0, 0, 'Active', '2026-07-29 02:34:00', '2026-07-29 02:34:00', 'WeekendShopping,Groceries,Community'),
+(28, 44, 4, 'Affordable frozen chicken brands', 'Which frozen chicken brand offers the best value for students?', 31, 0, 0, 'Active', '2026-07-29 02:46:00', '2026-07-29 02:46:00', 'FrozenFood,Chicken,Budget'),
+(29, 17, 2, 'Cheapest rice available?', 'Rice prices have gone up recently. Which supermarket still sells affordable brands?', 58, 0, 0, 'Active', '2026-07-29 03:02:00', '2026-07-29 03:02:00', 'Rice,PriceComparison,Groceries'),
+(30, 19, 1, 'Greetings from a new member', 'Hello everyone! I am excited to join this community and learn more about smart shopping.', 19, 0, 0, 'Active', '2026-07-29 03:15:00', '2026-07-29 03:15:00', 'Introduction,Community,Students'),
+(31, 24, 5, 'Favorite instant noodle brand?', 'Which instant noodle brand tastes the best while staying affordable?', 66, 0, 0, 'Active', '2026-07-29 03:33:00', '2026-07-29 03:33:00', 'InstantNoodles,StudentBudget,Food'),
+(32, 29, 3, 'Best drinks during promotions', 'Which beverages usually receive the biggest discounts during supermarket sales?', 28, 0, 0, 'Active', '2026-07-29 03:49:00', '2026-07-29 03:49:00', 'Promotion,Drinks,Discount'),
+(33, 36, 4, 'Affordable frozen seafood', 'Does anyone know where to buy reasonably priced frozen seafood?', 42, 0, 0, 'Active', '2026-07-29 04:08:00', '2026-07-29 04:08:00', 'FrozenFood,Seafood,Groceries'),
+(34, 41, 2, 'Best bread promotions', 'Which supermarket frequently offers discounts on bread and bakery products?', 39, 0, 0, 'Active', '2026-07-29 04:26:00', '2026-07-29 04:26:00', 'Bread,Promotion,Bakery'),
+(35, 51, 5, 'Student grocery budget per month', 'How much do you usually spend on groceries every month as a university student?', 85, 0, 0, 'Active', '2026-07-29 04:42:00', '2026-07-29 15:25:49', 'Budgeting,Students,Groceries'),
+(36, 54, 3, 'Any supermarket open late?', 'Sometimes I shop at night. Which supermarkets stay open until late?', 23, 0, 0, 'Active', '2026-07-29 05:05:00', '2026-07-29 05:05:00', 'Shopping,Supermarket,Convenience'),
+(37, 61, 2, 'Cheapest eggs this week', 'Has anyone compared egg prices this week between major supermarkets?', 37, 0, 0, 'Active', '2026-07-29 05:19:00', '2026-07-29 05:19:00', 'Eggs,PriceComparison,Savings'),
+(38, 27, 5, 'Good drinks for hot weather', 'What beverages do you usually buy during hot days that are still affordable?', 30, 0, 0, 'Active', '2026-07-29 05:34:00', '2026-07-29 05:34:00', 'Drinks,Weather,Budget'),
+(39, 46, 4, 'Frozen vegetables recommendations', 'Are frozen vegetables worth buying compared to fresh ones?', 45, 0, 0, 'Active', '2026-07-29 05:48:00', '2026-07-29 05:48:00', 'FrozenFood,Vegetables,HealthyFood'),
+(40, 63, 3, 'Share your biggest shopping savings', 'What is the biggest discount or promotion you have ever found while grocery shopping?', 73, 0, 0, 'Active', '2026-07-29 06:05:00', '2026-07-29 06:05:00', 'Savings,Promotion,Community'),
+(41, 8, 1, 'Welcome to all first-year students', 'Feel free to introduce yourselves and share your favorite supermarkets around campus.', 113, 1, 1, 'Active', '2026-07-29 06:22:00', '2026-07-29 13:59:13', 'Welcome,Students,CampusLife'),
+(42, 55, 2, 'Where do you buy cereal?', 'Breakfast cereal prices vary quite a bit. Which store has the best deals?', 27, 0, 0, 'Active', '2026-07-29 06:40:00', '2026-07-29 06:40:00', 'Breakfast,Cereal,PriceComparison'),
+(43, 39, 5, 'Most underrated supermarket?', 'Which supermarket do you think deserves more attention because of its prices?', 49, 0, 0, 'Active', '2026-07-29 07:02:00', '2026-07-29 07:02:00', 'Supermarket,Recommendation,Savings'),
+(44, 16, 4, 'Frozen pizza recommendations', 'Which frozen pizza offers the best taste without costing too much?', 36, 0, 0, 'Active', '2026-07-29 07:20:00', '2026-07-29 07:20:00', 'FrozenFood,Pizza,Budget'),
+(45, 14, 2, 'Cheapest biscuits for students?', 'I am looking for affordable biscuit brands for daily snacks. Which supermarket usually has the best prices?', 34, 0, 0, 'Active', '2026-07-29 07:42:00', '2026-07-29 07:42:00', 'Biscuits,Budget,Snacks'),
+(46, 25, 5, 'Best instant drinks to stock up', 'Which instant drink brands are worth buying when they are on promotion?', 46, 0, 0, 'Active', '2026-07-29 08:05:00', '2026-07-29 08:05:00', 'Drinks,Promotion,StudentBudget'),
+(47, 37, 3, 'Which supermarket has the friendliest staff?', 'Besides prices, customer service is important. Which supermarket gives you the best shopping experience?', 22, 0, 0, 'Active', '2026-07-29 08:18:00', '2026-07-29 08:18:00', 'ShoppingExperience,Community,Supermarket'),
+(48, 48, 4, 'Affordable frozen nuggets', 'Frozen nuggets are one of my favorite quick meals. Which brand offers the best value?', 53, 0, 0, 'Active', '2026-07-29 08:36:00', '2026-07-29 08:36:00', 'FrozenFood,Nuggets,BudgetMeals'),
+(49, 58, 2, 'Where do you buy canned food?', 'I want to stock up on canned food for emergencies. Which supermarket has the lowest prices?', 31, 0, 0, 'Active', '2026-07-29 08:52:00', '2026-07-29 08:52:00', 'CannedFood,Groceries,PriceComparison'),
+(50, 62, 5, 'Best bakery items under RM10', 'What bakery products do you usually buy that cost less than RM10?', 45, 0, 0, 'Active', '2026-07-29 09:14:00', '2026-07-29 15:25:39', 'Bakery,BudgetFood,Students'),
+(51, 20, 1, 'Community shopping challenge!', 'Let us challenge ourselves to spend less than RM50 on groceries this week. Share what you bought and how much you saved!', 100, 1, 0, 'Active', '2026-07-29 09:30:00', '2026-07-29 15:27:31', 'Challenge,Community,Savings');
 
 -- --------------------------------------------------------
 
@@ -481,7 +948,15 @@ INSERT INTO `forumviews` (`viewID`, `topicID`, `studentID`, `viewed_at`) VALUES
 (1, 1, 1, '2026-07-24 08:17:29'),
 (2, 3, 1, '2026-07-24 08:22:42'),
 (3, 2, 1, '2026-07-24 09:05:58'),
-(4, 4, 1, '2026-07-25 13:07:14');
+(5, 12, 1, '2026-07-28 19:22:38'),
+(6, 13, 1, '2026-07-28 19:22:51'),
+(7, 8, 1, '2026-07-28 19:33:49'),
+(8, 4, 1, '2026-07-28 21:58:04'),
+(9, 11, 1, '2026-07-29 12:33:43'),
+(10, 41, 1, '2026-07-29 12:44:48'),
+(11, 35, 1, '2026-07-29 12:45:05'),
+(12, 50, 1, '2026-07-29 12:45:53'),
+(13, 10, 1, '2026-07-29 13:12:47');
 
 -- --------------------------------------------------------
 
@@ -1288,7 +1763,7 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`studentID`, `fullName`, `username`, `email`, `password`, `studentIMG`, `logStatus`, `created_at`) VALUES
-(1, 'Faizatul Fitri Bin Boestamam', 'fai', 'fai@gmail.com', 'abc123', '../../assets/images/profile/fai.jpg', '1', '2024-03-15 02:30:00'),
+(1, 'Faizatul Fitri Bin Boestamam', 'fai', 'fai@gmail.com', 'abc123', '../../assets/images/profile/fai.jpg', '0', '2024-03-15 02:30:00'),
 (2, 'Mohammad Amir Alam Bin Rahim Omar', 'amiromar', 'amir@gmail.com', 'abc123', '../../assets/images/profile/amir.jpg', '0', '2024-03-15 02:30:00'),
 (3, 'Harith Zakwan Bin Zakaria', 'harith', 'harith@gmail.com', 'abc123', '../../assets/images/profile/harith.jpg', '0', '2024-03-15 02:30:00'),
 (4, 'Mohamad Waqiuddin Bin Yahya', 'qiu', 'qiu@gmail.com', 'abc123', '../../assets/images/profile/qiu.jpeg', '0', '2024-03-15 02:30:00'),
@@ -1541,7 +2016,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `audit_logs`
 --
 ALTER TABLE `audit_logs`
-  MODIFY `auditID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `auditID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `backups`
@@ -1571,7 +2046,7 @@ ALTER TABLE `comparisonhistory`
 -- AUTO_INCREMENT for table `forumbookmarks`
 --
 ALTER TABLE `forumbookmarks`
-  MODIFY `bookmarkID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `bookmarkID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `forumcategory`
@@ -1583,31 +2058,31 @@ ALTER TABLE `forumcategory`
 -- AUTO_INCREMENT for table `forumlikes`
 --
 ALTER TABLE `forumlikes`
-  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT for table `forumreply`
 --
 ALTER TABLE `forumreply`
-  MODIFY `replyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `replyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=242;
 
 --
 -- AUTO_INCREMENT for table `forumreport`
 --
 ALTER TABLE `forumreport`
-  MODIFY `reportID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `reportID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `forumtopic`
 --
 ALTER TABLE `forumtopic`
-  MODIFY `topicID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `topicID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `forumviews`
 --
 ALTER TABLE `forumviews`
-  MODIFY `viewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `viewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `item`

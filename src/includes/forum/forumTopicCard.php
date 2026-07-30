@@ -48,7 +48,17 @@
          REPORT ACTION
     ========================== -->
 
-     <?php include(__DIR__ . "/forumTopicReportAction.php"); ?>
+     <?php
+
+     if(
+     isset($studentID) &&
+     $post['studentID'] != $studentID
+     )
+     {
+     include(__DIR__ . "/forumTopicReportAction.php");
+     }
+
+     ?>
 
     <!-- =========================
          LAST REPLY

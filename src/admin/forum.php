@@ -482,16 +482,6 @@ $img=$user['adminIMG'];
             </div>
 
             <!-- ==========================
-                MODALS
-            ========================== -->
-
-            <?php include("../includes/forum/forumCreateModal.php"); ?>
-
-            <?php include("../includes/forum/forumEditModal.php"); ?>
-
-            <?php include("../includes/forum/forumDeleteModal.php"); ?>
-
-            <!-- ==========================
                 FOOTER
             ========================== -->
 
@@ -529,6 +519,7 @@ $img=$user['adminIMG'];
     <script src="../../assets/js/forum/modal.js"></script>
     <script src="../../assets/js/forum/topic.js"></script>
     <script src="../../assets/js/forum/searchTopic.js"></script>
+    <script src="../../assets/js/forum/topicSuggestion.js"></script>
     <script src="../../assets/js/forum/adminTopicActions.js"></script>
 
     <script>

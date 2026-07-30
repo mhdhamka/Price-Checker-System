@@ -1,145 +1,105 @@
 <div class="topic-modal" id="reportModal">
 
+    <div class="topic-modal-box">
 
-<div class="topic-modal-box">
+        <div class="topic-modal-header">
 
+            <div class="topic-title-area">
 
-<div class="topic-modal-header">
+                <div class="topic-modal-icon">
 
+                    <i class="fa-solid fa-flag"></i>
 
-<div class="topic-title-area">
+                </div>
 
-<div class="topic-modal-icon">
+                <div>
 
-<i class="fa-solid fa-flag"></i>
+                    <h3>
+                        Report Content
+                    </h3>
 
-</div>
+                    <p>
+                        Tell us why this content should be reviewed.
+                    </p>
 
+                </div>
 
-<div>
 
-<h3>
-Report Content
-</h3>
+            </div>
 
-<p>
-Tell us why this content should be reviewed.
-</p>
+            <span class="close-report-modal modal-close-icon">
 
-</div>
+                <i class="fa fa-times"></i>
 
+            </span>
 
-</div>
 
+        </div>
 
-<span class="close-report-modal modal-close-icon">
+        <form id="reportForm">
 
-<i class="fa fa-times"></i>
+            <input type="hidden" name="topicID" id="reportTopicID">
 
-</span>
+            <input type="hidden" name="replyID" id="reportReplyID">
 
+            <div class="topic-modal-body">
 
-</div>
+                <div class="topic-form-group">
 
+                    <label>
 
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        Reason
 
-<form id="reportForm">
+                    </label>
 
+                    <select name="reason" required>
 
-<input type="hidden" 
-name="topicID"
-id="reportTopicID">
+                        <option value="">
+                            Select reason
+                        </option>
 
+                        <option value="Spam">
+                            Spam
+                        </option>
 
-<input type="hidden"
-name="replyID"
-id="reportReplyID">
+                        <option value="Offensive">
+                            Offensive content
+                        </option>
 
+                        <option value="Wrong Information">
+                            Wrong information
+                        </option>
 
+                        <option value="Other">
+                            Other
+                        </option>
 
-<div class="topic-modal-body">
+                    </select>
 
+                </div>
 
-<div class="topic-form-group">
+            </div>
 
+            <div class="topic-modal-footer">
 
-<label>
+                <button type="button" class="topic-cancel-btn">
 
-<i class="fa-solid fa-circle-exclamation"></i>
+                    Cancel
 
-Reason
+                </button>
 
-</label>
+                <button type="submit" class="topic-submit-btn">
 
+                    <i class="fa-solid fa-flag"></i>
+                    Submit Report
 
-<select name="reason" required>
+                </button>
 
-<option value="">
-Select reason
-</option>
+            </div>
 
+        </form>
 
-<option value="Spam">
-Spam
-</option>
-
-
-<option value="Offensive">
-Offensive content
-</option>
-
-
-<option value="Wrong Information">
-Wrong information
-</option>
-
-
-<option value="Other">
-Other
-</option>
-
-
-</select>
-
-
-</div>
-
-
-</div>
-
-
-
-<div class="topic-modal-footer">
-
-
-<button 
-type="button"
-class="topic-cancel-btn">
-
-Cancel
-
-</button>
-
-
-<button 
-type="submit"
-class="topic-submit-btn">
-
-<i class="fa-solid fa-flag"></i>
-
-Submit Report
-
-</button>
-
-
-</div>
-
-
-
-</form>
-
-
-</div>
-
+    </div>
 
 </div>

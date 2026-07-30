@@ -2,6 +2,7 @@
 
 session_start();
 include("../../config/db_cPCS.php");
+include("../../config/auditLog.php");
 
 if(!isset($_SESSION['studentID']))
 {
@@ -11,6 +12,16 @@ if(!isset($_SESSION['studentID']))
 $studentID = $_SESSION['studentID'];
 
 $itemID = intval($_POST['itemID']);
+
+$itemQuery=mysqli_query($conn,"
+    SELECT ItemName
+    FROM item
+    WHERE ItemID='$itemID'
+");
+
+$item=mysqli_fetch_assoc($itemQuery);
+
+$itemName=$item['ItemName'];
 
 $rating = floatval($_POST['rating']);
 
@@ -56,7 +67,7 @@ if(mysqli_num_rows($check)>0)
 
     $ratingID = $row['ratingID'];
 
-    mysqli_query(
+    $updateResult = mysqli_query(
 
     $conn,
 
@@ -76,6 +87,42 @@ if(mysqli_num_rows($check)>0)
 
     );
 
+
+
+    if($updateResult)
+    {
+
+        $itemQuery=mysqli_query($conn,"
+
+            SELECT ItemName
+
+            FROM item
+
+            WHERE ItemID='$itemID'
+
+        ");
+
+        $item=mysqli_fetch_assoc($itemQuery);
+
+
+        createAuditLog(
+
+            $conn,
+
+            $studentID,
+
+            "Rating",
+
+            "UPDATE",
+
+            $item['ItemName'],
+
+            "Updated rating for ".$item['ItemName']." to ".$rating." stars"
+
+        );
+
+    }
+
 }
 
 
@@ -86,7 +133,7 @@ INSERT
 else
 {
 
-    mysqli_query(
+   $insertResult = mysqli_query(
 
     $conn,
 
@@ -123,6 +170,42 @@ else
     "
 
     );
+
+
+
+    if($insertResult)
+    {
+
+        $itemQuery=mysqli_query($conn,"
+
+            SELECT ItemName
+
+            FROM item
+
+            WHERE ItemID='$itemID'
+
+        ");
+
+        $item=mysqli_fetch_assoc($itemQuery);
+
+
+        createAuditLog(
+
+            $conn,
+
+            $studentID,
+
+            "Rating",
+
+            "ADD",
+
+            $item['ItemName'],
+
+            "Rated ".$item['ItemName']." with ".$rating." stars"
+
+        );
+
+    }
 
 }
 
