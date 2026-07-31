@@ -16,18 +16,29 @@ $adminID=$_SESSION['adminID'];
 
 
 /* ==========================
-USER SEARCH
+USER SEARCH + PAGINATION
 ========================== */
 
 
 $search=$_GET['search'] ?? "";
 
 
+/* Pagination */
+
+$limit = 9;
+
+$page = $_GET['page'] ?? 1;
+
+$page = max(1, intval($page));
+
+
+$offset = ($page - 1) * $limit;
+
+
 
 /* ==========================
 STUDENT MODERATION DATA
 ========================== */
-
 
 $query="
 
@@ -71,12 +82,9 @@ LEFT JOIN forumreport fr
 
 ON s.studentID=fr.studentID
 
-
-
 WHERE
 
 s.fullName LIKE '%$search%'
-
 
 GROUP BY s.studentID
 
@@ -84,7 +92,37 @@ GROUP BY s.studentID
 ORDER BY totalReports DESC
 
 
+LIMIT $limit OFFSET $offset
+
+
 ";
+
+
+/* ==========================
+TOTAL STUDENTS
+========================== */
+
+
+$countQuery="
+
+SELECT COUNT(*) total
+
+FROM student
+
+
+WHERE fullName LIKE '%$search%'
+
+
+";
+
+
+$total=mysqli_fetch_assoc(
+mysqli_query($conn,$countQuery)
+)['total'];
+
+
+
+$totalPages=ceil($total/$limit);
 
 
 
@@ -147,267 +185,333 @@ $img=$user['adminIMG'] ?? "../../assets/images/profile/default.png";
 
 
 
-<section class="section community-section" id="community">
+    <section class="section community-section" id="community">
 
 
-<div class="container">
+        <div class="container">
 
 
-<br><br>
+            <br><br>
 
 
-<a href="forumModeration.php"
-class="back-dashboard-btn">
+            <a href="forumModeration.php"
+            class="back-dashboard-btn">
 
-<i class="fa fa-arrow-left"></i>
+                <i class="fa fa-arrow-left"></i>
 
-Back To Moderation
+                Back To Moderation
 
-</a>
+            </a>
 
+            <div class="forum-page-header">
 
+                <div class="page-header-icon moderation-header-icon">
 
-<div class="forum-page-header">
+                    <i class="fa-solid fa-user-shield"></i>
 
+                </div>
 
-<div class="page-header-icon moderation-header-icon">
+                <div>
 
-<i class="fa-solid fa-user-shield"></i>
+                    <h2>
+                        User Moderation
+                    </h2>
 
-</div>
+                    <p>
+                        Monitor student report history and moderation behaviour.
+                    </p>
 
+                </div>
 
-<div>
+            </div>
 
-<h2>
-User Moderation
-</h2>
 
+            <!-- SEARCH -->
+            <div class="user-moderation-toolbar">
 
-<p>
-Monitor student report history and moderation behaviour.
-</p>
+                <form>
 
+                    <div class="moderation-search">
 
-</div>
+                        <i class="fa-solid fa-search"></i>
 
+                        <input 
+                        type="text"
+                        name="search"
+                        placeholder="Search student..."
+                        value="<?php echo htmlspecialchars($search); ?>">
 
-</div>
+                        <button>
 
+                            Search
+                        </button>
 
+                    </div>
 
+                </form>
 
+            </div>
 
-<!-- SEARCH -->
+            <div class="user-grid">
 
-<div class="user-moderation-toolbar">
+                <?php while($student=mysqli_fetch_assoc($students)){
 
 
-<form>
+                $level="Normal";
 
+                if($student['approvedReports'] >= 5)
+                {
+                    $level="High Risk";
+                }
 
-<div class="moderation-search">
+                else if($student['approvedReports'] >= 2)
+                {
+                    $level="Warning";
+                }
 
 
-<i class="fa-solid fa-search"></i>
+                ?>
 
+                <div class="user-card">
 
-<input 
-type="text"
-name="search"
-placeholder="Search student..."
-value="<?php echo htmlspecialchars($search); ?>">
+                    <div class="user-card-top">
 
+                        <div class="user-profile">
 
-<button>
+                            <img
+                            src="<?php echo !empty($student['studentIMG'])
+                            ? $student['studentIMG']
+                            : '../../assets/images/profile/default.png'; ?>">
 
-Search
+                            <div>
 
-</button>
+                                <h3>
+                                    <?php echo htmlspecialchars($student['fullName']); ?>
+                                </h3>
 
+                                <span class="username">
+                                    @<?php echo htmlspecialchars($student['username']); ?>
+                                </span>
 
-</div>
+                            </div>
 
+                        </div>
 
-</form>
+                        <span class="risk-badge <?php echo strtolower(str_replace(' ','-',$level)); ?>">
 
+                            <i class="fa-solid fa-shield-halved"></i>
 
-</div>
+                            <?php echo $level; ?>
 
+                        </span>
 
+                    </div>
 
 
+                    <div class="user-divider"></div>
 
-<div class="user-grid">
 
+                    <div class="user-stat-grid">
 
+                        <div class="user-stat">
 
-<?php while($student=mysqli_fetch_assoc($students)){
+                            <span>
 
+                                <?php echo $student['totalReports']; ?>
 
+                            </span>
 
-$level="Normal";
+                            <small>Total Reports</small>
 
+                        </div>
 
-if($student['approvedReports'] >= 5)
-{
-    $level="High Risk";
-}
+                        <div class="user-stat">
 
-else if($student['approvedReports'] >= 2)
-{
-    $level="Warning";
-}
+                            <span>
 
+                                <?php echo $student['approvedReports']; ?>
 
+                            </span>
 
-?>
+                            <small>Approved</small>
 
+                        </div>
 
+                        <div class="user-stat">
 
-<div class="user-card">
+                            <span>
 
+                                <?php echo $student['rejectedReports']; ?>
 
+                            </span>
 
-<div class="user-header">
+                            <small>Rejected</small>
 
+                        </div>
 
-<img src="<?php echo !empty($student['studentIMG']) 
-? $student['studentIMG']
-: '../../assets/images/profile/default.png'; ?>">
+                    </div>
 
 
-<div>
+                    <?php
 
+                    $rate = 0;
 
-<h3>
+                    if($student['totalReports'] > 0)
+                    {
+                        $rate = round(($student['approvedReports'] / $student['totalReports']) * 100);
+                    }
 
-<?php echo htmlspecialchars($student['fullName']); ?>
+                    ?>
 
-</h3>
 
+                    <div class="moderation-progress">
 
-<p>
-@<?php echo $student['username']; ?>
-</p>
+                        <div class="progress-title">
 
+                            <span>Violation Rate</span>
 
+                            <strong><?php echo $rate; ?>%</strong>
 
-<span class="risk-badge 
-<?php echo strtolower(str_replace(' ','-',$level)); ?>">
+                        </div>
 
-<i class="fa-solid fa-shield"></i>
+                        <div class="progress-bar">
 
-<?php echo $level; ?>
+                            <div class="progress-fill"
+                            style="width:<?php echo $rate; ?>%">
 
-</span>
+                            </div>
 
+                        </div>
 
-</div>
+                    </div>
 
 
-</div>
+                    <a href="forumHistory.php?id=<?php echo $student['studentID']; ?>"
+                    class="moderation-history-btn">
 
+                        <span>
 
+                            View Moderation History
 
+                        </span>
 
+                        <i class="fa-solid fa-arrow-right"></i>
 
+                    </a>
 
-<div class="moderation-stats-mini">
+                </div>
 
 
-<div>
+            <?php } ?>
 
-<strong>
-<?php echo $student['totalReports']; ?>
-</strong>
 
-<p>
-Reports
-</p>
+        </div>
 
-</div>
+        <?php if($totalPages>1){ ?>
 
 
+            <div class="pagination">
 
-<div>
 
-<strong>
-<?php echo $student['approvedReports']; ?>
-</strong>
+                <?php if($page>1){ ?>
 
-<p>
-Approved
-</p>
+                <a href="?page=<?php echo $page-1; ?>&search=<?php echo urlencode($search); ?>">
 
-</div>
+                    <i class="fa fa-angle-left"></i>
 
+                </a>
 
+                <?php } ?>
 
-<div>
 
-<strong>
-<?php echo $student['rejectedReports']; ?>
-</strong>
+                <?php
 
-<p>
-Rejected
-</p>
 
-</div>
+                $start=max(1,$page-2);
 
+                $end=min($totalPages,$page+2);
 
-</div>
 
+                for($i=$start;$i<=$end;$i++)
 
+                {
 
 
-<a href="forumHistory.php?id=<?php echo $student['studentID']; ?>"
-class="moderation-action-btn">
+                ?>
 
 
-<i class="fa-solid fa-clock-rotate-left"></i>
+                <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>"
+                class="<?php echo ($page==$i)?'active':''; ?>">
 
-View History
+                    <?php echo $i; ?>
 
+                </a>
 
-</a>
+                <?php } ?>
 
 
+                <?php if($page<$totalPages){ ?>
 
+                <a href="?page=<?php echo $page+1; ?>&search=<?php echo urlencode($search); ?>">
 
-</div>
+                    <i class="fa fa-angle-right"></i>
 
+                </a>
 
 
-<?php } ?>
+                <?php } ?>
 
 
 
-</div>
+            </div>
 
 
+            <div class="pagination-info">
 
-</div>
+                Showing
 
+                <strong>
 
-</section>
+                    <?php echo $offset+1; ?>
 
+                </strong>
 
+                to
 
-<?php include("../student/includes/footer.php"); ?>
+                <strong>
 
+                    <?php echo min($offset+$limit,$total); ?>
+
+                </strong>
+
+                of
+
+                <strong>
+
+                    <?php echo $total; ?>
+
+                </strong>
+
+                students
+
+            </div>
+
+
+            <?php } ?>
+
+
+    </div>
+
+
+    </section>
+
+
+
+    <?php include("../student/includes/footer.php"); ?>
 
 
     <script src="../../assets/js/studentTheme.js"></script>
     <script src="../../assets/js/header.js"></script>
-    <script src="../../assets/js/forum/like.js"></script>
-    <script src="../../assets/js/forum/bookmark.js"></script>
-    <script src="../../assets/js/forum/modal.js"></script>
-    <script src="../../assets/js/forum/topic.js"></script>
-    <script src="../../assets/js/forum/searchTopic.js"></script>
-    <script src="../../assets/js/forum/topicSuggestion.js"></script>
-    <script src="../../assets/js/forum/adminTopicActions.js"></script>
 
 
 </body>

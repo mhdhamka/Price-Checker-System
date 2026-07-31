@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2026 at 01:00 PM
+-- Generation Time: Jul 31, 2026 at 09:24 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -177,7 +177,43 @@ INSERT INTO `audit_logs` (`auditID`, `adminID`, `module`, `action`, `target`, `d
 (117, 1, 'Forum Admin', 'APPROVE_REPORT', 'Report 2', 'Deleted reported forum topic ID 9', '127.0.0.1', '2026-07-30 04:34:37'),
 (118, 1, 'Forum Admin', 'REJECT_REPORT', 'Report 2', 'Rejected forum report and restored reported content.', '127.0.0.1', '2026-07-30 04:35:08'),
 (119, 1, 'Forum Admin', 'APPROVE_REPORT', 'Report 2', 'Deleted reported forum topic ID 9', '127.0.0.1', '2026-07-30 07:21:27'),
-(120, 1, 'Forum Admin', 'APPROVE_REPORT', 'Report 3', 'Deleted reported forum reply ID 14', '127.0.0.1', '2026-07-30 08:21:51');
+(120, 1, 'Forum Admin', 'APPROVE_REPORT', 'Report 3', 'Deleted reported forum reply ID 14', '127.0.0.1', '2026-07-30 08:21:51'),
+(121, 1, 'Forum Admin', 'EXPORT', 'Forum Analytics PDF', 'Generated Forum Analytics PDF report', '127.0.0.1', '2026-07-30 11:47:47'),
+(122, 1, 'Forum Admin', 'EXPORT', 'Forum Analytics PDF', 'Generated Forum Analytics PDF report', '127.0.0.1', '2026-07-30 11:47:48'),
+(123, 1, 'Forum Admin', 'EXPORT', 'Forum Analytics PDF', 'Generated Forum Analytics PDF report', '127.0.0.1', '2026-07-30 11:50:11'),
+(124, 1, 'Forum Admin', 'EXPORT', 'Forum Analytics PDF', 'Generated Forum Analytics PDF report', '127.0.0.1', '2026-07-30 11:50:11'),
+(125, 1, 'Forum Admin', 'EXPORT', 'Forum Analytics PDF', 'Generated Forum Analytics PDF report', '127.0.0.1', '2026-07-30 11:50:13'),
+(126, 1, 'Forum Admin', 'EXPORT', 'Forum Analytics Excel', 'Generated Forum Analytics Excel report', '127.0.0.1', '2026-07-30 11:55:25'),
+(127, 1, 'Forum Admin', 'EXPORT', 'Forum Analytics Excel', 'Generated Forum Analytics Excel report', '127.0.0.1', '2026-07-30 11:55:25'),
+(128, 1, 'Forum Admin', 'EXPORT', 'Forum Analytics CSV', 'Generated Forum Analytics report in CSV format', '127.0.0.1', '2026-07-30 11:59:34'),
+(129, 1, 'Forum Admin', 'EXPORT', 'Forum Analytics CSV', 'Generated Forum Analytics report in CSV format', '127.0.0.1', '2026-07-30 11:59:34'),
+(130, 1, 'Forum Admin', 'EXPORT', 'Forum Analytics JSON', 'Generated Forum Analytics report as JSON file: Forum_Analytics_Report.json', '127.0.0.1', '2026-07-30 12:03:51'),
+(131, 1, 'Forum Admin', 'EXPORT', 'Forum Analytics JSON', 'Generated Forum Analytics report as JSON file: Forum_Analytics_Report.json', '127.0.0.1', '2026-07-30 12:03:51'),
+(132, 1, 'Authentication', 'LOGOUT', 'Admin Account', 'Admin logged out from the system', '127.0.0.1', '2026-07-30 12:44:17'),
+(133, 1, 'Authentication', 'LOGIN', 'Student Account', 'Student faiz logged into the system', '127.0.0.1', '2026-07-30 12:45:02'),
+(134, 1, 'Profile', 'UPDATE_PROFILE', 'fai', 'Updated profile information for fai', '127.0.0.1', '2026-07-30 12:45:10'),
+(135, 1, 'Authentication', 'LOGOUT', 'Student Account', 'Student logged out from the system', '127.0.0.1', '2026-07-30 12:45:39'),
+(136, 1, 'Authentication', 'LOGIN', 'Admin Account', 'Admin logged into the system', '127.0.0.1', '2026-07-31 16:31:58'),
+(137, 1, 'Forum Admin', 'LOCK_TOPIC', 'Community shopping challenge!', 'Locked topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:12:20'),
+(138, 1, 'Forum Admin', 'UNLOCK_TOPIC', 'Community shopping challenge!', 'Unlocked topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:12:21'),
+(139, 1, 'Forum Admin', 'UNPIN_TOPIC', 'Community shopping challenge!', 'Removed pin from topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:12:23'),
+(140, 1, 'Forum Admin', 'PIN_TOPIC', 'Community shopping challenge!', 'Pinned topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:12:24'),
+(141, 1, 'Forum Admin', 'LOCK_TOPIC', 'Community shopping challenge!', 'Locked topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:18:34'),
+(142, 1, 'Forum Admin', 'UNLOCK_TOPIC', 'Community shopping challenge!', 'Unlocked topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:18:35'),
+(143, 1, 'Forum Admin', 'UNPIN_TOPIC', 'Community shopping challenge!', 'Removed pin from topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:18:36'),
+(144, 1, 'Forum Admin', 'LOCK_TOPIC', 'Community shopping challenge!', 'Locked topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:18:37'),
+(145, 1, 'Forum Admin', 'UNLOCK_TOPIC', 'Community shopping challenge!', 'Unlocked topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:18:38'),
+(146, 1, 'Forum Admin', 'PIN_TOPIC', 'Community shopping challenge!', 'Pinned topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:18:38'),
+(147, 1, 'Authentication', 'LOGOUT', 'Admin Account', 'Admin logged out from the system', '127.0.0.1', '2026-07-31 18:36:50'),
+(148, 1, 'Authentication', 'LOGIN', 'Student Account', 'Student fai logged into the system', '127.0.0.1', '2026-07-31 18:36:57'),
+(149, 1, 'Authentication', 'LOGOUT', 'Student Account', 'Student logged out from the system', '127.0.0.1', '2026-07-31 18:38:46'),
+(150, 1, 'Authentication', 'LOGIN', 'Admin Account', 'Admin logged into the system', '127.0.0.1', '2026-07-31 18:38:56'),
+(151, 1, 'Forum Admin', 'UNPIN_TOPIC', 'Community shopping challenge!', 'Removed pin from topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:49:18'),
+(152, 1, 'Forum Admin', 'PIN_TOPIC', 'Community shopping challenge!', 'Pinned topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:49:20'),
+(153, 1, 'Forum Admin', 'UNPIN_TOPIC', 'Community shopping challenge!', 'Removed pin from topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:49:22'),
+(154, 1, 'Forum Admin', 'PIN_TOPIC', 'Community shopping challenge!', 'Pinned topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:49:25'),
+(155, 1, 'Forum Admin', 'LOCK_TOPIC', 'Community shopping challenge!', 'Locked topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:49:40'),
+(156, 1, 'Forum Admin', 'UNLOCK_TOPIC', 'Community shopping challenge!', 'Unlocked topic: Community shopping challenge!', '127.0.0.1', '2026-07-31 18:49:46');
 
 -- --------------------------------------------------------
 
@@ -658,7 +694,19 @@ INSERT INTO `forumlikes` (`likeID`, `topicID`, `studentID`, `liked_at`) VALUES
 (138, 13, 65, '2026-07-27 12:28:19'),
 (141, 13, 1, '2026-07-29 10:46:51'),
 (142, 51, 1, '2026-07-29 15:51:15'),
-(143, 7, 1, '2026-07-30 00:01:30');
+(143, 7, 1, '2026-07-30 00:01:30'),
+(234, 70, 66, '2026-08-01 02:01:00'),
+(235, 70, 55, '2026-08-01 02:02:00'),
+(236, 70, 44, '2026-08-01 02:03:00'),
+(237, 69, 63, '2026-08-01 02:04:00'),
+(238, 69, 52, '2026-08-01 02:05:00'),
+(239, 69, 41, '2026-08-01 02:06:00'),
+(240, 68, 60, '2026-08-01 02:07:00'),
+(241, 68, 49, '2026-08-01 02:08:00'),
+(242, 68, 38, '2026-08-01 02:09:00'),
+(243, 67, 57, '2026-08-01 02:10:00'),
+(244, 67, 46, '2026-08-01 02:11:00'),
+(245, 67, 35, '2026-08-01 02:12:00');
 
 -- --------------------------------------------------------
 
@@ -915,7 +963,27 @@ CREATE TABLE `forumreport` (
 INSERT INTO `forumreport` (`reportID`, `topicID`, `replyID`, `studentID`, `reason`, `created_at`, `status`) VALUES
 (1, 10, NULL, 1, 'Spam', '2026-07-29 13:15:20', 'Pending'),
 (2, 9, NULL, 1, 'Spam', '2026-07-29 23:37:06', 'Approved'),
-(3, NULL, 14, 1, 'Wrong Information', '2026-07-30 00:12:14', 'Approved');
+(3, NULL, 14, 1, 'Wrong Information', '2026-07-30 00:12:14', 'Approved'),
+(64, 10, NULL, 6, 'Spam', '2026-07-30 10:25:00', 'Approved'),
+(65, NULL, 25, 7, 'Wrong Information', '2026-07-30 10:30:00', 'Pending'),
+(66, 9, NULL, 8, 'Duplicate Topic', '2026-07-30 10:35:00', 'Rejected'),
+(67, NULL, 30, 9, 'Offensive Language', '2026-07-30 10:40:00', 'Approved'),
+(68, 15, NULL, 10, 'Spam', '2026-07-30 10:45:00', 'Pending'),
+(69, 5, NULL, 11, 'Misleading Information', '2026-07-30 11:00:00', 'Approved'),
+(70, NULL, 33, 12, 'Spam', '2026-07-30 11:05:00', 'Pending'),
+(71, 12, NULL, 13, 'Inappropriate Content', '2026-07-30 11:10:00', 'Rejected'),
+(72, NULL, 38, 14, 'Harassment', '2026-07-30 11:15:00', 'Approved'),
+(73, 20, NULL, 15, 'Wrong Information', '2026-07-30 11:20:00', 'Pending'),
+(74, 6, NULL, 16, 'Spam', '2026-07-30 11:25:00', 'Pending'),
+(75, NULL, 44, 17, 'Wrong Information', '2026-07-30 11:30:00', 'Approved'),
+(76, 8, NULL, 18, 'Duplicate Topic', '2026-07-30 11:35:00', 'Rejected'),
+(77, NULL, 48, 19, 'Offensive Language', '2026-07-30 11:40:00', 'Pending'),
+(78, 11, NULL, 20, 'Misleading Information', '2026-07-30 11:45:00', 'Approved'),
+(79, NULL, 53, 21, 'Spam', '2026-07-30 11:50:00', 'Pending'),
+(80, 13, NULL, 22, 'Inappropriate Content', '2026-07-30 11:55:00', 'Rejected'),
+(81, NULL, 59, 23, 'Harassment', '2026-07-30 12:00:00', 'Approved'),
+(82, 17, NULL, 24, 'Wrong Information', '2026-07-30 12:05:00', 'Pending'),
+(83, NULL, 62, 25, 'Spam', '2026-07-30 12:10:00', 'Approved');
 
 -- --------------------------------------------------------
 
@@ -956,7 +1024,7 @@ INSERT INTO `forumtopic` (`topicID`, `studentID`, `categoryID`, `topicTitle`, `t
 (11, 3, 4, 'How do you save money on groceries?', 'Share your best budgeting tips when buying groceries as a university student.', 77, 0, 0, 'Active', '2026-07-25 05:56:28', '2026-07-29 12:33:43', 'MoneySaving,Budgeting,GroceryTips'),
 (12, 8, 1, 'Welcome new students!', 'Welcome to the Price Checker community! Introduce yourself and share your favourite supermarket around Kota Samarahan.', 88, 1, 1, 'Active', '2026-07-25 09:20:08', '2026-07-29 08:21:30', 'Welcome,NewStudents,CampusLife'),
 (13, 1, 2, 'Where do you usually buy bread?', 'I often compare bread prices between Emart, Everrise, and 99 Speedmart. Which store offers the best deals?', 38, 0, 0, 'Active', '2026-07-26 01:42:13', '2026-07-28 22:18:53', 'Bread,Bakery,PriceComparison'),
-(15, 11, 2, 'Cheapest bottled water near UNIMAS?', 'Which supermarket usually has the lowest price for bottled drinking water?', 24, 0, 0, 'Active', '2026-07-27 01:15:00', '2026-07-27 01:15:00', 'Water,Budget,PriceComparison'),
+(15, 11, 2, 'Cheapest bottled water near UNIMAS?', 'Which supermarket usually has the lowest price for bottled drinking water?', 25, 0, 0, 'Active', '2026-07-27 01:15:00', '2026-07-31 18:38:21', 'Water,Budget,PriceComparison'),
 (16, 15, 3, 'Best weekly supermarket promotions', 'Have you found any good promotions for groceries this week? Please share them here.', 37, 0, 0, 'Active', '2026-07-27 03:20:00', '2026-07-27 03:20:00', 'Promotion,Discount,Groceries'),
 (17, 22, 5, 'Affordable breakfast ideas', 'What breakfast items do you usually buy that are filling and affordable for students?', 41, 0, 0, 'Active', '2026-07-27 05:40:00', '2026-07-27 05:40:00', 'Breakfast,BudgetFood,Students'),
 (18, 18, 4, 'Fresh fruits at reasonable prices', 'Which supermarket sells fresh fruits with the best value for money?', 29, 0, 0, 'Active', '2026-07-27 07:05:00', '2026-07-27 07:05:00', 'Fruits,HealthyFood,Groceries'),
@@ -992,7 +1060,7 @@ INSERT INTO `forumtopic` (`topicID`, `studentID`, `categoryID`, `topicTitle`, `t
 (48, 48, 4, 'Affordable frozen nuggets', 'Frozen nuggets are one of my favorite quick meals. Which brand offers the best value?', 53, 0, 0, 'Active', '2026-07-29 08:36:00', '2026-07-29 08:36:00', 'FrozenFood,Nuggets,BudgetMeals'),
 (49, 58, 2, 'Where do you buy canned food?', 'I want to stock up on canned food for emergencies. Which supermarket has the lowest prices?', 32, 0, 0, 'Active', '2026-07-29 08:52:00', '2026-07-30 03:14:23', 'CannedFood,Groceries,PriceComparison'),
 (50, 62, 5, 'Best bakery items under RM10', 'What bakery products do you usually buy that cost less than RM10?', 45, 0, 0, 'Active', '2026-07-29 09:14:00', '2026-07-29 15:25:39', 'Bakery,BudgetFood,Students'),
-(51, 20, 1, 'Community shopping challenge!', 'Let us challenge ourselves to spend less than RM50 on groceries this week. Share what you bought and how much you saved!', 102, 1, 0, 'Active', '2026-07-29 09:30:00', '2026-07-30 03:03:56', 'Challenge,Community,Savings'),
+(51, 20, 1, 'Community shopping challenge!', 'Let us challenge ourselves to spend less than RM50 on groceries this week. Share what you bought and how much you saved!', 115, 1, 0, 'Active', '2026-07-29 09:30:00', '2026-07-31 19:19:46', 'Challenge,Community,Savings'),
 (53, 31, 2, 'Best place to buy yogurt?', 'Looking for affordable yogurt brands around campus. Any recommendations?', 29, 0, 0, 'Active', '2026-07-30 00:15:00', '2026-07-30 00:15:00', 'Yogurt,Dairy,BudgetFood'),
 (54, 42, 3, 'Supermarket price comparison experience', 'Which supermarket do you think provides the best overall prices?', 56, 0, 0, 'Active', '2026-07-30 01:20:00', '2026-07-30 01:20:00', 'Supermarket,Comparison,Savings'),
 (55, 53, 4, 'Healthy lunch ideas for students', 'Share affordable lunch ideas that are suitable for university students.', 44, 0, 0, 'Active', '2026-07-30 02:05:00', '2026-07-30 02:05:00', 'Lunch,HealthyFood,Students'),
@@ -1012,7 +1080,87 @@ INSERT INTO `forumtopic` (`topicID`, `studentID`, `categoryID`, `topicTitle`, `t
 (69, 28, 4, 'Disrespectful review content', 'Review contained inappropriate comments toward staff.', 20, 0, 0, 'Hidden', '2026-07-30 05:20:00', '2026-07-30 10:00:00', 'Review,Community'),
 (70, 35, 5, 'Unauthorized promotion campaign', 'Removed because promotion was posted without approval.', 17, 0, 0, 'Hidden', '2026-07-30 05:45:00', '2026-07-30 10:15:00', 'Promotion,Rules'),
 (71, 45, 1, 'Misleading student advice', 'Content was hidden after moderation review.', 23, 0, 0, 'Hidden', '2026-07-30 06:10:00', '2026-07-30 10:30:00', 'Advice,Moderation'),
-(72, 52, 2, 'Repeated harmful comments', 'Topic hidden due to multiple community reports.', 30, 0, 0, 'Hidden', '2026-07-30 06:40:00', '2026-07-30 10:50:00', 'Reports,Community');
+(72, 52, 2, 'Repeated harmful comments', 'Topic hidden due to multiple community reports.', 30, 0, 0, 'Hidden', '2026-07-30 06:40:00', '2026-07-30 10:50:00', 'Reports,Community'),
+(73, 16, 2, 'Best place to buy cooking ingredients?', 'Where do you usually buy affordable cooking ingredients near campus?', 34, 0, 0, 'Active', '2026-07-31 00:15:00', '2026-07-31 00:15:00', 'Cooking,Groceries,Budget'),
+(74, 24, 3, 'Student friendly shopping habits', 'What are some shopping habits that help students save money?', 41, 0, 0, 'Active', '2026-07-31 01:00:00', '2026-07-31 01:00:00', 'StudentLife,SavingTips,Community'),
+(75, 37, 5, 'Affordable lunch meals', 'Looking for cheap lunch ideas around campus area.', 56, 0, 0, 'Active', '2026-07-31 01:35:00', '2026-07-31 01:35:00', 'Lunch,BudgetFood,Students'),
+(76, 8, 1, 'New semester introduction thread', 'Welcome new students joining this semester. Introduce yourself here!', 79, 0, 0, 'Active', '2026-07-31 02:10:00', '2026-07-31 02:10:00', 'Introduction,CampusLife,Community'),
+(77, 42, 4, 'Best supermarket for frozen items', 'Which supermarket offers the best frozen food prices?', 38, 0, 0, 'Active', '2026-07-31 02:40:00', '2026-07-31 02:40:00', 'FrozenFood,Supermarket,Comparison'),
+(78, 51, 2, 'Monthly grocery spending', 'How much do students usually spend on groceries every month?', 92, 0, 0, 'Active', '2026-07-31 03:20:00', '2026-07-31 03:20:00', 'Budgeting,Grocery,Students'),
+(79, 29, 3, 'Favourite supermarket promotion', 'Share current promotions that students should know about.', 47, 0, 0, 'Active', '2026-07-31 04:05:00', '2026-07-31 04:05:00', 'Promotion,Discount,Shopping'),
+(80, 63, 5, 'Cheap breakfast before class', 'What affordable breakfast options do you recommend?', 61, 0, 0, 'Active', '2026-07-31 04:45:00', '2026-07-31 04:45:00', 'Breakfast,BudgetFood,Campus'),
+(81, 11, 2, 'Where to buy affordable drinks?', 'Looking for cheap drinks suitable for students.', 44, 0, 0, 'Active', '2026-07-31 05:20:00', '2026-07-31 05:20:00', 'Drinks,Savings,Recommendation'),
+(82, 55, 4, 'Best bakery around campus', 'Which bakery has good quality products at reasonable prices?', 52, 0, 0, 'Active', '2026-07-31 06:00:00', '2026-07-31 06:00:00', 'Bakery,Bread,Food'),
+(83, 20, 1, 'Campus shopping experience', 'Share your experience shopping around UNIMAS.', 36, 0, 0, 'Active', '2026-07-31 06:30:00', '2026-07-31 06:30:00', 'Campus,Shopping,Community'),
+(84, 46, 3, 'How to save money as a student?', 'Share your best money saving strategies.', 85, 0, 0, 'Active', '2026-07-31 07:15:00', '2026-07-31 07:15:00', 'SavingTips,Students,Budget'),
+(85, 34, 5, 'Healthy food recommendations', 'What healthy and affordable foods do you usually buy?', 39, 0, 0, 'Active', '2026-07-31 08:00:00', '2026-07-31 08:00:00', 'HealthyFood,Students,Food'),
+(86, 5, 2, 'Best rice brand for students', 'Which rice brand gives the best value for money?', 64, 0, 0, 'Active', '2026-07-31 08:45:00', '2026-07-31 08:45:00', 'Rice,Budget,Groceries'),
+(87, 61, 4, 'Frozen meals worth buying?', 'Are frozen meals cheaper compared to cooking yourself?', 58, 0, 0, 'Active', '2026-08-01 00:10:00', '2026-08-01 00:10:00', 'FrozenFood,BudgetMeals,Review'),
+(88, 18, 1, 'Meet new forum members', 'Introduce yourself and meet other students.', 67, 0, 0, 'Active', '2026-08-01 01:00:00', '2026-08-01 01:00:00', 'Welcome,Community,Students'),
+(89, 44, 3, 'Best deals during weekends', 'Which stores usually have the best weekend deals?', 73, 0, 0, 'Active', '2026-08-01 02:00:00', '2026-08-01 02:00:00', 'Weekend,Promotion,Discount'),
+(90, 27, 5, 'Affordable dinner ideas', 'What cheap dinner meals do students usually prepare?', 49, 0, 0, 'Active', '2026-08-01 03:30:00', '2026-08-01 03:30:00', 'Dinner,BudgetFood,Students'),
+(91, 59, 2, 'Comparing supermarket prices', 'Which supermarket provides the cheapest groceries?', 88, 0, 0, 'Active', '2026-08-01 04:20:00', '2026-08-01 04:20:00', 'PriceComparison,Supermarket,Savings'),
+(92, 13, 4, 'Favourite student snacks', 'What snacks do you recommend for studying?', 54, 0, 0, 'Active', '2026-08-01 05:00:00', '2026-08-01 05:00:00', 'Snacks,StudyLife,Budget'),
+(93, 32, 2, 'Cheapest detergent brand?', 'Which detergent brand is affordable and still works well for students?', 42, 0, 0, 'Active', '2026-08-01 06:10:00', '2026-08-01 06:10:00', 'Cleaning,Budget,Comparison'),
+(94, 6, 3, 'Student shopping checklist', 'What items should students always buy during monthly shopping?', 51, 0, 0, 'Active', '2026-08-01 06:25:00', '2026-08-01 06:25:00', 'ShoppingTips,Students,Budget'),
+(95, 49, 5, 'Cheap snacks for hostel', 'Recommend affordable snacks that are suitable for hostel students.', 63, 0, 0, 'Active', '2026-08-01 06:50:00', '2026-08-01 06:50:00', 'Snacks,Hostel,BudgetFood'),
+(96, 14, 1, 'Hello second year students', 'Any advice for students entering their second year?', 72, 0, 0, 'Active', '2026-08-01 07:20:00', '2026-08-01 07:20:00', 'CampusLife,Advice,Community'),
+(97, 38, 4, 'Affordable milk brands', 'Which milk brand gives the best price and quality?', 46, 0, 0, 'Active', '2026-08-01 07:45:00', '2026-08-01 07:45:00', 'Milk,Dairy,PriceComparison'),
+(98, 57, 2, 'Best place for monthly groceries', 'Where do students usually buy groceries for the whole month?', 81, 0, 0, 'Active', '2026-08-01 08:10:00', '2026-08-01 08:10:00', 'Groceries,Shopping,Savings'),
+(99, 21, 3, 'Ways to reduce food expenses', 'Share tips to reduce daily food spending.', 68, 0, 0, 'Active', '2026-08-01 08:35:00', '2026-08-01 08:35:00', 'SavingTips,Food,Budget'),
+(100, 64, 5, 'Best instant drinks', 'What instant drinks are affordable and taste good?', 57, 0, 0, 'Active', '2026-08-01 09:00:00', '2026-08-01 09:00:00', 'Drinks,StudentBudget,Recommendation'),
+(101, 3, 2, 'Cheap toiletries for students', 'Where can students buy affordable personal care products?', 44, 0, 0, 'Active', '2026-08-01 09:25:00', '2026-08-01 09:25:00', 'Toiletries,Budget,Shopping'),
+(102, 53, 4, 'Best frozen food brands', 'Which frozen food brands are worth buying?', 59, 0, 0, 'Active', '2026-08-01 10:00:00', '2026-08-01 10:00:00', 'FrozenFood,Review,Food'),
+(103, 25, 1, 'First time shopping around campus', 'I just started studying here. Any shopping recommendations?', 74, 0, 0, 'Active', '2026-08-02 00:15:00', '2026-08-02 00:15:00', 'Introduction,CampusLife,Shopping'),
+(104, 40, 3, 'Student meal preparation ideas', 'What meals can students prepare with limited budget?', 66, 0, 0, 'Active', '2026-08-02 01:00:00', '2026-08-02 01:00:00', 'MealPrep,BudgetFood,Students'),
+(105, 10, 5, 'Cheap coffee alternatives', 'Any affordable coffee brands besides expensive cafes?', 53, 0, 0, 'Active', '2026-08-02 01:40:00', '2026-08-02 01:40:00', 'Coffee,Drinks,Savings'),
+(106, 47, 2, 'Best supermarket membership card', 'Are supermarket membership cards useful for students?', 37, 0, 0, 'Active', '2026-08-02 02:15:00', '2026-08-02 02:15:00', 'Membership,Rewards,Savings'),
+(107, 35, 4, 'Cheap fruits recommendation', 'Which fruits are affordable and easy to store?', 48, 0, 0, 'Active', '2026-08-02 02:50:00', '2026-08-02 02:50:00', 'Fruits,HealthyFood,Budget'),
+(108, 62, 3, 'Sharing grocery saving methods', 'How do you save money when buying groceries?', 91, 0, 0, 'Active', '2026-08-02 03:20:00', '2026-08-02 03:20:00', 'SavingTips,Grocery,Community'),
+(109, 17, 5, 'Best biscuits under RM5', 'Looking for affordable biscuits for daily snacks.', 52, 0, 0, 'Active', '2026-08-02 04:00:00', '2026-08-02 04:00:00', 'Biscuits,Snacks,Budget'),
+(110, 54, 1, 'Campus community discussion', 'Share your favourite campus experiences.', 83, 0, 0, 'Active', '2026-08-02 04:35:00', '2026-08-02 04:35:00', 'CampusLife,Community,Students'),
+(111, 31, 2, 'Best place to buy eggs', 'Which store sells affordable eggs consistently?', 62, 0, 0, 'Active', '2026-08-02 05:10:00', '2026-08-02 05:10:00', 'Eggs,Groceries,Comparison'),
+(112, 65, 4, 'Affordable cooking supplies', 'Where can students find cheap cooking supplies?', 45, 0, 0, 'Active', '2026-08-02 05:45:00', '2026-08-02 05:45:00', 'Cooking,Shopping,Budget'),
+(113, 23, 3, 'How much do you spend weekly?', 'How much money do you normally spend on food weekly?', 97, 0, 0, 'Active', '2026-08-02 06:20:00', '2026-08-02 06:20:00', 'Budgeting,Students,Discussion'),
+(114, 60, 5, 'Healthy drinks under RM10', 'Recommend healthy drinks that are affordable.', 43, 0, 0, 'Active', '2026-08-02 07:00:00', '2026-08-02 07:00:00', 'Drinks,HealthyFood,Budget'),
+(115, 19, 2, 'Cheapest cooking oil brand', 'Which cooking oil brand offers good value?', 56, 0, 0, 'Active', '2026-08-02 07:35:00', '2026-08-02 07:35:00', 'CookingOil,Comparison,Savings'),
+(116, 50, 4, 'Best supermarket location', 'Which supermarket location is easiest for students?', 39, 0, 0, 'Active', '2026-08-02 08:10:00', '2026-08-02 08:10:00', 'Supermarket,Location,Community'),
+(117, 9, 1, 'Advice for new students', 'Senior students share advice for newcomers.', 86, 0, 0, 'Active', '2026-08-02 08:45:00', '2026-08-02 08:45:00', 'Advice,Students,CampusLife'),
+(118, 43, 3, 'Affordable dinner choices', 'What are cheap dinner choices after classes?', 61, 0, 0, 'Active', '2026-08-02 09:20:00', '2026-08-02 09:20:00', 'Dinner,BudgetFood,Students'),
+(119, 28, 5, 'Favourite study snacks', 'What snacks do you buy during study sessions?', 75, 0, 0, 'Active', '2026-08-02 10:00:00', '2026-08-02 10:00:00', 'Snacks,StudyLife,Budget'),
+(120, 56, 2, 'Best place for cheap groceries', 'Share places where students can save money shopping.', 93, 0, 0, 'Active', '2026-08-03 00:00:00', '2026-08-03 00:00:00', 'Groceries,Savings,Recommendation'),
+(121, 36, 4, 'Supermarket comparison discussion', 'Compare your shopping experience between stores.', 71, 0, 0, 'Active', '2026-08-03 01:15:00', '2026-08-03 01:15:00', 'Comparison,Supermarket,Community'),
+(122, 15, 3, 'Student budget challenge', 'Can students survive with a limited monthly budget?', 105, 0, 0, 'Active', '2026-08-03 02:00:00', '2026-08-03 02:00:00', 'Challenge,Budgeting,Students'),
+(123, 6, 2, 'Affordable cooking ingredients near campus', 'Where do you usually buy affordable cooking ingredients around UNIMAS area?', 35, 0, 0, 'Active', '2026-08-01 00:10:00', '2026-08-01 00:10:00', 'Cooking,Groceries,Budget'),
+(124, 15, 3, 'Best student meal deals', 'Which restaurants or supermarkets offer the best meal deals for students?', 42, 0, 0, 'Active', '2026-08-01 00:25:00', '2026-08-01 00:25:00', 'Meals,Students,Deals'),
+(125, 24, 5, 'Cheap drinks for daily classes', 'Looking for affordable drinks that students usually buy before class.', 28, 0, 0, 'Active', '2026-08-01 00:40:00', '2026-08-01 00:40:00', 'Drinks,Budget,Campus'),
+(126, 32, 1, 'New semester shopping checklist', 'What items should students prepare before starting a new semester?', 51, 0, 0, 'Active', '2026-08-01 01:05:00', '2026-08-01 01:05:00', 'Students,Checklist,CampusLife'),
+(127, 41, 4, 'Affordable vegetables for cooking', 'Which stores provide fresh vegetables at reasonable prices?', 39, 0, 0, 'Active', '2026-08-01 01:20:00', '2026-08-01 01:20:00', 'Vegetables,FreshFood,Savings'),
+(128, 53, 2, 'Best place to buy eggs', 'I want to compare egg prices between different supermarkets.', 46, 0, 0, 'Active', '2026-08-01 01:45:00', '2026-08-01 01:45:00', 'Eggs,Comparison,Groceries'),
+(129, 62, 3, 'Student friendly supermarket recommendations', 'Which supermarkets are most convenient for students?', 33, 0, 0, 'Active', '2026-08-01 02:00:00', '2026-08-01 02:00:00', 'Supermarket,Students,Recommendation'),
+(130, 9, 5, 'Affordable breakfast before class', 'Share your favourite cheap breakfast choices.', 61, 0, 0, 'Active', '2026-08-01 02:20:00', '2026-08-01 02:20:00', 'Breakfast,BudgetFood,Students'),
+(131, 18, 2, 'Comparing grocery prices this month', 'Has anyone noticed changes in grocery prices recently?', 54, 0, 0, 'Active', '2026-08-01 02:45:00', '2026-08-01 02:45:00', 'Prices,Grocery,Comparison'),
+(132, 27, 4, 'Best frozen food brands', 'Which frozen food brands offer good value?', 37, 0, 0, 'Active', '2026-08-01 03:05:00', '2026-08-01 03:05:00', 'FrozenFood,Budget,Food'),
+(133, 36, 1, 'Introduce yourself new students', 'A place for new students to introduce themselves.', 74, 0, 0, 'Active', '2026-08-01 03:30:00', '2026-08-01 03:30:00', 'Introduction,Community,Students'),
+(134, 44, 3, 'Weekly shopping habits', 'How often do students usually go grocery shopping?', 31, 0, 0, 'Active', '2026-08-01 03:50:00', '2026-08-01 03:50:00', 'Shopping,Students,Lifestyle'),
+(135, 57, 2, 'Cheapest cooking oil brand', 'Which cooking oil brand is affordable and reliable?', 45, 0, 0, 'Active', '2026-08-01 04:10:00', '2026-08-01 04:10:00', 'CookingOil,Savings,Groceries'),
+(136, 65, 5, 'Snacks for late night studying', 'What snacks do you usually buy during study sessions?', 68, 0, 0, 'Active', '2026-08-01 04:35:00', '2026-08-01 04:35:00', 'Snacks,StudyLife,Budget'),
+(137, 11, 4, 'Best bakery around campus', 'Recommend affordable bakery products near campus.', 29, 0, 0, 'Active', '2026-08-01 05:00:00', '2026-08-01 05:00:00', 'Bakery,Food,Campus'),
+(138, 21, 2, 'Monthly grocery budget discussion', 'How much do students normally spend on groceries monthly?', 83, 0, 0, 'Active', '2026-08-01 05:20:00', '2026-08-01 05:20:00', 'Budgeting,Grocery,Students'),
+(139, 39, 3, 'Favourite supermarket promotions', 'Share current supermarket promotions you discovered.', 52, 0, 0, 'Active', '2026-08-01 05:45:00', '2026-08-01 05:45:00', 'Promotion,Discount,Shopping'),
+(140, 50, 1, 'Campus life tips for newcomers', 'Share advice for students adapting to campus life.', 96, 0, 0, 'Active', '2026-08-01 06:05:00', '2026-08-01 06:05:00', 'CampusLife,Students,Community'),
+(141, 4, 5, 'Healthy drinks under RM5', 'Looking for healthier drinks that are affordable.', 34, 0, 0, 'Active', '2026-08-01 06:30:00', '2026-08-01 06:30:00', 'Healthy,Drinks,Budget'),
+(142, 16, 2, 'Affordable rice brands', 'Which rice brands provide the best value?', 58, 0, 0, 'Active', '2026-08-01 06:50:00', '2026-08-01 06:50:00', 'Rice,Groceries,Savings'),
+(143, 29, 4, 'Frozen seafood recommendations', 'Recommend affordable frozen seafood products.', 41, 0, 0, 'Active', '2026-08-01 07:15:00', '2026-08-01 07:15:00', 'Seafood,FrozenFood,Budget'),
+(144, 47, 3, 'Best discount apps for students', 'Which apps help students save money while shopping?', 63, 0, 0, 'Active', '2026-08-01 07:40:00', '2026-08-01 07:40:00', 'Discount,Apps,Savings'),
+(145, 60, 1, 'Community shopping challenge', 'Challenge everyone to reduce unnecessary spending.', 107, 0, 0, 'Active', '2026-08-01 08:00:00', '2026-08-01 08:00:00', 'Challenge,Savings,Community'),
+(146, 13, 2, 'Affordable milk brands', 'Which milk brands are affordable for students?', 44, 0, 0, 'Active', '2026-08-01 08:25:00', '2026-08-01 08:25:00', 'Milk,Dairy,Budget'),
+(147, 34, 5, 'Best food choices during exams', 'What food helps students survive exam weeks?', 56, 0, 0, 'Active', '2026-08-01 08:45:00', '2026-08-01 08:45:00', 'Exam,Food,Students'),
+(148, 55, 4, 'Cheap lunch recommendations', 'Share affordable lunch places around campus.', 72, 0, 0, 'Active', '2026-08-01 09:10:00', '2026-08-01 09:10:00', 'Lunch,Budget,Food'),
+(149, 63, 3, 'Shopping mistakes students make', 'What shopping mistakes should students avoid?', 48, 0, 0, 'Active', '2026-08-01 09:35:00', '2026-08-01 09:35:00', 'Shopping,Tips,Students'),
+(150, 22, 2, 'Best place for weekly groceries', 'Which supermarket is your favourite for weekly shopping?', 79, 0, 0, 'Active', '2026-08-01 10:00:00', '2026-08-01 10:00:00', 'Groceries,Supermarket,Weekly'),
+(151, 31, 1, 'Student community discussion', 'General discussion for students to share experiences.', 65, 0, 0, 'Active', '2026-08-01 10:25:00', '2026-08-01 10:25:00', 'Community,Students,Discussion'),
+(152, 67, 5, 'Affordable dinner ideas', 'What are cheap dinner options for students?', 59, 0, 0, 'Active', '2026-08-01 10:50:00', '2026-08-01 10:50:00', 'Dinner,BudgetFood,Students');
 
 -- --------------------------------------------------------
 
@@ -1045,7 +1193,8 @@ INSERT INTO `forumviews` (`viewID`, `topicID`, `studentID`, `viewed_at`) VALUES
 (12, 50, 1, '2026-07-29 12:45:53'),
 (13, 10, 1, '2026-07-29 13:12:47'),
 (14, 51, 1, '2026-07-29 15:37:01'),
-(15, 7, 1, '2026-07-29 23:53:20');
+(15, 7, 1, '2026-07-29 23:53:20'),
+(16, 15, 1, '2026-07-31 18:38:21');
 
 -- --------------------------------------------------------
 
@@ -1791,7 +1940,20 @@ INSERT INTO `report_logs` (`reportID`, `adminID`, `reportType`, `format`, `gener
 (29, 1, 'item', 'PDF', '2026-07-27 17:04:10'),
 (30, 1, 'item', 'PDF', '2026-07-27 17:04:13'),
 (31, 1, 'item', 'CSV', '2026-07-27 17:20:26'),
-(32, 1, 'item', 'CSV', '2026-07-27 17:20:26');
+(32, 1, 'item', 'CSV', '2026-07-27 17:20:26'),
+(33, 1, 'forum', 'PDF', '2026-07-30 11:39:46'),
+(34, 1, 'forum', 'PDF', '2026-07-30 11:39:46'),
+(35, 1, 'forum', 'PDF', '2026-07-30 11:47:47'),
+(36, 1, 'forum', 'PDF', '2026-07-30 11:47:48'),
+(37, 1, 'forum', 'PDF', '2026-07-30 11:50:11'),
+(38, 1, 'forum', 'PDF', '2026-07-30 11:50:11'),
+(39, 1, 'forum', 'PDF', '2026-07-30 11:50:13'),
+(40, 1, 'forum', 'Excel', '2026-07-30 11:55:25'),
+(41, 1, 'forum', 'Excel', '2026-07-30 11:55:25'),
+(42, 1, 'forum', 'CSV', '2026-07-30 11:59:34'),
+(43, 1, 'forum', 'CSV', '2026-07-30 11:59:34'),
+(44, 1, 'forum', 'JSON', '2026-07-30 12:03:51'),
+(45, 1, 'forum', 'JSON', '2026-07-30 12:03:51');
 
 -- --------------------------------------------------------
 
@@ -1852,7 +2014,7 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`studentID`, `fullName`, `username`, `email`, `password`, `studentIMG`, `logStatus`, `created_at`) VALUES
-(1, 'Faizatul Fitri Bin Boestamam', 'faiz', 'fai@gmail.com', 'abc123', '../../assets/images/profile/fai.jpg', '0', '2024-03-15 02:30:00'),
+(1, 'Faizatul Fitri Bin Boestamam', 'fai', 'fai@gmail.com', 'abc123', '../../assets/images/profile/fai.jpg', '0', '2024-03-15 02:30:00'),
 (2, 'Mohammad Amir Alam Bin Rahim Omar', 'amiromar', 'amir@gmail.com', 'abc123', '../../assets/images/profile/amir.jpg', '0', '2024-03-15 02:30:00'),
 (3, 'Harith Zakwan Bin Zakaria', 'harith', 'harith@gmail.com', 'abc123', '../../assets/images/profile/harith.jpg', '0', '2024-03-15 02:30:00'),
 (4, 'Mohamad Waqiuddin Bin Yahya', 'qiu', 'qiu@gmail.com', 'abc123', '../../assets/images/profile/qiu.jpeg', '0', '2024-03-15 02:30:00'),
@@ -2106,7 +2268,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `audit_logs`
 --
 ALTER TABLE `audit_logs`
-  MODIFY `auditID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `auditID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
 -- AUTO_INCREMENT for table `backups`
@@ -2148,7 +2310,7 @@ ALTER TABLE `forumcategory`
 -- AUTO_INCREMENT for table `forumlikes`
 --
 ALTER TABLE `forumlikes`
-  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
+  MODIFY `likeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
 
 --
 -- AUTO_INCREMENT for table `forumreply`
@@ -2160,19 +2322,19 @@ ALTER TABLE `forumreply`
 -- AUTO_INCREMENT for table `forumreport`
 --
 ALTER TABLE `forumreport`
-  MODIFY `reportID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `reportID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `forumtopic`
 --
 ALTER TABLE `forumtopic`
-  MODIFY `topicID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `topicID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 
 --
 -- AUTO_INCREMENT for table `forumviews`
 --
 ALTER TABLE `forumviews`
-  MODIFY `viewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `viewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `item`
@@ -2190,7 +2352,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `report_logs`
 --
 ALTER TABLE `report_logs`
-  MODIFY `reportID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `reportID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `store`

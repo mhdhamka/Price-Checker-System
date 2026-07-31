@@ -223,6 +223,7 @@ ORDER BY r.created_at ASC
 <script src="../../assets/js/forum/modal.js"></script>
 <script src="../../assets/js/forum/topic.js"></script>
 <script src="../../assets/js/forum/reply.js"></script>
+<script src="../../assets/js/forum/adminTopicActions.js"></script>
 
 <script>
 

@@ -1,0 +1,192 @@
+# Price Checker System
+
+# Installation Guide
+
+## 1. Clone Repository
+
+Download the project:
+
+```bash
+git clone https://github.com/yourusername/pricechecker.git
+```
+
+Navigate into the project:
+
+```bash
+cd pricechecker
+```
+
+---
+
+# 2. Install PHP Dependencies
+
+The `vendor` folder is not included in this repository.
+
+This is intentional because Composer can regenerate it automatically.
+
+Make sure Composer is installed:
+
+```bash
+composer --version
+```
+
+Install all required libraries:
+
+```bash
+composer install
+```
+
+This will recreate:
+
+```
+vendor/
+├── dompdf/
+├── phpoffice/
+├── composer/
+└── autoload.php
+```
+
+The dependencies are restored using:
+
+```
+composer.json
+composer.lock
+```
+
+---
+
+# 3. Setup Database
+
+Create a MySQL database:
+
+```sql
+CREATE DATABASE pricechecker;
+```
+
+Import the provided SQL file:
+
+```
+database/pricechecker.sql
+```
+
+or import:
+
+```
+database/
+├── structure.sql
+└── sample_data.sql
+```
+
+depending on the repository version.
+
+---
+
+# 4. Dependency Information
+
+This project uses Composer for PHP package management.
+
+Installed packages:
+
+## DomPDF
+
+Used for:
+
+* PDF report generation
+* Exporting dashboard reports
+
+Install:
+
+```bash
+composer require dompdf/dompdf
+```
+
+---
+
+## PhpSpreadsheet
+
+Used for:
+
+* Excel export
+* Spreadsheet report generation
+
+Install:
+
+```bash
+composer require phpoffice/phpspreadsheet
+```
+
+---
+
+## Chart.js
+
+Used for:
+
+* Analytics dashboard charts
+* Data visualization
+
+Chart.js is loaded through frontend resources and does not require Composer installation.
+
+---
+
+# Troubleshooting
+
+## Vendor folder missing
+
+If you see:
+
+```
+Warning: require(vendor/autoload.php)
+failed to open stream
+```
+
+Run:
+
+```bash
+composer install
+```
+
+again.
+
+---
+
+## Database connection error
+
+Check:
+
+```
+src/config/db_cPCS.php
+```
+
+Make sure:
+
+* MySQL is running
+* Database name is correct
+* Username/password matches your local setup
+
+---
+
+## PHP Extension Requirements
+
+Required PHP extensions:
+
+* mysqli
+* mbstring
+* gd
+* zip
+* xml
+
+---
+
+# Development Notes
+
+The `vendor` folder is excluded from GitHub because it contains third-party dependencies that can be regenerated using Composer.
+
+Only the dependency definitions are stored:
+
+```
+composer.json
+composer.lock
+```
+
+This keeps the repository smaller and follows standard PHP development practices.
+

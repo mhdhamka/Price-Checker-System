@@ -258,7 +258,7 @@ arsort($tagCount);
 
         <!-- ANALYTICS -->
 
-        <a href="forumReportAnalytics.php"
+        <a href="forumAnalytics.php"
         class="admin-menu-item">
 
 

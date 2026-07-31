@@ -304,7 +304,7 @@ $img=$user['adminIMG'] ?? "../../assets/images/profile/default.png";
 
                 <div class="analytics-card">
 
-                    <div class="analytics-icon">
+                    <div class="forum-analytics-icon">
 
                         <i class="fa-solid fa-flag"></i>
 
@@ -327,7 +327,7 @@ $img=$user['adminIMG'] ?? "../../assets/images/profile/default.png";
 
                 <div class="analytics-card">
 
-                    <div class="analytics-icon">
+                    <div class="forum-analytics-icon">
 
                         <i class="fa-solid fa-circle-check"></i>
 
@@ -350,7 +350,7 @@ $img=$user['adminIMG'] ?? "../../assets/images/profile/default.png";
 
                 <div class="analytics-card">
 
-                    <div class="analytics-icon">
+                    <div class="forum-analytics-icon">
 
                         <i class="fa-solid fa-xmark"></i>
 
@@ -372,7 +372,7 @@ $img=$user['adminIMG'] ?? "../../assets/images/profile/default.png";
 
                 <div class="analytics-card">
 
-                    <div class="analytics-icon">
+                    <div class="forum-analytics-icon">
 
                         <i class="fa-solid fa-clock"></i>
 

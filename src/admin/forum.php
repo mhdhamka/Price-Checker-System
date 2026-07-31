@@ -367,6 +367,12 @@ $img=$user['adminIMG'];
 
                     <?php include("../includes/forum/forumTopicList.php"); ?>
 
+                    <!-- ==========================
+                        ADMIN MODALS
+                    ========================== -->
+
+                    <?php include("../includes/forum/deleteTopicAdminModal.php"); ?>
+
                      <?php if($totalPages > 1){ ?>
 
                         <div class="pagination">

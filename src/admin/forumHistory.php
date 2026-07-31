@@ -12,6 +12,7 @@ if(!isset($_SESSION['adminID']))
 }
 
 
+$adminID=$_SESSION['adminID'];
 
 if(!isset($_GET['id']))
 {
@@ -144,6 +145,30 @@ AND status='Rejected'
 
 
 
+/* ==========================
+ADMIN PROFILE
+========================== */
+
+
+$user=mysqli_fetch_assoc(mysqli_query($conn,"
+
+SELECT
+
+adminUsername,
+
+adminIMG
+
+FROM admin
+
+WHERE adminID='$adminID'
+
+"));
+
+
+$adminUsername=$user['adminUsername'] ?? "Admin";
+
+$img=$user['adminIMG'] ?? "../../assets/images/profile/default.png";
+
 ?>
 
 <!DOCTYPE html>
@@ -153,18 +178,18 @@ AND status='Rejected'
 
 <head>
 
-<title>
-Forum History
-</title>
+    <title>
+        Forum History
+    </title>
 
-
-<link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
-
-<link rel="stylesheet" href="../../assets/css/forum.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/styleindex.css">
+    <link rel="stylesheet" href="../../assets/css/forum.css">
+    <link rel="stylesheet" href="../../assets/css/footer.css">
+    <link rel="icon" href="../../assets/images/logo.png" type="image/x-icon">
 
 </head>
 
@@ -174,239 +199,219 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <?php include("../student/includes/header.php"); ?>
 
+    <section class="section community-section" id="community">
 
+        <div class="container">
 
-<section class="section community-section">
+            <br><br>
 
+            <a href="forumUserModeration.php"
+            class="back-dashboard-btn">
 
-<div class="container">
+                <i class="fa fa-arrow-left"></i>
 
+                Back
 
-<br><br>
+            </a>
 
+            <div class="forum-page-header">
 
-<a href="forumUserModeration.php"
-class="back-dashboard-btn">
+                <div class="page-header-icon moderation-header-icon">
 
-<i class="fa fa-arrow-left"></i>
+                    <i class="fa-solid fa-clock-rotate-left"></i>
 
-Back
+                </div>
 
-</a>
 
+                <div>
 
+                    <h2>
+                        Moderation History
+                    </h2>
 
+                    <p>
+                        Review student's forum violations and reports.
+                    </p>
 
-<div class="forum-page-header">
+                </div>
 
+            </div>
 
-<div class="page-header-icon moderation-header-icon">
 
-<i class="fa-solid fa-clock-rotate-left"></i>
+            <div class="history-profile-card">
 
-</div>
+                <div class="history-profile-left">
 
+                    <img src="<?php echo !empty($student['studentIMG'])
+                    ? $student['studentIMG']
+                    : '../../assets/images/profile/default.png'; ?>">
 
-<div>
+                    <div>
 
-<h2>
-Moderation History
-</h2>
+                        <h2><?php echo htmlspecialchars($student['fullName']); ?></h2>
 
-<p>
-Review student's forum violations and reports.
-</p>
+                        <p>@<?php echo htmlspecialchars($student['username']); ?></p>
 
+                        <span class="history-user-id">
+                            Student ID #<?php echo $student['studentID']; ?>
+                        </span>
 
-</div>
+                    </div>
 
+                </div>
 
-</div>
+                <div class="history-profile-right">
 
+                    <div class="history-stat">
+                        <span><?php echo $total; ?></span>
+                        <small>Reports</small>
+                    </div>
 
+                    <div class="history-stat">
+                        <span><?php echo $approved; ?></span>
+                        <small>Approved</small>
+                    </div>
 
+                    <div class="history-stat">
+                        <span><?php echo $rejected; ?></span>
+                        <small>Rejected</small>
+                    </div>
 
+                </div>
 
-<div class="user-card">
+            </div>
 
 
+            <div class="history-timeline-panel">
 
-<div class="user-header">
+                <div class="timeline-header">
 
+                    <h3>
 
-<img src="<?php echo !empty($student['studentIMG'])
+                        <i class="fa-solid fa-clock-rotate-left"></i>
 
-?
-'../../assets/images/student/'.$student['studentIMG']
+                        Moderation Timeline
 
-:
+                    </h3>
 
-'../../assets/images/student/default.png';
+                </div>
 
-?>">
+                <?php
 
+                    if(mysqli_num_rows($reports)==0){
 
+                ?>
 
-<div>
+                <div class="timeline-empty">
 
+                    <i class="fa-regular fa-face-smile"></i>
 
-<h3>
+                    <h4>
 
-<?php echo htmlspecialchars($student['fullName']); ?>
+                        No moderation history found.
 
-</h3>
+                    </h4>
 
+                    <p>
 
-<p>
+                        This student has not been reported.
 
-@<?php echo $student['username']; ?>
+                    </p>
 
-</p>
+                </div>
 
+                <?php
 
-</div>
+                }
 
+                    while($row=mysqli_fetch_assoc($reports)){
 
-</div>
+                ?>
 
+                <div class="timeline-card">
 
+                    <div class="timeline-top">
 
+                        <div>
 
-<div class="moderation-stats-mini">
+                            <h4>
 
+                                <?php
+                                    if(!empty($row['topicTitle']))
+                                    {
+                                        echo htmlspecialchars($row['topicTitle']);
+                                    }
+                                    else if(!empty($row['replyContent']))
+                                    {
+                                        echo "Reply: " . htmlspecialchars(substr($row['replyContent'],0,80));
 
-<div>
+                                        if(strlen($row['replyContent']) > 80)
+                                        {
+                                            echo "...";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        echo "Unknown Content";
+                                    }
+                                ?>
 
-<strong>
-<?php echo $total; ?>
-</strong>
+                            </h4>
 
-<p>
-Reports
-</p>
+                            <span class="timeline-date">
 
-</div>
+                                <i class="fa-regular fa-calendar"></i>
 
+                                <?php echo date("d M Y H:i",strtotime($row['created_at'])); ?>
 
-<div>
+                            </span>
 
-<strong>
-<?php echo $approved; ?>
-</strong>
+                        </div>
 
-<p>
-Approved
-</p>
+                        <span class="timeline-status
+                        <?php echo strtolower($row['status']); ?>">
 
-</div>
+                            <?php echo $row['status']; ?>
 
+                        </span>
 
-<div>
+                    </div>
 
-<strong>
-<?php echo $rejected; ?>
-</strong>
+                    <div class="timeline-body">
 
-<p>
-Rejected
-</p>
+                        <p>
 
+                            <strong>Reason</strong>
 
-</div>
+                        </p>
 
+                        <p>
 
-</div>
+                            <?php echo htmlspecialchars($row['reason']); ?>
 
+                        </p>
 
-</div>
+                    </div>
 
+                </div>
 
+                <?php } ?>
 
+            </div>
 
 
-<div class="moderation-panel">
+        </div>
 
 
-<h3>
+    </section>
 
-<i class="fa-solid fa-list"></i>
 
-Report Timeline
 
-</h3>
+    <?php include("../student/includes/footer.php"); ?>
 
 
-
-<?php while($row=mysqli_fetch_assoc($reports)){ ?>
-
-
-
-<div class="moderation-item">
-
-
-<strong>
-
-<?php 
-
-echo $row['topicTitle'] 
-?? "Reply Report";
-
-?>
-
-</strong>
-
-
-
-<p>
-
-Reason:
-
-<?php echo htmlspecialchars($row['reason']); ?>
-
-</p>
-
-
-
-<span class="risk-badge">
-
-<?php echo $row['status']; ?>
-
-</span>
-
-
-
-<small>
-
-<?php echo $row['created_at']; ?>
-
-</small>
-
-
-
-</div>
-
-
-
-<?php } ?>
-
-
-
-</div>
-
-
-
-
-</div>
-
-
-</section>
-
-
-
-<?php include("../student/includes/footer.php"); ?>
-
-
-<script src="../../assets/js/studentTheme.js"></script>
+    <script src="../../assets/js/studentTheme.js"></script>
+    <script src="../../assets/js/header.js"></script>
 
 
 </body>

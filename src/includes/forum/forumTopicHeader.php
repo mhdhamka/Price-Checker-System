@@ -1,3 +1,15 @@
+<?php
+
+    $isAdmin=false;
+
+
+    if(isset($_SESSION['adminID']))
+    {
+        $isAdmin=true;
+    }
+
+?>
+
 <div class="topic-header-card">
 
 
@@ -119,10 +131,7 @@
         </span>
 
 
-
-
         <!-- Likes -->
-
         <span class="stat-chip like-chip">
 
             <a href="#"
@@ -135,7 +144,6 @@
                 </i>
 
             </a>
-
 
             <span class="like-count">
 
@@ -152,11 +160,7 @@
         </span>
 
 
-
-
-
         <!-- Bookmark -->
-
         <span class="stat-chip bookmark-chip">
 
 
@@ -193,21 +197,23 @@
     </div>
 
 
-
-
-
     <!-- ==========================
          ACTIONS
     =========================== -->
 
     <div class="topic-actions">
 
-        <!-- REPORT -->
+        <!-- =====================
+            REPORT ACTION
+        ====================== -->
+
         <?php
 
         if(
             isset($studentID) &&
             $topic['studentID'] != $studentID
+            &&
+            !$isAdmin
         )
         {
 
@@ -217,13 +223,16 @@
 
         ?>
 
-        <br>
 
-        <!-- OWNER ACTION -->
-        <?php 
+        <!-- =====================
+            OWNER ACTION
+        ====================== -->
+
+        <?php
 
         if(
-            isset($studentID) &&
+            isset($studentID)
+            &&
             $topic['studentID']==$studentID
         )
         {
@@ -235,11 +244,23 @@
         ?>
 
 
+        <!-- =====================
+            ADMIN ACTION
+        ====================== -->
+
+        <?php
+
+        if($isAdmin)
+        {
+
+            include(__DIR__ . "/forumTopicAdminActions.php");
+
+        }
+
+        ?>
+
+
     </div>
-
-
-
-
 
 
     <!-- ==========================
