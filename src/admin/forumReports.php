@@ -122,7 +122,7 @@ $total=mysqli_num_rows($countResult);
 PAGINATION
 ==========================*/
 
-$limit=10;
+$limit=9;
 
 $page=isset($_GET['page'])
 ? (int)$_GET['page']

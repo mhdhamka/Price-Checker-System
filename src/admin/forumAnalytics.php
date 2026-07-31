@@ -264,6 +264,38 @@ $img=$user['adminIMG'] ?? "../../assets/images/profile/default.png";
 
             </div>
 
+            <hr>
+
+            <!-- =====================
+            Community Insights
+            ===================== -->
+
+            <div class="analytics-title">
+
+                <div class="analytics-title-icon">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Analytics Overview
+                    </h3>
+
+
+                    <p>
+                        Monitor forum reports, content activity,
+                        and community performance metrics.
+                    </p>
+
+                </div>
+
+
+            </div>
+
 
             <!-- =====================
             STATS
@@ -451,8 +483,36 @@ $img=$user['adminIMG'] ?? "../../assets/images/profile/default.png";
             </div>
 
 
+            <!-- =====================
+            Community Insights
+            ===================== -->
+
+            <div class="analytics-title">
 
 
+                <div class="analytics-title-icon">
+
+                    <i class="fa-solid fa-users-viewfinder"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Community Insights
+                    </h3>
+
+
+                    <p>
+                        Analyze reported discussions and
+                        moderation activities.
+                    </p>
+
+                </div>
+
+
+            </div>
 
 
             <!-- =====================
@@ -573,14 +633,7 @@ $img=$user['adminIMG'] ?? "../../assets/images/profile/default.png";
                 </div>
 
 
-
-
-
-
-
                 <!-- MODERATOR ACTIVITY -->
-
-
                 <div class="analytics-card-panel">
 
 
@@ -667,6 +720,196 @@ $img=$user['adminIMG'] ?? "../../assets/images/profile/default.png";
 
 
             </div>
+
+
+            <section class="export-section">
+
+                <div class="export-header">
+
+
+                    <div class="export-title">
+
+
+                        <div class="export-icon">
+
+                            <i class="fa-solid fa-file-export"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Export Center
+                            </h3>
+
+                            <p>
+                                Export forum moderation data, community activity reports, and discussion analytics.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+                <div class="export-grid">
+
+                    <!-- PDF -->
+
+                    <div class="export-card">
+
+
+                        <div class="export-card-icon pdf-icon">
+
+                            <i class="fa-solid fa-file-pdf"></i>
+
+                        </div>
+
+
+
+                        <h4>
+                            PDF Report
+                        </h4>
+
+
+                        <p>
+                            Printable reports containing formatted tables,
+                            summaries and analytics insights.
+                        </p>
+
+
+                        <a href="../admin/processes/forum/export/exportForumPDF.php"
+                        class="export-btn pdf">
+
+
+                            <i class="fa-solid fa-download"></i>
+
+                            Generate PDF
+
+
+                        </a>
+
+
+                    </div>
+
+
+                    <!-- EXCEL -->
+
+                    <div class="export-card">
+
+
+                        <div class="export-card-icon excel-icon">
+
+                            <i class="fa-solid fa-file-excel"></i>
+
+                        </div>
+
+
+
+                        <h4>
+                            Excel Spreadsheet
+                        </h4>
+
+
+                        <p>
+                            Export structured data for calculations,
+                            filtering and reporting.
+                        </p>
+
+
+
+                        <a href="../admin/processes/forum/export/exportForumExcel.php"
+                        class="export-btn excel">
+
+
+                            <i class="fa-solid fa-download"></i>
+
+                            Generate Excel
+
+
+                        </a>
+
+
+                    </div>
+
+
+                    <!-- CSV -->
+                    <div class="export-card">
+
+                        <div class="export-card-icon csv-icon">
+
+                            <i class="fa-solid fa-file-csv"></i>
+
+                        </div>
+
+                        <h4>
+                            CSV Dataset
+                        </h4>
+
+                        <p>
+                            Optimized dataset for Power BI,
+                            Tableau and analytics platforms.
+                        </p>
+
+
+                        <a href="../admin/processes/forum/export/exportForumCSV.php"
+                        class="export-btn csv">
+
+
+                            <i class="fa-solid fa-download"></i>
+
+                            Generate CSV
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- JSON -->
+                    <div class="export-card">
+
+
+                        <div class="export-card-icon json-icon">
+
+                            <i class="fa-solid fa-code"></i>
+
+                        </div>
+
+
+
+                        <h4>
+                            JSON Dataset
+                        </h4>
+
+
+                        <p>
+                            Machine-readable format for APIs,
+                            AI systems and integrations.
+                        </p>
+
+                        <a href="../admin/processes/forum/export/exportForumJSON.php"
+                        class="export-btn json">
+
+
+                            <i class="fa-solid fa-download"></i>
+
+                            Generate JSON
+
+
+                        </a>
+
+
+                    </div>
+
+
+
+                </div>
+
+
+            </section>
 
             </div> <!-- container -->
 

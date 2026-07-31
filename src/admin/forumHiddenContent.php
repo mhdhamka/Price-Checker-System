@@ -55,7 +55,7 @@ $hiddenReplyCount = mysqli_fetch_assoc(mysqli_query($conn,"
 ========================== */
 
 
-$topicLimit = 9;
+$topicLimit = 6;
 
 
 $topicPage = isset($_GET['topicPage'])
@@ -140,7 +140,7 @@ $hiddenTopics = mysqli_query($conn,"
 ========================== */
 
 
-$replyLimit = 9;
+$replyLimit = 6;
 
 
 $replyPage = isset($_GET['replyPage'])

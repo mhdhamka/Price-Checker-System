@@ -11753,3 +11753,930 @@ body.dark .analytics-table th{
 
 
 }
+
+
+
+
+/* ======================================
+   EXPORT CENTER
+====================================== */
+
+
+.export-section{
+
+
+    margin:45px 0;
+
+
+}
+
+
+
+.export-header{
+
+
+    margin-bottom:30px;
+
+
+}
+
+
+
+.export-title{
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+
+}
+
+
+
+.export-icon{
+
+
+    width:60px;
+
+    height:60px;
+
+
+    border-radius:20px;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #ED563B,
+        #ff8060
+    );
+
+
+    color:white;
+
+
+    font-size:25px;
+
+
+    box-shadow:
+
+    0 15px 35px rgba(237,86,59,.25);
+
+
+}
+
+
+
+
+.export-title h3{
+
+
+    margin:0;
+
+
+    color:var(--text);
+
+
+    font-size:28px;
+
+
+    font-weight:750;
+
+
+}
+
+
+
+.export-title p{
+
+
+    margin:5px 0 0;
+
+
+    color:var(--text-muted);
+
+
+}
+
+
+
+
+
+
+/* ======================================
+   GRID
+====================================== */
+
+
+.export-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(4,1fr);
+
+
+    gap:25px;
+
+
+}
+
+
+
+
+
+
+/* ======================================
+   CARD
+====================================== */
+
+
+.export-card{
+
+
+    background:var(--card);
+
+
+    border:1px solid var(--border);
+
+
+    border-radius:26px;
+
+
+    padding:30px 25px;
+
+
+    text-align:center;
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
+    transition:.35s ease;
+
+
+    box-shadow:
+
+    0 10px 35px rgba(0,0,0,.06);
+
+
+}
+
+
+
+.export-card::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    top:0;
+
+    left:0;
+
+
+    height:4px;
+
+
+    width:100%;
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #ED563B,
+        #ff947d
+    );
+
+
+}
+
+
+
+.export-card:hover{
+
+
+    transform:translateY(-8px);
+
+
+    box-shadow:
+
+    0 25px 55px rgba(0,0,0,.15);
+
+
+}
+
+
+
+
+
+
+
+/* ======================================
+   ICON
+====================================== */
+
+
+.export-card-icon{
+
+
+    width:75px;
+
+    height:75px;
+
+
+    border-radius:22px;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    margin:0 auto 22px;
+
+
+    font-size:35px;
+
+
+}
+
+
+
+.pdf-icon{
+
+
+    background:#FEE2E2;
+
+    color:#DC2626;
+
+}
+
+
+
+.excel-icon{
+
+
+    background:#DCFCE7;
+
+    color:#15803D;
+
+}
+
+
+
+.csv-icon{
+
+
+    background:#DBEAFE;
+
+    color:#2563EB;
+
+}
+
+
+
+.json-icon{
+
+
+    background:#F3E8FF;
+
+    color:#9333EA;
+
+}
+
+
+
+
+
+
+
+/* ======================================
+   TEXT
+====================================== */
+
+
+.export-card h4{
+
+
+    color:var(--text);
+
+
+    font-size:21px;
+
+
+    margin-bottom:12px;
+
+
+}
+
+
+
+.export-card p{
+
+
+    color:var(--text-muted);
+
+
+    line-height:1.6;
+
+
+    min-height:75px;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+
+
+
+/* ======================================
+   BUTTON
+====================================== */
+
+
+.export-btn{
+
+
+    margin-top:20px;
+
+
+    display:inline-flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    gap:10px;
+
+
+    padding:12px 22px;
+
+
+    border-radius:14px;
+
+
+    color:white;
+
+
+    text-decoration:none;
+
+
+    font-weight:600;
+
+
+    transition:.25s;
+
+
+}
+
+
+
+.export-btn:hover{
+
+
+    transform:translateY(-2px);
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+.export-btn.pdf{
+
+
+    background:#DC2626;
+
+}
+
+
+
+.export-btn.excel{
+
+
+    background:#15803D;
+
+}
+
+
+
+.export-btn.csv{
+
+
+    background:#2563EB;
+
+}
+
+
+
+.export-btn.json{
+
+
+    background:#9333EA;
+
+}
+
+
+
+
+
+
+/* ======================================
+   DARK MODE
+====================================== */
+
+
+body.dark .export-card{
+
+
+    background:var(--card);
+
+
+    border-color:var(--border);
+
+
+}
+
+
+
+body.dark .pdf-icon{
+
+
+    background:#451A1A;
+
+}
+
+
+
+body.dark .excel-icon{
+
+
+    background:#12351E;
+
+}
+
+
+
+body.dark .csv-icon{
+
+
+    background:#172554;
+
+}
+
+
+
+body.dark .json-icon{
+
+
+    background:#3B0764;
+
+}
+
+
+
+
+
+
+/* ======================================
+   RESPONSIVE
+====================================== */
+
+
+@media(max-width:1200px){
+
+
+.export-grid{
+
+
+    grid-template-columns:repeat(2,1fr);
+
+
+}
+
+
+}
+
+
+
+@media(max-width:650px){
+
+
+.export-grid{
+
+
+    grid-template-columns:1fr;
+
+
+}
+
+
+
+.export-title{
+
+
+    align-items:flex-start;
+
+
+}
+
+
+}
+
+
+
+/* =====================================
+   ANALYTICS SECTION TITLE
+===================================== */
+
+
+.analytics-title{
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+
+    margin:45px 0 30px;
+
+
+}
+
+
+
+.analytics-title-icon{
+
+
+    width:60px;
+
+    height:60px;
+
+
+    border-radius:20px;
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #ED563B,
+        #ff8060
+    );
+
+
+    color:white;
+
+
+    font-size:25px;
+
+
+    box-shadow:
+
+    0 15px 35px rgba(237,86,59,.25);
+
+
+}
+
+
+
+.analytics-title h3{
+
+
+    margin:0;
+
+
+    color:var(--text);
+
+
+    font-size:28px;
+
+
+    font-weight:750;
+
+
+}
+
+
+
+.analytics-title p{
+
+
+    margin:5px 0 0;
+
+
+    color:var(--text-muted);
+
+
+    font-size:14px;
+
+
+}
+
+
+
+
+/* =====================================
+ USER MODERATION
+===================================== */
+
+
+.user-moderation-toolbar{
+
+margin:30px 0;
+
+}
+
+
+
+.moderation-search{
+
+display:flex;
+
+background:var(--card-bg);
+
+padding:15px;
+
+border-radius:18px;
+
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+gap:10px;
+
+}
+
+
+
+.moderation-search input{
+
+flex:1;
+
+border:none;
+
+outline:none;
+
+background:transparent;
+
+color:var(--text-color);
+
+font-size:15px;
+
+}
+
+
+
+.moderation-search button{
+
+background:#ED563B;
+
+color:white;
+
+border:none;
+
+padding:10px 25px;
+
+border-radius:12px;
+
+cursor:pointer;
+
+}
+
+
+
+
+
+.user-grid{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(auto-fit,minmax(320px,1fr));
+
+gap:25px;
+
+}
+
+
+
+
+
+.user-card{
+
+background:var(--card-bg);
+
+border-radius:25px;
+
+padding:25px;
+
+box-shadow:
+
+0 10px 30px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
+
+
+
+.user-card:hover{
+
+transform:translateY(-5px);
+
+}
+
+
+
+
+
+.user-header{
+
+display:flex;
+
+align-items:center;
+
+gap:18px;
+
+}
+
+
+
+.user-header img{
+
+width:75px;
+
+height:75px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+}
+
+
+
+
+
+.user-header h3{
+
+margin:0;
+
+font-size:20px;
+
+}
+
+
+
+.user-header p{
+
+opacity:.7;
+
+}
+
+
+
+
+
+.risk-badge{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:6px;
+
+padding:6px 14px;
+
+border-radius:20px;
+
+font-size:12px;
+
+font-weight:600;
+
+}
+
+
+
+.normal{
+
+background:#dff7e5;
+
+color:#159447;
+
+}
+
+
+
+.warning{
+
+background:#fff3cd;
+
+color:#b88600;
+
+}
+
+
+
+.high-risk{
+
+background:#ffd6d6;
+
+color:#c62828;
+
+}
+
+
+
+
+
+.moderation-stats-mini{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+margin:25px 0;
+
+gap:10px;
+
+}
+
+
+
+.moderation-stats-mini div{
+
+background:var(--body-bg);
+
+padding:15px;
+
+border-radius:15px;
+
+text-align:center;
+
+}
+
+
+
+.moderation-stats-mini strong{
+
+font-size:22px;
+
+}
+
+
+
+.moderation-stats-mini p{
+
+margin:0;
+
+font-size:13px;
+
+opacity:.7;
+
+}
