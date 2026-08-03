@@ -39,10 +39,7 @@ Unlike a traditional CRUD application, this project focuses on delivering a prod
 
 ## 📸 Core Feature Preview
 
-<div align="center">
-  <img src="assets/images/compare-preview.png" alt="Price Checker Product Comparison Feature" width="100%">
-  <p><em>Real-time Side-by-Side Product & Price Comparison Engine</em></p>
-</div>
+
 
 ---
 
