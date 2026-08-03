@@ -188,5 +188,5 @@ composer.json
 composer.lock
 ```
 
-This keeps the repository smaller and follows standard PHP development practices.
+
 
