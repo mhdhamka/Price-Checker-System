@@ -158,6 +158,7 @@ README.md
 
 - Migration to modern full-stack architecture
 - REST API development
+- Web Scraping Engine for automated live price tracking
 - Automated testing
 - Containerized deployment
 - AI-based product recommendations
@@ -167,6 +168,7 @@ README.md
 # Areas for Improvement
 
 - Authentication Middleware
+- Web Scraper & DOM Parsing Pipeline (for product price fetching)
 - Reusable PHP Components
 - API Architecture
 - Automated Testing
