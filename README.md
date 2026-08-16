@@ -70,14 +70,6 @@ The current version introduces:
 This repository represents the continuous improvement and evolution of the original project idea.
 
 ---
-
-## Repository
-
-Initial Version Branch
-
-https://github.com/mhdhamka/Price-Checker-System/tree/initial-version
-
----
 # Features
 
 ## Student Module
