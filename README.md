@@ -60,8 +60,8 @@ Originally developed as a Final Year Project (FYP) at Universiti Malaysia Sarawa
 
 ## Tech Stack
 
-* **Backend:** PHP 8.1+, MySQL 8.0
-* **Frontend:** HTML5, CSS3, JavaScript (ES6), AJAX, jQuery, Bootstrap 5
+* **Backend:** PHP, MySQL 
+* **Frontend:** HTML, CSS, JavaScript, AJAX, jQuery, Bootstrap 5
 * **Libraries & Tools:** Chart.js, DomPDF, PhpSpreadsheet, Font Awesome, Git
 
 ---
