@@ -1,4 +1,8 @@
 {
+    "name": "mhdhamka/price-checker-system",
+    "description": "A price checker system",
+    "type": "project",
+    "license": "proprietary",
     "require": {
         "dompdf/dompdf": "^3.1",
         "phpoffice/phpspreadsheet": "^5.8"
