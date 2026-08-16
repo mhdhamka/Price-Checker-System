@@ -37,7 +37,7 @@ Unlike a traditional CRUD application, this project focuses on delivering a prod
 
 ---
 
-## 📸 Core Feature Preview
+## Core Feature Preview
 
 <div align="center">
   <img src="assets/images/compare-preview.png" alt="Price Checker Product Comparison Feature" width="100%">
@@ -100,7 +100,7 @@ https://github.com/mhdhamka/Price-Checker-System/tree/initial-version
 - Backup and restore database
 - Audit logs
 
-# 📱 Responsive Design
+# Responsive Design
 
 Optimized for:
 
@@ -151,30 +151,6 @@ database/
  └── db_pcs.sql
 README.md
 ```
-
----
-
-# Future Improvements
-
-- Migration to modern full-stack architecture
-- REST API development
-- Web Scraping Engine for automated live price tracking
-- Automated testing
-- Containerized deployment
-- AI-based product recommendations
-
----
-
-# Areas for Improvement
-
-- Authentication Middleware
-- Web Scraper & DOM Parsing Pipeline (for product price fetching)
-- Reusable PHP Components
-- API Architecture
-- Automated Testing
-- CI/CD Pipeline
-- Docker Deployment
-
 ---
 
 # License
@@ -187,7 +163,7 @@ Feel free to learn from, fork, and improve upon this project.
 
 <div align="center">
 
-⭐ If you found this project interesting, consider giving it a star!
+If you found this project interesting, consider giving it a star!
 
 Made with ❤️ by mdhamka
 
