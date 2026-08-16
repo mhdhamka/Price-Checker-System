@@ -1,13 +1,10 @@
-
 <div align="center">
 
 # 🛒 Price Checker System
 
-### A Modern Price Comparison & Analytics Platform for Students
+**A Modern Price Comparison & Analytics Platform for Students**
 
-Compare products • Analyze prices • Manage inventory • Community Forum • Reports & Analytics
-
----
+[Live Demo](https://github.com/mhdhamka/Price-Checker-System) · [Report Bug](https://github.com/mhdhamka/Price-Checker-System/issues) · [Request Feature](https://github.com/mhdhamka/Price-Checker-System/issues)
 
 ![PHP](https://img.shields.io/badge/PHP-8.1+-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
@@ -29,119 +26,62 @@ Compare products • Analyze prices • Manage inventory • Community Forum •
 
 ---
 
-# Overview
+## Overview
 
-Price Checker System is a modern web application that enables students to compare grocery prices from multiple stores while providing administrators with powerful management, analytics, reporting, and monitoring capabilities.
+**Price Checker System** is a modern web application that enables students to compare grocery prices from multiple stores while providing administrators with powerful management, analytics, reporting, and monitoring capabilities.
 
 Unlike a traditional CRUD application, this project focuses on delivering a production-style experience through interactive dashboards, real-time search suggestions, comparison tools, export capabilities, community features, activity logging, and system administration.
+
+Originally developed as a Final Year Project (FYP) at Universiti Malaysia Sarawak (UNIMAS), it has been redesigned and expanded into a comprehensive portfolio-level application featuring enhanced UI/UX, audit logging, backup/restore controls, and a community forum.
 
 ---
 
 ## Core Feature Preview
 
 <div align="center">
-  <img src="assets/images/compare-preview.png" alt="Price Checker Product Comparison Feature" width="100%">
-  <p><em>Real-time Side-by-Side Product & Price Comparison Engine</em></p>
+
+![Price Checker Product Comparison Feature](assets/images/compare-preview.png)
+
+*Real-time Side-by-Side Product & Price Comparison Engine*
+
 </div>
 
 ---
 
-## Project Evolution
+## Key Features
 
-This project was originally developed as my **Final Year Project (FYP)** at **Universiti Malaysia Sarawak (UNIMAS)**.
-
-After completing the initial academic project, I continued improving the system by redesigning the interface, expanding its functionality, and transforming it into a more complete **portfolio-level application**.
-
-The current version introduces:
-
-- Redesigned UI/UX
-- Student price comparison features
-- Admin dashboard and management tools
-- Reports and analytics
-- Export center
-- Backup and restore
-- Audit logging
-- Wishlist and comparison history
-- Community forum
-- Dark mode support
-- Responsive design
-- Role-based permissions
-
-This repository represents the continuous improvement and evolution of the original project idea.
-
----
-# Features
-
-## Student Module
-
-- Product search, filtering, sorting, and comparison
-- Wishlist and comparison history
-- Product ratings and reviews
-- Search suggestions using AJAX
-- Community forum
-- Light/Dark mode support
-
-
-## Admin Module
-
-- Dashboard analytics
-- Product, store, category management
-- Student and administrator management
-- Rating moderation
-- Export reports
-- Backup and restore database
-- Audit logs
-
-# Responsive Design
-
-Optimized for:
-
-- Desktop
-- Laptop
-- Tablet
-- Mobile
+* **Student Module:** Product search, filtering, sorting, side-by-side comparison, wishlist tracking, comparison history, ratings, reviews, and real-time search suggestions using AJAX.
+* **Admin Module:** Comprehensive administrative control covering dashboard analytics, product/store/category management, user administration, rating moderation, and export tools.
+* **Reporting & Export Center:** Built-in reporting pipelines powered by Chart.js for visualization, DomPDF for PDF exports, and PhpSpreadsheet for Excel reports.
+* **System Maintenance & Security:** Database backup and restore utilities, active audit logging, and role-based access permissions.
+* **Community & Accessibility:** Integrated community forum, responsive multi-device layout optimization, and light/dark mode support.
 
 ---
 
-# Tech Stack
+## Tech Stack
 
-## Backend
-
-- PHP
-- MySQL
-
-## Frontend
-
-- HTML5
-- CSS3
-- JavaScript
-- AJAX
-- jQuery
-- Bootstrap
-
-## Libraries
-
-- Chart.js
-- DomPDF
-- PhpSpreadsheet
-- Font Awesome
+* **Backend:** PHP 8.1+, MySQL 8.0
+* **Frontend:** HTML5, CSS3, JavaScript (ES6), AJAX, jQuery, Bootstrap 5
+* **Libraries & Tools:** Chart.js, DomPDF, PhpSpreadsheet, Font Awesome, Git
 
 ---
 
-# Project Structure
+## Project Structure
 
-```
+```text
 Price-Checker-System/
-
-admin/
-student/
-public/
-config/
-assets/
-vendor/
-database/
- └── db_pcs.sql
-README.md
+├── admin/
+├── student/
+├── public/
+├── config/
+├── assets/
+├── vendor/
+├── database/
+│   └── db_pcs.sql
+├── .gitignore
+├── composer.json
+├── composer.lock
+└── README.md
 ```
 ---
 
