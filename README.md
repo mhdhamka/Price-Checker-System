@@ -16,8 +16,6 @@
 ![DomPDF](https://img.shields.io/badge/DomPDF-PDF%20Export-E53935?style=for-the-badge)
 ![PhpSpreadsheet](https://img.shields.io/badge/PhpSpreadsheet-Excel-217346?style=for-the-badge)
 
-![Version](https://img.shields.io/badge/Version-2.0-blue?style=for-the-badge)
-
 </div>
 
 ---
