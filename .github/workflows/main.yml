@@ -1,4 +1,4 @@
-name: PHP CI
+name: PHP CI & FTP Deploy
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ "main", "initial-version" ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,11 +25,24 @@ jobs:
       id: composer-cache
       uses: actions/cache@v3
       with:
-        vendor: vendor
+        path: vendor
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
 
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+      run: composer install --prefer-dist --no-progress
 
+    - name: Sync files to InfinityFree
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: /htdocs/
+        exclude: |
+          **/.git/**
+          **/vendor/**
+          composer.json
+          composer.lock
+          README.md
