@@ -7,13 +7,13 @@
 Download the project:
 
 ```bash
-git clone https://github.com/yourusername/pricechecker.git
+git clone --branch initial-version --single-branch https://github.com/mhdhamka/Price-Checker-System.git
 ```
 
 Navigate into the project:
 
 ```bash
-cd pricechecker
+cd Price-Checker-System
 ```
 
 ---
