@@ -2,9 +2,9 @@ name: PHP CI & FTP Deploy
 
 on:
   push:
-    branches: [ "main", "initial-version" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "initial-version" ]
+    branches: [ "main" ]
 
 jobs:
   build-and-deploy:
